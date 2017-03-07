@@ -144,12 +144,12 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="0JQ-k5-pqR">
-                                <frame key="frameInset" width="375" height="667"/>
+                                <frame key="frameInset" minY="64" width="375" height="603"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="I5D-5s-Rbu">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="92" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="I5D-5s-Rbu" id="Ycg-aX-rmz">
                                             <frame key="frameInset" width="375" height="43"/>
@@ -166,7 +166,11 @@
                     </view>
                     <navigationItem key="navigationItem" id="1xn-pL-9rl">
                         <barButtonItem key="leftBarButtonItem" title="Log out" id="trZ-5T-7db"/>
-                        <barButtonItem key="rightBarButtonItem" title="Settings" id="qou-8K-Ztb"/>
+                        <barButtonItem key="rightBarButtonItem" title="Settings" id="qou-8K-Ztb">
+                            <connections>
+                                <segue destination="Iey-oi-ruY" kind="show" identifier="toSettignsSegue" id="Uqi-Bn-kQv"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rOQ-K5-NTj" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -350,7 +354,8 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="Awy-UM-CLS"/>
+        <segue reference="3RY-HH-zF9"/>
         <segue reference="q92-9b-Wrv"/>
+        <segue reference="Uqi-Bn-kQv"/>
     </inferredMetricsTieBreakers>
 </document>
