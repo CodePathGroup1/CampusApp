@@ -16,6 +16,7 @@
 		BE6004CD1E6F470C00A45ACC /* EventsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE6004CC1E6F470C00A45ACC /* EventsViewController.swift */; };
 		BE6004CF1E6F471700A45ACC /* EventsDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE6004CE1E6F471700A45ACC /* EventsDetailViewController.swift */; };
 		BE6004D11E6F472100A45ACC /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE6004D01E6F472100A45ACC /* SettingsViewController.swift */; };
+		BE6004D31E6F4EF300A45ACC /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE6004D21E6F4EF300A45ACC /* SignUpViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		BE6004CC1E6F470C00A45ACC /* EventsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventsViewController.swift; sourceTree = "<group>"; };
 		BE6004CE1E6F471700A45ACC /* EventsDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventsDetailViewController.swift; sourceTree = "<group>"; };
 		BE6004D01E6F472100A45ACC /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		BE6004D21E6F4EF300A45ACC /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,6 +71,7 @@
 				BE6004CC1E6F470C00A45ACC /* EventsViewController.swift */,
 				BE6004CE1E6F471700A45ACC /* EventsDetailViewController.swift */,
 				BE6004D01E6F472100A45ACC /* SettingsViewController.swift */,
+				BE6004D21E6F4EF300A45ACC /* SignUpViewController.swift */,
 				BE424A041E655D7200A7BA37 /* Assets.xcassets */,
 				BE424A061E655D7200A7BA37 /* LaunchScreen.storyboard */,
 				BE424A091E655D7200A7BA37 /* Info.plist */,
@@ -149,6 +152,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BE6004CB1E6F46FE00A45ACC /* LoginViewController.swift in Sources */,
+				BE6004D31E6F4EF300A45ACC /* SignUpViewController.swift in Sources */,
 				BE6004CD1E6F470C00A45ACC /* EventsViewController.swift in Sources */,
 				BE6004CF1E6F471700A45ACC /* EventsDetailViewController.swift in Sources */,
 				BE424A001E655D7200A7BA37 /* ViewController.swift in Sources */,
