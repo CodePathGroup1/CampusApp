@@ -22,6 +22,9 @@
                                 <frame key="frameInset" minX="174" minY="480" width="107" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Sign up!"/>
+                                <connections>
+                                    <segue destination="P8N-u8-2O1" kind="presentation" id="U1E-3O-mqd"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="New here?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AWp-D5-IrB">
                                 <frame key="frameInset" minX="110" minY="485" width="82" height="21"/>
