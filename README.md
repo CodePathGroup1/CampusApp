@@ -31,11 +31,11 @@ Here's a walkthrough of implemented user stories:
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
-## Notes
+## WIREFRAME:
 
 Describe any challenges encountered while building the app.
 
-WIREFRAME: 
+
 ![wireframe](https://cloud.githubusercontent.com/assets/12878483/23786701/5e5b88ac-0523-11e7-8b58-8293b2ca506e.png)
 
 
