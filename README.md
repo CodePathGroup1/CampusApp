@@ -35,6 +35,10 @@ GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
 Describe any challenges encountered while building the app.
 
+WIREFRAME: 
+![wireframe](https://cloud.githubusercontent.com/assets/12878483/23786701/5e5b88ac-0523-11e7-8b58-8293b2ca506e.png)
+
+
 ## License
 
     Copyright [2017] [Thomas Zhu & Hannah Lily Postman & Mitchell Wong]
