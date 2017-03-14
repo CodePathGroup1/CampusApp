@@ -76,7 +76,7 @@ Describe any challenges encountered while building the app.
 - BuildingID (because not all events occur in a room)
 - RoomID
 - Attendees - so that we can track and present number of attendees
-- type  (To differentiate between “event” and “class” types if/when we introduce support for classes)
+- Type  (To differentiate between “event” and “class” types if/when we introduce support for classes)
 
 
 
