@@ -15,9 +15,9 @@ The following **required** functionality is completed:
 	- [ ] Event time or time til
 	- [ ] Event campus, building, and room when applicable
 - [ ] User can navigate to a detail view of events that includes:
-		- [ ] Event info
-		- [ ] Event description
-		- [ ] Map view
+	- [ ] Event info
+	- [ ] Event description
+	- [ ] Map view
 - [ ] User can persist across restarts
 - [ ] User can save preferences in a settings controller
 	- [ ] UI settings
