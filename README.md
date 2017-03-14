@@ -40,7 +40,7 @@ GIF created with [LiceCap](http://www.cockos.com/licecap/).
 Describe any challenges encountered while building the app.
 
 
-![campuswireframe](https://cloud.githubusercontent.com/assets/12878483/23820245/7c364ee2-05c9-11e7-8319-aa0f12186e37.png)
+![wireframe](https://cloud.githubusercontent.com/assets/12878483/23884712/8f5feaaa-082b-11e7-9083-fbaf96757373.png)
 
 
 ## Data Schema
