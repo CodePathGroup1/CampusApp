@@ -43,6 +43,43 @@ Describe any challenges encountered while building the app.
 ![campuswireframe](https://cloud.githubusercontent.com/assets/12878483/23820245/7c364ee2-05c9-11e7-8319-aa0f12186e37.png)
 
 
+## Data Schema
+
+#### User (student, organization, etc.)
+- ID
+- Name
+- Email
+- List of event IDs
+
+#### Campus
+- ID
+- Name
+- Geo info (latitude, longitude)
+
+#### Building
+- ID
+- Name
+- CampusID
+- Geo (latitude, longitude)
+
+#### Room
+- ID
+- Name
+- Building ID
+
+#### Event
+- ID
+- Start
+- End
+- Name
+- CampusID (because not all events occur in a building)
+- BuildingID (because not all events occur in a room)
+- RoomID
+- Attendees - so that we can track and present number of attendees
+- type  (To differentiate between “event” and “class” types if/when we introduce support for classes)
+
+
+
 ## License
 
     Copyright [2017] [Thomas Zhu & Hannah Lily Postman & Mitchell Wong]
