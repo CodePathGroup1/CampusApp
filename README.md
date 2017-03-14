@@ -8,16 +8,20 @@ Time spent: **X** hours spent in total
 
 The following **required** functionality is completed:
 
-- [ ] Tab Bar with 4-5 tabs :
-   - [ ] Segue into profile view page. Profile view page contains username, picture, and settings button on upper right corner
-      - [ ] Create a settings page. Will implement functionality as we progress.
-   - [ ] Segue into feed page. Feed page contains labels such as school alerts and news
-   - [ ] Segue into schedule page. Schedule page contains student schedule and maps button on upper right corner
-      - [ ] Create maps using API.
-   - [ ] Segue into events. Events page will contain current events.
-   - [ ] Segue into sale. Sale will contain tableview and searchbar
- 
-- [ ] Set up Heroku with mock data.
+- [ ] User can sign up, log in, and log out with custom backend
+- [ ] User can see feed of CCSF events
+	Events include:
+	- [ ] Event titles
+	- [ ] Event time or time til
+	- [ ] Event campus, building, and room when applicable
+- [ ] User can navigate to a detail view of events that includes:
+		- [ ] Event info
+		- [ ] Event description
+		- [ ] Map view
+- [ ] User can persist across restarts
+- [ ] User can save preferences in a settings controller
+	- [ ] UI settings
+	- [ ] Set which campus(es) to see events for
 
 
 **Optional**
