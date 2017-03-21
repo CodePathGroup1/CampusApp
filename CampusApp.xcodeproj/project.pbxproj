@@ -59,6 +59,70 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		65F5BBE31E81974C00368D36 /* API */ = {
+			isa = PBXGroup;
+			children = (
+				65F5BBDF1E81059500368D36 /* ParseClient.swift */,
+			);
+			name = API;
+			sourceTree = "<group>";
+		};
+		65F5BBE41E81975100368D36 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				65E835411E80DDD00006FC0D /* RegisterVC.swift */,
+				65E8353D1E80CA610006FC0D /* LoginVC.swift */,
+				BE4249FF1E655D7200A7BA37 /* EventViewController.swift */,
+				1DF7D75B1E80CC5D003ECFB6 /* DetailEventViewController.swift */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		65F5BBE51E81975900368D36 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				65F5BBE31E81974C00368D36 /* API */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		65F5BBE61E81975D00368D36 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				65F5BBE81E8198E400368D36 /* Storyboards */,
+				1DF7D7591E80CA16003ECFB6 /* EventCell.swift */,
+				65E8353B1E80C2DC0006FC0D /* RoundButton.swift */,
+				65E8353F1E80CCE80006FC0D /* RoundTextField.swift */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		65F5BBE71E81976200368D36 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				BE424A041E655D7200A7BA37 /* Assets.xcassets */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		65F5BBE81E8198E400368D36 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				BE424A061E655D7200A7BA37 /* LaunchScreen.storyboard */,
+				BE424A011E655D7200A7BA37 /* Main.storyboard */,
+				65F5BBDC1E80FE9000368D36 /* LoginUI.storyboard */,
+			);
+			name = Storyboards;
+			sourceTree = "<group>";
+		};
+		65F5BBE91E81991600368D36 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				65F5BBE11E810C4D00368D36 /* UIViewControllerExtension.swift */,
+			);
+			name = Extensions;
+			sourceTree = "<group>";
+		};
 		70E4F69D8AFB4E1C8E64D46F /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -97,21 +161,13 @@
 		BE4249FC1E655D7200A7BA37 /* CampusApp */ = {
 			isa = PBXGroup;
 			children = (
-				65E8353D1E80CA610006FC0D /* LoginVC.swift */,
-				65E835411E80DDD00006FC0D /* RegisterVC.swift */,
-				65E8353B1E80C2DC0006FC0D /* RoundButton.swift */,
-				65E8353F1E80CCE80006FC0D /* RoundTextField.swift */,
-				BE424A061E655D7200A7BA37 /* LaunchScreen.storyboard */,
+				65F5BBE41E81975100368D36 /* Controllers */,
+				65F5BBE51E81975900368D36 /* Models */,
+				65F5BBE61E81975D00368D36 /* Views */,
+				65F5BBE71E81976200368D36 /* Resources */,
+				65F5BBE91E81991600368D36 /* Extensions */,
 				BE4249FD1E655D7200A7BA37 /* AppDelegate.swift */,
-				BE4249FF1E655D7200A7BA37 /* EventViewController.swift */,
-				1DF7D7591E80CA16003ECFB6 /* EventCell.swift */,
-				BE424A011E655D7200A7BA37 /* Main.storyboard */,
-				65F5BBDC1E80FE9000368D36 /* LoginUI.storyboard */,
-				BE424A041E655D7200A7BA37 /* Assets.xcassets */,
 				BE424A091E655D7200A7BA37 /* Info.plist */,
-				1DF7D75B1E80CC5D003ECFB6 /* DetailEventViewController.swift */,
-				65F5BBDF1E81059500368D36 /* ParseClient.swift */,
-				65F5BBE11E810C4D00368D36 /* UIViewControllerExtension.swift */,
 			);
 			path = CampusApp;
 			sourceTree = "<group>";
