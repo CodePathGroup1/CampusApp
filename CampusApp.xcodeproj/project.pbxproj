@@ -13,11 +13,13 @@
 		653040F71E81A2C3009EF9A5 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 653040F51E81A2C3009EF9A5 /* MainTabBarController.swift */; };
 		653040F81E81A2C3009EF9A5 /* MainTabBarController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 653040F61E81A2C3009EF9A5 /* MainTabBarController.xib */; };
 		653040FC1E81B57C009EF9A5 /* GoogleCalendarClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 653040FB1E81B57C009EF9A5 /* GoogleCalendarClient.swift */; };
+		653040FE1E81C1A8009EF9A5 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 653040FD1E81C1A8009EF9A5 /* Event.swift */; };
+		653041001E81C88D009EF9A5 /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 653040FF1E81C88D009EF9A5 /* DateExtension.swift */; };
+		653041021E81C8AF009EF9A5 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 653041011E81C8AF009EF9A5 /* StringExtension.swift */; };
 		65E8353C1E80C2DC0006FC0D /* RoundButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65E8353B1E80C2DC0006FC0D /* RoundButton.swift */; };
 		65E8353E1E80CA610006FC0D /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65E8353D1E80CA610006FC0D /* LoginViewController.swift */; };
 		65E835401E80CCE80006FC0D /* RoundTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65E8353F1E80CCE80006FC0D /* RoundTextField.swift */; };
 		65E835421E80DDD00006FC0D /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65E835411E80DDD00006FC0D /* RegisterViewController.swift */; };
-		65F5BBDB1E80FE6500368D36 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BE424A091E655D7200A7BA37 /* Info.plist */; };
 		65F5BBDE1E80FE9000368D36 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 65F5BBDC1E80FE9000368D36 /* Login.storyboard */; };
 		65F5BBE01E81059500368D36 /* ParseClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F5BBDF1E81059500368D36 /* ParseClient.swift */; };
 		65F5BBE21E810C4D00368D36 /* UIViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F5BBE11E810C4D00368D36 /* UIViewControllerExtension.swift */; };
@@ -36,6 +38,9 @@
 		653040F51E81A2C3009EF9A5 /* MainTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		653040F61E81A2C3009EF9A5 /* MainTabBarController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainTabBarController.xib; sourceTree = "<group>"; };
 		653040FB1E81B57C009EF9A5 /* GoogleCalendarClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoogleCalendarClient.swift; sourceTree = "<group>"; };
+		653040FD1E81C1A8009EF9A5 /* Event.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
+		653040FF1E81C88D009EF9A5 /* DateExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateExtension.swift; sourceTree = "<group>"; };
+		653041011E81C8AF009EF9A5 /* StringExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
 		65E8353B1E80C2DC0006FC0D /* RoundButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundButton.swift; sourceTree = "<group>"; };
 		65E8353D1E80CA610006FC0D /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		65E8353F1E80CCE80006FC0D /* RoundTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundTextField.swift; sourceTree = "<group>"; };
@@ -89,6 +94,7 @@
 			isa = PBXGroup;
 			children = (
 				65F5BBE31E81974C00368D36 /* API */,
+				653040FD1E81C1A8009EF9A5 /* Event.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -128,6 +134,8 @@
 			isa = PBXGroup;
 			children = (
 				65F5BBE11E810C4D00368D36 /* UIViewControllerExtension.swift */,
+				653040FF1E81C88D009EF9A5 /* DateExtension.swift */,
+				653041011E81C8AF009EF9A5 /* StringExtension.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -245,7 +253,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				653040F81E81A2C3009EF9A5 /* MainTabBarController.xib in Resources */,
-				65F5BBDB1E80FE6500368D36 /* Info.plist in Resources */,
 				BE424A081E655D7200A7BA37 /* LaunchScreen.storyboard in Resources */,
 				65F5BBDE1E80FE9000368D36 /* Login.storyboard in Resources */,
 				BE424A051E655D7200A7BA37 /* Assets.xcassets in Resources */,
@@ -309,6 +316,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				65F5BBE01E81059500368D36 /* ParseClient.swift in Sources */,
+				653041001E81C88D009EF9A5 /* DateExtension.swift in Sources */,
+				653041021E81C8AF009EF9A5 /* StringExtension.swift in Sources */,
 				65E835401E80CCE80006FC0D /* RoundTextField.swift in Sources */,
 				653040F71E81A2C3009EF9A5 /* MainTabBarController.swift in Sources */,
 				65F5BBE21E810C4D00368D36 /* UIViewControllerExtension.swift in Sources */,
@@ -320,6 +329,7 @@
 				BE4249FE1E655D7200A7BA37 /* AppDelegate.swift in Sources */,
 				65E8353E1E80CA610006FC0D /* LoginViewController.swift in Sources */,
 				65E835421E80DDD00006FC0D /* RegisterViewController.swift in Sources */,
+				653040FE1E81C1A8009EF9A5 /* Event.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -7,45 +7,54 @@
 //
 
 import UIKit
+import PKHUD
 
 class EventViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     @IBOutlet weak var tableView: UITableView!
     
+    private var events: [[String: AnyObject]] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        GoogleCalendarClient.shared.getPublicEvents(calendarID: "mail.ccsf.edu_2o3osj4laq9iapttl8tpc5igbc@group.calendar.google.com",
-                                                    success: { json in
-                                                        print(json)
-                                                        print("succeeded")
-        },
-                                                    failure: { error in
-                                                        print(error)
-        })
         
         tableView.delegate = self
         tableView.dataSource = self
         
-        // Do any additional setup after loading the view, typically from a nib.
-        
-        tableView.reloadData()
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        loadEvents()
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return events.count
     }
     
-    public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "EventCell", for: indexPath) as! EventCell
-        
+        cell.textLabel?.text = events[indexPath.row]["summary"] as? String
         return cell
     }
 
+    private func loadEvents() {
+        var loadedCalendarCount = 0
+        let totalCalendarCount = GoogleCalendarClient.calendarIDs.count
+        HUD.flash(.label("Loading: \(loadedCalendarCount / totalCalendarCount) %"))
+        
+        for calendarID in GoogleCalendarClient.calendarIDs {
+            GoogleCalendarClient.shared.getPublicEvents(calendarID: calendarID,
+                                                        success: { json in
+                                                            loadedCalendarCount += 1
+                                                            HUD.flash(.label("Loading: \(loadedCalendarCount / totalCalendarCount) %"))
+                                                            
+                                                            self.events.append(contentsOf: json)
+                                                            self.tableView.reloadData()
+                                                            
+                                                            if loadedCalendarCount == totalCalendarCount {
+                                                                HUD.hide(animated: true)
+                                                            }},
+                                                        failure: { error in
+                                                            print(error) }
+            )
+        }
+    }
 }
 
