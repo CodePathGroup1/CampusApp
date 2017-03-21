@@ -7,14 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1DF7D75A1E80CA16003ECFB6 /* EventCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DF7D7591E80CA16003ECFB6 /* EventCell.swift */; };
+		1DF7D75C1E80CC5D003ECFB6 /* DetailEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DF7D75B1E80CC5D003ECFB6 /* DetailEventViewController.swift */; };
 		65E8353C1E80C2DC0006FC0D /* RoundButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65E8353B1E80C2DC0006FC0D /* RoundButton.swift */; };
 		65E8353E1E80CA610006FC0D /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65E8353D1E80CA610006FC0D /* LoginVC.swift */; };
 		65E835401E80CCE80006FC0D /* RoundTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65E8353F1E80CCE80006FC0D /* RoundTextField.swift */; };
 		65E835421E80DDD00006FC0D /* RegisterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65E835411E80DDD00006FC0D /* RegisterVC.swift */; };
-		BE4249FE1E655D7200A7BA37 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4249FD1E655D7200A7BA37 /* AppDelegate.swift */; };
-		BE424A031E655D7200A7BA37 /* LoginUI.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BE424A011E655D7200A7BA37 /* LoginUI.storyboard */; };
-		1DF7D75A1E80CA16003ECFB6 /* EventCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DF7D7591E80CA16003ECFB6 /* EventCell.swift */; };
-		1DF7D75C1E80CC5D003ECFB6 /* DetailEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DF7D75B1E80CC5D003ECFB6 /* DetailEventViewController.swift */; };
+		65F5BBDB1E80FE6500368D36 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BE424A091E655D7200A7BA37 /* Info.plist */; };
+		65F5BBDE1E80FE9000368D36 /* LoginUI.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 65F5BBDC1E80FE9000368D36 /* LoginUI.storyboard */; };
 		BE4249FE1E655D7200A7BA37 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4249FD1E655D7200A7BA37 /* AppDelegate.swift */; };
 		BE424A001E655D7200A7BA37 /* EventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4249FF1E655D7200A7BA37 /* EventViewController.swift */; };
 		BE424A031E655D7200A7BA37 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BE424A011E655D7200A7BA37 /* Main.storyboard */; };
@@ -23,22 +23,20 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1DF7D7591E80CA16003ECFB6 /* EventCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventCell.swift; sourceTree = "<group>"; };
+		1DF7D75B1E80CC5D003ECFB6 /* DetailEventViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailEventViewController.swift; sourceTree = "<group>"; };
 		65E8353B1E80C2DC0006FC0D /* RoundButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundButton.swift; sourceTree = "<group>"; };
 		65E8353D1E80CA610006FC0D /* LoginVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
 		65E8353F1E80CCE80006FC0D /* RoundTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundTextField.swift; sourceTree = "<group>"; };
 		65E835411E80DDD00006FC0D /* RegisterVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterVC.swift; sourceTree = "<group>"; };
-		BE4249FA1E655D7200A7BA37 /* CampusApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CampusApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		BE4249FD1E655D7200A7BA37 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		BE424A021E655D7200A7BA37 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LoginUI.storyboard; sourceTree = "<group>"; };
-		1DF7D7591E80CA16003ECFB6 /* EventCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventCell.swift; sourceTree = "<group>"; };
-		1DF7D75B1E80CC5D003ECFB6 /* DetailEventViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailEventViewController.swift; sourceTree = "<group>"; };
+		65F5BBDD1E80FE9000368D36 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LoginUI.storyboard; sourceTree = "<group>"; };
 		BE4249FA1E655D7200A7BA37 /* CampusApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CampusApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE4249FD1E655D7200A7BA37 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BE4249FF1E655D7200A7BA37 /* EventViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventViewController.swift; sourceTree = "<group>"; };
 		BE424A021E655D7200A7BA37 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		BE424A041E655D7200A7BA37 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BE424A071E655D7200A7BA37 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		BE424A091E655D7200A7BA37 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BE424A091E655D7200A7BA37 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,12 +73,12 @@
 				65E835411E80DDD00006FC0D /* RegisterVC.swift */,
 				65E8353B1E80C2DC0006FC0D /* RoundButton.swift */,
 				65E8353F1E80CCE80006FC0D /* RoundTextField.swift */,
-				BE424A011E655D7200A7BA37 /* LoginUI.storyboard */,
 				BE424A061E655D7200A7BA37 /* LaunchScreen.storyboard */,
 				BE4249FD1E655D7200A7BA37 /* AppDelegate.swift */,
 				BE4249FF1E655D7200A7BA37 /* EventViewController.swift */,
 				1DF7D7591E80CA16003ECFB6 /* EventCell.swift */,
 				BE424A011E655D7200A7BA37 /* Main.storyboard */,
+				65F5BBDC1E80FE9000368D36 /* LoginUI.storyboard */,
 				BE424A041E655D7200A7BA37 /* Assets.xcassets */,
 				BE424A091E655D7200A7BA37 /* Info.plist */,
 				1DF7D75B1E80CC5D003ECFB6 /* DetailEventViewController.swift */,
@@ -148,9 +146,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				65F5BBDB1E80FE6500368D36 /* Info.plist in Resources */,
 				BE424A081E655D7200A7BA37 /* LaunchScreen.storyboard in Resources */,
+				65F5BBDE1E80FE9000368D36 /* LoginUI.storyboard in Resources */,
 				BE424A051E655D7200A7BA37 /* Assets.xcassets in Resources */,
-				BE424A031E655D7200A7BA37 /* LoginUI.storyboard in Resources */,
+				BE424A031E655D7200A7BA37 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -175,12 +175,20 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		BE424A011E655D7200A7BA37 /* LoginUI.storyboard */ = {
+		65F5BBDC1E80FE9000368D36 /* LoginUI.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				65F5BBDD1E80FE9000368D36 /* Base */,
+			);
+			name = LoginUI.storyboard;
+			sourceTree = "<group>";
+		};
+		BE424A011E655D7200A7BA37 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				BE424A021E655D7200A7BA37 /* Base */,
 			);
-			name = LoginUI.storyboard;
+			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
 		BE424A061E655D7200A7BA37 /* LaunchScreen.storyboard */ = {
