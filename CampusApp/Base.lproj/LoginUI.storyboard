@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="SlX-be-GHe">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--LoginVC-->
+        <scene sceneID="jzU-NE-o0a">
+            <objects>
+                <viewController storyboardIdentifier="LoginViewController" id="SlX-be-GHe" customClass="LoginVC" customModule="CampusApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="EGX-FQ-5xZ"/>
+                        <viewControllerLayoutGuide type="bottom" id="rCh-7x-ssO"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="qZM-US-AUh">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="login_background" translatesAutoresizingMaskIntoConstraints="NO" id="upV-GG-Cmn"/>
+                            <visualEffectView opaque="NO" contentMode="scaleAspectFill" translatesAutoresizingMaskIntoConstraints="NO" id="ji0-wB-jzk">
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="Em2-xx-fen">
+                                    <frame key="frameInset"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                </view>
+                                <blurEffect style="light"/>
+                            </visualEffectView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="he3-UA-q5E" userLabel="Main">
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M4b-2a-v9a">
+                                        <fontDescription key="fontDescription" name="Avenir-Light" family="Avenir" pointSize="37"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CampusApp is a place where students from the same college meet, explore, and have fun!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c1a-kC-ZIJ">
+                                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="11"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="oQM-wb-E8E" customClass="RoundTextField" customModule="CampusApp" customModuleProvider="target">
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="12"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
+                                    </textField>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="GVK-hU-eTm" customClass="RoundTextField" customModule="CampusApp" customModuleProvider="target">
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="12"/>
+                                        <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                                    </textField>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="3Fp-MN-3Iu">
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VHf-rI-Ghu" customClass="RoundButton" customModule="CampusApp" customModuleProvider="target">
+                                                <color key="backgroundColor" red="0.31372549020000001" green="0.8980392157" blue="0.63529411759999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="16"/>
+                                                <state key="normal" title="Login"/>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4It-wG-0qZ" customClass="RoundButton" customModule="CampusApp" customModuleProvider="target">
+                                                <color key="backgroundColor" red="0.31238972199999998" green="0.89723322019999996" blue="0.63656171549999996" alpha="1" colorSpace="calibratedRGB"/>
+                                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="16"/>
+                                                <state key="normal" title="Register"/>
+                                            </button>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="02U-pc-6r6"/>
+                                        </constraints>
+                                    </stackView>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="upV-GG-Cmn" firstAttribute="top" secondItem="qZM-US-AUh" secondAttribute="top" id="5vc-lC-u2O"/>
+                            <constraint firstItem="rCh-7x-ssO" firstAttribute="top" secondItem="ji0-wB-jzk" secondAttribute="bottom" id="A84-cH-ZbT"/>
+                            <constraint firstAttribute="trailing" secondItem="ji0-wB-jzk" secondAttribute="trailing" id="CqV-PE-gCy"/>
+                            <constraint firstAttribute="trailing" secondItem="upV-GG-Cmn" secondAttribute="trailing" id="HVz-6b-dRu"/>
+                            <constraint firstItem="ji0-wB-jzk" firstAttribute="leading" secondItem="qZM-US-AUh" secondAttribute="leading" id="HWD-9G-ILc"/>
+                            <constraint firstItem="he3-UA-q5E" firstAttribute="centerY" secondItem="qZM-US-AUh" secondAttribute="centerY" id="Koq-HH-ZRT"/>
+                            <constraint firstItem="ji0-wB-jzk" firstAttribute="top" secondItem="qZM-US-AUh" secondAttribute="top" id="YI6-Uo-o1Q"/>
+                            <constraint firstItem="he3-UA-q5E" firstAttribute="width" secondItem="qZM-US-AUh" secondAttribute="width" multiplier="0.65" id="piQ-1M-aar"/>
+                            <constraint firstItem="rCh-7x-ssO" firstAttribute="top" secondItem="upV-GG-Cmn" secondAttribute="bottom" id="tF0-mB-Mmj"/>
+                            <constraint firstItem="he3-UA-q5E" firstAttribute="centerX" secondItem="qZM-US-AUh" secondAttribute="centerX" id="v3T-Zy-Yp2"/>
+                            <constraint firstItem="upV-GG-Cmn" firstAttribute="leading" secondItem="qZM-US-AUh" secondAttribute="leading" id="wl4-dy-JGL"/>
+                        </constraints>
+                    </view>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
+                    <connections>
+                        <outlet property="loginButton" destination="VHf-rI-Ghu" id="2AP-zb-Mr0"/>
+                        <outlet property="passwordField" destination="GVK-hU-eTm" id="BnX-VS-mmM"/>
+                        <outlet property="registerButton" destination="4It-wG-0qZ" id="YRt-Aw-ziS"/>
+                        <outlet property="usernameField" destination="oQM-wb-E8E" id="XXy-9m-Ix5"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pQV-ep-cWU" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="505" y="100"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="login_background" width="1280" height="826"/>
+    </resources>
+</document>
