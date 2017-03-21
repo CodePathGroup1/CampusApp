@@ -19,12 +19,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // Initialize Parse
         Parse.initialize(with:
-            ParseClientConfiguration(block: { (configuration:ParseMutableClientConfiguration) -> Void in
-                configuration.applicationId = "tm-campus-app"
-                configuration.clientKey = "4O3zwm4r8VjZQ3pY3wyK"
-                configuration.server = "http://tm-campus-app.herokuapp.com/parse"
-            })
+            ParseClientConfiguration { (configuration:ParseMutableClientConfiguration) -> Void in
+                configuration.applicationId = "campus-app"
+                configuration.clientKey = "ijS97M6sbiNotEj5IKhf"
+                configuration.server = "http://campus-app.herokuapp.com/parse"
+            }
         )
+        
+        
+        if let _ = PFUser.current() {
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            if let vc = storyboard.instantiateViewController(withIdentifier: "EventNavigationVC") as? UINavigationController {
+                window?.rootViewController = vc
+            }
+        } else {
+            let storyboard = UIStoryboard(name: "LoginUI", bundle: nil)
+            if let vc = storyboard.instantiateViewController(withIdentifier: "LoginVC") as? LoginVC {
+                window?.rootViewController = vc
+            }
+        }
         
         return true
     }
