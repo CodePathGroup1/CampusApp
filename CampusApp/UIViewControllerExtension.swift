@@ -12,8 +12,7 @@ extension UIViewController {
     
     func showViewController(storyboardIdentifier: String, viewControllerIdentifier: String) {
         let storyboard = UIStoryboard(name: storyboardIdentifier, bundle: nil)
-        if let vc = storyboard.instantiateViewController(withIdentifier: viewControllerIdentifier) as? UIViewController {
-            present(vc, animated: true, completion: nil)
-        }
+        let vc = storyboard.instantiateViewController(withIdentifier: viewControllerIdentifier)
+        present(vc, animated: true, completion: nil)
     }
 }

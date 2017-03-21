@@ -10,9 +10,9 @@ import UIKit
 import Parse
 import PKHUD
 
-class LoginVC: UIViewController {
+class LoginViewController: UIViewController {
 
-    @IBOutlet weak var usernameField: RoundTextField!
+    @IBOutlet weak var emailField: RoundTextField!
     @IBOutlet weak var passwordField: RoundTextField!
     
     @IBOutlet weak var loginButton: RoundButton!
@@ -34,16 +34,18 @@ class LoginVC: UIViewController {
     MARK: - Log in
      ====================================================================================================== */
     @IBAction func loginButtonTapped(_ sender: AnyObject) {
-        if let username = usernameField.text, let password = passwordField.text {
-            HUD.show(.progress)
-            
-            PFUser.logInWithUsername(inBackground: username, password: password) { (user: PFUser?, error: Error?) -> Void in
-                if let _ = user {
-                    HUD.hide(animated: true)
-                    self.showViewController(storyboardIdentifier: "Main", viewControllerIdentifier: "EventNavigationVC")
-                } else {
-                    HUD.flash(.error)
-                    print(error?.localizedDescription ?? "Unknown error")
+        if let email = emailField.text, let password = passwordField.text {
+            if !email.isEmpty && !password.isEmpty {
+                HUD.show(.progress)
+                
+                PFUser.logInWithUsername(inBackground: email, password: password) { (user: PFUser?, error: Error?) -> Void in
+                    if let _ = user {
+                        HUD.hide(animated: true)
+                        self.showViewController(storyboardIdentifier: "Main", viewControllerIdentifier: "EventNavigationVC")
+                    } else {
+                        HUD.flash(.error)
+                        print(error?.localizedDescription ?? "Unknown error")
+                    }
                 }
             }
         }
