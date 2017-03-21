@@ -20,6 +20,10 @@ class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // TODO: remove this once development is finished
+        emailField.text = "codepath@codepath.com"
+        passwordField.text = "codepath"
     }
     
     /* ====================================================================================================

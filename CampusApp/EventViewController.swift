@@ -15,6 +15,15 @@ class EventViewController: UIViewController, UITableViewDataSource, UITableViewD
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        GoogleCalendarClient.shared.getPublicEvents(calendarID: "mail.ccsf.edu_2o3osj4laq9iapttl8tpc5igbc@group.calendar.google.com",
+                                                    success: { json in
+                                                        print(json)
+                                                        print("succeeded")
+        },
+                                                    failure: { error in
+                                                        print(error)
+        })
+        
         tableView.delegate = self
         tableView.dataSource = self
         
