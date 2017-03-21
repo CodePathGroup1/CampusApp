@@ -1,4 +1,5 @@
 PODS:
+  - Alamofire (4.4.0)
   - Bolts/Tasks (1.8.4)
   - Parse (1.14.2):
     - Bolts/Tasks (~> 1.8)
@@ -8,16 +9,18 @@ PODS:
   - PKHUD (4.0.0)
 
 DEPENDENCIES:
+  - Alamofire
   - Parse
   - ParseUI
   - PKHUD
 
 SPEC CHECKSUMS:
+  Alamofire: dc44b1600b800eb63da6a19039a0083d62a6a62d
   Bolts: 8a7995239dbe724f9cba2248b766d48b7ebdd322
   Parse: 4335d65f40cb3d43190d723144bbe1afb9c38230
   ParseUI: af2eba584799da4a9fbdac0e178662d7438b502e
   PKHUD: 2bb45c936bb8afa39f3cd33ec14e8cc89f624255
 
-PODFILE CHECKSUM: 65c6f29dad6363f80cd0cf2790889fd054e975a6
+PODFILE CHECKSUM: 4bdacbc9487b7c88322d287e20beab69f8ef3270
 
-COCOAPODS: 1.2.0.beta.1
+COCOAPODS: 1.2.1.beta.1

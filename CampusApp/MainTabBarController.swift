@@ -15,8 +15,4 @@ class MainTabBarController: UITabBarController {
 
         
     }
-    
-    override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
-        
-    }
 }
