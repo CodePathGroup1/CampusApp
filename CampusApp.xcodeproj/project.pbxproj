@@ -10,6 +10,7 @@
 		65E8353C1E80C2DC0006FC0D /* RoundButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65E8353B1E80C2DC0006FC0D /* RoundButton.swift */; };
 		65E8353E1E80CA610006FC0D /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65E8353D1E80CA610006FC0D /* LoginVC.swift */; };
 		65E835401E80CCE80006FC0D /* RoundTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65E8353F1E80CCE80006FC0D /* RoundTextField.swift */; };
+		65E835421E80DDD00006FC0D /* RegisterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65E835411E80DDD00006FC0D /* RegisterVC.swift */; };
 		BE4249FE1E655D7200A7BA37 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4249FD1E655D7200A7BA37 /* AppDelegate.swift */; };
 		BE424A031E655D7200A7BA37 /* LoginUI.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BE424A011E655D7200A7BA37 /* LoginUI.storyboard */; };
 		BE424A051E655D7200A7BA37 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BE424A041E655D7200A7BA37 /* Assets.xcassets */; };
@@ -20,6 +21,7 @@
 		65E8353B1E80C2DC0006FC0D /* RoundButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundButton.swift; sourceTree = "<group>"; };
 		65E8353D1E80CA610006FC0D /* LoginVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
 		65E8353F1E80CCE80006FC0D /* RoundTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundTextField.swift; sourceTree = "<group>"; };
+		65E835411E80DDD00006FC0D /* RegisterVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterVC.swift; sourceTree = "<group>"; };
 		BE4249FA1E655D7200A7BA37 /* CampusApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CampusApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE4249FD1E655D7200A7BA37 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BE424A021E655D7200A7BA37 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LoginUI.storyboard; sourceTree = "<group>"; };
@@ -60,6 +62,7 @@
 			isa = PBXGroup;
 			children = (
 				65E8353D1E80CA610006FC0D /* LoginVC.swift */,
+				65E835411E80DDD00006FC0D /* RegisterVC.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -179,6 +182,7 @@
 				65E8353C1E80C2DC0006FC0D /* RoundButton.swift in Sources */,
 				BE4249FE1E655D7200A7BA37 /* AppDelegate.swift in Sources */,
 				65E8353E1E80CA610006FC0D /* LoginVC.swift in Sources */,
+				65E835421E80DDD00006FC0D /* RegisterVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -303,6 +307,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = L398DL783R;
 				INFOPLIST_FILE = CampusApp/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.github.hlpostman.CampusApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -316,6 +321,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = L398DL783R;
 				INFOPLIST_FILE = CampusApp/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.github.hlpostman.CampusApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";

@@ -1,5 +1,5 @@
 //
-//  LoginVC.swift
+//  RegisterVC.swift
 //  CampusApp
 //
 //  Created by Thomas Zhu on 3/20/17.
@@ -8,20 +8,20 @@
 
 import UIKit
 
-class LoginVC: UIViewController, UITextFieldDelegate {
+class RegisterVC: UIViewController, UITextFieldDelegate {
 
-    @IBOutlet weak var usernameField: RoundTextField!
-    @IBOutlet weak var passwordField: RoundTextField!
-    
-    @IBOutlet weak var loginButton: RoundButton!
-    @IBOutlet weak var registerButton: RoundButton!
-    
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        // Do any additional setup after loading the view.
+    }
+    
+    @IBAction func closeButtonPressed(_ sender: AnyObject) {
+        dismiss(animated: true, completion: nil)
     }
     
     /* ====================================================================================================
-     MARK: - Dismiss keyboard when tapping background or pressing enter
+        MARK: - Dismiss keyboard when tapping background or pressing enter
      ====================================================================================================== */
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.endEditing(true)

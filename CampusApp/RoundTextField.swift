@@ -8,6 +8,7 @@
 
 import UIKit
 
+@IBDesignable
 class RoundTextField: UITextField {
 
     let padding = UIEdgeInsets(top: 0, left: 15, bottom: 0, right: 15);
@@ -16,6 +17,7 @@ class RoundTextField: UITextField {
         super.awakeFromNib()
         
         self.layer.cornerRadius = 15.0
+        self.clipsToBounds = true
         self.layer.masksToBounds = true
         self.layer.borderColor = UIColor.white.cgColor
         self.layer.borderWidth = 1
