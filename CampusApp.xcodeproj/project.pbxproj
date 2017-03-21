@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		1DF7D75A1E80CA16003ECFB6 /* EventCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DF7D7591E80CA16003ECFB6 /* EventCell.swift */; };
 		1DF7D75C1E80CC5D003ECFB6 /* DetailEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DF7D75B1E80CC5D003ECFB6 /* DetailEventViewController.swift */; };
+		34245A0B18139A5EC26A1945 /* Pods_CampusApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B6B289A9EC90E41B448C975D /* Pods_CampusApp.framework */; };
 		65E8353C1E80C2DC0006FC0D /* RoundButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65E8353B1E80C2DC0006FC0D /* RoundButton.swift */; };
 		65E8353E1E80CA610006FC0D /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65E8353D1E80CA610006FC0D /* LoginVC.swift */; };
 		65E835401E80CCE80006FC0D /* RoundTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65E8353F1E80CCE80006FC0D /* RoundTextField.swift */; };
@@ -25,11 +26,14 @@
 /* Begin PBXFileReference section */
 		1DF7D7591E80CA16003ECFB6 /* EventCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventCell.swift; sourceTree = "<group>"; };
 		1DF7D75B1E80CC5D003ECFB6 /* DetailEventViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailEventViewController.swift; sourceTree = "<group>"; };
+		2BE7391FFFE1ECA4FAC20D5E /* Pods-CampusApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CampusApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-CampusApp/Pods-CampusApp.release.xcconfig"; sourceTree = "<group>"; };
+		596B552B26D2DA6826F22FD3 /* Pods-CampusApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CampusApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CampusApp/Pods-CampusApp.debug.xcconfig"; sourceTree = "<group>"; };
 		65E8353B1E80C2DC0006FC0D /* RoundButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundButton.swift; sourceTree = "<group>"; };
 		65E8353D1E80CA610006FC0D /* LoginVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
 		65E8353F1E80CCE80006FC0D /* RoundTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundTextField.swift; sourceTree = "<group>"; };
 		65E835411E80DDD00006FC0D /* RegisterVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterVC.swift; sourceTree = "<group>"; };
 		65F5BBDD1E80FE9000368D36 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LoginUI.storyboard; sourceTree = "<group>"; };
+		B6B289A9EC90E41B448C975D /* Pods_CampusApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CampusApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE4249FA1E655D7200A7BA37 /* CampusApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CampusApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE4249FD1E655D7200A7BA37 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BE4249FF1E655D7200A7BA37 /* EventViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventViewController.swift; sourceTree = "<group>"; };
@@ -44,17 +48,37 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				34245A0B18139A5EC26A1945 /* Pods_CampusApp.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		70E4F69D8AFB4E1C8E64D46F /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				596B552B26D2DA6826F22FD3 /* Pods-CampusApp.debug.xcconfig */,
+				2BE7391FFFE1ECA4FAC20D5E /* Pods-CampusApp.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		94109B60B6E85CBC793EA517 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				B6B289A9EC90E41B448C975D /* Pods_CampusApp.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		BE4249F11E655D7200A7BA37 = {
 			isa = PBXGroup;
 			children = (
 				BE4249FC1E655D7200A7BA37 /* CampusApp */,
 				BE4249FB1E655D7200A7BA37 /* Products */,
+				70E4F69D8AFB4E1C8E64D46F /* Pods */,
+				94109B60B6E85CBC793EA517 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -93,9 +117,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = BE424A0C1E655D7200A7BA37 /* Build configuration list for PBXNativeTarget "CampusApp" */;
 			buildPhases = (
+				4D0EF45B15CA3BE688CBF3A1 /* [CP] Check Pods Manifest.lock */,
 				BE4249F61E655D7200A7BA37 /* Sources */,
 				BE4249F71E655D7200A7BA37 /* Frameworks */,
 				BE4249F81E655D7200A7BA37 /* Resources */,
+				5C92E77DF5C29A0B0EC6F482 /* [CP] Embed Pods Frameworks */,
+				54EE2BD2E33F25A2098E375B /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -155,6 +182,54 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		4D0EF45B15CA3BE688CBF3A1 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		54EE2BD2E33F25A2098E375B /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CampusApp/Pods-CampusApp-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		5C92E77DF5C29A0B0EC6F482 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CampusApp/Pods-CampusApp-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		BE4249F61E655D7200A7BA37 /* Sources */ = {
@@ -299,6 +374,7 @@
 		};
 		BE424A0D1E655D7200A7BA37 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 596B552B26D2DA6826F22FD3 /* Pods-CampusApp.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = L398DL783R;
@@ -313,6 +389,7 @@
 		};
 		BE424A0E1E655D7200A7BA37 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2BE7391FFFE1ECA4FAC20D5E /* Pods-CampusApp.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = L398DL783R;

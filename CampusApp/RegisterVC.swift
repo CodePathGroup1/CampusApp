@@ -8,7 +8,7 @@
 
 import UIKit
 
-class RegisterVC: UIViewController, UITextFieldDelegate {
+class RegisterVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,11 +23,6 @@ class RegisterVC: UIViewController, UITextFieldDelegate {
     /* ====================================================================================================
         MARK: - Dismiss keyboard when tapping background or pressing enter
      ====================================================================================================== */
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.endEditing(true)
-        return true
-    }
-    
     @IBAction func backgroundTapped(_ sender: AnyObject) {
         view.endEditing(true)
     }

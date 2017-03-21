@@ -9,7 +9,7 @@
 import UIKit
 
 @IBDesignable
-class RoundTextField: UITextField {
+class RoundTextField: UITextField, UITextFieldDelegate {
 
     let padding = UIEdgeInsets(top: 0, left: 15, bottom: 0, right: 15);
     
@@ -23,8 +23,13 @@ class RoundTextField: UITextField {
         self.layer.borderWidth = 1
         self.attributedPlaceholder = NSAttributedString(string: self.placeholder ?? "",
                                                         attributes: [NSForegroundColorAttributeName: UIColor.white])
+        
+        self.delegate = self
     }
     
+    /* ====================================================================================================
+     MARK: - Inset customization
+     ====================================================================================================== */
     override func textRect(forBounds bounds: CGRect) -> CGRect {
         return UIEdgeInsetsInsetRect(bounds, padding)
     }
@@ -36,4 +41,15 @@ class RoundTextField: UITextField {
     override func editingRect(forBounds bounds: CGRect) -> CGRect {
         return UIEdgeInsetsInsetRect(bounds, padding)
     }
+    /* ==================================================================================================== */
+    
+    
+    /* ====================================================================================================
+     MARK: - Dismiss keyboard upon return key press
+     ====================================================================================================== */
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+    /* ==================================================================================================== */
 }

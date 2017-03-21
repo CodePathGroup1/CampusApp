@@ -8,7 +8,7 @@
 
 import UIKit
 
-class LoginVC: UIViewController, UITextFieldDelegate {
+class LoginVC: UIViewController {
 
     @IBOutlet weak var usernameField: RoundTextField!
     @IBOutlet weak var passwordField: RoundTextField!
@@ -21,13 +21,8 @@ class LoginVC: UIViewController, UITextFieldDelegate {
     }
     
     /* ====================================================================================================
-     MARK: - Dismiss keyboard when tapping background or pressing enter
+     MARK: - Dismiss keyboard when tapping background
      ====================================================================================================== */
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.endEditing(true)
-        return true
-    }
-    
     @IBAction func backgroundTapped(_ sender: AnyObject) {
         view.endEditing(true)
     }

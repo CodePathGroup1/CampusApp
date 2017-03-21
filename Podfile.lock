@@ -1,0 +1,23 @@
+PODS:
+  - Bolts/Tasks (1.8.4)
+  - Parse (1.14.2):
+    - Bolts/Tasks (~> 1.8)
+  - ParseUI (1.2.0):
+    - Bolts/Tasks (~> 1.3)
+    - Parse (~> 1.9)
+  - PKHUD (4.0.0)
+
+DEPENDENCIES:
+  - Parse
+  - ParseUI
+  - PKHUD
+
+SPEC CHECKSUMS:
+  Bolts: 8a7995239dbe724f9cba2248b766d48b7ebdd322
+  Parse: 4335d65f40cb3d43190d723144bbe1afb9c38230
+  ParseUI: af2eba584799da4a9fbdac0e178662d7438b502e
+  PKHUD: 2bb45c936bb8afa39f3cd33ec14e8cc89f624255
+
+PODFILE CHECKSUM: 65c6f29dad6363f80cd0cf2790889fd054e975a6
+
+COCOAPODS: 1.2.0.beta.1
