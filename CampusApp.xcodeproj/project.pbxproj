@@ -41,41 +41,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		65E835351E80BCF90006FC0D /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				65E8353B1E80C2DC0006FC0D /* RoundButton.swift */,
-				65E8353F1E80CCE80006FC0D /* RoundTextField.swift */,
-				65E835381E80BD1A0006FC0D /* Storyboards */,
-			);
-			name = Views;
-			sourceTree = "<group>";
-		};
-		65E835361E80BCFD0006FC0D /* Models */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Models;
-			sourceTree = "<group>";
-		};
-		65E835371E80BD030006FC0D /* Controllers */ = {
-			isa = PBXGroup;
-			children = (
-				65E8353D1E80CA610006FC0D /* LoginVC.swift */,
-				65E835411E80DDD00006FC0D /* RegisterVC.swift */,
-			);
-			name = Controllers;
-			sourceTree = "<group>";
-		};
-		65E835381E80BD1A0006FC0D /* Storyboards */ = {
-			isa = PBXGroup;
-			children = (
-				BE424A011E655D7200A7BA37 /* LoginUI.storyboard */,
-				BE424A061E655D7200A7BA37 /* LaunchScreen.storyboard */,
-			);
-			name = Storyboards;
-			sourceTree = "<group>";
-		};
 		BE4249F11E655D7200A7BA37 = {
 			isa = PBXGroup;
 			children = (
@@ -95,9 +60,12 @@
 		BE4249FC1E655D7200A7BA37 /* CampusApp */ = {
 			isa = PBXGroup;
 			children = (
-				65E835371E80BD030006FC0D /* Controllers */,
-				65E835361E80BCFD0006FC0D /* Models */,
-				65E835351E80BCF90006FC0D /* Views */,
+				65E8353D1E80CA610006FC0D /* LoginVC.swift */,
+				65E835411E80DDD00006FC0D /* RegisterVC.swift */,
+				65E8353B1E80C2DC0006FC0D /* RoundButton.swift */,
+				65E8353F1E80CCE80006FC0D /* RoundTextField.swift */,
+				BE424A011E655D7200A7BA37 /* LoginUI.storyboard */,
+				BE424A061E655D7200A7BA37 /* LaunchScreen.storyboard */,
 				BE4249FD1E655D7200A7BA37 /* AppDelegate.swift */,
 				BE424A041E655D7200A7BA37 /* Assets.xcassets */,
 				BE424A091E655D7200A7BA37 /* Info.plist */,
