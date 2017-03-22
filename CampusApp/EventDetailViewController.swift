@@ -9,7 +9,7 @@
 import UIKit
 import MapKit
 
-class EventDetailViewController: UIViewController {
+class EventDetailViewController: UIViewController, MKMapViewDelegate {
 
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UITextView!
@@ -25,6 +25,21 @@ class EventDetailViewController: UIViewController {
         descriptionLabel.text = event.description
         
         mapView.delegate = self
+        mapView.showsUserLocation = true
+        mapView.layer.cornerRadius = 8.0
+        mapView.clipsToBounds = true
+        
+        /*
+        if let latitude = event.latitude, let longitude = event.longitude {
+            let annotation: MKAnnotation = {
+                let annotation = MKPointAnnotation()
+                annotation.coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+                return annotation
+            }()
+            
+            mapView.showAnnotations([annotation], animated: false)
+        }
+        */
         
         print(event)
     }

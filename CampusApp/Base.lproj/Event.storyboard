@@ -133,25 +133,47 @@
                                         <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                     </textView>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YIe-qA-4Ws">
+                                        <subviews>
+                                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="4LR-Vj-dgF"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.75" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Location not available" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RF0-LQ-isZ">
+                                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="17"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstItem="4LR-Vj-dgF" firstAttribute="top" secondItem="YIe-qA-4Ws" secondAttribute="top" id="08E-ZK-m6c"/>
+                                            <constraint firstItem="RF0-LQ-isZ" firstAttribute="height" secondItem="4LR-Vj-dgF" secondAttribute="height" id="3XJ-re-0gL"/>
+                                            <constraint firstItem="4LR-Vj-dgF" firstAttribute="leading" secondItem="YIe-qA-4Ws" secondAttribute="leading" id="5lZ-St-dqs"/>
+                                            <constraint firstItem="RF0-LQ-isZ" firstAttribute="centerX" secondItem="4LR-Vj-dgF" secondAttribute="centerX" id="KDP-gQ-wD0"/>
+                                            <constraint firstAttribute="trailing" secondItem="4LR-Vj-dgF" secondAttribute="trailing" id="id5-Ic-Hn8"/>
+                                            <constraint firstAttribute="bottom" secondItem="4LR-Vj-dgF" secondAttribute="bottom" id="r9p-Zg-rfl"/>
+                                            <constraint firstItem="RF0-LQ-isZ" firstAttribute="width" secondItem="4LR-Vj-dgF" secondAttribute="width" id="rEw-q5-Dpp"/>
+                                            <constraint firstItem="RF0-LQ-isZ" firstAttribute="centerY" secondItem="4LR-Vj-dgF" secondAttribute="centerY" id="rvg-fF-0bM"/>
+                                        </constraints>
+                                    </view>
                                 </subviews>
+                                <constraints>
+                                    <constraint firstItem="YIe-qA-4Ws" firstAttribute="height" secondItem="XTm-If-bKD" secondAttribute="height" multiplier="0.3" id="LRs-lx-NAI"/>
+                                </constraints>
                             </stackView>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Goy-jp-Scj"/>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="Goy-jp-Scj" secondAttribute="trailing" id="8ij-kY-KTn"/>
+                            <constraint firstItem="XTm-If-bKD" firstAttribute="top" secondItem="HBb-CO-3DN" secondAttribute="bottom" constant="12" id="4S3-lC-bSa"/>
+                            <constraint firstAttribute="bottomMargin" secondItem="XTm-If-bKD" secondAttribute="bottom" constant="12" id="8Ys-TG-Fv8"/>
+                            <constraint firstItem="XTm-If-bKD" firstAttribute="trailing" secondItem="ytc-gi-ZrO" secondAttribute="trailingMargin" id="BLr-eo-DP4"/>
                             <constraint firstAttribute="trailingMargin" secondItem="XTm-If-bKD" secondAttribute="trailing" id="RD4-6q-2CV"/>
-                            <constraint firstItem="Goy-jp-Scj" firstAttribute="top" secondItem="XTm-If-bKD" secondAttribute="bottom" constant="12" id="TK2-oi-teQ"/>
+                            <constraint firstItem="XTm-If-bKD" firstAttribute="leading" secondItem="ytc-gi-ZrO" secondAttribute="leadingMargin" id="Ub2-h8-6aI"/>
                             <constraint firstItem="XTm-If-bKD" firstAttribute="leading" secondItem="ytc-gi-ZrO" secondAttribute="leadingMargin" id="VKZ-K7-uCz"/>
-                            <constraint firstItem="Goy-jp-Scj" firstAttribute="height" secondItem="ytc-gi-ZrO" secondAttribute="height" multiplier="0.3" id="bAf-S8-x01"/>
-                            <constraint firstItem="f1N-8u-xUs" firstAttribute="top" secondItem="Goy-jp-Scj" secondAttribute="bottom" id="eGi-po-4DV"/>
-                            <constraint firstItem="XTm-If-bKD" firstAttribute="top" secondItem="HBb-CO-3DN" secondAttribute="bottom" constant="12" id="p8S-dV-LN6"/>
-                            <constraint firstItem="Goy-jp-Scj" firstAttribute="leading" secondItem="ytc-gi-ZrO" secondAttribute="leading" id="tZk-05-JTC"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="descriptionLabel" destination="ypJ-MS-13q" id="4Vu-jf-3YN"/>
-                        <outlet property="mapView" destination="Goy-jp-Scj" id="6qg-lB-Wjz"/>
+                        <outlet property="mapView" destination="4LR-Vj-dgF" id="TSM-86-eQl"/>
                         <outlet property="titleLabel" destination="jUA-Yv-QhW" id="Cji-Fw-HzJ"/>
                     </connections>
                 </viewController>
