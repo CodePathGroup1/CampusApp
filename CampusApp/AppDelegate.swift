@@ -33,7 +33,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         } else {
             let storyboard = UIStoryboard(name: "Login", bundle: nil)
-            if let vc = storyboard.instantiateViewController(withIdentifier: "LoginVC") as? LoginViewController {
+            if let vc = storyboard.instantiateViewController(withIdentifier: "LoginViewController") as? LoginViewController {
                 window?.rootViewController = vc
             }
         }

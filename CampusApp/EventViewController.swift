@@ -37,9 +37,8 @@ class EventViewController: UIViewController, UITableViewDataSource, UITableViewD
         HUD.flash(.progress)
         
         PFUser.logOutInBackground { _ in
-            self.dismiss(animated: true) {
-                HUD.hide(animated: true)
-            }
+            self.showViewController(storyboardIdentifier: "Login", viewControllerIdentifier: "LoginViewController")
+            HUD.hide(animated: true)
         }
     }
     
