@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Parse
 import PKHUD
 
 class EventViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
@@ -30,6 +31,16 @@ class EventViewController: UIViewController, UITableViewDataSource, UITableViewD
         tableView.register(nib, forCellReuseIdentifier: "EventCell")
         
         loadEvents()
+    }
+    
+    @IBAction func logoutButtonTapped(_ sender: AnyObject) {
+        HUD.flash(.progress)
+        
+        PFUser.logOutInBackground { _ in
+            self.dismiss(animated: true) {
+                HUD.hide(animated: true)
+            }
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -60,9 +71,17 @@ class EventViewController: UIViewController, UITableViewDataSource, UITableViewD
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let event = events[indexPath.row]
-        print(event.startDateTime!)
-        print(event.startDateTime!.timeIntervalSinceNow)
+        performSegue(withIdentifier: "EventDetailViewController", sender: events[indexPath.row])
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let identifier = segue.identifier, identifier == "EventDetailViewController" {
+            if let event = sender as? Event {
+                if let destinationVC = segue.destination as? EventDetailViewController {
+                    destinationVC.event = event
+                }
+            }
+        }
     }
     
     private func loadEvents() {
@@ -77,7 +96,6 @@ class EventViewController: UIViewController, UITableViewDataSource, UITableViewD
                                                             HUD.flash(.label("Loading: \(loadedCalendarCount / totalCalendarCount) %"))
                                                             
                                                             let newEvents = json.map { eventJSON -> Event in
-                                                                print(json)
                                                                 return Event(json: eventJSON)
                                                             }.filter { event -> Bool in  // Filter out repeat events
                                                                 return event.startDateTime != nil

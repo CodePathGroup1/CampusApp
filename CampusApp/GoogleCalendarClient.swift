@@ -42,8 +42,8 @@ final class GoogleCalendarClient {
         let parameters: Parameters = [
             "fields": "items(id,summary,organizer(displayName),start,end,recurrence,location,description,htmlLink)",
             "key": apiKey,
-            "maxResults": 10,
-            "timeMin": Date().standardTime
+            "timeMin": Date().standardTime,
+            "timeMax": Calendar.current.date(byAdding: .day, value: 14, to: Date())!.standardTime
         ]
         
         let headers: HTTPHeaders = ["X-Ios-Bundle-Identifier": Bundle.main.bundleIdentifier!]

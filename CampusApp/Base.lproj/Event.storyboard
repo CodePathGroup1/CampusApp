@@ -24,7 +24,7 @@
                                         <rect key="frame" x="0.0" y="92" width="375" height="84"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="kbA-te-9ae" id="cQO-8E-JEd">
-                                            <frame key="frameInset" width="375" height="83"/>
+                                            <frame key="frameInset" width="375" height="84"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -39,19 +39,26 @@
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="fm3-Gy-W4k" secondAttribute="bottom" id="zhu-mn-FDK"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Events" id="NCK-89-h2a"/>
+                    <navigationItem key="navigationItem" title="Events" id="NCK-89-h2a">
+                        <barButtonItem key="leftBarButtonItem" title="Log out" id="Wvj-gu-rFy">
+                            <connections>
+                                <action selector="logoutButtonTapped:" destination="BYZ-38-t0r" id="QXt-Lr-yGj"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="fm3-Gy-W4k" id="Fwn-XT-o1d"/>
+                        <segue destination="zNt-fj-lfZ" kind="show" identifier="EventDetailViewController" id="AQ3-P8-s8U"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="900" y="139"/>
+            <point key="canvasLocation" x="887" y="139"/>
         </scene>
-        <!--Detail Event View Controller-->
+        <!--Event Detail View Controller-->
         <scene sceneID="AIF-fI-Nod">
             <objects>
-                <viewController id="zNt-fj-lfZ" customClass="DetailEventViewController" customModule="CampusApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="zNt-fj-lfZ" customClass="EventDetailViewController" customModule="CampusApp" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="HBb-CO-3DN"/>
                         <viewControllerLayoutGuide type="bottom" id="f1N-8u-xUs"/>
@@ -67,7 +74,6 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Oo6-e4-LNv"/>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ame-gg-LKb">
                                 <frame key="frameInset" minX="16" minY="83" width="37" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -98,13 +104,11 @@
                             </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstAttribute="trailing" secondItem="Oo6-e4-LNv" secondAttribute="trailing" id="3J3-Db-fct"/>
-                            <constraint firstItem="f1N-8u-xUs" firstAttribute="top" secondItem="Oo6-e4-LNv" secondAttribute="bottom" id="Agn-fw-C4o"/>
-                            <constraint firstItem="Oo6-e4-LNv" firstAttribute="leading" secondItem="ytc-gi-ZrO" secondAttribute="leading" id="fYt-e4-6M9"/>
-                            <constraint firstItem="Oo6-e4-LNv" firstAttribute="top" secondItem="ytc-gi-ZrO" secondAttribute="top" constant="284" id="lnm-fB-Bkl"/>
-                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="descriptionLabel" destination="flM-R6-31g" id="O93-5B-MpL"/>
+                        <outlet property="titleLabel" destination="Ame-gg-LKb" id="Zuw-1z-sXM"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DVX-cU-88D" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

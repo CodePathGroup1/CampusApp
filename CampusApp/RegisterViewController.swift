@@ -57,7 +57,7 @@ class RegisterViewController: UIViewController {
                 newUser.signUpInBackground { (success: Bool, error: Error?) in
                     if success {
                         HUD.hide(animated: true)
-                        self.showViewController(storyboardIdentifier: "Main", viewControllerIdentifier: "EventNavigationVC")
+                        self.showViewController(storyboardIdentifier: "Event", viewControllerIdentifier: "EventNavigationVC")
                     } else if let error = error as? NSError {
                         switch error.code {
                         case 202:
