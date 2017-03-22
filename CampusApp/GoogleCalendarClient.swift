@@ -39,9 +39,8 @@ final class GoogleCalendarClient {
         }
         
         // API Call: https://developers.google.com/google-apps/calendar/v3/reference/events/list
-        // Events Response: https://developers.google.com/google-apps/calendar/v3/reference/events
         let parameters: Parameters = [
-            "fields": "items(id,summary,organizer(displayName),start,end,location,description,htmlLink)",
+            "fields": "items(id,summary,organizer(displayName),start(dateTime),end(dateTime),location,description,htmlLink)",
             "key": apiKey,
             "maxResults": 10,
             "timeMin": Date().iso8601

@@ -10,15 +10,40 @@ import Foundation
 
 class Event {
     
-//    let id: String?
-//    let summary: String?
-//    let startDate: Date?
-//    let startTime: Date?
-//    let endDate: Date?
-//    let endTime: Date?
-//    let location: String?
+    // Events Response: https://developers.google.com/google-apps/calendar/v3/reference/events
     
-    // "fields": "items(id,summary,organizer(displayName),start,end,location,description,htmlLink)"
+    let id: String?
+    let summary: String?
+    let organizerDisplayName: String?
+    let startDateTime: Date?
+    let endDateTime: Date?
+    let location: String?
+    let description: String?
+    let htmlLink: String?
     
-    
+    // "fields": "items(id,summary,organizer(displayName),start,end,location,description,htmlLink)",
+    init(json: [String: AnyObject]) {
+        
+        id = json["id"] as? String
+        summary = json["summary"] as? String
+        organizerDisplayName = json["organizer"]?["displayName"] as? String
+        
+        if let startDateTimeString = json["start"]?["dateTime"] as? String,
+            let formattedStartDateTime = startDateTimeString.dateFromISO8601 {
+            startDateTime = formattedStartDateTime
+        } else {
+            startDateTime = nil
+        }
+        
+        if let endDateTimeString = json["end"]?["dateTime"] as? String,
+            let formattedStartDateTime = endDateTimeString.dateFromISO8601 {
+            endDateTime = formattedStartDateTime
+        } else {
+            endDateTime = nil
+        }
+        
+        location = json["location"] as? String
+        description = json["description"] as? String
+        htmlLink = json["htmlLink"] as? String
+    }
 }
