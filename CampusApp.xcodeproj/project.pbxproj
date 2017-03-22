@@ -10,6 +10,7 @@
 		1DF7D75A1E80CA16003ECFB6 /* EventCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DF7D7591E80CA16003ECFB6 /* EventCell.swift */; };
 		1DF7D75C1E80CC5D003ECFB6 /* DetailEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DF7D75B1E80CC5D003ECFB6 /* DetailEventViewController.swift */; };
 		34245A0B18139A5EC26A1945 /* Pods_CampusApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B6B289A9EC90E41B448C975D /* Pods_CampusApp.framework */; };
+		6519E53C1E820D1A0058CB6A /* TopAlignedLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6519E53B1E820D1A0058CB6A /* TopAlignedLabel.swift */; };
 		653040F71E81A2C3009EF9A5 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 653040F51E81A2C3009EF9A5 /* MainTabBarController.swift */; };
 		653040F81E81A2C3009EF9A5 /* MainTabBarController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 653040F61E81A2C3009EF9A5 /* MainTabBarController.xib */; };
 		653040FC1E81B57C009EF9A5 /* GoogleCalendarClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 653040FB1E81B57C009EF9A5 /* GoogleCalendarClient.swift */; };
@@ -23,6 +24,7 @@
 		65F5BBDE1E80FE9000368D36 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 65F5BBDC1E80FE9000368D36 /* Login.storyboard */; };
 		65F5BBE01E81059500368D36 /* ParseClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F5BBDF1E81059500368D36 /* ParseClient.swift */; };
 		65F5BBE21E810C4D00368D36 /* UIViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F5BBE11E810C4D00368D36 /* UIViewControllerExtension.swift */; };
+		65F5BBEB1E82082700368D36 /* EventCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 65F5BBEA1E82082700368D36 /* EventCell.xib */; };
 		BE4249FE1E655D7200A7BA37 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4249FD1E655D7200A7BA37 /* AppDelegate.swift */; };
 		BE424A001E655D7200A7BA37 /* EventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4249FF1E655D7200A7BA37 /* EventViewController.swift */; };
 		BE424A031E655D7200A7BA37 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BE424A011E655D7200A7BA37 /* Main.storyboard */; };
@@ -35,6 +37,7 @@
 		1DF7D75B1E80CC5D003ECFB6 /* DetailEventViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailEventViewController.swift; sourceTree = "<group>"; };
 		2BE7391FFFE1ECA4FAC20D5E /* Pods-CampusApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CampusApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-CampusApp/Pods-CampusApp.release.xcconfig"; sourceTree = "<group>"; };
 		596B552B26D2DA6826F22FD3 /* Pods-CampusApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CampusApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CampusApp/Pods-CampusApp.debug.xcconfig"; sourceTree = "<group>"; };
+		6519E53B1E820D1A0058CB6A /* TopAlignedLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopAlignedLabel.swift; sourceTree = "<group>"; };
 		653040F51E81A2C3009EF9A5 /* MainTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		653040F61E81A2C3009EF9A5 /* MainTabBarController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainTabBarController.xib; sourceTree = "<group>"; };
 		653040FB1E81B57C009EF9A5 /* GoogleCalendarClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoogleCalendarClient.swift; sourceTree = "<group>"; };
@@ -48,6 +51,7 @@
 		65F5BBDD1E80FE9000368D36 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Login.storyboard; sourceTree = "<group>"; };
 		65F5BBDF1E81059500368D36 /* ParseClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseClient.swift; sourceTree = "<group>"; };
 		65F5BBE11E810C4D00368D36 /* UIViewControllerExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtension.swift; sourceTree = "<group>"; };
+		65F5BBEA1E82082700368D36 /* EventCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EventCell.xib; sourceTree = "<group>"; };
 		B6B289A9EC90E41B448C975D /* Pods_CampusApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CampusApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE4249FA1E655D7200A7BA37 /* CampusApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CampusApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE4249FD1E655D7200A7BA37 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -104,10 +108,12 @@
 			children = (
 				65F5BBE81E8198E400368D36 /* Storyboards */,
 				1DF7D7591E80CA16003ECFB6 /* EventCell.swift */,
+				65F5BBEA1E82082700368D36 /* EventCell.xib */,
 				653040F51E81A2C3009EF9A5 /* MainTabBarController.swift */,
 				653040F61E81A2C3009EF9A5 /* MainTabBarController.xib */,
 				65E8353B1E80C2DC0006FC0D /* RoundButton.swift */,
 				65E8353F1E80CCE80006FC0D /* RoundTextField.swift */,
+				6519E53B1E820D1A0058CB6A /* TopAlignedLabel.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -256,6 +262,7 @@
 				BE424A081E655D7200A7BA37 /* LaunchScreen.storyboard in Resources */,
 				65F5BBDE1E80FE9000368D36 /* Login.storyboard in Resources */,
 				BE424A051E655D7200A7BA37 /* Assets.xcassets in Resources */,
+				65F5BBEB1E82082700368D36 /* EventCell.xib in Resources */,
 				BE424A031E655D7200A7BA37 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -322,6 +329,7 @@
 				653040F71E81A2C3009EF9A5 /* MainTabBarController.swift in Sources */,
 				65F5BBE21E810C4D00368D36 /* UIViewControllerExtension.swift in Sources */,
 				65E8353C1E80C2DC0006FC0D /* RoundButton.swift in Sources */,
+				6519E53C1E820D1A0058CB6A /* TopAlignedLabel.swift in Sources */,
 				BE424A001E655D7200A7BA37 /* EventViewController.swift in Sources */,
 				1DF7D75A1E80CA16003ECFB6 /* EventCell.swift in Sources */,
 				653040FC1E81B57C009EF9A5 /* GoogleCalendarClient.swift in Sources */,

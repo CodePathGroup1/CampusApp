@@ -9,7 +9,17 @@
 import Foundation
 
 extension String {
+    /*
     var dateFromISO8601: Date? {
         return Date.iso8601Formatter.date(from: self)
+    }
+    */
+    
+    var timeFromStandardFormat: Date? {
+        return Date.standardTimeFormatter.date(from: self)
+    }
+    
+    var dateFromStandardFormat: Date? {
+        return Date.standardDateFormatter.date(from: self)
     }
 }

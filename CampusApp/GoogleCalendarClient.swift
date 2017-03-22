@@ -40,10 +40,10 @@ final class GoogleCalendarClient {
         
         // API Call: https://developers.google.com/google-apps/calendar/v3/reference/events/list
         let parameters: Parameters = [
-            "fields": "items(id,summary,organizer(displayName),start(dateTime),end(dateTime),location,description,htmlLink)",
+            "fields": "items(id,summary,organizer(displayName),start,end,recurrence,location,description,htmlLink)",
             "key": apiKey,
             "maxResults": 10,
-            "timeMin": Date().iso8601
+            "timeMin": Date().standardTime
         ]
         
         let headers: HTTPHeaders = ["X-Ios-Bundle-Identifier": Bundle.main.bundleIdentifier!]
