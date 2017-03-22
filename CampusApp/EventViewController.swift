@@ -14,7 +14,7 @@ class EventViewController: UIViewController, UITableViewDataSource, UITableViewD
     
     @IBOutlet weak var tableView: UITableView!
     
-    private var events: [Event] = []
+    private var events: [GoogleCalendarEvent] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -75,7 +75,7 @@ class EventViewController: UIViewController, UITableViewDataSource, UITableViewD
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let identifier = segue.identifier, identifier == "EventDetailViewController" {
-            if let event = sender as? Event {
+            if let event = sender as? GoogleCalendarEvent {
                 if let destinationVC = segue.destination as? EventDetailViewController {
                     destinationVC.event = event
                 }
@@ -94,8 +94,8 @@ class EventViewController: UIViewController, UITableViewDataSource, UITableViewD
                                                             loadedCalendarCount += 1
                                                             HUD.flash(.label("Loading: \(loadedCalendarCount / totalCalendarCount) %"))
                                                             
-                                                            let newEvents = json.map { eventJSON -> Event in
-                                                                return Event(json: eventJSON)
+                                                            let newEvents = json.map { eventJSON -> GoogleCalendarEvent in
+                                                                return GoogleCalendarEvent(json: eventJSON)
                                                             }.filter { event -> Bool in  // Filter out repeat events
                                                                 return event.startDateTime != nil
                                                             }

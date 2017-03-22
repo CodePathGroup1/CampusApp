@@ -14,15 +14,19 @@
 		653040F71E81A2C3009EF9A5 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 653040F51E81A2C3009EF9A5 /* MainTabBarController.swift */; };
 		653040F81E81A2C3009EF9A5 /* MainTabBarController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 653040F61E81A2C3009EF9A5 /* MainTabBarController.xib */; };
 		653040FC1E81B57C009EF9A5 /* GoogleCalendarClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 653040FB1E81B57C009EF9A5 /* GoogleCalendarClient.swift */; };
-		653040FE1E81C1A8009EF9A5 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 653040FD1E81C1A8009EF9A5 /* Event.swift */; };
+		653040FE1E81C1A8009EF9A5 /* GoogleCalendarEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 653040FD1E81C1A8009EF9A5 /* GoogleCalendarEvent.swift */; };
 		653041001E81C88D009EF9A5 /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 653040FF1E81C88D009EF9A5 /* DateExtension.swift */; };
 		653041021E81C8AF009EF9A5 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 653041011E81C8AF009EF9A5 /* StringExtension.swift */; };
+		65730E211E82FA3000FF5906 /* Campus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65730E201E82FA3000FF5906 /* Campus.swift */; };
+		65730E231E82FA3B00FF5906 /* Building.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65730E221E82FA3B00FF5906 /* Building.swift */; };
+		65730E251E82FA4900FF5906 /* Room.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65730E241E82FA4900FF5906 /* Room.swift */; };
+		65730E291E82FF5300FF5906 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65730E281E82FF5300FF5906 /* Event.swift */; };
 		65E8353C1E80C2DC0006FC0D /* RoundButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65E8353B1E80C2DC0006FC0D /* RoundButton.swift */; };
 		65E8353E1E80CA610006FC0D /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65E8353D1E80CA610006FC0D /* LoginViewController.swift */; };
 		65E835401E80CCE80006FC0D /* RoundTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65E8353F1E80CCE80006FC0D /* RoundTextField.swift */; };
 		65E835421E80DDD00006FC0D /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65E835411E80DDD00006FC0D /* RegisterViewController.swift */; };
 		65F5BBDE1E80FE9000368D36 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 65F5BBDC1E80FE9000368D36 /* Login.storyboard */; };
-		65F5BBE01E81059500368D36 /* ParseClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F5BBDF1E81059500368D36 /* ParseClient.swift */; };
+		65F5BBE01E81059500368D36 /* ParseUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F5BBDF1E81059500368D36 /* ParseUtil.swift */; };
 		65F5BBE21E810C4D00368D36 /* UIViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F5BBE11E810C4D00368D36 /* UIViewControllerExtension.swift */; };
 		65F5BBEB1E82082700368D36 /* EventCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 65F5BBEA1E82082700368D36 /* EventCell.xib */; };
 		BE4249FE1E655D7200A7BA37 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4249FD1E655D7200A7BA37 /* AppDelegate.swift */; };
@@ -41,15 +45,19 @@
 		653040F51E81A2C3009EF9A5 /* MainTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		653040F61E81A2C3009EF9A5 /* MainTabBarController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainTabBarController.xib; sourceTree = "<group>"; };
 		653040FB1E81B57C009EF9A5 /* GoogleCalendarClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoogleCalendarClient.swift; sourceTree = "<group>"; };
-		653040FD1E81C1A8009EF9A5 /* Event.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
+		653040FD1E81C1A8009EF9A5 /* GoogleCalendarEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoogleCalendarEvent.swift; sourceTree = "<group>"; };
 		653040FF1E81C88D009EF9A5 /* DateExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateExtension.swift; sourceTree = "<group>"; };
 		653041011E81C8AF009EF9A5 /* StringExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
+		65730E201E82FA3000FF5906 /* Campus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Campus.swift; sourceTree = "<group>"; };
+		65730E221E82FA3B00FF5906 /* Building.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Building.swift; sourceTree = "<group>"; };
+		65730E241E82FA4900FF5906 /* Room.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Room.swift; sourceTree = "<group>"; };
+		65730E281E82FF5300FF5906 /* Event.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		65E8353B1E80C2DC0006FC0D /* RoundButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundButton.swift; sourceTree = "<group>"; };
 		65E8353D1E80CA610006FC0D /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		65E8353F1E80CCE80006FC0D /* RoundTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundTextField.swift; sourceTree = "<group>"; };
 		65E835411E80DDD00006FC0D /* RegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		65F5BBDD1E80FE9000368D36 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Login.storyboard; sourceTree = "<group>"; };
-		65F5BBDF1E81059500368D36 /* ParseClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseClient.swift; sourceTree = "<group>"; };
+		65F5BBDF1E81059500368D36 /* ParseUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseUtil.swift; sourceTree = "<group>"; };
 		65F5BBE11E810C4D00368D36 /* UIViewControllerExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtension.swift; sourceTree = "<group>"; };
 		65F5BBEA1E82082700368D36 /* EventCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EventCell.xib; sourceTree = "<group>"; };
 		B6B289A9EC90E41B448C975D /* Pods_CampusApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CampusApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -74,10 +82,37 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		65730E261E82FA5600FF5906 /* Place */ = {
+			isa = PBXGroup;
+			children = (
+				65730E201E82FA3000FF5906 /* Campus.swift */,
+				65730E221E82FA3B00FF5906 /* Building.swift */,
+				65730E241E82FA4900FF5906 /* Room.swift */,
+			);
+			name = Place;
+			sourceTree = "<group>";
+		};
+		65730E271E82FA6B00FF5906 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				65F5BBE31E81974C00368D36 /* API */,
+			);
+			name = Utilities;
+			sourceTree = "<group>";
+		};
+		65730E2A1E83011500FF5906 /* Parse */ = {
+			isa = PBXGroup;
+			children = (
+				65730E261E82FA5600FF5906 /* Place */,
+				65730E281E82FF5300FF5906 /* Event.swift */,
+			);
+			name = Parse;
+			sourceTree = "<group>";
+		};
 		65F5BBE31E81974C00368D36 /* API */ = {
 			isa = PBXGroup;
 			children = (
-				65F5BBDF1E81059500368D36 /* ParseClient.swift */,
+				65F5BBDF1E81059500368D36 /* ParseUtil.swift */,
 				653040FB1E81B57C009EF9A5 /* GoogleCalendarClient.swift */,
 			);
 			name = API;
@@ -97,8 +132,8 @@
 		65F5BBE51E81975900368D36 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				65F5BBE31E81974C00368D36 /* API */,
-				653040FD1E81C1A8009EF9A5 /* Event.swift */,
+				65730E2A1E83011500FF5906 /* Parse */,
+				653040FD1E81C1A8009EF9A5 /* GoogleCalendarEvent.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -188,6 +223,7 @@
 				65F5BBE51E81975900368D36 /* Models */,
 				65F5BBE61E81975D00368D36 /* Views */,
 				65F5BBE71E81976200368D36 /* Resources */,
+				65730E271E82FA6B00FF5906 /* Utilities */,
 				65F5BBE91E81991600368D36 /* Extensions */,
 				BE4249FD1E655D7200A7BA37 /* AppDelegate.swift */,
 				BE424A091E655D7200A7BA37 /* Info.plist */,
@@ -322,14 +358,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				65F5BBE01E81059500368D36 /* ParseClient.swift in Sources */,
+				65F5BBE01E81059500368D36 /* ParseUtil.swift in Sources */,
+				65730E231E82FA3B00FF5906 /* Building.swift in Sources */,
 				653041001E81C88D009EF9A5 /* DateExtension.swift in Sources */,
 				653041021E81C8AF009EF9A5 /* StringExtension.swift in Sources */,
+				65730E291E82FF5300FF5906 /* Event.swift in Sources */,
 				65E835401E80CCE80006FC0D /* RoundTextField.swift in Sources */,
 				653040F71E81A2C3009EF9A5 /* MainTabBarController.swift in Sources */,
 				65F5BBE21E810C4D00368D36 /* UIViewControllerExtension.swift in Sources */,
 				65E8353C1E80C2DC0006FC0D /* RoundButton.swift in Sources */,
+				65730E211E82FA3000FF5906 /* Campus.swift in Sources */,
 				6519E53C1E820D1A0058CB6A /* TopAlignedLabel.swift in Sources */,
+				65730E251E82FA4900FF5906 /* Room.swift in Sources */,
 				BE424A001E655D7200A7BA37 /* EventViewController.swift in Sources */,
 				1DF7D75A1E80CA16003ECFB6 /* EventCell.swift in Sources */,
 				653040FC1E81B57C009EF9A5 /* GoogleCalendarClient.swift in Sources */,
@@ -337,7 +377,7 @@
 				BE4249FE1E655D7200A7BA37 /* AppDelegate.swift in Sources */,
 				65E8353E1E80CA610006FC0D /* LoginViewController.swift in Sources */,
 				65E835421E80DDD00006FC0D /* RegisterViewController.swift in Sources */,
-				653040FE1E81C1A8009EF9A5 /* Event.swift in Sources */,
+				653040FE1E81C1A8009EF9A5 /* GoogleCalendarEvent.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
