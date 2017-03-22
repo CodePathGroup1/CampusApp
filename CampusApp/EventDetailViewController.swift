@@ -7,11 +7,14 @@
 //
 
 import UIKit
+import MapKit
 
 class EventDetailViewController: UIViewController {
 
     @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var descriptionLabel: UILabel!
+    @IBOutlet weak var descriptionLabel: UITextView!
+    
+    @IBOutlet weak var mapView: MKMapView!
     
     var event: Event!
     
@@ -20,6 +23,8 @@ class EventDetailViewController: UIViewController {
         
         titleLabel.text = event.summary
         descriptionLabel.text = event.description
+        
+        mapView.delegate = self
         
         print(event)
     }
