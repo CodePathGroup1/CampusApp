@@ -8,11 +8,11 @@
 
 import Parse
 
+enum EventType {
+    case Event, Class
+}
+
 struct Event {
-    
-    enum Type {
-        case Event, Class
-    }
     
     let id: String?
     
@@ -23,18 +23,18 @@ struct Event {
     let buildingID: String?
     let roomID: String?
     let attendeeIDs: [String?]?
-    let type: Event.Type?
+    let type: EventType?
     
     init(pfObject: PFObject) {
         id = pfObject.objectId
         
-        startDateTime = (pfObject["event_start_date_time"] as? Date)?.standardTime
-        endDateTime = (pfObject["event_end_date_time"] as? Date)?.standardTime
+        startDateTime = pfObject["event_start_date_time"] as? Date
+        endDateTime = pfObject["event_end_date_time"] as? Date
         name = pfObject["event_name"] as? String
         campusID = pfObject["campus_id"] as? String
         buildingID = pfObject["building_id"] as? String
         roomID = pfObject["room_id"] as? String
         attendeeIDs = pfObject["event_attendee_ids"] as? [String?]
-        type = Type(rawValue: pfObject["event_type"] as? String)
+        type = nil
     }
 }
