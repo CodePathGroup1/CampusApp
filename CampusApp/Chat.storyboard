@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="VfI-VZ-NBj">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Chat List View Controller-->
+        <scene sceneID="5RB-a4-4QO">
+            <objects>
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="OoV-F4-0ZD" customClass="ChatListViewController" customModule="CampusApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Zqj-xk-imk"/>
+                        <viewControllerLayoutGuide type="bottom" id="Uwk-NZ-fSe"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="CPe-rP-mbG">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Pg3-QC-0W7">
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ChatCell" id="8Vd-uU-EUS" customClass="ChatCell" customModule="CampusApp" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="8Vd-uU-EUS" id="61m-J0-IbK">
+                                            <frame key="frameInset" width="375" height="44"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="Pg3-QC-0W7" secondAttribute="trailing" id="76j-al-3WK"/>
+                            <constraint firstItem="Pg3-QC-0W7" firstAttribute="leading" secondItem="CPe-rP-mbG" secondAttribute="leading" id="Ml1-Ni-ZyW"/>
+                            <constraint firstItem="Pg3-QC-0W7" firstAttribute="top" secondItem="Zqj-xk-imk" secondAttribute="bottom" id="Q1A-bL-PRX"/>
+                            <constraint firstItem="Uwk-NZ-fSe" firstAttribute="top" secondItem="Pg3-QC-0W7" secondAttribute="bottom" id="q4L-mI-aYr"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="KN9-EV-mLH"/>
+                    <connections>
+                        <outlet property="tableView" destination="Pg3-QC-0W7" id="Mlm-So-vll"/>
+                        <segue destination="ud1-TR-3Iy" kind="show" identifier="ChatConversationViewController" id="cKt-aW-K7V"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gl7-bU-inI" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="315" y="-107"/>
+        </scene>
+        <!--Chat Conversation View Controller-->
+        <scene sceneID="TVg-wY-KXu">
+            <objects>
+                <viewController id="ud1-TR-3Iy" customClass="ChatConversationViewController" customModule="CampusApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="9tO-gg-atH"/>
+                        <viewControllerLayoutGuide type="bottom" id="qgT-Tn-gtA"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Fp5-4f-ZgS">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5Rj-cp-SYg" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="875" y="-107"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="qGG-lv-2ug">
+            <objects>
+                <navigationController storyboardIdentifier="ChatNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="VfI-VZ-NBj" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="sfH-qG-85K">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="OoV-F4-0ZD" kind="relationship" relationship="rootViewController" id="wHP-sj-m5H"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="uZU-nH-Fti" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-220" y="-105.69715142428787"/>
+        </scene>
+    </scenes>
+</document>

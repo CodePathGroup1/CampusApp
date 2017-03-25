@@ -45,7 +45,7 @@ class LoginViewController: UIViewController {
                 PFUser.logInWithUsername(inBackground: email, password: password) { (user: PFUser?, error: Error?) -> Void in
                     if let _ = user {
                         HUD.hide(animated: true)
-                        self.showViewController(storyboardIdentifier: "Event", viewControllerIdentifier: "EventNavigationVC")
+                        self.showViewController(storyboardIdentifier: "Event", viewControllerIdentifier: "EventNavigationController")
                     } else {
                         HUD.flash(.error)
                         print(error?.localizedDescription ?? "Unknown error")

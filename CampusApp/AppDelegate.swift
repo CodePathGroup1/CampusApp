@@ -28,7 +28,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         if let _ = PFUser.current() {
             let storyboard = UIStoryboard(name: "Event", bundle: nil)
-            if let vc = storyboard.instantiateViewController(withIdentifier: "EventNavigationVC") as? UINavigationController {
+            if let vc = storyboard.instantiateViewController(withIdentifier: "EventNavigationController") as? UINavigationController {
                 window?.rootViewController = vc
             }
         } else {

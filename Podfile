@@ -10,4 +10,5 @@ target 'CampusApp' do
   pod 'PKHUD'
   pod 'ParseUI'
   pod 'Alamofire'
+  pod 'JSQMessagesViewController'
 end

@@ -14,6 +14,16 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>JSQMessagesViewController.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>JSQSystemSoundPlayer.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>PKHUD.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -42,6 +52,11 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>7FDDA5F7C90F0A8B82FB8C7DF906D455</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>88E9EC28B8B46C3631E6B242B50F4442</key>
 		<dict>
 			<key>primary</key>
@@ -52,12 +67,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>D7A75F149082140741FC1E0B5B2863C8</key>
+		<key>C7DCF2B547F7871B9BFD74DE93B0E173</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>E70A9A203CD5100D2FE86D95C3580B79</key>
+		<key>D0581AF7BF4A6DA140D280B19ECC7BFF</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>D7A75F149082140741FC1E0B5B2863C8</key>
 		<dict>
 			<key>primary</key>
 			<true/>

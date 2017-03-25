@@ -184,7 +184,7 @@
         <!--Navigation Controller-->
         <scene sceneID="dqL-Q1-53A">
             <objects>
-                <navigationController storyboardIdentifier="EventNavigationVC" automaticallyAdjustsScrollViewInsets="NO" id="hL2-cV-juP" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="EventNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="hL2-cV-juP" sceneMemberID="viewController">
                     <toolbarItems/>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="mje-Ry-j6S">
