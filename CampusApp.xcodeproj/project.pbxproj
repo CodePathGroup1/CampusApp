@@ -28,7 +28,7 @@
 		65730E211E82FA3000FF5906 /* Campus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65730E201E82FA3000FF5906 /* Campus.swift */; };
 		65730E231E82FA3B00FF5906 /* Building.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65730E221E82FA3B00FF5906 /* Building.swift */; };
 		65730E251E82FA4900FF5906 /* Room.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65730E241E82FA4900FF5906 /* Room.swift */; };
-		65730E291E82FF5300FF5906 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65730E281E82FF5300FF5906 /* Event.swift */; };
+		65730E291E82FF5300FF5906 /* CampusEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65730E281E82FF5300FF5906 /* CampusEvent.swift */; };
 		65E8353C1E80C2DC0006FC0D /* RoundButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65E8353B1E80C2DC0006FC0D /* RoundButton.swift */; };
 		65E8353E1E80CA610006FC0D /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65E8353D1E80CA610006FC0D /* LoginViewController.swift */; };
 		65E835401E80CCE80006FC0D /* RoundTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65E8353F1E80CCE80006FC0D /* RoundTextField.swift */; };
@@ -68,7 +68,7 @@
 		65730E201E82FA3000FF5906 /* Campus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Campus.swift; sourceTree = "<group>"; };
 		65730E221E82FA3B00FF5906 /* Building.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Building.swift; sourceTree = "<group>"; };
 		65730E241E82FA4900FF5906 /* Room.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Room.swift; sourceTree = "<group>"; };
-		65730E281E82FF5300FF5906 /* Event.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
+		65730E281E82FF5300FF5906 /* CampusEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CampusEvent.swift; sourceTree = "<group>"; };
 		65E8353B1E80C2DC0006FC0D /* RoundButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundButton.swift; sourceTree = "<group>"; };
 		65E8353D1E80CA610006FC0D /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		65E8353F1E80CCE80006FC0D /* RoundTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundTextField.swift; sourceTree = "<group>"; };
@@ -122,7 +122,9 @@
 			isa = PBXGroup;
 			children = (
 				65730E261E82FA5600FF5906 /* Place */,
-				65730E281E82FF5300FF5906 /* Event.swift */,
+				65730E281E82FF5300FF5906 /* CampusEvent.swift */,
+				652F531A1E838D860073CA9C /* Conversation.swift */,
+				652F531E1E8390450073CA9C /* Message.swift */,
 				652F530E1E838A9B0073CA9C /* User.swift */,
 			);
 			name = Parse;
@@ -162,9 +164,7 @@
 			isa = PBXGroup;
 			children = (
 				65730E2A1E83011500FF5906 /* Parse */,
-				652F531A1E838D860073CA9C /* Conversation.swift */,
 				653040FD1E81C1A8009EF9A5 /* GoogleCalendarEvent.swift */,
-				652F531E1E8390450073CA9C /* Message.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -400,7 +400,7 @@
 				653041001E81C88D009EF9A5 /* DateExtension.swift in Sources */,
 				653041021E81C8AF009EF9A5 /* StringExtension.swift in Sources */,
 				652F53111E838ACE0073CA9C /* ChatListViewController.swift in Sources */,
-				65730E291E82FF5300FF5906 /* Event.swift in Sources */,
+				65730E291E82FF5300FF5906 /* CampusEvent.swift in Sources */,
 				65E835401E80CCE80006FC0D /* RoundTextField.swift in Sources */,
 				653040F71E81A2C3009EF9A5 /* MainTabBarController.swift in Sources */,
 				65F5BBE21E810C4D00368D36 /* UIViewControllerExtension.swift in Sources */,

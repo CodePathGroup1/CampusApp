@@ -22,12 +22,24 @@ struct C {
             static let className = "Conversation"
             
             struct Keys {
-                static let groupID = "group_id"
                 static let lastMessage = "last_message"
                 static let lastUser = "last_user"
                 static let sendersDescription = "senders_description"
                 static let lastMessageTimestamp = "last_message_timestamp"
-                static let userID = "user_id"
+                static let user = "user"
+            }
+        }
+        
+        struct Message {
+            static let className = "Event"
+            
+            struct Keys {
+                static let conversationID = "conversation_id"
+                static let createdAt = "created_at"
+                static let picture = "picture"
+                static let text = "text"
+                static let user = "user"
+                static let video = "video"
             }
         }
         
@@ -36,6 +48,7 @@ struct C {
             
             struct Keys {
                 static let avatar = "avatar"
+                static let fullName = "full_name"
             }
         }
     }

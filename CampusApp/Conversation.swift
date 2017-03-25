@@ -6,21 +6,19 @@
 //  Copyright © 2017 HLPostman. All rights reserved.
 //
 
-import Foundation
+import Parse
 
 class Conversation {
     
-    let id: String
-    var otherUserIDs: [String?]?
-    var latestMessageTimestamp: Date?
-    var messages: [Message]?
-    var hasUnreadMessages: Bool
+    let lastUser: PFUser?
+    let sendersDescription: String?
+    let lastMessage: String?
+    let lastMessageTimestamp: Date?
     
-    init() {
-        self.id = UUID().uuidString
-        self.otherUserIDs = nil
-        self.latestMessageTimestamp = nil
-        self.messages = nil
-        self.hasUnreadMessages = false
+    init(pfObject: PFObject) {
+        lastUser = pfObject[C.Parse.Conversation.Keys.lastUser] as? PFUser
+        sendersDescription = pfObject[C.Parse.Conversation.Keys.sendersDescription] as? String
+        lastMessage = pfObject[C.Parse.Conversation.Keys.lastMessage] as? String
+        lastMessageTimestamp = pfObject[C.Parse.Conversation.Keys.lastMessageTimestamp] as? Date
     }
 }

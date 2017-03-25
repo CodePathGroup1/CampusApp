@@ -11,4 +11,5 @@ target 'CampusApp' do
   pod 'ParseUI'
   pod 'Alamofire'
   pod 'JSQMessagesViewController'
+  pod 'ParseLiveQuery'
 end

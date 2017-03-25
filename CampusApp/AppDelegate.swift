@@ -8,6 +8,9 @@
 
 import UIKit
 import Parse
+import ParseLiveQuery
+
+let liveQueryClient = ParseLiveQuery.Client()
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {

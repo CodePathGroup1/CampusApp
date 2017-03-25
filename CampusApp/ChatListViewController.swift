@@ -76,8 +76,8 @@ class ChatListViewController: UIViewController, UITableViewDataSource, UITableVi
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let conversation = conversations[indexPath.row]
-        if let groupID = conversation[C.Parse.Conversation.Keys.groupID] as? String {
-            performSegue(withIdentifier: C.Identifier.Segue.chatConversationViewController, sender: groupID)
+        if let conversationID = conversation.objectId {
+            performSegue(withIdentifier: C.Identifier.Segue.chatConversationViewController, sender: conversationID)
         }
     }
     
@@ -92,7 +92,7 @@ class ChatListViewController: UIViewController, UITableViewDataSource, UITableVi
      ====================================================================================================== */
     private func loadConversations() {
         let query = PFQuery(className: C.Parse.Conversation.className)
-        query.whereKey(C.Parse.Conversation.Keys.userID, equalTo: PFUser.current()?.objectId)
+        query.whereKey(C.Parse.Conversation.Keys.user, equalTo: PFUser.current())
         query.includeKey(C.Parse.Conversation.Keys.lastUser)
         query.order(byDescending: C.Parse.Conversation.Keys.lastMessageTimestamp)
         query.findObjectsInBackground { pfObjects, error in
@@ -103,6 +103,7 @@ class ChatListViewController: UIViewController, UITableViewDataSource, UITableVi
                 HUD.flash(.label(error?.localizedDescription ?? "Network error"))
             }
         }
+        
     }
     /* ==================================================================================================== */
 }

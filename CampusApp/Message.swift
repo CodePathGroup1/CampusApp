@@ -6,10 +6,8 @@
 //  Copyright © 2017 HLPostman. All rights reserved.
 //
 
-import Foundation
+import Parse
 
-struct Message {
-    let senderID: String
-    let body: String
-    let timestamp: Date
+class Message: PFObject {
+    
 }

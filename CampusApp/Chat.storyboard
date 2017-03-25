@@ -55,10 +55,10 @@
             </objects>
             <point key="canvasLocation" x="529" y="-107"/>
         </scene>
-        <!--Chat Conversation View Controller-->
+        <!--Messages View Controller-->
         <scene sceneID="TVg-wY-KXu">
             <objects>
-                <viewController id="ud1-TR-3Iy" customClass="ChatConversationViewController" customModule="CampusApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="ud1-TR-3Iy" customClass="JSQMessagesViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="9tO-gg-atH"/>
                         <viewControllerLayoutGuide type="bottom" id="qgT-Tn-gtA"/>

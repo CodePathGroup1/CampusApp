@@ -9,10 +9,10 @@
 import Parse
 
 enum EventType {
-    case Event, Class
+    case Extracurricular, Class
 }
 
-struct Event {
+struct CampusEvent {
     
     let id: String?
     
