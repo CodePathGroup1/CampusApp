@@ -44,7 +44,7 @@ class ChatListViewController: UIViewController, UITableViewDataSource, UITableVi
      MARK: - Segue
      ====================================================================================================== */
     @IBAction func newConversationButtonPressed(_ sender: AnyObject) {
-        performSegue(withIdentifier: C.Identifier.Segue.chatConversationViewController, sender: nil)
+        showViewController(storyboardIdentifier: "Chat", viewControllerIdentifier: "ChatUserSearchViewController")
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -52,8 +52,6 @@ class ChatListViewController: UIViewController, UITableViewDataSource, UITableVi
             if let vc = segue.destination as? ChatConversationViewController {
                 if let conversationID = sender as? String {
                     vc.conversationID = conversationID
-                } else {
-                    vc.conversationID = nil
                 }
             }
         }
@@ -91,19 +89,20 @@ class ChatListViewController: UIViewController, UITableViewDataSource, UITableVi
      MARK: - Helper Methods
      ====================================================================================================== */
     private func loadConversations() {
-        let query = PFQuery(className: C.Parse.Conversation.className)
-        query.whereKey(C.Parse.Conversation.Keys.user, equalTo: PFUser.current())
-        query.includeKey(C.Parse.Conversation.Keys.lastUser)
-        query.order(byDescending: C.Parse.Conversation.Keys.lastMessageTimestamp)
-        query.findObjectsInBackground { pfObjects, error in
-            if let pfObjects = pfObjects {
-                self.conversations = pfObjects
-                self.tableView.reloadData()
-            } else {
-                HUD.flash(.label(error?.localizedDescription ?? "Network error"))
+        if let currentUser = PFUser.current() {
+            let query = PFQuery(className: C.Parse.Conversation.className)
+            query.whereKey(C.Parse.Conversation.Keys.userID, equalTo: currentUser.objectId)
+            query.includeKey(C.Parse.Conversation.Keys.lastUser)
+            query.order(byDescending: C.Parse.Conversation.Keys.lastMessageTimestamp)
+            query.findObjectsInBackground { pfObjects, error in
+                if let pfObjects = pfObjects {
+                    self.conversations = pfObjects
+                    self.tableView.reloadData()
+                } else {
+                    HUD.flash(.label(error?.localizedDescription ?? "Network error"))
+                }
             }
         }
-        
     }
     /* ==================================================================================================== */
 }

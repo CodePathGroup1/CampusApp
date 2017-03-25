@@ -53,7 +53,84 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gl7-bU-inI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="529" y="-107"/>
+            <point key="canvasLocation" x="538" y="-107"/>
+        </scene>
+        <!--Chat User Search View Controller-->
+        <scene sceneID="pNN-ue-2Ev">
+            <objects>
+                <viewController storyboardIdentifier="ChatUserSearchViewController" id="IaE-Dd-C8A" customClass="ChatUserSearchViewController" customModule="CampusApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="hGo-Y0-SOY"/>
+                        <viewControllerLayoutGuide type="bottom" id="fyb-bh-qJv"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="shA-TY-zaL">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="dIE-en-wit">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="OTk-YG-GgT"/>
+                                </constraints>
+                                <textInputTraits key="textInputTraits"/>
+                            </searchBar>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="76" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="mI0-lf-qcK">
+                                <frame key="frameInset" minY="64" width="375" height="603"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ChatUserCell" rowHeight="76" id="hDd-iT-9r8" customClass="ChatUserCell" customModule="CampusApp" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="76"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="hDd-iT-9r8" id="XXJ-JY-RzE">
+                                            <frame key="frameInset" width="375" height="75"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <stackView opaque="NO" contentMode="scaleToFill" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="wnH-Zg-Ogt">
+                                                    <subviews>
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="75k-Ax-iAN" customClass="PFImageView">
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="60" id="3m8-MR-2cX"/>
+                                                                <constraint firstAttribute="width" constant="60" id="GIh-QR-u9g"/>
+                                                            </constraints>
+                                                        </imageView>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="User full name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gQj-33-3Bz">
+                                                            <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="15"/>
+                                                            <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                </stackView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="bottom" secondItem="wnH-Zg-Ogt" secondAttribute="bottom" constant="8" id="Fa8-xu-uMT"/>
+                                                <constraint firstItem="wnH-Zg-Ogt" firstAttribute="leading" secondItem="XXJ-JY-RzE" secondAttribute="leading" constant="8" id="RCO-EE-B2b"/>
+                                                <constraint firstAttribute="trailing" secondItem="wnH-Zg-Ogt" secondAttribute="trailing" constant="8" id="dYt-F4-anh"/>
+                                                <constraint firstItem="wnH-Zg-Ogt" firstAttribute="top" secondItem="XXJ-JY-RzE" secondAttribute="top" constant="8" id="eGs-O1-ZfA"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="avatarPFImageView" destination="75k-Ax-iAN" id="ztL-JN-3lm"/>
+                                            <outlet property="userFullNameLabel" destination="gQj-33-3Bz" id="cGx-WF-rjT"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="dIE-en-wit" secondAttribute="trailing" id="6HB-NX-V2v"/>
+                            <constraint firstItem="dIE-en-wit" firstAttribute="leading" secondItem="shA-TY-zaL" secondAttribute="leading" id="6mM-IM-Xu2"/>
+                            <constraint firstItem="dIE-en-wit" firstAttribute="top" secondItem="hGo-Y0-SOY" secondAttribute="bottom" id="f9c-Ej-fSa"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="searchBar" destination="dIE-en-wit" id="OMH-U4-uMi"/>
+                        <outlet property="tableView" destination="mI0-lf-qcK" id="n9V-rn-wqf"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7Sm-Gp-AiN" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="536.79999999999995" y="-823.53823088455783"/>
         </scene>
         <!--Messages View Controller-->
         <scene sceneID="TVg-wY-KXu">

@@ -50,14 +50,16 @@ class ChatConversationViewController: JSQMessagesViewController, UINavigationCon
         self.outgoingBubbleImage = self.bubbleFactory?.outgoingMessagesBubbleImage(with: .jsq_messageBubbleBlue())
         self.incomingBubbleImage = self.bubbleFactory?.incomingMessagesBubbleImage(with: .jsq_messageBubbleLightGray())
         
-        let messageQuery = getMessageQuery()
-        subscription = liveQueryClient
-            .subscribe(messageQuery)
-            .handle(Event.created) { _, message in
-                self.add(message: message)
-            }
-        
-        self.loadMessages(query: messageQuery)
+        if let _ = conversationID {
+            let messageQuery = getMessageQuery()
+            subscription = liveQueryClient
+                .subscribe(messageQuery)
+                .handle(Event.created) { _, message in
+                    self.add(message: message)
+                }
+            
+            self.loadMessages(query: messageQuery)
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -236,7 +238,7 @@ class ChatConversationViewController: JSQMessagesViewController, UINavigationCon
         }
         alertVC.addAction(chooseExistingPhotoAction)
         
-        let chooseExistingVideo = UIAlertAction(title: "Choose existing video", style: .default) { _ in 
+        let chooseExistingVideo = UIAlertAction(title: "Choose existing video", style: .default) { _ in
             _ = Camera.shouldStartPhotoLibrary(target: self, mediaType: .Video, canEdit: true)
         }
         alertVC.addAction(chooseExistingVideo)

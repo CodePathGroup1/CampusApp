@@ -10,6 +10,7 @@ struct C {
     struct Identifier {
         struct Cell {
             static let chatCell = "ChatCell"
+            static let chatUserCell = "ChatUserCell"
         }
         
         struct Segue {
@@ -22,11 +23,12 @@ struct C {
             static let className = "Conversation"
             
             struct Keys {
+                static let conversationID = "conversation_id"
                 static let lastMessage = "last_message"
                 static let lastUser = "last_user"
                 static let sendersDescription = "senders_description"
                 static let lastMessageTimestamp = "last_message_timestamp"
-                static let user = "user"
+                static let userID = "user_id"
             }
         }
         
@@ -44,11 +46,12 @@ struct C {
         }
         
         struct User {
-            static let className = "User"
+            static let className = "_User"
             
             struct Keys {
                 static let avatar = "avatar"
                 static let fullName = "full_name"
+                static let id = "_id"
             }
         }
     }

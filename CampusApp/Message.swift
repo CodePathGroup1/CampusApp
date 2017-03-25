@@ -2,7 +2,7 @@
 //  Message.swift
 //  CampusApp
 //
-//  Created by Thomas Zhu on 3/22/17.
+//  Created by Thomas Zhu on 3/25/17.
 //  Copyright © 2017 HLPostman. All rights reserved.
 //
 
