@@ -7,18 +7,42 @@
 //
 
 import UIKit
+import Parse
+import ParseUI
+import JSQMessagesViewController
 
 class ChatCell: UITableViewCell {
 
+    @IBOutlet weak var avatarPFImageView: PFImageView!
+    @IBOutlet weak var sendersDescriptionLabel: UILabel!
+    @IBOutlet weak var lastMessageTimestampLabel: UILabel!
+    @IBOutlet weak var lastMessageLabel: UILabel!
+    
+    
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        
+        self.avatarPFImageView.layer.cornerRadius = 30
+        self.avatarPFImageView.clipsToBounds = true
     }
 
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+    func bindData(with conversation: PFObject) {
+        let lastUser = conversation[C.Parse.Conversation.Keys.lastUser] as? PFUser
+        avatarPFImageView.file = lastUser?[C.Parse.User.Keys.avatar] as? PFFile
+        avatarPFImageView.loadInBackground()
+        
+        sendersDescriptionLabel.text = conversation[C.Parse.Conversation.Keys.sendersDescription] as? String
+        lastMessageLabel.text = conversation[C.Parse.Conversation.Keys.lastMessage] as? String
+        
+        if let lastMessageTimestamp = conversation[C.Parse.Conversation.Keys.lastMessageTimestamp] as? Date {
+            let dateDescription = JSQMessagesTimestampFormatter.shared().relativeDate(for: lastMessageTimestamp)
+            if dateDescription == "Today" {
+                lastMessageTimestampLabel.text = JSQMessagesTimestampFormatter.shared().time(for: lastMessageTimestamp)
+            } else {
+                lastMessageTimestampLabel.text = dateDescription
+            }
+        } else {
+            lastMessageTimestampLabel.text = ""
+        }
     }
-    
 }

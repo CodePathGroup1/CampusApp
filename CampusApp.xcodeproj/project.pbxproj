@@ -33,6 +33,7 @@
 		65E8353E1E80CA610006FC0D /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65E8353D1E80CA610006FC0D /* LoginViewController.swift */; };
 		65E835401E80CCE80006FC0D /* RoundTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65E8353F1E80CCE80006FC0D /* RoundTextField.swift */; };
 		65E835421E80DDD00006FC0D /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65E835411E80DDD00006FC0D /* RegisterViewController.swift */; };
+		65F4E3801E860A0D0001CA93 /* C.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F4E37F1E860A0D0001CA93 /* C.swift */; };
 		65F5BBDE1E80FE9000368D36 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 65F5BBDC1E80FE9000368D36 /* Login.storyboard */; };
 		65F5BBE01E81059500368D36 /* ParseUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F5BBDF1E81059500368D36 /* ParseUtil.swift */; };
 		65F5BBE21E810C4D00368D36 /* UIViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F5BBE11E810C4D00368D36 /* UIViewControllerExtension.swift */; };
@@ -72,6 +73,7 @@
 		65E8353D1E80CA610006FC0D /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		65E8353F1E80CCE80006FC0D /* RoundTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundTextField.swift; sourceTree = "<group>"; };
 		65E835411E80DDD00006FC0D /* RegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
+		65F4E37F1E860A0D0001CA93 /* C.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = C.swift; sourceTree = "<group>"; };
 		65F5BBDD1E80FE9000368D36 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Login.storyboard; sourceTree = "<group>"; };
 		65F5BBDF1E81059500368D36 /* ParseUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseUtil.swift; sourceTree = "<group>"; };
 		65F5BBE11E810C4D00368D36 /* UIViewControllerExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtension.swift; sourceTree = "<group>"; };
@@ -124,6 +126,14 @@
 				652F530E1E838A9B0073CA9C /* User.swift */,
 			);
 			name = Parse;
+			sourceTree = "<group>";
+		};
+		65F4E37E1E8609C30001CA93 /* Values */ = {
+			isa = PBXGroup;
+			children = (
+				65F4E37F1E860A0D0001CA93 /* C.swift */,
+			);
+			name = Values;
 			sourceTree = "<group>";
 		};
 		65F5BBE31E81974C00368D36 /* API */ = {
@@ -247,8 +257,9 @@
 				65F5BBE51E81975900368D36 /* Models */,
 				65F5BBE61E81975D00368D36 /* Views */,
 				65F5BBE71E81976200368D36 /* Resources */,
-				65730E271E82FA6B00FF5906 /* Utilities */,
 				65F5BBE91E81991600368D36 /* Extensions */,
+				65730E271E82FA6B00FF5906 /* Utilities */,
+				65F4E37E1E8609C30001CA93 /* Values */,
 				BE4249FD1E655D7200A7BA37 /* AppDelegate.swift */,
 				BE424A091E655D7200A7BA37 /* Info.plist */,
 			);
@@ -396,6 +407,7 @@
 				652F531F1E8390450073CA9C /* Message.swift in Sources */,
 				65E8353C1E80C2DC0006FC0D /* RoundButton.swift in Sources */,
 				65730E211E82FA3000FF5906 /* Campus.swift in Sources */,
+				65F4E3801E860A0D0001CA93 /* C.swift in Sources */,
 				6519E53C1E820D1A0058CB6A /* TopAlignedLabel.swift in Sources */,
 				65730E251E82FA4900FF5906 /* Room.swift in Sources */,
 				652F531B1E838D860073CA9C /* Conversation.swift in Sources */,

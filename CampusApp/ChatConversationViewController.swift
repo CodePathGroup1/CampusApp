@@ -7,9 +7,13 @@
 //
 
 import UIKit
+import Parse
+import JSQMessagesViewController
 
 class ChatConversationViewController: UIViewController {
 
+    var conversationID: String?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
