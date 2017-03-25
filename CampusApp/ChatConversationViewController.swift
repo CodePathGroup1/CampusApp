@@ -15,7 +15,7 @@ import UIKit
 
 import MediaPlayer
 
-class ChatConversationViewController: JSQMessagesViewController, UIImagePickerControllerDelegate {
+class ChatConversationViewController: JSQMessagesViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
 
     var conversationID: String?
     
@@ -224,19 +224,24 @@ class ChatConversationViewController: JSQMessagesViewController, UIImagePickerCo
     override func didPressAccessoryButton(_ sender: UIButton!) {
         view.endEditing(true)
         
-        // TODO: finish this
-//        let alertVC = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-//        
-//        let takePhotoAction = UIAlertAction(title: "Take photo", style: .default, handler: {  })
-//        alertVC.addAction(takePhotoAction)
-//        
-//        let chooseExistingPhotoAction = UIAlertAction(title: "Choose existing photo", style: .default, handler: {})
-//        alertVC.addAction(chooseExistingPhotoAction)
-//        
-//        let chooseExistingVideo = UIAlertAction(title: "Choose existing video", style: .default, handler: {})
-//        alertVC.addAction(chooseExistingVideo)
-//        
-//        present(alertVC, animated: true, completion: nil)
+        let alertVC = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        
+        let takePhotoAction = UIAlertAction(title: "Take photo", style: .default) { _ in
+            _ = Camera.shouldStartCamera(target: self, canEdit: true, frontFacing: true)
+        }
+        alertVC.addAction(takePhotoAction)
+        
+        let chooseExistingPhotoAction = UIAlertAction(title: "Choose existing photo", style: .default) { _ in
+            _ = Camera.shouldStartPhotoLibrary(target: self, mediaType: .Photo, canEdit: true)
+        }
+        alertVC.addAction(chooseExistingPhotoAction)
+        
+        let chooseExistingVideo = UIAlertAction(title: "Choose existing video", style: .default) { _ in 
+            _ = Camera.shouldStartPhotoLibrary(target: self, mediaType: .Video, canEdit: true)
+        }
+        alertVC.addAction(chooseExistingVideo)
+        
+        present(alertVC, animated: true, completion: nil)
     }
     /* ==================================================================================================== */
     
