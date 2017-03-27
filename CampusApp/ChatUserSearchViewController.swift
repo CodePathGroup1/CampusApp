@@ -30,7 +30,7 @@ class ChatUserSearchViewController: UIViewController, UISearchBarDelegate, UITab
         self.tableView.dataSource = self
         self.tableView.delegate = self
         
-        self.tableView.estimatedRowHeight = 76
+        self.tableView.estimatedRowHeight = 46
         self.tableView.rowHeight = UITableViewAutomaticDimension
         
         self.loadUsers()
@@ -45,7 +45,7 @@ class ChatUserSearchViewController: UIViewController, UISearchBarDelegate, UITab
         if !searchText.isEmpty {
             filteredUsers = originalLoadedUsers.filter { user -> Bool in
                 if let fullName = user.fullName {
-                    return (fullName.range(of: searchText) == nil)
+                    return (fullName.lowercased().range(of: searchText.lowercased()) != nil)
                 }
                 return false
             }

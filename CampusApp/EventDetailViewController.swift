@@ -52,23 +52,27 @@ class EventDetailViewController: UIViewController, MKMapViewDelegate {
     
     
     @IBAction func eventCreatorTapped(_ sender: AnyObject) {
-        // test
-        let query = PFQuery(className: C.Parse.User.className)
-        query.whereKey(C.Parse.User.Keys.username, notEqualTo: PFUser.current()!.username!)
-        query.limit = 1
-        query.findObjectsInBackground { pfObject, error in
-            if let pfObject = pfObject?.first {
-                let otherUsers = [User(pfObject: pfObject)]
-                Conversation.startConversation(otherUsers: otherUsers) { conversationID in
-                    let storyboard = UIStoryboard(name: "Chat", bundle: nil)
-                    if let vc = storyboard.instantiateViewController(withIdentifier: "ChatConversationViewController") as? ChatConversationViewController {
-                        vc.conversationID = conversationID
-                        self.present(vc, animated: true, completion: nil)
-                    }
-                }
-            } else {
-                HUD.flash(.label(error?.localizedDescription ?? "ERROR"))
-            }
-        }
+//        // TODO: change this to actual user
+//        let query = PFQuery(className: C.Parse.User.className)
+//        query.whereKey(C.Parse.User.Keys.username, notEqualTo: PFUser.current()!.username!)
+//        query.limit = 1
+//        query.findObjectsInBackground { pfObject, error in
+//            if let pfObject = pfObject?.first {
+//                let otherUsers = [User(pfObject: pfObject)]
+//                Conversation.startConversation(otherUsers: otherUsers) { conversationID in
+//                    let storyboard = UIStoryboard(name: "Chat", bundle: nil)
+//                    if let vc = storyboard.instantiateViewController(withIdentifier: "ChatConversationViewController") as? ChatConversationViewController {
+//                        vc.conversationID = conversationID
+//                        self.present(vc, animated: true, completion: nil)
+//                    }
+//                }
+//            } else {
+//                HUD.flash(.label(error?.localizedDescription ?? "ERROR"))
+//            }
+//        }
+        
+        showViewController(storyboardIdentifier: "Chat", viewControllerIdentifier: "ChatNavigationController")
     }
+    
+    
 }

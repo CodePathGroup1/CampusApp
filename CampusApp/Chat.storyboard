@@ -78,30 +78,29 @@
                                 </constraints>
                                 <textInputTraits key="textInputTraits"/>
                             </searchBar>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="76" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="mI0-lf-qcK">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="76" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="mI0-lf-qcK">
                                 <rect key="frame" x="0.0" y="64" width="375" height="603"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ChatUserCell" rowHeight="76" id="hDd-iT-9r8" customClass="ChatUserCell" customModule="CampusApp" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="76"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ChatUserCell" rowHeight="46" id="hDd-iT-9r8" customClass="ChatUserCell" customModule="CampusApp" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="46"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="hDd-iT-9r8" id="XXJ-JY-RzE">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="75"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="45"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="wnH-Zg-Ogt">
-                                                    <rect key="frame" x="8" y="8" width="359" height="1000.5"/>
+                                                    <rect key="frame" x="8" y="8" width="359" height="30"/>
                                                     <subviews>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="75k-Ax-iAN" customClass="PFImageView">
-                                                            <rect key="frame" x="0.0" y="0.0" width="60" height="1000.5"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
                                                             <constraints>
-                                                                <constraint firstAttribute="height" constant="60" id="3m8-MR-2cX"/>
-                                                                <constraint firstAttribute="width" constant="60" id="GIh-QR-u9g"/>
+                                                                <constraint firstAttribute="height" constant="30" id="3m8-MR-2cX"/>
+                                                                <constraint firstAttribute="width" constant="30" id="GIh-QR-u9g"/>
                                                             </constraints>
                                                         </imageView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="User full name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gQj-33-3Bz">
-                                                            <rect key="frame" x="72" y="0.0" width="287" height="1000.5"/>
+                                                            <rect key="frame" x="42" y="0.0" width="317" height="30"/>
                                                             <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="15"/>
                                                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                             <nil key="highlightedColor"/>
@@ -110,10 +109,10 @@
                                                 </stackView>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="bottom" secondItem="wnH-Zg-Ogt" secondAttribute="bottom" constant="8" id="Fa8-xu-uMT"/>
+                                                <constraint firstAttribute="trailing" secondItem="wnH-Zg-Ogt" secondAttribute="trailing" constant="8" id="Nme-yc-C6f"/>
                                                 <constraint firstItem="wnH-Zg-Ogt" firstAttribute="leading" secondItem="XXJ-JY-RzE" secondAttribute="leading" constant="8" id="RCO-EE-B2b"/>
-                                                <constraint firstAttribute="trailing" secondItem="wnH-Zg-Ogt" secondAttribute="trailing" constant="8" id="dYt-F4-anh"/>
                                                 <constraint firstItem="wnH-Zg-Ogt" firstAttribute="top" secondItem="XXJ-JY-RzE" secondAttribute="top" constant="8" id="eGs-O1-ZfA"/>
+                                                <constraint firstAttribute="bottom" secondItem="wnH-Zg-Ogt" secondAttribute="bottom" constant="8" id="zyd-bj-WQc"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
@@ -128,6 +127,10 @@
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="dIE-en-wit" secondAttribute="trailing" id="6HB-NX-V2v"/>
                             <constraint firstItem="dIE-en-wit" firstAttribute="leading" secondItem="shA-TY-zaL" secondAttribute="leading" id="6mM-IM-Xu2"/>
+                            <constraint firstItem="fyb-bh-qJv" firstAttribute="top" secondItem="mI0-lf-qcK" secondAttribute="bottom" id="JN9-ye-XIe"/>
+                            <constraint firstItem="mI0-lf-qcK" firstAttribute="leading" secondItem="shA-TY-zaL" secondAttribute="leading" id="TCJ-SF-3el"/>
+                            <constraint firstItem="mI0-lf-qcK" firstAttribute="top" secondItem="dIE-en-wit" secondAttribute="bottom" id="c4T-QY-TD7"/>
+                            <constraint firstAttribute="trailing" secondItem="mI0-lf-qcK" secondAttribute="trailing" id="eAL-EM-GaR"/>
                             <constraint firstItem="dIE-en-wit" firstAttribute="top" secondItem="hGo-Y0-SOY" secondAttribute="bottom" id="f9c-Ej-fSa"/>
                         </constraints>
                     </view>

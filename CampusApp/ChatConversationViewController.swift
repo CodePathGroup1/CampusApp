@@ -268,9 +268,7 @@ class ChatConversationViewController: JSQMessagesViewController, UINavigationCon
         }
         alertVC.addAction(chooseExistingVideoAction)
         
-        let cancelAction = UIAlertAction(title: "Cancel", style: .default) { _ in
-            self.dismiss(animated: true, completion: nil)
-        }
+        let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: nil)
         alertVC.addAction(cancelAction)
         
         present(alertVC, animated: true, completion: nil)

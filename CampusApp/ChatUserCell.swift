@@ -17,7 +17,7 @@ class ChatUserCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        avatarPFImageView.layer.cornerRadius = 30
+        avatarPFImageView.layer.cornerRadius = 15
         avatarPFImageView.clipsToBounds = true
     }
     
