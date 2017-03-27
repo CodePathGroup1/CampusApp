@@ -89,9 +89,9 @@ class ChatListViewController: UIViewController, UITableViewDataSource, UITableVi
      MARK: - Helper Methods
      ====================================================================================================== */
     private func loadConversations() {
-        if let currentUser = PFUser.current() {
+        if let currentUser = PFUser.current(), let currentUserID = currentUser.objectId {
             let query = PFQuery(className: C.Parse.Conversation.className)
-            query.whereKey(C.Parse.Conversation.Keys.userID, equalTo: currentUser.objectId)
+            query.whereKey(C.Parse.Conversation.Keys.userID, equalTo: currentUserID)
             query.includeKey(C.Parse.Conversation.Keys.lastUser)
             query.order(byDescending: C.Parse.Conversation.Keys.lastMessageTimestamp)
             query.findObjectsInBackground { pfObjects, error in

@@ -37,8 +37,13 @@ class EventViewController: UIViewController, UITableViewDataSource, UITableViewD
         HUD.flash(.progress)
         
         PFUser.logOutInBackground { _ in
-            self.showViewController(storyboardIdentifier: "Login", viewControllerIdentifier: "LoginViewController")
-            HUD.hide(animated: true)
+            let storyboard = UIStoryboard(name: "Login", bundle: nil)
+            if let vc = storyboard.instantiateViewController(withIdentifier: "LoginViewController") as? LoginViewController {
+                self.present(vc, animated: true) {
+                    UIApplication.shared.keyWindow?.rootViewController = vc
+                    HUD.hide(animated: true)
+                }
+            }
         }
     }
     

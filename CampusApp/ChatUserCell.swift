@@ -22,7 +22,7 @@ class ChatUserCell: UITableViewCell {
     }
     
     func bindData(user: User) {
-        avatarPFImageView.file = user.avatar
+//        avatarPFImageView.file = user.avatarPFFile
         avatarPFImageView.loadInBackground()
         
         userFullNameLabel.text = user.fullName

@@ -111,14 +111,14 @@ class ChatUserSearchViewController: UIViewController, UISearchBarDelegate, UITab
      MARK: - Private Helper Methods
      ====================================================================================================== */
     private func loadUsers() {
-        if let currentUser = PFUser.current(), let currentUserID = currentUser.objectId {
+        if let currentUser = PFUser.current(), let currentUsername = currentUser.username {
             let query = PFQuery(className: C.Parse.User.className)
-            query.whereKey(C.Parse.User.Keys.id, notEqualTo: currentUserID)
+            query.whereKey(C.Parse.User.Keys.username, notEqualTo: currentUsername)
             query.order(byAscending: C.Parse.User.Keys.fullName)
             query.findObjectsInBackground { pfObjects, error in
                 if let pfObjects = pfObjects as? [PFUser] {
                     self.originalLoadedUsers = pfObjects.map { pfObject in
-                        return User(pbObject: pfObject)
+                        return User(pfObject: pfObject)
                     }
                     self.filteredUsers = self.originalLoadedUsers
                     self.tableView.reloadData()

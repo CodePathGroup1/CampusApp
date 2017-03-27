@@ -13,17 +13,15 @@ import ParseLiveQuery
 import PKHUD
 import UIKit
 
-import MediaPlayer
-
 class ChatConversationViewController: JSQMessagesViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
 
-    var conversationID: String?
+    var conversationID: String!
     
-    private var users = [PFUser]()
+    private var users = [User]()
     private var messages = [JSQMessage]()
     
     private var avatars = [String: JSQMessagesAvatarImage]()
-    private var blankAvatarImage: JSQMessagesAvatarImage!
+    private let blankAvatarImage = JSQMessagesAvatarImageFactory.avatarImage(with: UIImage(named: "profile_blank"), diameter: 30)
     
     private let bubbleFactory = JSQMessagesBubbleImageFactory()
     private var outgoingBubbleImage: JSQMessagesBubbleImage!
@@ -45,27 +43,47 @@ class ChatConversationViewController: JSQMessagesViewController, UINavigationCon
             }
         }
         
-        self.blankAvatarImage = JSQMessagesAvatarImageFactory.avatarImage(with: UIImage(named: "profile_blank"), diameter: 30)
-        
         self.outgoingBubbleImage = self.bubbleFactory?.outgoingMessagesBubbleImage(with: .jsq_messageBubbleBlue())
         self.incomingBubbleImage = self.bubbleFactory?.incomingMessagesBubbleImage(with: .jsq_messageBubbleLightGray())
         
-        if let _ = conversationID {
-            let messageQuery = getMessageQuery()
-            subscription = liveQueryClient
-                .subscribe(messageQuery)
-                .handle(Event.created) { _, message in
-                    self.add(message: message)
-                }
-            
-            self.loadMessages(query: messageQuery)
+        Message.registerSubclass()
+        
+        let messageQuery = getMessageQuery()
+        subscription = ParseLiveQuery.Client.shared
+            .subscribe(messageQuery)
+            .handle(Event.created)  { query, pfMessage in
+                // Note: DO NOT call add(message:) directly -- Parse Live Query doesn't work well with includeKey yet
+                self.loadMessages(query: self.getMessageQuery())
+        }
+        
+        self.loadMessages(query: messageQuery)
+        
+        if self.isModal {
+            let closeButton: UIButton = {
+                let button = UIButton(frame: CGRect(x: 24, y: 24, width: 25, height: 25))
+                button.addTarget(self, action: #selector(self.closeButtonTapped), for: .touchUpInside)
+                button.adjustsImageWhenHighlighted = false
+                button.setImage(UIImage(named: "close_button"), for: .normal)
+                button.setTitle("", for: .normal)
+                return button
+            }()
+            self.view.addSubview(closeButton)
         }
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         
-        self.collectionView.collectionViewLayout.springinessEnabled = true
+        inputToolbar.contentView.textView.becomeFirstResponder()
+    }
+    /* ==================================================================================================== */
+    
+    
+    /* ====================================================================================================
+     MARK: - Close Button Behavior
+     ====================================================================================================== */
+    func closeButtonTapped() {
+        dismiss(animated: true, completion: nil)
     }
     /* ==================================================================================================== */
     
@@ -75,10 +93,9 @@ class ChatConversationViewController: JSQMessagesViewController, UINavigationCon
      ====================================================================================================== */
     private func getMessageQuery() -> PFQuery<Message> {
         let query: PFQuery<Message> = PFQuery(className: C.Parse.Message.className)
-        
         query.whereKey(C.Parse.Message.Keys.conversationID, equalTo: conversationID)
-        if let lastMessage = messages.last {
-            query.whereKey(C.Parse.Message.Keys.createdAt, equalTo: lastMessage.date)
+        if let lastMessage = messages.last, let lastMessageDate = lastMessage.date {
+            query.whereKey(C.Parse.Message.Keys.createdAt, greaterThan: lastMessageDate)
         }
         query.includeKey(C.Parse.Message.Keys.user)
         query.order(byDescending: C.Parse.Message.Keys.createdAt)
@@ -88,78 +105,84 @@ class ChatConversationViewController: JSQMessagesViewController, UINavigationCon
     }
     
     private func loadMessages(query: PFQuery<Message>) {
-        query.findObjectsInBackground { messages, error in
-            if let messages = messages {
-                self.automaticallyScrollsToMostRecentMessage = false
-                for message in messages {
-                    self.add(message: message)
-                }
-                if messages.count >= 1 {
-                    self.finishReceivingMessage()
-                    self.scrollToBottom(animated: false)
-                }
-                self.automaticallyScrollsToMostRecentMessage = true
+        query.findObjectsInBackground { pfMessages, error in
+            if let pfMessages = pfMessages {
+                self.add(pfMessages: pfMessages.reversed())
             } else {
                 HUD.flash(.label(error?.localizedDescription ?? "Network error"))
             }
         }
     }
     
-    private func add(message: Message) {
-        if let user = message[C.Parse.Message.Keys.user] as? PFUser,
-            let name = user[C.Parse.User.Keys.fullName] as? String {
-            
-            let jsqMessage: JSQMessage? = {
-                let pictureFile = message[C.Parse.Message.Keys.picture] as? PFFile
-                let videoFile = message[C.Parse.Message.Keys.video] as? PFFile
+    private func add(pfMessages: [PFObject]) {
+        
+        func add(pfMessage: PFObject) {
+            if let pfUserObject = pfMessage[C.Parse.Message.Keys.user] as? PFObject {
+                let author = User(pfObject: pfUserObject)
                 
-                if pictureFile == nil && videoFile == nil {
-                    if let text = message[C.Parse.Message.Keys.text] as? String {
-                        return JSQMessage(senderId: user.objectId,
-                                          senderDisplayName: name,
-                                          date: message.createdAt,
-                                          text: text)
-                    }
-                }
-                
-                if let pictureFile = pictureFile {
-                    if let mediaItem = JSQPhotoMediaItem(image: nil) {
-                        mediaItem.appliesMediaViewMaskAsOutgoing = (user.objectId == self.senderId)
-                        let pictureDelayedJSQMessage = JSQMessage(senderId: user.objectId,
-                                                                  senderDisplayName: name,
-                                                                  date: message.createdAt,
-                                                                  media: mediaItem)
+                if let authorID = author.id, let authorFullName = author.fullName {
+                    let jsqMessage: JSQMessage? = {
+                        let pictureFile = pfMessage[C.Parse.Message.Keys.picture] as? PFFile
+                        let videoFile = pfMessage[C.Parse.Message.Keys.video] as? PFFile
                         
-                        pictureFile.getDataInBackground { imageData, error in
-                            if let imageData = imageData, let image = UIImage(data: imageData) {
-                                mediaItem.image = image
-                                self.collectionView.reloadData()
+                        if pictureFile == nil && videoFile == nil {
+                            if let text = pfMessage[C.Parse.Message.Keys.text] as? String {
+                                return JSQMessage(senderId: authorID,
+                                                  senderDisplayName: authorFullName,
+                                                   date: pfMessage.createdAt,
+                                                  text: text)
                             }
                         }
                         
-                        return pictureDelayedJSQMessage
-                    }
-                }
-                
-                if let videoFile = videoFile {
-                    if let urlString = videoFile.url, let url = URL(string: urlString) {
-                        if let mediaItem = JSQVideoMediaItem(fileURL: url, isReadyToPlay: true) {
-                            mediaItem.appliesMediaViewMaskAsOutgoing = (user.objectId == self.senderId)
-                            return JSQMessage(senderId: user.objectId,
-                                              senderDisplayName: name,
-                                              date: message.createdAt,
-                                              media: mediaItem)
+                        if let pictureFile = pictureFile {
+                            if let mediaItem = JSQPhotoMediaItem(image: nil) {
+                                mediaItem.appliesMediaViewMaskAsOutgoing = (authorID == self.senderId)
+                                let pictureDelayedJSQMessage = JSQMessage(senderId: authorID,
+                                                                          senderDisplayName: authorFullName,
+                                                                          date: pfMessage.createdAt,
+                                                                          media: mediaItem)
+                                
+                                pictureFile.getDataInBackground { imageData, error in
+                                    if let imageData = imageData, let image = UIImage(data: imageData) {
+                                        mediaItem.image = image
+                                        self.collectionView.reloadData()
+                                    }
+                                }
+                                
+                                return pictureDelayedJSQMessage
+                            }
                         }
+                        
+                        if let videoFile = videoFile {
+                            if let urlString = videoFile.url, let url = URL(string: urlString) {
+                                if let mediaItem = JSQVideoMediaItem(fileURL: url, isReadyToPlay: true) {
+                                    mediaItem.appliesMediaViewMaskAsOutgoing = (authorID == self.senderId)
+                                    return JSQMessage(senderId: authorID,
+                                                      senderDisplayName: authorFullName,
+                                                      date: pfMessage.createdAt,
+                                                      media: mediaItem)
+                                }
+                            }
+                        }
+                        
+                        return nil
+                    }()
+                    
+                    if let jsqMessage = jsqMessage {
+                        self.users.append(author)
+                        self.messages.append(jsqMessage)
                     }
                 }
-                
-                return nil
-            }()
-            
-            if let jsqMessage = jsqMessage {
-                users.append(user)
-                messages.append(jsqMessage)
             }
+        }
+    
+        for pfMessage in pfMessages {
+            add(pfMessage: pfMessage)
+        }
+    
+        if pfMessages.count >= 1 {
+            self.scrollToBottom(animated: false)
+            self.finishReceivingMessage()
         }
     }
     
@@ -194,20 +217,22 @@ class ChatConversationViewController: JSQMessagesViewController, UINavigationCon
             }
         }
         
-        let messageObject = PFObject(className: C.Parse.Message.className)
-        messageObject[C.Parse.Message.Keys.conversationID] = self.conversationID
-        messageObject[C.Parse.Message.Keys.user] = PFUser.current()
-        messageObject[C.Parse.Message.Keys.text] = modifiedText
-        if let pictureFile = pictureFile {
-            messageObject[C.Parse.Message.Keys.picture] = pictureFile
-        }
-        if let videoFile = videoFile {
-            messageObject[C.Parse.Message.Keys.video] = videoFile
-        }
-        
-        messageObject.saveInBackground { succeeded, error in
-            if let error = error {
-                HUD.flash(.label(error.localizedDescription))
+        if let currentUser = PFUser.current() {
+            let messageObject = PFObject(className: C.Parse.Message.className)
+            messageObject[C.Parse.Message.Keys.conversationID] = self.conversationID
+            messageObject[C.Parse.Message.Keys.user] = currentUser
+            messageObject[C.Parse.Message.Keys.text] = modifiedText
+            if let pictureFile = pictureFile {
+                messageObject[C.Parse.Message.Keys.picture] = pictureFile
+            }
+            if let videoFile = videoFile {
+                messageObject[C.Parse.Message.Keys.video] = videoFile
+            }
+            
+            messageObject.saveInBackground { succeeded, error in
+                if let error = error {
+                    HUD.flash(.label(error.localizedDescription))
+                }
             }
         }
         
@@ -238,10 +263,15 @@ class ChatConversationViewController: JSQMessagesViewController, UINavigationCon
         }
         alertVC.addAction(chooseExistingPhotoAction)
         
-        let chooseExistingVideo = UIAlertAction(title: "Choose existing video", style: .default) { _ in
+        let chooseExistingVideoAction = UIAlertAction(title: "Choose existing video", style: .default) { _ in
             _ = Camera.shouldStartPhotoLibrary(target: self, mediaType: .Video, canEdit: true)
         }
-        alertVC.addAction(chooseExistingVideo)
+        alertVC.addAction(chooseExistingVideoAction)
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .default) { _ in
+            self.dismiss(animated: true, completion: nil)
+        }
+        alertVC.addAction(cancelAction)
         
         present(alertVC, animated: true, completion: nil)
     }
@@ -281,20 +311,21 @@ class ChatConversationViewController: JSQMessagesViewController, UINavigationCon
     }
     
     override func collectionView(_ collectionView: JSQMessagesCollectionView!, avatarImageDataForItemAt indexPath: IndexPath!) -> JSQMessageAvatarImageDataSource! {
-        let user = users[indexPath.item]
-        
-        if let userId = user.objectId {
-            if let avatar = avatars[userId] {
-                return avatar
-            } else {
-                let avatarFile = user[C.Parse.User.Keys.avatar] as? PFFile
-                avatarFile?.getDataInBackground { imageData, error in
-                    if let imageData = imageData, let image = UIImage(data: imageData) {
-                        self.avatars[userId] = JSQMessagesAvatarImageFactory.avatarImage(with: image, diameter: 30)
-                    }
-                }
-            }
-        }
+//        let user = users[indexPath.item]
+//        
+//        if let userId = user.id {
+//            if let avatar = avatars[userId] {
+//                return avatar
+//            } else {
+//                if let avatarPFFile = user.avatarPFFile {
+//                    avatarPFFile.getDataInBackground { imageData, error in
+//                        if let imageData = imageData, let image = UIImage(data: imageData) {
+//                            self.avatars[userId] = JSQMessagesAvatarImageFactory.avatarImage(with: image, diameter: 30)
+//                        }
+//                    }
+//                }
+//            }
+//        }
         
         return blankAvatarImage
     }
@@ -310,8 +341,6 @@ class ChatConversationViewController: JSQMessagesViewController, UINavigationCon
     override func collectionView(_ collectionView: JSQMessagesCollectionView!, messageDataForItemAt indexPath: IndexPath!) -> JSQMessageData! {
         return messages[indexPath.row]
     }
-    
-    
     /* ==================================================================================================== */
     
     
@@ -322,9 +351,9 @@ class ChatConversationViewController: JSQMessagesViewController, UINavigationCon
         if let cell = super.collectionView(collectionView, cellForItemAt: indexPath) as? JSQMessagesCollectionViewCell {
             let message = messages[indexPath.item]
             if message.senderId == senderId {
-                cell.textView.textColor = UIColor.white
+                cell.textView?.textColor = .white
             } else {
-                cell.textView.textColor = UIColor.black
+                cell.textView?.textColor = .black
             }
             return cell
         }

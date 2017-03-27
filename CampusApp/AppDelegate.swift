@@ -10,8 +10,6 @@ import UIKit
 import Parse
 import ParseLiveQuery
 
-let liveQueryClient = ParseLiveQuery.Client()
-
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
@@ -22,10 +20,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // Initialize Parse
         Parse.initialize(with:
-            ParseClientConfiguration { (configuration:ParseMutableClientConfiguration) -> Void in
+            ParseClientConfiguration { (configuration: ParseMutableClientConfiguration) -> Void in
                 configuration.applicationId = "campus-app"
                 configuration.clientKey = "ijS97M6sbiNotEj5IKhf"
-                configuration.server = "http://campus-app.herokuapp.com/parse"
+                configuration.server = "https://campus-app.herokuapp.com/parse"
+                configuration.isLocalDatastoreEnabled = false
             }
         )
         

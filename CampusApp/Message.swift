@@ -8,6 +8,8 @@
 
 import Parse
 
-class Message: PFObject {
-    
+class Message: PFObject, PFSubclassing {
+    public static func parseClassName() -> String {
+        return "Message"
+    }
 }

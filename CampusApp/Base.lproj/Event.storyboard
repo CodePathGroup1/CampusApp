@@ -26,7 +26,7 @@
                                         <rect key="frame" x="0.0" y="92" width="375" height="84"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="kbA-te-9ae" id="cQO-8E-JEd">
-                                            <frame key="frameInset" width="375" height="83"/>
+                                            <frame key="frameInset" width="375" height="84"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -84,6 +84,28 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="vgz-rP-gw9">
+                                        <subviews>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="yhw-wi-w4L" customClass="PFImageView">
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="30" id="ggy-TN-cNj"/>
+                                                    <constraint firstAttribute="height" constant="30" id="tEg-cn-cCu"/>
+                                                </constraints>
+                                            </imageView>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="U33-hZ-akK">
+                                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="14"/>
+                                                <state key="normal" title="Event Creator">
+                                                    <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="eventCreatorTapped:" destination="zNt-fj-lfZ" eventType="touchUpInside" id="Sh7-wa-YLe"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="BcO-3A-B7b"/>
+                                        </constraints>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="cma-8y-7CW">
                                         <subviews>
@@ -174,6 +196,7 @@
                     <connections>
                         <outlet property="descriptionLabel" destination="ypJ-MS-13q" id="4Vu-jf-3YN"/>
                         <outlet property="mapView" destination="4LR-Vj-dgF" id="TSM-86-eQl"/>
+                        <outlet property="startingDateTimeLabel" destination="T3H-BG-tgA" id="UNR-nj-Nuk"/>
                         <outlet property="titleLabel" destination="jUA-Yv-QhW" id="Cji-Fw-HzJ"/>
                     </connections>
                 </viewController>

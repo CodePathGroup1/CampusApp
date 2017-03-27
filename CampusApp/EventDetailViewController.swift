@@ -6,12 +6,17 @@
 //  Copyright © 2017 HLPostman. All rights reserved.
 //
 
-import UIKit
+import JSQMessagesViewController
 import MapKit
+import Parse
+import ParseUI
+import PKHUD
+import UIKit
 
 class EventDetailViewController: UIViewController, MKMapViewDelegate {
 
     @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var startingDateTimeLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UITextView!
     
     @IBOutlet weak var mapView: MKMapView!
@@ -22,6 +27,7 @@ class EventDetailViewController: UIViewController, MKMapViewDelegate {
         super.viewDidLoad()
         
         titleLabel.text = event.summary
+        startingDateTimeLabel.text = event.startDateTime?.shortDateTimeFormat
         descriptionLabel.text = event.description
         
         mapView.delegate = self
@@ -42,5 +48,27 @@ class EventDetailViewController: UIViewController, MKMapViewDelegate {
         */
         
         print(event)
+    }
+    
+    
+    @IBAction func eventCreatorTapped(_ sender: AnyObject) {
+        // test
+        let query = PFQuery(className: C.Parse.User.className)
+        query.whereKey(C.Parse.User.Keys.username, notEqualTo: PFUser.current()!.username!)
+        query.limit = 1
+        query.findObjectsInBackground { pfObject, error in
+            if let pfObject = pfObject?.first {
+                let otherUsers = [User(pfObject: pfObject)]
+                Conversation.startConversation(otherUsers: otherUsers) { conversationID in
+                    let storyboard = UIStoryboard(name: "Chat", bundle: nil)
+                    if let vc = storyboard.instantiateViewController(withIdentifier: "ChatConversationViewController") as? ChatConversationViewController {
+                        vc.conversationID = conversationID
+                        self.present(vc, animated: true, completion: nil)
+                    }
+                }
+            } else {
+                HUD.flash(.label(error?.localizedDescription ?? "ERROR"))
+            }
+        }
     }
 }

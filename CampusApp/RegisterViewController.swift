@@ -29,6 +29,7 @@ class RegisterViewController: UIViewController {
         dismiss(animated: true, completion: nil)
     }
     
+    
     /* ====================================================================================================
         MARK: - Dismiss keyboard when tapping background or pressing enter
      ====================================================================================================== */
@@ -36,6 +37,7 @@ class RegisterViewController: UIViewController {
         view.endEditing(true)
     }
     /* ==================================================================================================== */
+    
     
     /* ====================================================================================================
      MARK: - Register new account
@@ -53,6 +55,8 @@ class RegisterViewController: UIViewController {
                 let newUser = PFUser()
                 newUser.username = email
                 newUser.password = password
+                
+                newUser[C.Parse.User.Keys.fullName] = (firstNameField.text!.isEmpty ? email : firstNameField.text!)
                 
                 newUser.signUpInBackground { (success: Bool, error: Error?) in
                     if success {
@@ -72,6 +76,7 @@ class RegisterViewController: UIViewController {
         }
     }
     /* ==================================================================================================== */
+    
     
     /* ====================================================================================================
      MARK: - Private helper methods

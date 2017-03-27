@@ -33,11 +33,11 @@ struct C {
         }
         
         struct Message {
-            static let className = "Event"
+            static let className = "Message"
             
             struct Keys {
                 static let conversationID = "conversation_id"
-                static let createdAt = "created_at"
+                static let createdAt = "createdAt"
                 static let picture = "picture"
                 static let text = "text"
                 static let user = "user"
@@ -51,7 +51,7 @@ struct C {
             struct Keys {
                 static let avatar = "avatar"
                 static let fullName = "full_name"
-                static let id = "_id"
+                static let username = "username"
             }
         }
     }
