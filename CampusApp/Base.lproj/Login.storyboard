@@ -110,6 +110,7 @@
                                             </stackView>
                                         </subviews>
                                         <color key="backgroundColor" red="0.68627450980392157" green="0.49019607843137253" blue="0.29411764705882354" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <gestureRecognizers/>
                                         <constraints>
                                             <constraint firstAttribute="trailing" secondItem="9nZ-BS-OQY" secondAttribute="trailing" constant="24" id="3La-M7-LpF"/>
                                             <constraint firstAttribute="height" constant="30" id="Ida-PK-bVR"/>
@@ -117,6 +118,9 @@
                                             <constraint firstItem="9nZ-BS-OQY" firstAttribute="leading" secondItem="r4V-zb-Fp9" secondAttribute="leading" constant="24" id="mat-h5-sfd"/>
                                             <constraint firstItem="9nZ-BS-OQY" firstAttribute="top" secondItem="r4V-zb-Fp9" secondAttribute="top" id="n9Q-di-cfF"/>
                                         </constraints>
+                                        <connections>
+                                            <outletCollection property="gestureRecognizers" destination="ZQe-za-jHS" appends="YES" id="oDA-5W-cxZ"/>
+                                        </connections>
                                     </view>
                                 </subviews>
                             </stackView>
@@ -143,15 +147,21 @@
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                     <connections>
                         <outlet property="emailField" destination="oQM-wb-E8E" id="pig-UA-iIf"/>
+                        <outlet property="facebookLoginView" destination="r4V-zb-Fp9" id="Vxe-5q-Lyp"/>
                         <outlet property="loginButton" destination="VHf-rI-Ghu" id="2AP-zb-Mr0"/>
                         <outlet property="passwordField" destination="GVK-hU-eTm" id="BnX-VS-mmM"/>
                         <outlet property="registerButton" destination="4It-wG-0qZ" id="YRt-Aw-ziS"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pQV-ep-cWU" sceneMemberID="firstResponder"/>
-                <tapGestureRecognizer id="bHJ-ey-dSv">
+                <tapGestureRecognizer id="bHJ-ey-dSv" userLabel="Background Tap Gesture Recognizer">
                     <connections>
                         <action selector="backgroundTapped:" destination="SlX-be-GHe" id="ptT-ra-xqR"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="ZQe-za-jHS" userLabel="Facebook Login Tap Gesture Recognizer">
+                    <connections>
+                        <action selector="facebookButtonTapped:" destination="SlX-be-GHe" id="1Jt-AO-1sS"/>
                     </connections>
                 </tapGestureRecognizer>
             </objects>
