@@ -36,11 +36,10 @@ class EventViewController: UIViewController, UITableViewDataSource, UITableViewD
     @IBAction func logoutButtonTapped(_ sender: AnyObject) {
         HUD.flash(.progress)
         
-        PFUser.logOutInBackground { _ in
-            let storyboard = UIStoryboard(name: "Login", bundle: nil)
-            if let vc = storyboard.instantiateViewController(withIdentifier: "LoginViewController") as? LoginViewController {
-                self.present(vc, animated: true) {
-                    UIApplication.shared.keyWindow?.rootViewController = vc
+        let storyboard = UIStoryboard(name: "Login", bundle: nil)
+        if let vc = storyboard.instantiateViewController(withIdentifier: "LoginViewController") as? LoginViewController {
+            self.present(vc, animated: true) {
+                PFUser.logOutInBackground { _ in
                     HUD.hide(animated: true)
                 }
             }
