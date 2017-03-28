@@ -6,9 +6,8 @@
 //  Copyright © 2017 HLPostman. All rights reserved.
 //
 
-import FacebookCore
-import FacebookLogin
 import Parse
+import ParseFacebookUtilsV4
 import PKHUD
 import UIKit
 
@@ -65,80 +64,19 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction func facebookButtonTapped(_ sender: Any) {
-        let loginManager = LoginManager()
-        loginManager.logIn([.publicProfile, .email], viewController: self) { loginResult in
-            switch loginResult {
-            case .failed(let error):
-                HUD.flash(.label(error.localizedDescription))
-            case .cancelled:
-                break  // Do nothing
-            case .success(_, _, let accessToken):
-                let request = GraphRequest(graphPath: "me",
-                                           parameters: ["fields": "email,first_name,last_name"],
-                                           accessToken: accessToken,
-                                           httpMethod: .GET,
-                                           apiVersion: GraphAPIVersion.defaultVersion)
-                request.start { response, result in
-                    switch result {
-                    case .success(let response):
-                        guard
-                            let dictionary = response.dictionaryValue,
-                            let username = dictionary["email"] as? String else {
-                                fatalError("Request user data failed")
-                        }
-                        
-                        let query = PFQuery(className: C.Parse.User.className)
-                        query.whereKey(C.Parse.User.Keys.username, equalTo: username)
-                        query.limit = 1
-                        query.findObjectsInBackground { pfObjects, error in
-                            if let pfUser = pfObjects?.first as? PFUser {
-                                pfUser.password = accessToken.authenticationToken
-                                pfUser.saveInBackground { succeeded, error in
-                                    if succeeded {
-                                        self.showViewController(storyboardIdentifier: "Event", viewControllerIdentifier: "EventNavigationController")
-                                    } else {
-                                        HUD.flash(.label(error?.localizedDescription ?? "Unknown error"))
-                                    }
-                                }
-                                
-                            } else {
-                                let newUser = PFUser()
-                                newUser.username = username
-                                newUser.password = accessToken.authenticationToken
-                                
-                                let fullName: String = {
-                                    var nameParts: [String] = []
-                                    if let firstName = dictionary["first_name"] as? String {
-                                        nameParts.append(firstName)
-                                    }
-                                    if let lastName = dictionary["last_name"] as? String {
-                                        nameParts.append(lastName)
-                                    }
-                                    return nameParts.joined(separator: " ")
-                                }()
-                                
-                                newUser[C.Parse.User.Keys.fullName] = (fullName.isEmpty ? username : fullName)
-                                
-                                newUser.signUpInBackground { (success: Bool, error: Error?) in
-                                    if success {
-                                        self.showViewController(storyboardIdentifier: "Event", viewControllerIdentifier: "EventNavigationController")
-                                    } else if let error = error as? NSError {
-                                        switch error.code {
-                                        case 202:
-                                            HUD.flash(.label("User name is taken"))
-                                        default:
-                                            HUD.flash(.error)
-                                            print(error.localizedDescription)
-                                        }
-                                    }
-                                }
-                                
-                            }
-                        }
-                    case .failed(let error):
-                        HUD.flash(.label(error.localizedDescription))
-                    }
+        // Facebook permissions: https://developers.facebook.com/docs/facebook-login/permissions/
+        PFFacebookUtils.logInInBackground(withReadPermissions: ["public_profile"]) { user, error in
+            HUD.show(.progress)
+            
+            if let user = user {
+                if user.isNew {
+                    print("User signed up and logged in through Facebook!")
                 }
+                HUD.hide(animated: true)
+                self.showViewController(storyboardIdentifier: "Event", viewControllerIdentifier: "EventNavigationController")
+            } else {
+                HUD.flash(.error)
+                print(error?.localizedDescription ?? "Unknown error")
             }
         }
     }

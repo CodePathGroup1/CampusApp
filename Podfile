@@ -12,7 +12,5 @@ target 'CampusApp' do
   pod 'Alamofire'
   pod 'JSQMessagesViewController'
   pod 'ParseLiveQuery'
-  pod 'FacebookCore'
-  pod 'FacebookLogin'
-  pod 'FacebookShare'
+  pod 'ParseFacebookUtilsV4'
 end

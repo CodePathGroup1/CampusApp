@@ -29,26 +29,6 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>FBSDKShareKit.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>FacebookCore.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>FacebookLogin.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>FacebookShare.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
 		<key>JSQMessagesViewController.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -65,6 +45,11 @@
 			<false/>
 		</dict>
 		<key>Parse.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>ParseFacebookUtilsV4.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -97,17 +82,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>0B82EFE9712B6D3EAC93992AE624CC98</key>
+		<key>2A52779AA0BD86BA0CEB8753126ED2FE</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
 		<key>303B205E77242885B735F1851BC7585F</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>332F91393FB1DE033D370B4CEDDD5FCF</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -122,22 +102,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>593E9479C06FB200807D11AB29EB50BD</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>5B5AC3C06B783F8674FDB4C0F900B56A</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>7335E9C9689F3B8A16F063A884748533</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
 		<key>88E9EC28B8B46C3631E6B242B50F4442</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>9EC996F6AD11EF1703399A14BA6E91A9</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -147,7 +117,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>A7FEAA14E89971698ACA148F7F7202F2</key>
+		<key>BC5000D645EEAF961C85907CDC796FE1</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>BEF7E6E85DB5CDE5D7A18F4F2EB8494B</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -168,11 +143,6 @@
 			<true/>
 		</dict>
 		<key>D7A75F149082140741FC1E0B5B2863C8</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>DDBCFDE490CDFDABF6F16A26F346932D</key>
 		<dict>
 			<key>primary</key>
 			<true/>

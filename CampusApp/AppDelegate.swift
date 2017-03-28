@@ -6,10 +6,9 @@
 //  Copyright © 2017 HLPostman. All rights reserved.
 //
 
-import FacebookCore
-import FacebookLogin
 import UIKit
 import Parse
+import ParseFacebookUtilsV4
 import ParseLiveQuery
 
 @UIApplicationMain
@@ -42,7 +41,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
         
-        return SDKApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
+        PFFacebookUtils.initializeFacebook(applicationLaunchOptions: launchOptions)
+        
+        return FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
     }
 
     func applicationWillResignActive(_ application: UIApplication) {
@@ -61,6 +62,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationDidBecomeActive(_ application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+        FBSDKAppEvents.activateApp()
     }
 
     func applicationWillTerminate(_ application: UIApplication) {
@@ -68,7 +70,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
-        return SDKApplicationDelegate.shared.application(app, open: url, options: options)
+        return FBSDKApplicationDelegate.sharedInstance().application(app, open: url, options: options)
     }
 }
 
