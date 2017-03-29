@@ -165,8 +165,8 @@
 		65F5BBE41E81975100368D36 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				65E835411E80DDD00006FC0D /* RegisterViewController.swift */,
 				65E8353D1E80CA610006FC0D /* LoginViewController.swift */,
+				65E835411E80DDD00006FC0D /* RegisterViewController.swift */,
 				BE4249FF1E655D7200A7BA37 /* EventViewController.swift */,
 				1DF7D75B1E80CC5D003ECFB6 /* EventDetailViewController.swift */,
 				652F53101E838ACE0073CA9C /* ChatListViewController.swift */,
@@ -273,8 +273,8 @@
 				65F5BBE41E81975100368D36 /* Controllers */,
 				65F5BBE51E81975900368D36 /* Models */,
 				65F5BBE61E81975D00368D36 /* Views */,
-				65F5BBE71E81976200368D36 /* Resources */,
 				65F5BBE91E81991600368D36 /* Extensions */,
+				65F5BBE71E81976200368D36 /* Resources */,
 				65730E271E82FA6B00FF5906 /* Utilities */,
 				65F4E37E1E8609C30001CA93 /* Values */,
 				BE4249FD1E655D7200A7BA37 /* AppDelegate.swift */,

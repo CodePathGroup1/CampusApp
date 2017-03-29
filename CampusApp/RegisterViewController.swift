@@ -53,9 +53,14 @@ class RegisterViewController: UIViewController {
                 }
                 
                 let newUser = PFUser()
-                newUser.username = email
+                if let username = usernameField.text, !username.isEmpty {
+                    newUser.username = username
+                } else {
+                    newUser.username = email
+                }
                 newUser.password = password
                 
+                newUser[C.Parse.User.Keys.email] = (emailField.text!.isEmpty ? email : emailField.text!)
                 newUser[C.Parse.User.Keys.fullName] = (firstNameField.text!.isEmpty ? email : firstNameField.text!)
                 
                 newUser.signUpInBackground { (success: Bool, error: Error?) in
