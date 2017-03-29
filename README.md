@@ -8,31 +8,35 @@ Time spent: **X** hours spent in total
 
 The following **required** functionality is completed:
 
-- [ ] User can sign up, log in, and log out with custom backend
-- [ ] User can see feed of CCSF events
+- [X] User can sign up, log in, and log out with custom backend
+- [X] User can see feed of CCSF events
 	Events include:
-	- [ ] Event titles
-	- [ ] Event time or time til
+	- [X] Event titles
+	- [X] Event time or time til
 	- [ ] Event campus, building, and room when applicable
-- [ ] User can navigate to a detail view of events that includes:
-	- [ ] Event info
-	- [ ] Event description
+- [X] User can navigate to a detail view of events that includes:
+	- [X] Event info
+	- [X] Event description
 	- [ ] Map view
-- [ ] User can persist across restarts
+- [X] User can persist across restarts
 - [ ] User can save preferences in a settings controller
 	- [ ] UI settings
 	- [ ] Set which campus(es) to see events for
 
-
-
 **Optional**
 
+- [X] Facebook signup and login
+- [X] Sign up using email and password
+- [X] Chat
+    - [X] Live (no timer is used)
+    - [X] Sending picture and video is supported
+    - [X] UI modifications
 
 ## Video Walkthrough 
 
 Here's a walkthrough of implemented user stories:
 
-<img src='http://i.imgur.com/link/to/your/gif/file.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+<img src='http://i.imgur.com/PQGovYO.gif' title='Spring 1' width='' alt='Video Walkthrough' />
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
@@ -83,7 +87,7 @@ Describe any challenges encountered while building the app.
 
 ## License
 
-    Copyright [2017] [Thomas Zhu & Hannah Lily Postman & Mitchell Wong]
+    Copyright [2017] [Thomas Zhu & Mitchell Wong]
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
