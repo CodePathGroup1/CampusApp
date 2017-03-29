@@ -6,13 +6,14 @@
 //  Copyright © 2017 HLPostman. All rights reserved.
 //
 
+import FBSDKCoreKit
 import Parse
 import ParseFacebookUtilsV4
 import PKHUD
 import UIKit
 
 class LoginViewController: UIViewController {
-
+    
     @IBOutlet weak var emailField: RoundTextField!
     @IBOutlet weak var passwordField: RoundTextField!
     
@@ -43,7 +44,7 @@ class LoginViewController: UIViewController {
     
     
     /* ====================================================================================================
-    MARK: - Log in
+     MARK: - Log in
      ====================================================================================================== */
     @IBAction func loginButtonTapped(_ sender: AnyObject) {
         if let email = emailField.text, let password = passwordField.text {
@@ -65,15 +66,36 @@ class LoginViewController: UIViewController {
     
     @IBAction func facebookButtonTapped(_ sender: Any) {
         // Facebook permissions: https://developers.facebook.com/docs/facebook-login/permissions/
-        PFFacebookUtils.logInInBackground(withReadPermissions: ["public_profile"]) { user, error in
+        PFFacebookUtils.logInInBackground(withReadPermissions: ["public_profile", "email"]) { user, error in
             HUD.show(.progress)
             
             if let user = user {
                 if user.isNew {
-                    print("User signed up and logged in through Facebook!")
+                    if let request = FBSDKGraphRequest(graphPath: "me",
+                                                       parameters: ["fields":"email,name"]) {
+                        _ = request.start { connection, result, error in
+                            if let result = result as? [String: AnyObject],
+                                let email = result["email"] as? String,
+                                let name = result["name"] as? String {
+                                
+                                user[C.Parse.User.Keys.email] = email
+                                user[C.Parse.User.Keys.fullName] = name
+                                
+                                user.saveInBackground { succeeded, error in
+                                    if succeeded {
+                                        HUD.hide(animated: true)
+                                        self.showViewController(storyboardIdentifier: "Event", viewControllerIdentifier: "EventNavigationController")
+                                    } else {
+                                        print(error?.localizedDescription ?? "Unknown error")
+                                    }
+                                }
+                            }
+                        }
+                    }
+                } else {
+                    HUD.hide(animated: true)
+                    self.showViewController(storyboardIdentifier: "Event", viewControllerIdentifier: "EventNavigationController")
                 }
-                HUD.hide(animated: true)
-                self.showViewController(storyboardIdentifier: "Event", viewControllerIdentifier: "EventNavigationController")
             } else {
                 HUD.flash(.error)
                 print(error?.localizedDescription ?? "Unknown error")

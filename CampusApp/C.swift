@@ -50,6 +50,7 @@ struct C {
             
             struct Keys {
                 static let avatar = "avatar"
+                static let email = "email"
                 static let fullName = "full_name"
                 static let username = "username"
             }
