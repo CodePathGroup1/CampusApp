@@ -88,6 +88,32 @@ class EventViewController: UIViewController, UITableViewDataSource, UITableViewD
     }
     
     private func loadEvents() {
+        loadGoogleEvents()
+//        loadParseEvents()
+//        bindParseEventsWithGoogleEvents()
+    }
+    
+    enum ProcessType {
+        case loadGoogleEvents, loadParseEvents, bindParseEventsWithGoogleEvents
+    }
+    
+    var backgroundProcesses: [ProcessType: Bool] = [
+        .loadGoogleEvents: false,
+        .loadParseEvents: false,
+        .bindParseEventsWithGoogleEvents: false
+    ] {
+        didSet {
+            if !backgroundProcesses.values.contains(false) {
+                self.events.sort(by: { (event1, event2) -> Bool in
+                    return event1.startDateTime!.timeIntervalSinceNow < event2.startDateTime!.timeIntervalSinceNow
+                })
+                self.tableView.reloadData()
+                HUD.hide(animated: true)
+            }
+        }
+    }
+    
+    private func loadGoogleEvents() {
         var loadedCalendarCount = 0
         let totalCalendarCount = GoogleCalendarClient.calendarIDs.count
         HUD.flash(.label("Loading: \(loadedCalendarCount / totalCalendarCount) %"))
@@ -100,18 +126,14 @@ class EventViewController: UIViewController, UITableViewDataSource, UITableViewD
                                                             
                                                             let newEvents = json.map { eventJSON -> GoogleCalendarEvent in
                                                                 return GoogleCalendarEvent(json: eventJSON)
-                                                            }.filter { event -> Bool in  // Filter out repeat events
-                                                                return event.startDateTime != nil
+                                                                }.filter { event -> Bool in  // Filter out repeat events
+                                                                    return event.startDateTime != nil
                                                             }
                                                             
                                                             self.events.append(contentsOf: newEvents)
                                                             
                                                             if loadedCalendarCount == totalCalendarCount {
-                                                                self.events.sort(by: { (event1, event2) -> Bool in
-                                                                    return event1.startDateTime!.timeIntervalSinceNow < event2.startDateTime!.timeIntervalSinceNow
-                                                                })
-                                                                self.tableView.reloadData()
-                                                                HUD.hide(animated: true)
+                                                                self.backgroundProcesses[.loadGoogleEvents] = true
                                                             }},
                                                         failure: { error in
                                                             print(error) }
@@ -119,4 +141,3 @@ class EventViewController: UIViewController, UITableViewDataSource, UITableViewD
         }
     }
 }
-
