@@ -32,6 +32,22 @@ struct C {
             }
         }
         
+        struct Event {
+            static let className = "Event"
+            
+            struct Keys {
+                static let googleEventID = "google_event_id"
+                static let isFavorited = "is_favorited"
+                static let title = "title"
+                static let startDateTime = "start_date_time"
+                static let endDateTime = "end_date_time"
+                static let campusID = "campus_id"
+                static let buildingID = "building_id"
+                static let roomID = "room_id"
+                static let attendees = "attendees"
+            }
+        }
+        
         struct Message {
             static let className = "Message"
             

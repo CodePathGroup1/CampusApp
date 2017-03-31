@@ -140,4 +140,9 @@ class EventViewController: UIViewController, UITableViewDataSource, UITableViewD
             )
         }
     }
+    
+    
+    private func loadParseEvents() {
+        let query = PFQuery(className: C.Parse.Event.className)
+    }
 }
