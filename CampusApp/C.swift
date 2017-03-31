@@ -39,12 +39,14 @@ struct C {
                 static let googleEventID = "google_event_id"
                 static let isFavorited = "is_favorited"
                 static let title = "title"
+                static let organizerName = "organizer_name"
                 static let startDateTime = "start_date_time"
                 static let endDateTime = "end_date_time"
                 static let campusID = "campus_id"
                 static let buildingID = "building_id"
                 static let roomID = "room_id"
                 static let attendees = "attendees"
+                static let description = "description"
             }
         }
         

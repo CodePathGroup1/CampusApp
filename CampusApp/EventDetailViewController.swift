@@ -26,7 +26,7 @@ class EventDetailViewController: UIViewController, MKMapViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        titleLabel.text = event.summary
+        titleLabel.text = event.title
         startingDateTimeLabel.text = event.startDateTime?.shortDateTimeFormat
         descriptionLabel.text = event.description
         

@@ -14,7 +14,7 @@ class EventViewController: UIViewController, UITableViewDataSource, UITableViewD
     
     @IBOutlet weak var tableView: UITableView!
     
-    private var events: [GoogleCalendarEvent] = []
+    private var events: [ParseEvent] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -59,7 +59,7 @@ class EventViewController: UIViewController, UITableViewDataSource, UITableViewD
                 }
             }
             
-            configure(label: cell.titleLabel, content: event.summary)
+            configure(label: cell.titleLabel, content: event.title)
             configure(label: cell.startDateTimeLabel, content: event.startDateTime?.shortDateTimeFormat)
             configure(label: cell.detailLabel, content: event.description)
             
@@ -124,7 +124,7 @@ class EventViewController: UIViewController, UITableViewDataSource, UITableViewD
                                                             loadedCalendarCount += 1
                                                             HUD.flash(.label("Loading: \(loadedCalendarCount / totalCalendarCount) %"))
                                                             
-                                                            let newEvents = json.map { eventJSON -> GoogleCalendarEvent in
+                                                            let newEvents: [ParseEvent] = json.map { eventJSON -> GoogleCalendarEvent in
                                                                 return GoogleCalendarEvent(json: eventJSON)
                                                                 }.filter { event -> Bool in  // Filter out repeat events
                                                                     return event.startDateTime != nil
@@ -144,5 +144,15 @@ class EventViewController: UIViewController, UITableViewDataSource, UITableViewD
     
     private func loadParseEvents() {
         let query = PFQuery(className: C.Parse.Event.className)
+        query.whereKey(C.Parse.Event.Keys.startDateTime, lessThanOrEqualTo: Calendar.current.date(byAdding: .day, value: 14, to: Date())!)
+        query.findObjectsInBackground { pfObjects, error in
+            if let pfObjects = pfObjects {
+                let events = pfObjects.map { pfObject in
+                    return ParseEvent(pfObject: pfObject)
+                }
+                
+                
+            }
+        }
     }
 }
