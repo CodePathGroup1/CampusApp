@@ -235,11 +235,78 @@
                         <outlet property="roomTextField" destination="DFa-ya-6ED" id="PHV-Fs-3lg"/>
                         <outlet property="startDateTimeTextField" destination="kaG-LZ-RHc" id="8EE-Aq-rYW"/>
                         <outlet property="titleTextField" destination="caY-D8-Lcw" id="eVJ-wx-3ck"/>
+                        <segue destination="tQu-Kb-XTn" kind="presentation" id="5nv-2V-tPG"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4GI-0p-7dB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1702" y="-645"/>
+        </scene>
+        <!--Event Detail Picker View Controller-->
+        <scene sceneID="XwK-GN-Rfb">
+            <objects>
+                <viewController id="tQu-Kb-XTn" customClass="EventDetailPickerViewController" customModule="CampusApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="6V2-ak-hhI"/>
+                        <viewControllerLayoutGuide type="bottom" id="mie-Yh-a68"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="ovB-5T-Qcg">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="9u4-s1-Czy" userLabel="Main">
+                                <rect key="frame" x="16" y="28" width="343" height="631"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="deS-BI-JZ5" userLabel="Banner">
+                                        <rect key="frame" x="0.0" y="0.0" width="343" height="40"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="D7M-mi-oC7">
+                                                <rect key="frame" x="8" y="5" width="48" height="30"/>
+                                                <state key="normal" title="CLOSE"/>
+                                                <connections>
+                                                    <action selector="closeButtonTapped:" destination="tQu-Kb-XTn" eventType="touchUpInside" id="o2E-gG-FXJ"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstItem="D7M-mi-oC7" firstAttribute="leading" secondItem="deS-BI-JZ5" secondAttribute="leading" constant="8" id="5Fo-CD-yFl"/>
+                                            <constraint firstItem="D7M-mi-oC7" firstAttribute="centerY" secondItem="deS-BI-JZ5" secondAttribute="centerY" id="lPE-1l-ATY"/>
+                                            <constraint firstAttribute="height" constant="40" id="qhD-8Q-bxI"/>
+                                        </constraints>
+                                    </view>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="eF7-G0-jqb" customClass="RoundTextField" customModule="CampusApp" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="52" width="343" height="30"/>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Lzc-j2-aIX">
+                                        <rect key="frame" x="0.0" y="94" width="343" height="216"/>
+                                    </pickerView>
+                                    <view contentMode="scaleToFill" verticalHuggingPriority="245" translatesAutoresizingMaskIntoConstraints="NO" id="h7I-od-uK1" userLabel="Blank View">
+                                        <rect key="frame" x="0.0" y="322" width="343" height="309"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </view>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="9u4-s1-Czy" secondAttribute="trailing" constant="16" id="0Tk-K5-cG9"/>
+                            <constraint firstItem="mie-Yh-a68" firstAttribute="top" secondItem="9u4-s1-Czy" secondAttribute="bottom" constant="8" id="Zju-25-YNI"/>
+                            <constraint firstItem="9u4-s1-Czy" firstAttribute="leading" secondItem="ovB-5T-Qcg" secondAttribute="leading" constant="16" id="gyK-gB-bw5"/>
+                            <constraint firstItem="9u4-s1-Czy" firstAttribute="top" secondItem="6V2-ak-hhI" secondAttribute="bottom" constant="8" id="nSw-qh-vRM"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="inputPickerView" destination="Lzc-j2-aIX" id="6j4-cd-UwE"/>
+                        <outlet property="inputTextField" destination="eF7-G0-jqb" id="lTb-d2-6Qm"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="R8Q-OU-TWp" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2455.1999999999998" y="-645.42728635682158"/>
         </scene>
         <!--Detail-->
         <scene sceneID="AIF-fI-Nod">
