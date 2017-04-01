@@ -47,9 +47,36 @@ class EventDetailViewController: UIViewController, MKMapViewDelegate {
         }
         */
         
+        configuireUI()
         print(event)
     }
     
+    @IBAction func favoriteButtonTapped(_ sender: Any) {
+        
+        let pfObject = event.getRemoteParseObject()
+        
+        pfObject.saveInBackground { succeeded, error in
+            if succeeded {
+                if let isFavorited = self.event.isFavorited {
+                    pfObject[C.Parse.Event.Keys.isFavorited] = !isFavorited
+                } else {
+                    pfObject[C.Parse.Event.Keys.isFavorited] = true
+                }
+                
+                HUD.flash(.progress)
+                pfObject.saveInBackground { succeeded, error in
+                    if succeeded {
+                        self.event = ParseEvent(pfObject: pfObject)
+                        HUD.hide(animated: true)
+                    } else {
+                        HUD.flash(.label(error?.localizedDescription ?? "Unknown error"))
+                    }
+                }
+            } else {
+                HUD.flash(.label(error?.localizedDescription ?? "Unknown error"))
+            }
+        }
+    }
     
     @IBAction func eventCreatorTapped(_ sender: AnyObject) {
         // TODO: change this to actual user
@@ -77,9 +104,9 @@ class EventDetailViewController: UIViewController, MKMapViewDelegate {
                 HUD.flash(.label(error?.localizedDescription ?? "ERROR"))
             }
         }
-        
-//        showViewController(storyboardIdentifier: "Chat", viewControllerIdentifier: "ChatNavigationController")
     }
     
-    
+    private func configuireUI() {
+        
+    }
 }

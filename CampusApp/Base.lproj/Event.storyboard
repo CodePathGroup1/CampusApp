@@ -61,7 +61,7 @@
             </objects>
             <point key="canvasLocation" x="887" y="139"/>
         </scene>
-        <!--Event Detail View Controller-->
+        <!--Detail-->
         <scene sceneID="AIF-fI-Nod">
             <objects>
                 <viewController id="zNt-fj-lfZ" customClass="EventDetailViewController" customModule="CampusApp" customModuleProvider="target" sceneMemberID="viewController">
@@ -218,6 +218,15 @@
                             <constraint firstItem="XTm-If-bKD" firstAttribute="leading" secondItem="ytc-gi-ZrO" secondAttribute="leadingMargin" id="VKZ-K7-uCz"/>
                         </constraints>
                     </view>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" title="Detail" id="kkE-mu-d0K">
+                        <barButtonItem key="rightBarButtonItem" systemItem="bookmarks" id="lp7-nH-eJk">
+                            <connections>
+                                <action selector="favoriteButtonTapped:" destination="zNt-fj-lfZ" id="zbr-Uu-O1e"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="descriptionLabel" destination="ypJ-MS-13q" id="4Vu-jf-3YN"/>
                         <outlet property="mapView" destination="4LR-Vj-dgF" id="TSM-86-eQl"/>

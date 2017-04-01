@@ -69,12 +69,12 @@ class EventViewController: UIViewController, UITableViewDataSource, UITableViewD
         return UITableViewCell()
     }
 
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return events.count
-    }
-    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         performSegue(withIdentifier: "EventDetailViewController", sender: events[indexPath.row])
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return events.count
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

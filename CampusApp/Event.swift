@@ -11,7 +11,7 @@ import Parse
 class ParseEvent {
     var pfObject: PFObject?
     
-    let googleEventID: String?
+    var googleEventID: String?
     let isFavorited: Bool?
     
     let title: String?
@@ -76,5 +76,35 @@ class ParseEvent {
         self.attendees = pfObject[C.Parse.Event.Keys.attendees] as? PFRelation<PFObject>
         
         self.description = pfObject[C.Parse.Event.Keys.description] as? String
+    }
+    
+    func getRemoteParseObject() -> PFObject {
+        if let pfObject = self.pfObject {
+            return pfObject
+        }
+        
+        let eventPFObject = PFObject(className: C.Parse.Event.className)
+        
+        if let googleEventID = googleEventID {
+            eventPFObject[C.Parse.Event.Keys.googleEventID] = googleEventID
+        }
+        if let title = title {
+            eventPFObject[C.Parse.Event.Keys.title] = title
+        }
+        if let organizerName = organizerName {
+            eventPFObject[C.Parse.Event.Keys.organizerName] = organizerName
+        }
+        if let startDateTime = startDateTime {
+            eventPFObject[C.Parse.Event.Keys.startDateTime] = startDateTime
+        }
+        if let endDateTime = endDateTime {
+            eventPFObject[C.Parse.Event.Keys.endDateTime] = endDateTime
+        }
+        if let description = description {
+            eventPFObject[C.Parse.Event.Keys.description] = description
+        }
+        
+        self.pfObject = eventPFObject
+        return eventPFObject
     }
 }

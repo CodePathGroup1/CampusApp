@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Parse
 
 class GoogleCalendarEvent: ParseEvent {
     
@@ -16,20 +17,20 @@ class GoogleCalendarEvent: ParseEvent {
         var startDateTime: Date?
         var endDateTime: Date?
         
-        if let startTimeString = json["start"]?["dateTime"] as? String,
+        if let startTimeString = (json["start"] as? [String: AnyObject])?["dateTime"] as? String,
             let startTime = startTimeString.timeFromStandardFormat {
             startDateTime = startTime
-        } else if let startDateString = json["start"]?["date"] as? String,
+        } else if let startDateString = (json["start"] as? [String: AnyObject])?["date"] as? String,
             let startDate = startDateString.dateFromStandardFormat {
             startDateTime = startDate
         } else {
             startDateTime = nil
         }
         
-        if let endTimeString = json["end"]?["dateTime"] as? String,
+        if let endTimeString = (json["end"] as? [String: AnyObject])?["dateTime"] as? String,
             let endTime = endTimeString.timeFromStandardFormat {
             endDateTime = endTime
-        } else if let endDateString = json["end"]?["date"] as? String,
+        } else if let endDateString = (json["end"] as? [String: AnyObject])?["date"] as? String,
             let endDate = endDateString.dateFromStandardFormat {
             endDateTime = endDate
         } else {
@@ -71,7 +72,7 @@ class GoogleCalendarEvent: ParseEvent {
                    googleEventID: json["id"] as? String,
                    isFavorited: nil,
                    title: json["summary"] as? String,
-                   organizerName: json["organizer"]?["displayName"] as? String,
+                   organizerName: (json["organizer"] as? [String: AnyObject])?["displayName"] as? String,
                    startDateTime: startDateTime,
                    endDateTime: endDateTime,
                    campusID: nil,
