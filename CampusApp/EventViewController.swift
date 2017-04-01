@@ -93,6 +93,7 @@ class EventViewController: UIViewController, UITableViewDataSource, UITableViewD
             
             configure(label: cell.titleLabel, content: event.title)
             configure(label: cell.startDateTimeLabel, content: event.startDateTime?.shortDateTimeFormat)
+            configure(label: cell.endDateTimeLabel, content: event.endDateTime?.shortDateTimeFormat)
             configure(label: cell.detailLabel, content: event.description)
             
             if let isFavorited = event.isFavorited {
