@@ -71,9 +71,6 @@ class EventDetailViewController: UIViewController, MKMapViewDelegate {
             mapView.showAnnotations([annotation], animated: false)
         }
         */
-        
-        configuireUI()
-        print(event)
     }
     
     @IBAction func favoriteButtonTapped(_ sender: Any) {
@@ -104,34 +101,17 @@ class EventDetailViewController: UIViewController, MKMapViewDelegate {
     }
     
     @IBAction func eventCreatorTapped(_ sender: AnyObject) {
-        // TODO: change this to actual user
-        let query = PFQuery(className: C.Parse.User.className)
-        query.whereKey(C.Parse.User.Keys.username, notEqualTo: PFUser.current()!.username!)
-        query.limit = 1
-        query.findObjectsInBackground { pfObject, error in
-            if let pfObject = pfObject?.first {
-                let otherUsers = [User(pfObject: pfObject)]
-                Conversation.startConversation(otherUsers: otherUsers) { conversationID in
-                    let storyboard = UIStoryboard(name: "Chat", bundle: nil)
-                    if let vc = storyboard.instantiateViewController(withIdentifier: "ChatConversationViewController") as? ChatConversationViewController {
-                        vc.conversationID = conversationID
-                        self.present(vc, animated: true) {
-                            let alertVC = UIAlertController(title: "", message: "The following screen is just a demostration of the live chat feature. A pre-determined user is selected, not the actual event creator. That functionality is coming soon.", preferredStyle: .alert)
-                            
-                            let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
-                            alertVC.addAction(okAction)
-                            
-                            vc.present(alertVC, animated: true, completion: nil)
-                        }
-                    }
+        if let organizer = event.organizer, organizer.objectId != PFUser.current()?.objectId {
+            let otherUsers = [User(pfObject: organizer)]
+            Conversation.startConversation(otherUsers: otherUsers) { conversationID in
+                let storyboard = UIStoryboard(name: "Chat", bundle: nil)
+                if let vc = storyboard.instantiateViewController(withIdentifier: "ChatConversationViewController") as? ChatConversationViewController {
+                    vc.conversationID = conversationID
+                    self.present(vc, animated: true, completion: nil)
                 }
-            } else {
-                HUD.flash(.label(error?.localizedDescription ?? "ERROR"))
             }
+        } else if let _ = event.googleEventID {
+            HUD.flash(.label("Chatting with user is not supported for events imported from Google Calendars."))
         }
-    }
-    
-    private func configuireUI() {
-        
     }
 }
