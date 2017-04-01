@@ -46,6 +46,10 @@ class EventViewController: UIViewController, UITableViewDataSource, UITableViewD
         }
     }
     
+    @IBAction func newEventTapped(_ sender: Any) {
+        
+    }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: "EventCell", for: indexPath) as? EventCell {
             let event = events[indexPath.row]
