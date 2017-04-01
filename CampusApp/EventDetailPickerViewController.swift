@@ -11,7 +11,7 @@ import PKHUD
 import UIKit
 
 class EventDetailPickerViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
-
+    
     enum Mode: Int {
         case startDateTime = 0
         case endDateTime = 1
@@ -29,11 +29,11 @@ class EventDetailPickerViewController: UIViewController, UIPickerViewDataSource,
     var buildingID: String?
     
     var dateClosure: ((Date) -> Void)!
-    var stringClosure: ((String, String) -> Void)!
+    var stringClosure: ((PFObject, String) -> Void)!
     
     private var className: String?
     
-    private var pickerObjectIDs: [String] = []
+    private var pickerObjects: [PFObject] = []
     private var pickerData: [String] = []
     private var selectedIndex = 0
     
@@ -72,12 +72,7 @@ class EventDetailPickerViewController: UIViewController, UIPickerViewDataSource,
                 
                 query.findObjectsInBackground { pfObjects, error in
                     if let pfObjects = pfObjects {
-                        self.pickerObjectIDs = pfObjects.reduce([]) { result, pfObject in
-                            if let objectId = pfObject.objectId {
-                                return result + [objectId]
-                            }
-                            return result
-                        }
+                        self.pickerObjects = pfObjects
                         
                         self.pickerData = pfObjects.reduce([]) { result, pfObject in
                             if self.mode == .campus, let name = pfObject[C.Parse.Campus.Keys.name] as? String {
@@ -108,7 +103,7 @@ class EventDetailPickerViewController: UIViewController, UIPickerViewDataSource,
             if self.mode == .startDateTime || self.mode == .endDateTime {
                 self.dateClosure(self.inputDatePicker.date)
             } else {
-                self.stringClosure(self.pickerObjectIDs[self.selectedIndex], self.pickerData[self.selectedIndex])
+                self.stringClosure(self.pickerObjects[self.selectedIndex], self.pickerData[self.selectedIndex])
             }
         }
     }

@@ -402,22 +402,22 @@
                                             <stackView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="245" axis="vertical" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Xkm-pn-h9X">
                                                 <rect key="frame" x="64" y="0.0" width="279" height="106"/>
                                                 <subviews>
-                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Lqg-4c-3En">
+                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Lqg-4c-3En" customClass="RoundTextField" customModule="CampusApp" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="0.0" width="279" height="30"/>
-                                                        <nil key="textColor"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits"/>
                                                     </textField>
-                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="CiH-Jw-ESW">
+                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="CiH-Jw-ESW" customClass="RoundTextField" customModule="CampusApp" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="38" width="279" height="30"/>
-                                                        <nil key="textColor"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits"/>
                                                     </textField>
-                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8Nc-D1-s2N">
+                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8Nc-D1-s2N" customClass="RoundTextField" customModule="CampusApp" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="76" width="279" height="30"/>
-                                                        <nil key="textColor"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits"/>
                                                     </textField>
                                                 </subviews>
@@ -483,8 +483,13 @@
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="buildingTextField" destination="CiH-Jw-ESW" id="w8k-av-oWX"/>
+                        <outlet property="campusTextField" destination="Lqg-4c-3En" id="2JD-Xr-az6"/>
+                        <outlet property="creatorAvatorPFImageView" destination="yhw-wi-w4L" id="Wt1-B0-SKg"/>
+                        <outlet property="creatorNameButton" destination="U33-hZ-akK" id="hcj-mn-6UP"/>
                         <outlet property="descriptionLabel" destination="ypJ-MS-13q" id="4Vu-jf-3YN"/>
                         <outlet property="mapView" destination="4LR-Vj-dgF" id="TSM-86-eQl"/>
+                        <outlet property="roomTextField" destination="8Nc-D1-s2N" id="Hf2-xq-Zop"/>
                         <outlet property="startingDateTimeLabel" destination="T3H-BG-tgA" id="UNR-nj-Nuk"/>
                         <outlet property="titleLabel" destination="jUA-Yv-QhW" id="Cji-Fw-HzJ"/>
                     </connections>

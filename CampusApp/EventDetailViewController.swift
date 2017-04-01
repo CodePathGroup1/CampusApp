@@ -17,6 +17,11 @@ class EventDetailViewController: UIViewController, MKMapViewDelegate {
 
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var startingDateTimeLabel: UILabel!
+    @IBOutlet weak var creatorAvatorPFImageView: PFImageView!
+    @IBOutlet weak var creatorNameButton: UIButton!
+    @IBOutlet weak var campusTextField: RoundTextField!
+    @IBOutlet weak var buildingTextField: RoundTextField!
+    @IBOutlet weak var roomTextField: RoundTextField!
     @IBOutlet weak var descriptionLabel: UITextView!
     
     @IBOutlet weak var mapView: MKMapView!
@@ -28,6 +33,26 @@ class EventDetailViewController: UIViewController, MKMapViewDelegate {
         
         titleLabel.text = event.title
         startingDateTimeLabel.text = event.startDateTime?.shortDateTimeFormat
+        
+        if let organizer = event.organizer {
+            creatorNameButton.setTitle(organizer[C.Parse.User.Keys.fullName] as? String, for: .normal)
+        } else if let organizerName = event.organizerName {
+            creatorAvatorPFImageView.isHidden = true
+            creatorNameButton.setTitle(organizerName, for: .normal)
+        }
+        
+        if let campus = event.campus {
+            campusTextField.text = campus[C.Parse.Campus.Keys.name] as? String
+        }
+        
+        if let building = event.building {
+            buildingTextField.text = building[C.Parse.Building.Keys.name] as? String
+        }
+        
+        if let room = event.room {
+            roomTextField.text = room[C.Parse.Room.Keys.name] as? String
+        }
+        
         descriptionLabel.text = event.description
         
         mapView.delegate = self

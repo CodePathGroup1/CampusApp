@@ -178,10 +178,14 @@ class EventViewController: UIViewController, UITableViewDataSource, UITableViewD
         }
     }
     
-    
     private func loadParseEvents() {
         let query = PFQuery(className: C.Parse.Event.className)
         query.whereKey(C.Parse.Event.Keys.startDateTime, lessThanOrEqualTo: Calendar.current.date(byAdding: .day, value: 14, to: Date())!)
+        query.includeKey(C.Parse.Event.Keys.organizer)
+        query.includeKey(C.Parse.Event.Keys.campus)
+        query.includeKey(C.Parse.Event.Keys.building)
+        query.includeKey(C.Parse.Event.Keys.room)
+        
         query.findObjectsInBackground { pfObjects, error in
             if let pfObjects = pfObjects {
                 let parseEvents = pfObjects.map { pfObject in

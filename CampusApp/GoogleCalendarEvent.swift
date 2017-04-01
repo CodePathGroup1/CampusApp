@@ -72,12 +72,13 @@ class GoogleCalendarEvent: ParseEvent {
                    googleEventID: json["id"] as? String,
                    isFavorited: nil,
                    title: json["summary"] as? String,
+                   organizer: nil,
                    organizerName: (json["organizer"] as? [String: AnyObject])?["displayName"] as? String,
                    startDateTime: startDateTime,
                    endDateTime: endDateTime,
-                   campusID: nil,
-                   buildingID: nil,
-                   roomID: nil,
+                   campus: nil,
+                   building: nil,
+                   room: nil,
                    attendees: nil,
                    description: json["description"] as? String)
     }

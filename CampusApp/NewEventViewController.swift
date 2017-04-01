@@ -22,32 +22,32 @@ class NewEventViewController: UIViewController, UITextFieldDelegate, UIGestureRe
     
     private var startDateTime: Date?
     private var endDateTime: Date?
-    private var campusID: String? {
+    private var campus: PFObject? {
         didSet {
-            if campusID != oldValue {
-                buildingID = nil
-                roomID = nil
+            if campus?.objectId != oldValue?.objectId {
+                building = nil
+                room = nil
             }
             
-            if campusID == nil {
+            if campus == nil {
                 campusTextField.text = ""
             }
         }
     }
-    private var buildingID: String? {
+    private var building: PFObject? {
         didSet {
-            if buildingID != oldValue {
-                roomID = nil
+            if building?.objectId != oldValue?.objectId {
+                room = nil
             }
             
-            if buildingID == nil {
+            if building == nil {
                 buildingTextField.text = ""
             }
         }
     }
-    private var roomID: String? {
+    private var room: PFObject? {
         didSet {
-            if roomID == nil {
+            if room == nil {
                 roomTextField.text = ""
             }
         }
@@ -99,16 +99,16 @@ class NewEventViewController: UIViewController, UITextFieldDelegate, UIGestureRe
         eventPFObject[C.Parse.Event.Keys.startDateTime] = startDateTime
         eventPFObject[C.Parse.Event.Keys.endDateTime] = endDateTime
         
-        if let campusID = campusID {
-            eventPFObject[C.Parse.Event.Keys.campusID] = campusID
+        if let campus = campus {
+            eventPFObject[C.Parse.Event.Keys.campus] = campus
         }
         
-        if let buildingID = buildingID {
-            eventPFObject[C.Parse.Event.Keys.buildingID] = buildingID
+        if let building = building {
+            eventPFObject[C.Parse.Event.Keys.building] = building
         }
         
-        if let roomID = roomID {
-            eventPFObject[C.Parse.Event.Keys.roomID] = roomID
+        if let room = room {
+            eventPFObject[C.Parse.Event.Keys.room] = room
         }
         
         if let eventDescription = descriptionTextView.text, !eventDescription.isEmpty {
@@ -152,22 +152,22 @@ class NewEventViewController: UIViewController, UITextFieldDelegate, UIGestureRe
                     }
                 case Mode.campus.rawValue:
                     vc.mode = .campus
-                    vc.stringClosure = { objectID, string in
-                        self.campusID = objectID
+                    vc.stringClosure = { object, string in
+                        self.campus = object
                         self.campusTextField.text = string
                     }
                 case Mode.building.rawValue:
                     vc.mode = .building
-                    vc.campusID = campusID
-                    vc.stringClosure = { objectID, string in
-                        self.buildingID = objectID
+                    vc.campusID = campus?.objectId
+                    vc.stringClosure = { object, string in
+                        self.building = object
                         self.buildingTextField.text = string
                     }
                 case Mode.room.rawValue:
                     vc.mode = .room
-                    vc.buildingID = buildingID
-                    vc.stringClosure = { objectID, string in
-                        self.roomID = objectID
+                    vc.buildingID = building?.objectId
+                    vc.stringClosure = { object, string in
+                        self.room = object
                         self.roomTextField.text = string
                     }
                 default:
