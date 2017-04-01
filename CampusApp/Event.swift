@@ -64,7 +64,7 @@ class ParseEvent {
         self.googleEventID = pfObject[C.Parse.Event.Keys.googleEventID] as? String
         self.isFavorited = pfObject[C.Parse.Event.Keys.isFavorited] as? Bool
         
-        self.title = pfObject[C.Parse.Event.Keys.googleEventID] as? String
+        self.title = pfObject[C.Parse.Event.Keys.title] as? String
         self.organizerName = pfObject[C.Parse.Event.Keys.organizerName] as? String
         self.startDateTime = pfObject[C.Parse.Event.Keys.startDateTime] as? Date
         self.endDateTime = pfObject[C.Parse.Event.Keys.endDateTime] as? Date

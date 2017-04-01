@@ -56,6 +56,7 @@ struct C {
                 static let googleEventID = "google_event_id"
                 static let isFavorited = "is_favorited"
                 static let title = "title"
+                static let organizer = "organizer"
                 static let organizerName = "organizer_name"
                 static let startDateTime = "start_date_time"
                 static let endDateTime = "end_date_time"

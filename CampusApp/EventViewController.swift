@@ -104,10 +104,22 @@ class EventViewController: UIViewController, UITableViewDataSource, UITableViewD
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let identifier = segue.identifier, identifier == "EventDetailViewController" {
-            if let event = sender as? GoogleCalendarEvent {
-                if let destinationVC = segue.destination as? EventDetailViewController {
-                    destinationVC.event = event
+        if let identifier = segue.identifier {
+            if identifier == "EventDetailViewController" {
+                if let event = sender as? ParseEvent {
+                    if let destinationVC = segue.destination as? EventDetailViewController {
+                        destinationVC.event = event
+                    }
+                }
+            } else if identifier == "NewEventViewController" {
+                if let destinationVC = segue.destination as? NewEventViewController {
+                    destinationVC.completion = { parseEvent in
+                        self.events.append(parseEvent)
+                        self.events.sort(by: { (event1, event2) -> Bool in
+                            return event1.startDateTime!.timeIntervalSinceNow < event2.startDateTime!.timeIntervalSinceNow
+                        })
+                        self.tableView.reloadData()
+                    }
                 }
             }
         }

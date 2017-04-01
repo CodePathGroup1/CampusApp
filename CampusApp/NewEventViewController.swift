@@ -20,9 +20,40 @@ class NewEventViewController: UIViewController, UITextFieldDelegate, UIGestureRe
     @IBOutlet weak var roomTextField: RoundTextField!
     @IBOutlet weak var descriptionTextView: UITextView!
     
-    private var campusID: String?
-    private var buildingID: String?
-    private var roomID: String?
+    private var startDateTime: Date?
+    private var endDateTime: Date?
+    private var campusID: String? {
+        didSet {
+            if campusID != oldValue {
+                buildingID = nil
+                roomID = nil
+            }
+            
+            if campusID == nil {
+                campusTextField.text = ""
+            }
+        }
+    }
+    private var buildingID: String? {
+        didSet {
+            if buildingID != oldValue {
+                roomID = nil
+            }
+            
+            if buildingID == nil {
+                buildingTextField.text = ""
+            }
+        }
+    }
+    private var roomID: String? {
+        didSet {
+            if roomID == nil {
+                roomTextField.text = ""
+            }
+        }
+    }
+    
+    var completion: ((ParseEvent) -> ())?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,7 +75,56 @@ class NewEventViewController: UIViewController, UITextFieldDelegate, UIGestureRe
     }
     
     @IBAction func saveButtonTapped(_ sender: Any) {
+        guard
+            let title = titleTextField.text, !title.isEmpty,
+            let startDateTime = startDateTime,
+            let endDateTime = endDateTime
+        else {
+            HUD.flash(.label("Missing content in required field(s)"))
+            return
+        }
         
+        let eventPFObject = PFObject(className: C.Parse.Event.className)
+        
+        eventPFObject[C.Parse.Event.Keys.title] = title
+        
+        if let currentUser = PFUser.current() {
+            eventPFObject[C.Parse.Event.Keys.organizer] = currentUser
+            
+            if let fullName = currentUser[C.Parse.User.Keys.fullName] as? String {
+                eventPFObject[C.Parse.Event.Keys.organizerName] = fullName
+            }
+        }
+        
+        eventPFObject[C.Parse.Event.Keys.startDateTime] = startDateTime
+        eventPFObject[C.Parse.Event.Keys.endDateTime] = endDateTime
+        
+        if let campusID = campusID {
+            eventPFObject[C.Parse.Event.Keys.campusID] = campusID
+        }
+        
+        if let buildingID = buildingID {
+            eventPFObject[C.Parse.Event.Keys.buildingID] = buildingID
+        }
+        
+        if let roomID = roomID {
+            eventPFObject[C.Parse.Event.Keys.roomID] = roomID
+        }
+        
+        if let eventDescription = descriptionTextView.text, !eventDescription.isEmpty {
+            eventPFObject[C.Parse.Event.Keys.description] = eventDescription
+        }
+        
+        eventPFObject.saveInBackground { succeeded, error in
+            if succeeded {
+                _ = self.navigationController?.popViewController(animated: true)
+                
+                let parseEvent = ParseEvent(pfObject: eventPFObject)
+                self.completion?(parseEvent)
+            } else {
+                HUD.flash(.label(error?.localizedDescription ?? "Create event failed"))
+            }
+        }
     }
     
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
@@ -61,11 +141,13 @@ class NewEventViewController: UIViewController, UITextFieldDelegate, UIGestureRe
                 case Mode.startDateTime.rawValue:
                     vc.mode = .startDateTime
                     vc.dateClosure = { date in
+                        self.startDateTime = date
                         self.startDateTimeTextField.text = date.shortDateTimeFormat
                     }
                 case Mode.endDateTime.rawValue:
                     vc.mode = .endDateTime
                     vc.dateClosure = { date in
+                        self.endDateTime = date
                         self.endDateTimeTextField.text = date.shortDateTimeFormat
                     }
                 case Mode.campus.rawValue:
@@ -73,12 +155,6 @@ class NewEventViewController: UIViewController, UITextFieldDelegate, UIGestureRe
                     vc.stringClosure = { objectID, string in
                         self.campusID = objectID
                         self.campusTextField.text = string
-                        
-                        self.buildingID = nil
-                        self.buildingTextField.text = ""
-                        
-                        self.roomID = nil
-                        self.roomTextField.text = ""
                     }
                 case Mode.building.rawValue:
                     vc.mode = .building
@@ -86,9 +162,6 @@ class NewEventViewController: UIViewController, UITextFieldDelegate, UIGestureRe
                     vc.stringClosure = { objectID, string in
                         self.buildingID = objectID
                         self.buildingTextField.text = string
-                        
-                        self.roomID = nil
-                        self.roomTextField.text = ""
                     }
                 case Mode.room.rawValue:
                     vc.mode = .room
