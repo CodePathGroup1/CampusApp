@@ -89,18 +89,17 @@ class EventViewController: UIViewController, UITableViewDataSource, UITableViewD
     
     private func loadEvents() {
         loadGoogleEvents()
-//        loadParseEvents()
-//        bindParseEventsWithGoogleEvents()
+        loadParseEvents()
     }
     
     enum ProcessType {
-        case loadGoogleEvents, loadParseEvents, bindParseEventsWithGoogleEvents
+        case loadGoogleEvents, loadParseEvents, associateGoogleEvents
     }
     
     var backgroundProcesses: [ProcessType: Bool] = [
         .loadGoogleEvents: false,
         .loadParseEvents: false,
-        .bindParseEventsWithGoogleEvents: false
+        .associateGoogleEvents: false
     ] {
         didSet {
             if !backgroundProcesses.values.contains(false) {
@@ -147,12 +146,42 @@ class EventViewController: UIViewController, UITableViewDataSource, UITableViewD
         query.whereKey(C.Parse.Event.Keys.startDateTime, lessThanOrEqualTo: Calendar.current.date(byAdding: .day, value: 14, to: Date())!)
         query.findObjectsInBackground { pfObjects, error in
             if let pfObjects = pfObjects {
-                let events = pfObjects.map { pfObject in
+                let parseEvents = pfObjects.map { pfObject in
                     return ParseEvent(pfObject: pfObject)
                 }
+                self.backgroundProcesses[.loadParseEvents] = true
                 
+                self.associateGoogleEvents(with: parseEvents)
+            }
+        }
+    }
+    
+    private func associateGoogleEvents(with parseEvents: [ParseEvent]) {
+        var nonAssociatedParseEvents: [ParseEvent] = []
+        
+        for parseEvent in parseEvents {
+            if let googleEventID = parseEvent.googleEventID {
+                let foundGoogleEvent: ParseEvent? = {
+                    for googleEvent in self.events {
+                        if googleEvent.googleEventID == googleEventID {
+                            return googleEvent
+                        }
+                    }
+                    return nil
+                }()
+                
+                if let foundGoogleEvent = foundGoogleEvent {
+                    parseEvent.pfObject = foundGoogleEvent.pfObject
+                }
+                
+            } else {
+                nonAssociatedParseEvents.append(parseEvent)
                 
             }
         }
+        
+        self.events.append(contentsOf: nonAssociatedParseEvents)
+        
+        self.backgroundProcesses[.associateGoogleEvents] = true
     }
 }

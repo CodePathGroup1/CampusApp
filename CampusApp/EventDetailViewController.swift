@@ -21,7 +21,7 @@ class EventDetailViewController: UIViewController, MKMapViewDelegate {
     
     @IBOutlet weak var mapView: MKMapView!
     
-    var event: GoogleCalendarEvent!
+    var event: ParseEvent!
     
     override func viewDidLoad() {
         super.viewDidLoad()

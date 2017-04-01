@@ -228,9 +228,9 @@
 		65F5BBE91E81991600368D36 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				65F5BBE11E810C4D00368D36 /* UIViewControllerExtension.swift */,
 				653040FF1E81C88D009EF9A5 /* DateExtension.swift */,
 				653041011E81C8AF009EF9A5 /* StringExtension.swift */,
+				65F5BBE11E810C4D00368D36 /* UIViewControllerExtension.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";

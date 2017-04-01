@@ -9,7 +9,7 @@
 import Parse
 
 class ParseEvent {
-    let pfObject: PFObject?
+    var pfObject: PFObject?
     
     let googleEventID: String?
     let isFavorited: Bool?
