@@ -16,9 +16,11 @@ import UIKit
 class EventDetailViewController: UIViewController, MKMapViewDelegate {
 
     @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var startingDateTimeLabel: UILabel!
+    @IBOutlet weak var favoriteButton: UIButton!
     @IBOutlet weak var creatorAvatorPFImageView: PFImageView!
     @IBOutlet weak var creatorNameButton: UIButton!
+    @IBOutlet weak var startingDateTimeLabel: UILabel!
+    @IBOutlet weak var endingDateTimeLabel: UILabel!
     @IBOutlet weak var campusTextField: RoundTextField!
     @IBOutlet weak var buildingTextField: RoundTextField!
     @IBOutlet weak var roomTextField: RoundTextField!
@@ -26,13 +28,19 @@ class EventDetailViewController: UIViewController, MKMapViewDelegate {
     
     @IBOutlet weak var mapView: MKMapView!
     
+    private var changed = false
+    var completionHandler: ((ParseEvent) -> Void)!
     var event: ParseEvent!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         titleLabel.text = event.title
-        startingDateTimeLabel.text = event.startDateTime?.shortDateTimeFormat
+        
+        if let isFavorited = event.isFavorited {
+            let image = UIImage(named: (isFavorited ? "favorited" : "not-favorited"))
+            favoriteButton.setImage(image, for: .normal)
+        }
         
         if let organizer = event.organizer {
             creatorNameButton.setTitle(organizer[C.Parse.User.Keys.fullName] as? String, for: .normal)
@@ -40,6 +48,9 @@ class EventDetailViewController: UIViewController, MKMapViewDelegate {
             creatorAvatorPFImageView.isHidden = true
             creatorNameButton.setTitle(organizerName, for: .normal)
         }
+        
+        startingDateTimeLabel.text = event.startDateTime?.shortDateTimeFormat
+        endingDateTimeLabel.text = event.endDateTime?.shortDateTimeFormat
         
         if let campus = event.campus {
             campusTextField.text = campus[C.Parse.Campus.Keys.name] as? String
@@ -73,29 +84,24 @@ class EventDetailViewController: UIViewController, MKMapViewDelegate {
         */
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        if changed {
+            completionHandler(self.event)
+        }
+    }
+    
     @IBAction func favoriteButtonTapped(_ sender: Any) {
-        
-        let pfObject = event.getRemoteParseObject()
-        
-        pfObject.saveInBackground { succeeded, error in
-            if succeeded {
-                if let isFavorited = self.event.isFavorited {
-                    pfObject[C.Parse.Event.Keys.isFavorited] = !isFavorited
-                } else {
-                    pfObject[C.Parse.Event.Keys.isFavorited] = true
+        event.favorite { parseEvent in
+            if let parseEvent = parseEvent {
+                if let isFavorited = parseEvent.isFavorited {
+                    let image = UIImage(named: (isFavorited ? "favorited" : "not-favorited"))
+                    self.favoriteButton.setImage(image, for: .normal)
                 }
                 
-                HUD.flash(.progress)
-                pfObject.saveInBackground { succeeded, error in
-                    if succeeded {
-                        self.event = ParseEvent(pfObject: pfObject)
-                        HUD.hide(animated: true)
-                    } else {
-                        HUD.flash(.label(error?.localizedDescription ?? "Unknown error"))
-                    }
-                }
-            } else {
-                HUD.flash(.label(error?.localizedDescription ?? "Unknown error"))
+                self.changed = true
+                self.event = parseEvent
+                HUD.hide(animated: true)
             }
         }
     }

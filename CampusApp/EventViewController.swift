@@ -36,6 +36,12 @@ class EventViewController: UIViewController, UITableViewDataSource, UITableViewD
 //        createSampleData()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        
+    }
+    
     // TODO: Remove this
     private func createSampleData() {
         var pfObject: PFObject
@@ -89,6 +95,14 @@ class EventViewController: UIViewController, UITableViewDataSource, UITableViewD
             configure(label: cell.startDateTimeLabel, content: event.startDateTime?.shortDateTimeFormat)
             configure(label: cell.detailLabel, content: event.description)
             
+            if let isFavorited = event.isFavorited {
+                let image = UIImage(named: (isFavorited ? "favorited" : "not-favorited"))
+                cell.favoriteButton.setImage(image, for: .normal)
+                
+                cell.favoriteButton.tag = indexPath.row
+                cell.favoriteButton.addTarget(self, action: #selector(favoriteButtonTapped(_:)), for: .touchUpInside)
+            }
+            
             return cell
         }
         
@@ -96,19 +110,39 @@ class EventViewController: UIViewController, UITableViewDataSource, UITableViewD
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        performSegue(withIdentifier: "EventDetailViewController", sender: events[indexPath.row])
+        performSegue(withIdentifier: "EventDetailViewController", sender: indexPath)
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return events.count
     }
     
+    func favoriteButtonTapped(_ sender: UIButton) {
+        let index = sender.tag
+        events[index].favorite { parseEvent in
+            if let parseEvent = parseEvent {
+                if let isFavorited = parseEvent.isFavorited {
+                    if let cell = self.tableView.cellForRow(at: IndexPath(row: index, section: 0)) as? EventCell {
+                        let image = UIImage(named: (isFavorited ? "favorited" : "not-favorited"))
+                        cell.favoriteButton.setImage(image, for: .normal)
+                        
+                        self.events[index] = parseEvent
+                    }
+                }
+            }
+        }
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let identifier = segue.identifier {
             if identifier == "EventDetailViewController" {
-                if let event = sender as? ParseEvent {
-                    if let destinationVC = segue.destination as? EventDetailViewController {
-                        destinationVC.event = event
+                if let destinationVC = segue.destination as? EventDetailViewController {
+                    if let indexPath = sender as? IndexPath {
+                        destinationVC.completionHandler = { parseEvent in
+                            self.events[indexPath.row] = parseEvent
+                            self.tableView.reloadRows(at: [indexPath], with: .automatic)
+                        }
+                        destinationVC.event = events[indexPath.row]
                     }
                 }
             } else if identifier == "NewEventViewController" {

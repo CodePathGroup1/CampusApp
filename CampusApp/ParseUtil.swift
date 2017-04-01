@@ -36,8 +36,4 @@ final class ParseUtil {
         }
         return nil
     }
-    
-    class func loadCampusGeoInformation() {
-        
-    }
 }

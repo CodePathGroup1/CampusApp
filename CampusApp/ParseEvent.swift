@@ -7,6 +7,7 @@
 //
 
 import Parse
+import PKHUD
 
 class ParseEvent {
     var pfObject: PFObject?
@@ -82,7 +83,7 @@ class ParseEvent {
         self.description = pfObject[C.Parse.Event.Keys.description] as? String
     }
     
-    func getRemoteParseObject() -> PFObject {
+    private func getRemoteParseObject() -> PFObject {
         if let pfObject = self.pfObject {
             return pfObject
         }
@@ -113,5 +114,30 @@ class ParseEvent {
         
         self.pfObject = eventPFObject
         return eventPFObject
+    }
+    
+    func favorite(completion: ((ParseEvent?) -> Void)?) {
+        let pfObject = self.getRemoteParseObject()
+        
+        pfObject.saveInBackground { succeeded, error in
+            if succeeded {
+                if let isFavorited = self.isFavorited {
+                    pfObject[C.Parse.Event.Keys.isFavorited] = !isFavorited
+                } else {
+                    pfObject[C.Parse.Event.Keys.isFavorited] = true
+                }
+                
+                HUD.flash(.progress)
+                pfObject.saveInBackground { succeeded, error in
+                    if succeeded {
+                        completion?(ParseEvent(pfObject: pfObject))
+                    } else {
+                        HUD.flash(.label(error?.localizedDescription ?? "Unknown error"))
+                    }
+                }
+            } else {
+                HUD.flash(.label(error?.localizedDescription ?? "Unknown error"))
+            }
+        }
     }
 }
