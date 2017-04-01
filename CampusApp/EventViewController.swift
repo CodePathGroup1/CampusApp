@@ -31,6 +31,32 @@ class EventViewController: UIViewController, UITableViewDataSource, UITableViewD
         tableView.register(nib, forCellReuseIdentifier: "EventCell")
         
         loadEvents()
+        
+        // TODO: Remove this
+//        createSampleData()
+    }
+    
+    // TODO: Remove this
+    private func createSampleData() {
+        var pfObject: PFObject
+            
+        pfObject = PFObject(className: "Campus")
+        pfObject["name"] = "Chinatown"
+        pfObject.saveInBackground()
+        
+        pfObject = PFObject(className: "Campus")
+        pfObject["name"] = "Ocean"
+        pfObject.saveInBackground()
+        
+        pfObject = PFObject(className: "Building")
+        pfObject["campus_id"] = "rhex3QYTkA"     // Chinatown
+        pfObject["name"] = "Ni Hao"
+        pfObject.saveInBackground()
+        
+        pfObject = PFObject(className: "Building")
+        pfObject["campus_id"] = "qOWe1AWNnZ"     // Ocean
+        pfObject["name"] = "Cloud"
+        pfObject.saveInBackground()
     }
     
     @IBAction func logoutButtonTapped(_ sender: AnyObject) {
@@ -44,10 +70,6 @@ class EventViewController: UIViewController, UITableViewDataSource, UITableViewD
                 }
             }
         }
-    }
-    
-    @IBAction func newEventTapped(_ sender: Any) {
-        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

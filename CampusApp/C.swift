@@ -19,6 +19,23 @@ struct C {
     }
     
     struct Parse {
+        struct Building {
+            static let className = "Building"
+            
+            struct Keys {
+                static let campusID = "campus_id"
+                static let name = "name"
+            }
+        }
+        
+        struct Campus {
+            static let className = "Campus"
+            
+            struct Keys {
+                static let name = "name"
+            }
+        }
+        
         struct Conversation {
             static let className = "Conversation"
             
@@ -60,6 +77,15 @@ struct C {
                 static let text = "text"
                 static let user = "user"
                 static let video = "video"
+            }
+        }
+        
+        struct Room {
+            static let className = "Room"
+            
+            struct Keys {
+                static let buildingID = "building_id"
+                static let name = "name"
             }
         }
         

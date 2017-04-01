@@ -175,12 +175,12 @@
 				65E8353D1E80CA610006FC0D /* LoginViewController.swift */,
 				65E835411E80DDD00006FC0D /* RegisterViewController.swift */,
 				BE4249FF1E655D7200A7BA37 /* EventViewController.swift */,
+				6526E88E1E8F5D26008F468D /* NewEventViewController.swift */,
+				6526E8901E8F63D3008F468D /* EventDetailPickerViewController.swift */,
 				1DF7D75B1E80CC5D003ECFB6 /* EventDetailViewController.swift */,
 				652F53101E838ACE0073CA9C /* ChatListViewController.swift */,
 				652F53121E838B0E0073CA9C /* ChatConversationViewController.swift */,
 				6555F1C71E86D9EE004284DB /* ChatUserSearchViewController.swift */,
-				6526E88E1E8F5D26008F468D /* NewEventViewController.swift */,
-				6526E8901E8F63D3008F468D /* EventDetailPickerViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
