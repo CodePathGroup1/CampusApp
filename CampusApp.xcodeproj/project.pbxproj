@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1DCF9BC51E91B7E8008BE66E /* Sale.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1DCF9BC41E91B7E8008BE66E /* Sale.storyboard */; };
 		1DF7D75A1E80CA16003ECFB6 /* EventCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DF7D7591E80CA16003ECFB6 /* EventCell.swift */; };
 		1DF7D75C1E80CC5D003ECFB6 /* EventDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DF7D75B1E80CC5D003ECFB6 /* EventDetailViewController.swift */; };
 		34245A0B18139A5EC26A1945 /* Pods_CampusApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B6B289A9EC90E41B448C975D /* Pods_CampusApp.framework */; };
@@ -52,6 +53,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1DCF9BC41E91B7E8008BE66E /* Sale.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Sale.storyboard; sourceTree = "<group>"; };
 		1DF7D7591E80CA16003ECFB6 /* EventCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventCell.swift; sourceTree = "<group>"; };
 		1DF7D75B1E80CC5D003ECFB6 /* EventDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDetailViewController.swift; sourceTree = "<group>"; };
 		2BE7391FFFE1ECA4FAC20D5E /* Pods-CampusApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CampusApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-CampusApp/Pods-CampusApp.release.xcconfig"; sourceTree = "<group>"; };
@@ -227,6 +229,7 @@
 				BE424A011E655D7200A7BA37 /* Event.storyboard */,
 				65F5BBDC1E80FE9000368D36 /* Login.storyboard */,
 				652F53141E838B220073CA9C /* Chat.storyboard */,
+				1DCF9BC41E91B7E8008BE66E /* Sale.storyboard */,
 			);
 			name = Storyboards;
 			sourceTree = "<group>";
@@ -360,6 +363,7 @@
 				BE424A081E655D7200A7BA37 /* LaunchScreen.storyboard in Resources */,
 				65F5BBDE1E80FE9000368D36 /* Login.storyboard in Resources */,
 				BE424A051E655D7200A7BA37 /* Assets.xcassets in Resources */,
+				1DCF9BC51E91B7E8008BE66E /* Sale.storyboard in Resources */,
 				652F53191E838BC40073CA9C /* ChatCell.xib in Resources */,
 				65F5BBEB1E82082700368D36 /* EventCell.xib in Resources */,
 				BE424A031E655D7200A7BA37 /* Event.storyboard in Resources */,
