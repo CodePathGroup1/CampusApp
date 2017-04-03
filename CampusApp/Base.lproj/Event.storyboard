@@ -234,17 +234,17 @@
                         <outlet property="roomTextField" destination="DFa-ya-6ED" id="PHV-Fs-3lg"/>
                         <outlet property="startDateTimeTextField" destination="kaG-LZ-RHc" id="8EE-Aq-rYW"/>
                         <outlet property="titleTextField" destination="caY-D8-Lcw" id="eVJ-wx-3ck"/>
-                        <segue destination="tQu-Kb-XTn" kind="presentation" identifier="EventDetailPickerViewController" id="5nv-2V-tPG"/>
+                        <segue destination="tQu-Kb-XTn" kind="presentation" identifier="NewEventDetailPickerViewController" id="5nv-2V-tPG"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4GI-0p-7dB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1702" y="-597"/>
         </scene>
-        <!--Event Detail Picker View Controller-->
+        <!--New Event Detail Picker View Controller-->
         <scene sceneID="XwK-GN-Rfb">
             <objects>
-                <viewController id="tQu-Kb-XTn" customClass="EventDetailPickerViewController" customModule="CampusApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="tQu-Kb-XTn" customClass="NewEventDetailPickerViewController" customModule="CampusApp" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="6V2-ak-hhI"/>
                         <viewControllerLayoutGuide type="bottom" id="mie-Yh-a68"/>

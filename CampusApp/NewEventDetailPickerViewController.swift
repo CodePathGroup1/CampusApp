@@ -10,26 +10,24 @@ import Parse
 import PKHUD
 import UIKit
 
-class EventDetailPickerViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
+class NewEventDetailPickerViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
     
-    enum Mode: Int {
-        case startDateTime = 0
-        case endDateTime = 1
-        case campus = 2
-        case building = 3
-        case room = 4
+    enum Mode {
+        case startDateTime(Date?)
+        case endDateTime(Date?)
+        case campus(String?)
+        case building(String)
+        case room(String)
+        case invalid
     }
     
     @IBOutlet weak var inputDatePicker: UIDatePicker!
     @IBOutlet weak var inputPickerView: UIPickerView!
     
-    var mode: Mode!
-    
-    var campusID: String?
-    var buildingID: String?
+    var mode: Mode = .invalid
     
     var dateClosure: ((Date) -> Void)!
-    var stringClosure: ((PFObject, String) -> Void)!
+    var stringClosure: ((PFObject?, String?) -> Void)!
     
     private var className: String?
     
@@ -39,35 +37,44 @@ class EventDetailPickerViewController: UIViewController, UIPickerViewDataSource,
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         inputPickerView.dataSource = self
         inputPickerView.delegate = self
         
-        if mode == .startDateTime {
+        switch mode {
+        case .startDateTime(let endDate):
+            inputDatePicker.minimumDate = Date()
+            inputDatePicker.maximumDate = endDate
             inputPickerView.isHidden = true
-        } else if mode == .endDateTime {
+        case .endDateTime(let startDate):
+            inputDatePicker.minimumDate = (startDate ?? Date())
             inputPickerView.isHidden = true
-        } else if mode == .campus {
+        case .campus(_):
             className = C.Parse.Campus.className
             inputDatePicker.isHidden = true
-        } else if mode == .building {
+        case .building(_):
             className = C.Parse.Building.className
             inputDatePicker.isHidden = true
-        } else if mode == .room {
+        case .room(_):
             className = C.Parse.Room.className
             inputDatePicker.isHidden = true
+        case .invalid:
+            break
         }
         
         if !inputPickerView.isHidden {
             if let className = className {
                 let query = PFQuery(className: className)
                 
-                if mode == .campus {
-                    // Do nothing, for now
-                } else if mode == .building, let campusID = campusID {
+                switch mode {
+                case .campus(_):
+                    break   // Do nothing, for now
+                case .building(let campusID):
                     query.whereKey(C.Parse.Building.Keys.campusID, equalTo: campusID)
-                } else if mode == .room, let buildingID = buildingID {
+                case .room(let buildingID):
                     query.whereKey(C.Parse.Room.Keys.buildingID, equalTo: buildingID)
+                default:
+                    break
                 }
                 
                 query.findObjectsInBackground { pfObjects, error in
@@ -75,12 +82,21 @@ class EventDetailPickerViewController: UIViewController, UIPickerViewDataSource,
                         self.pickerObjects = pfObjects
                         
                         self.pickerData = pfObjects.reduce([]) { result, pfObject in
-                            if self.mode == .campus, let name = pfObject[C.Parse.Campus.Keys.name] as? String {
-                                return result + [name]
-                            } else if self.mode == .building, let name = pfObject[C.Parse.Building.Keys.name] as? String {
-                                return result + [name]
-                            } else if self.mode == .room, let name = pfObject[C.Parse.Room.Keys.name] as? String {
-                                return result + [name]
+                            switch self.mode {
+                            case .campus(_):
+                                if let name = pfObject[C.Parse.Campus.Keys.name] as? String {
+                                    return result + [name]
+                                }
+                            case .building(_):
+                                if let name = pfObject[C.Parse.Building.Keys.name] as? String {
+                                    return result + [name]
+                                }
+                            case .room(_):
+                                if let name = pfObject[C.Parse.Room.Keys.name] as? String {
+                                    return result + [name]
+                                }
+                            default:
+                                break
                             }
                             return result
                         }
@@ -100,9 +116,10 @@ class EventDetailPickerViewController: UIViewController, UIPickerViewDataSource,
     
     @IBAction func saveButtonTapped(_ sender: Any) {
         dismiss(animated: true) { 
-            if self.mode == .startDateTime || self.mode == .endDateTime {
+            switch self.mode {
+            case .startDateTime(_), .endDateTime(_):
                 self.dateClosure(self.inputDatePicker.date)
-            } else {
+            default:
                 self.stringClosure(self.pickerObjects[self.selectedIndex], self.pickerData[self.selectedIndex])
             }
         }

@@ -11,7 +11,7 @@ import Parse
 import PKHUD
 
 class NewEventViewController: UIViewController, UITextFieldDelegate, UIGestureRecognizerDelegate {
-
+    
     @IBOutlet weak var titleTextField: RoundTextField!
     @IBOutlet weak var startDateTimeTextField: RoundTextField!
     @IBOutlet weak var endDateTimeTextField: RoundTextField!
@@ -19,6 +19,14 @@ class NewEventViewController: UIViewController, UITextFieldDelegate, UIGestureRe
     @IBOutlet weak var buildingTextField: RoundTextField!
     @IBOutlet weak var roomTextField: RoundTextField!
     @IBOutlet weak var descriptionTextView: UITextView!
+    
+    enum Tag: Int {
+        case startDateTime = 0
+        case endDateTime = 1
+        case campus = 2
+        case building = 3
+        case room = 4
+    }
     
     private var startDateTime: Date?
     private var endDateTime: Date?
@@ -59,19 +67,19 @@ class NewEventViewController: UIViewController, UITextFieldDelegate, UIGestureRe
         super.viewDidLoad()
 
         startDateTimeTextField.delegate = self
-        startDateTimeTextField.tag = EventDetailPickerViewController.Mode.startDateTime.rawValue
+        startDateTimeTextField.tag = Tag.startDateTime.rawValue
         
         endDateTimeTextField.delegate = self
-        endDateTimeTextField.tag = EventDetailPickerViewController.Mode.endDateTime.rawValue
+        endDateTimeTextField.tag = Tag.endDateTime.rawValue
         
         campusTextField.delegate = self
-        campusTextField.tag = EventDetailPickerViewController.Mode.campus.rawValue
+        campusTextField.tag = Tag.campus.rawValue
         
         buildingTextField.delegate = self
-        buildingTextField.tag = EventDetailPickerViewController.Mode.building.rawValue
+        buildingTextField.tag = Tag.building.rawValue
         
         roomTextField.delegate = self
-        roomTextField.tag = EventDetailPickerViewController.Mode.room.rawValue
+        roomTextField.tag = Tag.room.rawValue
     }
     
     @IBAction func saveButtonTapped(_ sender: Any) {
@@ -128,47 +136,54 @@ class NewEventViewController: UIViewController, UITextFieldDelegate, UIGestureRe
     }
     
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
-        performSegue(withIdentifier: "EventDetailPickerViewController", sender: textField.tag)
+        if textField.tag == Tag.building.rawValue, self.campus?.objectId == nil {
+            HUD.flash(.label("No campus has been specified yet."))
+        } else if textField.tag == Tag.room.rawValue, self.building?.objectId == nil {
+            HUD.flash(.label("No building has been specified yet."))
+        } else {
+            performSegue(withIdentifier: "NewEventDetailPickerViewController", sender: textField.tag)
+        }
+        
         return false
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let tag = sender as? Int {
-            if let vc = segue.destination as? EventDetailPickerViewController {
-                typealias Mode = EventDetailPickerViewController.Mode
-                
+            if let vc = segue.destination as? NewEventDetailPickerViewController {
                 switch tag {
-                case Mode.startDateTime.rawValue:
-                    vc.mode = .startDateTime
+                case Tag.startDateTime.rawValue:
+                    vc.mode = .startDateTime(self.endDateTime)
                     vc.dateClosure = { date in
                         self.startDateTime = date
                         self.startDateTimeTextField.text = date.shortDateTimeFormat
                     }
-                case Mode.endDateTime.rawValue:
-                    vc.mode = .endDateTime
+                case Tag.endDateTime.rawValue:
+                    vc.mode = .endDateTime(self.startDateTime)
                     vc.dateClosure = { date in
                         self.endDateTime = date
                         self.endDateTimeTextField.text = date.shortDateTimeFormat
                     }
-                case Mode.campus.rawValue:
-                    vc.mode = .campus
+                case Tag.campus.rawValue:
+                    vc.mode = .campus(nil)
                     vc.stringClosure = { object, string in
                         self.campus = object
                         self.campusTextField.text = string
                     }
-                case Mode.building.rawValue:
-                    vc.mode = .building
-                    vc.campusID = campus?.objectId
-                    vc.stringClosure = { object, string in
-                        self.building = object
-                        self.buildingTextField.text = string
+                case Tag.building.rawValue:
+                    if let campusID = self.campus?.objectId {
+                        vc.mode = .building(campusID)
+                        vc.stringClosure = { object, string in
+                            self.building = object
+                            self.buildingTextField.text = string
+                        }
                     }
-                case Mode.room.rawValue:
-                    vc.mode = .room
-                    vc.buildingID = building?.objectId
-                    vc.stringClosure = { object, string in
-                        self.room = object
-                        self.roomTextField.text = string
+                case Tag.room.rawValue:
+                    if let buildingID = self.building?.objectId {
+                        vc.mode = .room(buildingID)
+                        vc.stringClosure = { object, string in
+                            self.room = object
+                            self.roomTextField.text = string
+                        }
                     }
                 default:
                     break
