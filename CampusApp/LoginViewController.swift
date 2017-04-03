@@ -14,7 +14,7 @@ import UIKit
 
 class LoginViewController: UIViewController {
     
-    @IBOutlet weak var emailField: RoundTextField!
+    @IBOutlet weak var usernameField: RoundTextField!
     @IBOutlet weak var passwordField: RoundTextField!
     
     @IBOutlet weak var loginButton: RoundButton!
@@ -29,7 +29,7 @@ class LoginViewController: UIViewController {
         facebookLoginView.clipsToBounds = true
         
         // TODO: remove this once development is finished
-        emailField.text = "codepath@codepath.com"
+        usernameField.text = "codepath"
         passwordField.text = "codepath"
     }
     
@@ -47,17 +47,16 @@ class LoginViewController: UIViewController {
      MARK: - Log in
      ====================================================================================================== */
     @IBAction func loginButtonTapped(_ sender: AnyObject) {
-        if let email = emailField.text, let password = passwordField.text {
-            if !email.isEmpty && !password.isEmpty {
+        if let username = usernameField.text, let password = passwordField.text {
+            if !username.isEmpty && !password.isEmpty {
                 HUD.show(.progress)
                 
-                PFUser.logInWithUsername(inBackground: email, password: password) { (user: PFUser?, error: Error?) -> Void in
+                PFUser.logInWithUsername(inBackground: username, password: password) { (user: PFUser?, error: Error?) -> Void in
                     if let _ = user {
                         HUD.hide(animated: true)
                         self.showViewController(storyboardIdentifier: "Event", viewControllerIdentifier: "EventNavigationController")
                     } else {
-                        HUD.flash(.error)
-                        print(error?.localizedDescription ?? "Unknown error")
+                        HUD.flash(.label(error?.localizedDescription ?? "Unknown error"))
                     }
                 }
             }
@@ -72,13 +71,13 @@ class LoginViewController: UIViewController {
             if let user = user {
                 if user.isNew {
                     if let request = FBSDKGraphRequest(graphPath: "me",
-                                                       parameters: ["fields":"email,name"]) {
+                                                       parameters: ["fields":"name"]) {
                         _ = request.start { connection, result, error in
-                            if let result = result as? [String: AnyObject],
-                                let email = result["email"] as? String,
+                            if let username = user.username,
+                                let result = result as? [String: AnyObject],
                                 let name = result["name"] as? String {
                                 
-                                user[C.Parse.User.Keys.email] = email
+                                user[C.Parse.User.Keys.username] = username
                                 user[C.Parse.User.Keys.fullName] = name
                                 
                                 user.saveInBackground { succeeded, error in

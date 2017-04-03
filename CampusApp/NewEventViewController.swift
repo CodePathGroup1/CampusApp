@@ -61,6 +61,7 @@ class NewEventViewController: UIViewController, UITextFieldDelegate, UIGestureRe
         }
     }
     
+    private var isSaving = false
     var completion: ((ParseEvent) -> ())?
     
     override func viewDidLoad() {
@@ -91,6 +92,8 @@ class NewEventViewController: UIViewController, UITextFieldDelegate, UIGestureRe
             HUD.flash(.label("Missing content in required field(s)"))
             return
         }
+        
+        self.isSaving = true
         
         let eventPFObject = PFObject(className: C.Parse.Event.className)
         
@@ -130,6 +133,7 @@ class NewEventViewController: UIViewController, UITextFieldDelegate, UIGestureRe
                 let parseEvent = ParseEvent(pfObject: eventPFObject)
                 self.completion?(parseEvent)
             } else {
+                self.isSaving = false
                 HUD.flash(.label(error?.localizedDescription ?? "Create event failed"))
             }
         }

@@ -43,25 +43,24 @@ class RegisterViewController: UIViewController {
      MARK: - Register new account
      ====================================================================================================== */
     @IBAction func registerButtonTapped(_ sender: AnyObject) {
-        if let email = emailField.text, let password = passwordField.text {
-            if !email.isEmpty && !password.isEmpty {
+        if let username = usernameField.text, let password = passwordField.text {
+            if !username.isEmpty && !password.isEmpty {
                 HUD.show(.progress)
                 
-                guard isValidEmail(email) else {
-                    HUD.flash(.label("Invalid email format"))
-                    return
-                }
-                
                 let newUser = PFUser()
-                if let username = usernameField.text, !username.isEmpty {
-                    newUser.username = username
-                } else {
-                    newUser.username = email
-                }
+                newUser.username = username
                 newUser.password = password
                 
-                newUser[C.Parse.User.Keys.email] = (emailField.text!.isEmpty ? email : emailField.text!)
-                newUser[C.Parse.User.Keys.fullName] = (firstNameField.text!.isEmpty ? email : firstNameField.text!)
+                if let email = emailField.text, !email.isEmpty {
+                    if isValidEmail(email) {
+                        newUser[C.Parse.User.Keys.email] = emailField.text
+                    } else {
+                        HUD.flash(.label("Invalid email format"))
+                        return
+                    }
+                }
+                
+                newUser[C.Parse.User.Keys.fullName] = firstNameField.text
                 
                 newUser.signUpInBackground { (success: Bool, error: Error?) in
                     if success {
@@ -87,10 +86,8 @@ class RegisterViewController: UIViewController {
      MARK: - Private helper methods
      ====================================================================================================== */
     private func isValidEmail(_ email: String) -> Bool {
-        let emailRegEx = "^(?:(?:(?:(?: )*(?:(?:(?:\\t| )*\\r\\n)?(?:\\t| )+))+(?: )*)|(?: )+)?(?:(?:(?:[-A-Za-z0-9!#$%&’*+/=?^_'{|}~]+(?:\\.[-A-Za-z0-9!#$%&’*+/=?^_'{|}~]+)*)|(?:\"(?:(?:(?:(?: )*(?:(?:[!#-Z^-~]|\\[|\\])|(?:\\\\(?:\\t|[ -~]))))+(?: )*)|(?: )+)\"))(?:@)(?:(?:(?:[A-Za-z0-9](?:[-A-Za-z0-9]{0,61}[A-Za-z0-9])?)(?:\\.[A-Za-z0-9](?:[-A-Za-z0-9]{0,61}[A-Za-z0-9])?)*)|(?:\\[(?:(?:(?:(?:(?:[0-9]|(?:[1-9][0-9])|(?:1[0-9][0-9])|(?:2[0-4][0-9])|(?:25[0-5]))\\.){3}(?:[0-9]|(?:[1-9][0-9])|(?:1[0-9][0-9])|(?:2[0-4][0-9])|(?:25[0-5]))))|(?:(?:(?: )*[!-Z^-~])*(?: )*)|(?:[Vv][0-9A-Fa-f]+\\.[-A-Za-z0-9._~!$&'()*+,;=:]+))\\])))(?:(?:(?:(?: )*(?:(?:(?:\\t| )*\\r\\n)?(?:\\t| )+))+(?: )*)|(?: )+)?$"
-        let emailTest = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
-        let result = emailTest.evaluate(with: email)
-        return result
+        let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
+        return NSPredicate(format: "SELF MATCHES %@", emailRegEx).evaluate(with: email)
     }
     /* ==================================================================================================== */
 }
