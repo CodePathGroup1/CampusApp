@@ -99,10 +99,12 @@ class EventViewController: UIViewController, UITableViewDataSource, UITableViewD
             if let isFavorited = event.isFavorited {
                 let image = UIImage(named: (isFavorited ? "favorited" : "not-favorited"))
                 cell.favoriteButton.setImage(image, for: .normal)
-                
-                cell.favoriteButton.tag = indexPath.row
-                cell.favoriteButton.addTarget(self, action: #selector(favoriteButtonTapped(_:)), for: .touchUpInside)
+            } else {
+                let image = UIImage(named: "not-favorited")
+                cell.favoriteButton.setImage(image, for: .normal)
             }
+            cell.favoriteButton.tag = indexPath.row
+            cell.favoriteButton.addTarget(self, action: #selector(favoriteButtonTapped(_:)), for: .touchUpInside)
             
             return cell
         }
