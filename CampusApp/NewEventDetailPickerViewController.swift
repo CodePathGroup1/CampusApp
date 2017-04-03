@@ -120,7 +120,11 @@ class NewEventDetailPickerViewController: UIViewController, UIPickerViewDataSour
             case .startDateTime(_), .endDateTime(_):
                 self.dateClosure(self.inputDatePicker.date)
             default:
-                self.stringClosure(self.pickerObjects[self.selectedIndex], self.pickerData[self.selectedIndex])
+                if self.pickerObjects.isEmpty || self.pickerData.isEmpty {
+                    self.stringClosure(nil, nil)
+                } else {
+                    self.stringClosure(self.pickerObjects[self.selectedIndex], self.pickerData[self.selectedIndex])
+                }
             }
         }
     }
