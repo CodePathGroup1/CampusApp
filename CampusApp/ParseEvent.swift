@@ -114,6 +114,8 @@ class ParseEvent {
     }
     
     func favorite(completion: ((Void) -> Void)?) {
+        HUD.flash(.progress)
+        
         if let currentUser = PFUser.current() {
             let pfObject = self.getRemoteParseObject()
             
