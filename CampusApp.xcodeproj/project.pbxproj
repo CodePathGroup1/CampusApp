@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		1DCF9BC51E91B7E8008BE66E /* Sale.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1DCF9BC41E91B7E8008BE66E /* Sale.storyboard */; };
+		1DCF9BC71E91BB62008BE66E /* SaleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DCF9BC61E91BB62008BE66E /* SaleViewController.swift */; };
+		1DCF9BC91E91BE41008BE66E /* SaleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DCF9BC81E91BE41008BE66E /* SaleCell.swift */; };
+		1DCF9BCB1E91BED6008BE66E /* SaleDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DCF9BCA1E91BED6008BE66E /* SaleDetailViewController.swift */; };
 		1DF7D75A1E80CA16003ECFB6 /* EventCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DF7D7591E80CA16003ECFB6 /* EventCell.swift */; };
 		1DF7D75C1E80CC5D003ECFB6 /* EventDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DF7D75B1E80CC5D003ECFB6 /* EventDetailViewController.swift */; };
 		34245A0B18139A5EC26A1945 /* Pods_CampusApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B6B289A9EC90E41B448C975D /* Pods_CampusApp.framework */; };
@@ -54,6 +57,9 @@
 
 /* Begin PBXFileReference section */
 		1DCF9BC41E91B7E8008BE66E /* Sale.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Sale.storyboard; sourceTree = "<group>"; };
+		1DCF9BC61E91BB62008BE66E /* SaleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SaleViewController.swift; sourceTree = "<group>"; };
+		1DCF9BC81E91BE41008BE66E /* SaleCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SaleCell.swift; sourceTree = "<group>"; };
+		1DCF9BCA1E91BED6008BE66E /* SaleDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SaleDetailViewController.swift; sourceTree = "<group>"; };
 		1DF7D7591E80CA16003ECFB6 /* EventCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventCell.swift; sourceTree = "<group>"; };
 		1DF7D75B1E80CC5D003ECFB6 /* EventDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDetailViewController.swift; sourceTree = "<group>"; };
 		2BE7391FFFE1ECA4FAC20D5E /* Pods-CampusApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CampusApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-CampusApp/Pods-CampusApp.release.xcconfig"; sourceTree = "<group>"; };
@@ -183,6 +189,8 @@
 				652F53101E838ACE0073CA9C /* ChatListViewController.swift */,
 				652F53121E838B0E0073CA9C /* ChatConversationViewController.swift */,
 				6555F1C71E86D9EE004284DB /* ChatUserSearchViewController.swift */,
+				1DCF9BC61E91BB62008BE66E /* SaleViewController.swift */,
+				1DCF9BCA1E91BED6008BE66E /* SaleDetailViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -210,6 +218,7 @@
 				65E8353B1E80C2DC0006FC0D /* RoundButton.swift */,
 				65E8353F1E80CCE80006FC0D /* RoundTextField.swift */,
 				6519E53B1E820D1A0058CB6A /* TopAlignedLabel.swift */,
+				1DCF9BC81E91BE41008BE66E /* SaleCell.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -426,6 +435,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				65F5BBE01E81059500368D36 /* ParseUtil.swift in Sources */,
+				1DCF9BC71E91BB62008BE66E /* SaleViewController.swift in Sources */,
 				65730E231E82FA3B00FF5906 /* Building.swift in Sources */,
 				6526E88F1E8F5D26008F468D /* NewEventViewController.swift in Sources */,
 				653041001E81C88D009EF9A5 /* DateExtension.swift in Sources */,
@@ -444,6 +454,7 @@
 				6519E53C1E820D1A0058CB6A /* TopAlignedLabel.swift in Sources */,
 				65730E251E82FA4900FF5906 /* Room.swift in Sources */,
 				652F531B1E838D860073CA9C /* Conversation.swift in Sources */,
+				1DCF9BCB1E91BED6008BE66E /* SaleDetailViewController.swift in Sources */,
 				6555F1CA1E86E773004284DB /* ChatUserCell.swift in Sources */,
 				BE424A001E655D7200A7BA37 /* EventViewController.swift in Sources */,
 				1DF7D75A1E80CA16003ECFB6 /* EventCell.swift in Sources */,
@@ -452,6 +463,7 @@
 				652F53181E838BC40073CA9C /* ChatCell.swift in Sources */,
 				BE4249FE1E655D7200A7BA37 /* AppDelegate.swift in Sources */,
 				65E8353E1E80CA610006FC0D /* LoginViewController.swift in Sources */,
+				1DCF9BC91E91BE41008BE66E /* SaleCell.swift in Sources */,
 				65E835421E80DDD00006FC0D /* RegisterViewController.swift in Sources */,
 				653040FE1E81C1A8009EF9A5 /* GoogleCalendarEvent.swift in Sources */,
 				6555F1C81E86D9EE004284DB /* ChatUserSearchViewController.swift in Sources */,
