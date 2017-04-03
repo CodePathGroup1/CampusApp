@@ -43,7 +43,17 @@ class EventDetailViewController: UIViewController, MKMapViewDelegate {
         }
         
         if let organizer = event.organizer {
-            creatorNameButton.setTitle(organizer[C.Parse.User.Keys.fullName] as? String, for: .normal)
+            if organizer.objectId != PFUser.current()?.objectId {
+                creatorNameButton.setTitle(organizer[C.Parse.User.Keys.fullName] as? String, for: .normal)
+            } else {
+                if let creatorName = organizer[C.Parse.User.Keys.fullName] as? String {
+                    creatorNameButton.setTitle("\(creatorName) (me)", for: .normal)
+                } else {
+                    creatorNameButton.setTitle("Me", for: .normal)
+                }
+                creatorNameButton.isEnabled = false
+                creatorNameButton.isUserInteractionEnabled = false
+            }
         } else if let organizerName = event.organizerName {
             creatorAvatorPFImageView.isHidden = true
             creatorNameButton.setTitle(organizerName, for: .normal)
