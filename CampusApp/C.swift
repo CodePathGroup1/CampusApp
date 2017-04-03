@@ -54,7 +54,6 @@ struct C {
             
             struct Keys {
                 static let googleEventID = "google_event_id"
-                static let isFavorited = "is_favorited"
                 static let title = "title"
                 static let organizer = "organizer"
                 static let organizerName = "organizer_name"
@@ -96,6 +95,7 @@ struct C {
             struct Keys {
                 static let avatar = "avatar"
                 static let email = "email"
+                static let favoritedPFObjects = "favorited_pf_objects"
                 static let fullName = "full_name"
                 static let username = "username"
             }

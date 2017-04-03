@@ -78,6 +78,9 @@ class LoginViewController: UIViewController {
                                 let name = result["name"] as? String {
                                 
                                 user[C.Parse.User.Keys.username] = username
+                                
+                                user[C.Parse.User.Keys.email] = ""
+                                
                                 user[C.Parse.User.Keys.fullName] = name
                                 
                                 user.saveInBackground { succeeded, error in

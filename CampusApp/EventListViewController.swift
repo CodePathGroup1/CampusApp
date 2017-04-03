@@ -10,12 +10,16 @@ import UIKit
 import Parse
 import PKHUD
 
-class EventViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class EventListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     @IBOutlet weak var tableView: UITableView!
     
     private var events: [ParseEvent] = []
     
+    
+    /* ====================================================================================================
+     MARK: - Lifecycle Methods
+     ====================================================================================================== */
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -30,41 +34,14 @@ class EventViewController: UIViewController, UITableViewDataSource, UITableViewD
         let nib = UINib(nibName: "EventCell", bundle: nil)
         tableView.register(nib, forCellReuseIdentifier: "EventCell")
         
-        loadEvents()
-        
-        // TODO: Remove this
-//        createSampleData()
+        self.loadEvents()
     }
+    /* ==================================================================================================== */
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        
-    }
     
-    // TODO: Remove this
-    private func createSampleData() {
-        var pfObject: PFObject
-            
-        pfObject = PFObject(className: "Campus")
-        pfObject["name"] = "Chinatown"
-        pfObject.saveInBackground()
-        
-        pfObject = PFObject(className: "Campus")
-        pfObject["name"] = "Ocean"
-        pfObject.saveInBackground()
-        
-        pfObject = PFObject(className: "Building")
-        pfObject["campus_id"] = "rhex3QYTkA"     // Chinatown
-        pfObject["name"] = "Ni Hao"
-        pfObject.saveInBackground()
-        
-        pfObject = PFObject(className: "Building")
-        pfObject["campus_id"] = "qOWe1AWNnZ"     // Ocean
-        pfObject["name"] = "Cloud"
-        pfObject.saveInBackground()
-    }
-    
+    /* ====================================================================================================
+     MARK: - Button Handlers
+     ====================================================================================================== */
     @IBAction func logoutButtonTapped(_ sender: AnyObject) {
         HUD.flash(.progress)
         
@@ -78,6 +55,21 @@ class EventViewController: UIViewController, UITableViewDataSource, UITableViewD
         }
     }
     
+    func favoriteButtonTapped(_ sender: UIButton) {
+        let index = sender.tag
+        events[index].favorite { parseEvent in
+            if let cell = self.tableView.cellForRow(at: IndexPath(row: index, section: 0)) as? EventCell {
+                let image = UIImage(named: (self.events[index].isFavorited ? "favorited" : "not-favorited"))
+                cell.favoriteButton.setImage(image, for: .normal)
+            }
+        }
+    }
+    /* ==================================================================================================== */
+    
+    
+    /* ====================================================================================================
+     MARK: - TableView Delegate Methods
+     ====================================================================================================== */
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: "EventCell", for: indexPath) as? EventCell {
             let event = events[indexPath.row]
@@ -96,13 +88,8 @@ class EventViewController: UIViewController, UITableViewDataSource, UITableViewD
             configure(label: cell.endDateTimeLabel, content: event.endDateTime?.shortDateTimeFormat)
             configure(label: cell.detailLabel, content: event.description)
             
-            if let isFavorited = event.isFavorited {
-                let image = UIImage(named: (isFavorited ? "favorited" : "not-favorited"))
-                cell.favoriteButton.setImage(image, for: .normal)
-            } else {
-                let image = UIImage(named: "not-favorited")
-                cell.favoriteButton.setImage(image, for: .normal)
-            }
+            let image = UIImage(named: (event.isFavorited ? "favorited" : "not-favorited"))
+            cell.favoriteButton.setImage(image, for: .normal)
             cell.favoriteButton.tag = indexPath.row
             cell.favoriteButton.addTarget(self, action: #selector(favoriteButtonTapped(_:)), for: .touchUpInside)
             
@@ -111,7 +98,7 @@ class EventViewController: UIViewController, UITableViewDataSource, UITableViewD
         
         return UITableViewCell()
     }
-
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         performSegue(withIdentifier: "EventDetailViewController", sender: indexPath)
     }
@@ -119,23 +106,12 @@ class EventViewController: UIViewController, UITableViewDataSource, UITableViewD
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return events.count
     }
+    /* ==================================================================================================== */
     
-    func favoriteButtonTapped(_ sender: UIButton) {
-        let index = sender.tag
-        events[index].favorite { parseEvent in
-            if let parseEvent = parseEvent {
-                if let isFavorited = parseEvent.isFavorited {
-                    if let cell = self.tableView.cellForRow(at: IndexPath(row: index, section: 0)) as? EventCell {
-                        let image = UIImage(named: (isFavorited ? "favorited" : "not-favorited"))
-                        cell.favoriteButton.setImage(image, for: .normal)
-                        
-                        self.events[index] = parseEvent
-                    }
-                }
-            }
-        }
-    }
     
+    /* ====================================================================================================
+     MARK: - Segue
+     ====================================================================================================== */
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let identifier = segue.identifier {
             if identifier == "EventDetailViewController" {
@@ -161,36 +137,22 @@ class EventViewController: UIViewController, UITableViewDataSource, UITableViewD
             }
         }
     }
+    /* ==================================================================================================== */
     
+    
+    /* ====================================================================================================
+     MARK: - Load Events
+     ====================================================================================================== */
+    // Starter Method
     private func loadEvents() {
+        HUD.flash(.progress)
         loadGoogleEvents()
-        loadParseEvents()
     }
     
-    enum ProcessType {
-        case loadGoogleEvents, loadParseEvents, associateGoogleEvents
-    }
-    
-    var backgroundProcesses: [ProcessType: Bool] = [
-        .loadGoogleEvents: false,
-        .loadParseEvents: false,
-        .associateGoogleEvents: false
-    ] {
-        didSet {
-            if !backgroundProcesses.values.contains(false) {
-                self.events.sort(by: { (event1, event2) -> Bool in
-                    return event1.startDateTime!.timeIntervalSinceNow < event2.startDateTime!.timeIntervalSinceNow
-                })
-                self.tableView.reloadData()
-                HUD.hide(animated: true)
-            }
-        }
-    }
-    
+    // Step 1: Load Google Events from Google Calendar API
     private func loadGoogleEvents() {
         var loadedCalendarCount = 0
         let totalCalendarCount = GoogleCalendarClient.calendarIDs.count
-        HUD.flash(.label("Loading: \(loadedCalendarCount / totalCalendarCount) %"))
         
         for calendarID in GoogleCalendarClient.calendarIDs {
             GoogleCalendarClient.shared.getPublicEvents(calendarID: calendarID,
@@ -207,7 +169,8 @@ class EventViewController: UIViewController, UITableViewDataSource, UITableViewD
                                                             self.events.append(contentsOf: newEvents)
                                                             
                                                             if loadedCalendarCount == totalCalendarCount {
-                                                                self.backgroundProcesses[.loadGoogleEvents] = true
+                                                                // Go to Step 2
+                                                                self.loadParseEvents()
                                                             }},
                                                         failure: { error in
                                                             print(error) }
@@ -215,6 +178,7 @@ class EventViewController: UIViewController, UITableViewDataSource, UITableViewD
         }
     }
     
+    // Step 2: Load Events from Parse
     private func loadParseEvents() {
         let query = PFQuery(className: C.Parse.Event.className)
         query.whereKey(C.Parse.Event.Keys.startDateTime, lessThanOrEqualTo: Calendar.current.date(byAdding: .day, value: 14, to: Date())!)
@@ -228,39 +192,81 @@ class EventViewController: UIViewController, UITableViewDataSource, UITableViewD
                 let parseEvents = pfObjects.map { pfObject in
                     return ParseEvent(pfObject: pfObject)
                 }
-                self.backgroundProcesses[.loadParseEvents] = true
                 
+                // Go to Step 3
                 self.associateGoogleEvents(with: parseEvents)
             }
         }
     }
     
+    // Step 3: Link Google Events to corresponding Parse Event Objects (if any)
     private func associateGoogleEvents(with parseEvents: [ParseEvent]) {
-        var nonAssociatedParseEvents: [ParseEvent] = []
         
         for parseEvent in parseEvents {
             if let googleEventID = parseEvent.googleEventID {
-                let foundGoogleEvent: ParseEvent? = {
-                    for googleEvent in self.events {
-                        if googleEvent.googleEventID == googleEventID {
-                            return googleEvent
+                let loadedGoogleEvent: ParseEvent? = {
+                    for event in self.events {
+                        if event.googleEventID == googleEventID {
+                            return event
                         }
                     }
                     return nil
                 }()
                 
-                if let foundGoogleEvent = foundGoogleEvent {
-                    parseEvent.pfObject = foundGoogleEvent.pfObject
+                if let loadedGoogleEvent = loadedGoogleEvent {
+                    loadedGoogleEvent.pfObject = parseEvent.pfObject
                 }
-                
             } else {
-                nonAssociatedParseEvents.append(parseEvent)
-                
+                self.events.append(parseEvent)
             }
         }
         
-        self.events.append(contentsOf: nonAssociatedParseEvents)
-        
-        self.backgroundProcesses[.associateGoogleEvents] = true
+        // Go to Step 4
+        self.loadFavoriteStatus()
     }
+    
+    // Step 4: Query current user's favorited events and update ParseEvent objects
+    private func loadFavoriteStatus() {
+        if let currentUser = PFUser.current() {
+            let relation = currentUser.relation(forKey: C.Parse.User.Keys.favoritedPFObjects)
+            let query = relation.query()
+            query.findObjectsInBackground { pfObjects, error in
+                if let pfObjects = pfObjects {
+                    let favoritedParseEventIDs: [String] = pfObjects.reduce([]) { result, pfObject in
+                        if let objectId = pfObject.objectId {
+                            return result + [objectId]
+                        }
+                        return result
+                    }
+                    
+                    let favoritedParseEvents = self.events.filter { event in
+                        if let objectId = event.pfObject?.objectId {
+                            return favoritedParseEventIDs.contains(objectId)
+                        }
+                        return false
+                    }
+                    
+                    for favoritedParseEvent in favoritedParseEvents {
+                        favoritedParseEvent.isFavorited = true
+                    }
+                    
+                    // Go to FINAL step
+                    self.reloadEvents()
+                } else {
+                    HUD.flash(.label(error?.localizedDescription ?? "Getting favorite status failed"))
+                }
+            }
+        }
+    }
+    
+    // FINAL Step: Reload Table View
+    private func reloadEvents() {
+        self.events.sort(by: { (event1, event2) -> Bool in
+            return event1.startDateTime!.timeIntervalSinceNow < event2.startDateTime!.timeIntervalSinceNow
+        })
+        self.tableView.reloadData()
+        
+        HUD.hide(animated: true)
+    }
+    /* ==================================================================================================== */
 }

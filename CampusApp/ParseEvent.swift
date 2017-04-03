@@ -13,7 +13,7 @@ class ParseEvent {
     var pfObject: PFObject?
     
     var googleEventID: String?
-    let isFavorited: Bool?
+    var isFavorited = false
     
     let title: String?
     let organizer: PFObject?
@@ -31,7 +31,6 @@ class ParseEvent {
     
     init(pfObject: PFObject?,
          googleEventID: String?,
-         isFavorited: Bool?,
          title: String?,
          organizer: PFObject?,
          organizerName: String?,
@@ -45,7 +44,6 @@ class ParseEvent {
         self.pfObject = pfObject
         
         self.googleEventID = googleEventID
-        self.isFavorited = isFavorited
         
         self.title = title
         self.organizer = organizer
@@ -66,7 +64,6 @@ class ParseEvent {
         self.pfObject = pfObject
         
         self.googleEventID = pfObject[C.Parse.Event.Keys.googleEventID] as? String
-        self.isFavorited = pfObject[C.Parse.Event.Keys.isFavorited] as? Bool
         
         self.title = pfObject[C.Parse.Event.Keys.title] as? String
         self.organizer = pfObject[C.Parse.Event.Keys.organizer] as? PFObject
@@ -116,27 +113,39 @@ class ParseEvent {
         return eventPFObject
     }
     
-    func favorite(completion: ((ParseEvent?) -> Void)?) {
-        let pfObject = self.getRemoteParseObject()
-        
-        pfObject.saveInBackground { succeeded, error in
-            if succeeded {
-                if let isFavorited = self.isFavorited {
-                    pfObject[C.Parse.Event.Keys.isFavorited] = !isFavorited
-                } else {
-                    pfObject[C.Parse.Event.Keys.isFavorited] = true
-                }
-                
-                HUD.flash(.progress)
-                pfObject.saveInBackground { succeeded, error in
-                    if succeeded {
-                        completion?(ParseEvent(pfObject: pfObject))
-                    } else {
-                        HUD.flash(.label(error?.localizedDescription ?? "Unknown error"))
+    func favorite(completion: ((Void) -> Void)?) {
+        if let currentUser = PFUser.current() {
+            let pfObject = self.getRemoteParseObject()
+            
+            pfObject.saveInBackground { succeeded, error in
+                if succeeded {
+                    HUD.flash(.progress)
+                    pfObject.saveInBackground { succeeded, error in
+                        if succeeded {
+                            self.isFavorited = !self.isFavorited
+                            
+                            let relation = currentUser.relation(forKey: C.Parse.User.Keys.favoritedPFObjects)
+                            if self.isFavorited {
+                                relation.add(pfObject)
+                            } else {
+                                relation.remove(pfObject)
+                            }
+                            
+                            currentUser.saveInBackground { succeed, error in
+                                if succeeded {
+                                    completion?()
+                                } else {
+                                    self.isFavorited = !self.isFavorited
+                                    HUD.flash(.label("Failed to save favorited event to user profile"))
+                                }
+                            }
+                        } else {
+                            HUD.flash(.label(error?.localizedDescription ?? "Unknown error"))
+                        }
                     }
+                } else {
+                    HUD.flash(.label(error?.localizedDescription ?? "Unknown error"))
                 }
-            } else {
-                HUD.flash(.label(error?.localizedDescription ?? "Unknown error"))
             }
         }
     }

@@ -37,10 +37,8 @@ class EventDetailViewController: UIViewController, MKMapViewDelegate {
         
         titleLabel.text = event.title
         
-        if let isFavorited = event.isFavorited {
-            let image = UIImage(named: (isFavorited ? "favorited" : "not-favorited"))
-            favoriteButton.setImage(image, for: .normal)
-        }
+        let image = UIImage(named: (event.isFavorited ? "favorited" : "not-favorited"))
+        favoriteButton.setImage(image, for: .normal)
         
         if let organizer = event.organizer {
             if organizer.objectId != PFUser.current()?.objectId {
@@ -102,17 +100,12 @@ class EventDetailViewController: UIViewController, MKMapViewDelegate {
     }
     
     @IBAction func favoriteButtonTapped(_ sender: Any) {
-        event.favorite { parseEvent in
-            if let parseEvent = parseEvent {
-                if let isFavorited = parseEvent.isFavorited {
-                    let image = UIImage(named: (isFavorited ? "favorited" : "not-favorited"))
-                    self.favoriteButton.setImage(image, for: .normal)
-                }
-                
-                self.changed = true
-                self.event = parseEvent
-                HUD.hide(animated: true)
-            }
+        event.favorite {
+            let image = UIImage(named: (self.event.isFavorited ? "favorited" : "not-favorited"))
+            self.favoriteButton.setImage(image, for: .normal)
+            
+            self.changed = true
+            HUD.hide(animated: true)
         }
     }
     

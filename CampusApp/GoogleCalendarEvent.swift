@@ -70,7 +70,6 @@ class GoogleCalendarEvent: ParseEvent {
         
         super.init(pfObject: nil,
                    googleEventID: json["id"] as? String,
-                   isFavorited: nil,
                    title: json["summary"] as? String,
                    organizer: nil,
                    organizerName: (json["organizer"] as? [String: AnyObject])?["displayName"] as? String,
