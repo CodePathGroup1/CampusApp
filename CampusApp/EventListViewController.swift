@@ -70,6 +70,11 @@ class EventListViewController: UIViewController, UITableViewDataSource, UITableV
     /* ====================================================================================================
      MARK: - TableView Delegate Methods
      ====================================================================================================== */
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        let event = events[indexPath.row]
+        return (event.organizer?.objectId == PFUser.current()?.objectId && event.googleEventID == nil)
+    }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: "EventCell", for: indexPath) as? EventCell {
             let event = events[indexPath.row]
@@ -97,6 +102,16 @@ class EventListViewController: UIViewController, UITableViewDataSource, UITableV
         }
         
         return UITableViewCell()
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            let event = events[indexPath.row]
+            event.pfObject?.deleteInBackground { succeed, error in
+                self.events.remove(at: indexPath.row)
+                self.tableView.deleteRows(at: [indexPath], with: .automatic)
+            }
+        }
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
