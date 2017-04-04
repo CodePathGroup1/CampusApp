@@ -44,11 +44,14 @@ class EventDetailViewController: UIViewController, MKMapViewDelegate {
             if organizer.objectId != PFUser.current()?.objectId {
                 creatorNameButton.setTitle(organizer[C.Parse.User.Keys.fullName] as? String, for: .normal)
             } else {
-                if let creatorName = organizer[C.Parse.User.Keys.fullName] as? String {
+                if let creatorName = organizer[C.Parse.User.Keys.fullName] as? String, !creatorName.isEmpty {
                     creatorNameButton.setTitle("\(creatorName) (me)", for: .normal)
+                } else if let username = PFUser.current()?.username, !username.isEmpty {
+                    creatorNameButton.setTitle("\(username) (me)", for: .normal)
                 } else {
                     creatorNameButton.setTitle("Me", for: .normal)
                 }
+                
                 creatorNameButton.isEnabled = false
                 creatorNameButton.isUserInteractionEnabled = false
             }
