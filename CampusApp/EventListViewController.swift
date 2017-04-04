@@ -55,6 +55,10 @@ class EventListViewController: UIViewController, UITableViewDataSource, UITableV
         }
     }
     
+    @IBAction func addEventButtonTapped(_ sender: AnyObject) {
+        performSegue(withIdentifier: "EditEventViewController_NEW", sender: nil)
+    }
+    
     func favoriteButtonTapped(_ sender: UIButton) {
         let index = sender.tag
         events[index].favorite { parseEvent in
@@ -139,9 +143,10 @@ class EventListViewController: UIViewController, UITableViewDataSource, UITableV
                         destinationVC.event = events[indexPath.row]
                     }
                 }
-            } else if identifier == "NewEventViewController" {
-                if let destinationVC = segue.destination as? NewEventViewController {
-                    destinationVC.completion = { parseEvent in
+            } else if identifier == "EditEventViewController_NEW" {
+                if let destinationVC = segue.destination as? EditEventViewController {
+                    destinationVC.mode = .New
+                    destinationVC.completionHandler = { parseEvent in
                         self.events.append(parseEvent)
                         self.events.sort(by: { (event1, event2) -> Bool in
                             return event1.startDateTime!.timeIntervalSinceNow < event2.startDateTime!.timeIntervalSinceNow

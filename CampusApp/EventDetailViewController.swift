@@ -15,6 +15,8 @@ import UIKit
 
 class EventDetailViewController: UIViewController, MKMapViewDelegate {
 
+    @IBOutlet var editButton: UIBarButtonItem!
+    
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var favoriteButton: UIButton!
     @IBOutlet weak var creatorAvatorPFImageView: PFImageView!
@@ -32,8 +34,20 @@ class EventDetailViewController: UIViewController, MKMapViewDelegate {
     var completionHandler: ((ParseEvent) -> Void)!
     var event: ParseEvent!
     
+    
+    /* ====================================================================================================
+     MARK: - Lifecycle Methods
+     ====================================================================================================== */
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if event.organizer?.objectId != PFUser.current()?.objectId {
+            navigationItem.rightBarButtonItem = nil
+        }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         
         titleLabel.text = event.title
         
@@ -83,16 +97,16 @@ class EventDetailViewController: UIViewController, MKMapViewDelegate {
         mapView.clipsToBounds = true
         
         /*
-        if let latitude = event.latitude, let longitude = event.longitude {
-            let annotation: MKAnnotation = {
-                let annotation = MKPointAnnotation()
-                annotation.coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
-                return annotation
-            }()
-            
-            mapView.showAnnotations([annotation], animated: false)
-        }
-        */
+         if let latitude = event.latitude, let longitude = event.longitude {
+         let annotation: MKAnnotation = {
+         let annotation = MKPointAnnotation()
+         annotation.coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+         return annotation
+         }()
+         
+         mapView.showAnnotations([annotation], animated: false)
+         }
+         */
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -100,6 +114,15 @@ class EventDetailViewController: UIViewController, MKMapViewDelegate {
         if changed {
             completionHandler(self.event)
         }
+    }
+    /* ==================================================================================================== */
+    
+    
+    /* ====================================================================================================
+     MARK: - Buttons
+     ====================================================================================================== */
+    @IBAction func editButtonTapped(_ sender: AnyObject) {
+        performSegue(withIdentifier: "EditEventViewController_EDIT", sender: nil)
     }
     
     @IBAction func favoriteButtonTapped(_ sender: Any) {
@@ -126,4 +149,24 @@ class EventDetailViewController: UIViewController, MKMapViewDelegate {
             HUD.flash(.label("Chatting with user is not supported for events imported from Google Calendars."))
         }
     }
+    /* ==================================================================================================== */
+    
+    
+    /* ====================================================================================================
+     MARK: - Segue
+     ====================================================================================================== */
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let identifier = segue.identifier {
+            if identifier == "EditEventViewController_EDIT" {
+                if let destination = segue.destination as? EditEventViewController {
+                    destination.mode = .Edit(event)
+                    destination.completionHandler = { parseEvent in
+                        self.event = parseEvent
+                        self.changed = true
+                    }
+                }
+            }
+        }
+    }
+    /* ==================================================================================================== */
 }

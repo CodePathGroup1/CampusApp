@@ -10,7 +10,7 @@ import Parse
 import PKHUD
 import UIKit
 
-class NewEventDetailPickerViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
+class EditEventDetailPickerViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
     
     enum Mode {
         case startDateTime(Date?)
