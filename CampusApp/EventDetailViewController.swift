@@ -56,7 +56,13 @@ class EventDetailViewController: UIViewController, MKMapViewDelegate {
         
         if let organizer = event.organizer {
             if organizer.objectId != PFUser.current()?.objectId {
-                creatorNameButton.setTitle(organizer[C.Parse.User.Keys.fullName] as? String, for: .normal)
+                if let fullName = organizer[C.Parse.User.Keys.fullName] as? String, !fullName.isEmpty {
+                    creatorNameButton.setTitle(fullName, for: .normal)
+                } else if let organizerPFUser = organizer as? PFUser {
+                    creatorNameButton.setTitle(organizerPFUser.username, for: .normal)
+                } else {
+                    creatorNameButton.setTitle("User \(organizer.objectId ?? "unknown")", for: .normal)
+                }
             } else {
                 if let creatorName = organizer[C.Parse.User.Keys.fullName] as? String, !creatorName.isEmpty {
                     creatorNameButton.setTitle("\(creatorName) (me)", for: .normal)
