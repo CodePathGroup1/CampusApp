@@ -23,7 +23,7 @@ struct C {
             static let className = "Building"
             
             struct Keys {
-                static let campusID = "campus_id"
+                static let campus = "campus"
                 static let name = "name"
             }
         }
@@ -84,7 +84,7 @@ struct C {
             static let className = "Room"
             
             struct Keys {
-                static let buildingID = "building_id"
+                static let building = "building"
                 static let name = "name"
             }
         }

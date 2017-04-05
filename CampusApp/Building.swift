@@ -10,19 +10,18 @@ import Parse
 
 struct Building {
     
-    let id: String?
+    let pfObject: PFObject?
     
-    let campusID: String?
-    
+    let campus: PFObject?
     let name: String?
     let address: String?
     let latitude: Double?
     let longitude: Double?
     
     init(pfObject: PFObject) {
-        id = pfObject.objectId
+        self.pfObject = pfObject
         
-        campusID = pfObject["campus_id"] as? String
+        campus = pfObject["campus"] as? PFObject
         name = pfObject["building_name"] as? String
         address = pfObject["building_address"] as? String
         latitude = pfObject["building_latitude"] as? Double

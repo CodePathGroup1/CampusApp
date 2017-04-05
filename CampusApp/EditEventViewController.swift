@@ -144,9 +144,9 @@ class EditEventViewController: UIViewController, UITextFieldDelegate, UIGestureR
      MARK: - TextField Delegate Methods
      ====================================================================================================== */
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
-        if textField.tag == Tag.building.rawValue, self.campus?.objectId == nil {
+        if textField.tag == Tag.building.rawValue, self.campus == nil {
             HUD.flash(.label("No campus has been specified yet."))
-        } else if textField.tag == Tag.room.rawValue, self.building?.objectId == nil {
+        } else if textField.tag == Tag.room.rawValue, self.building == nil {
             HUD.flash(.label("No building has been specified yet."))
         } else {
             performSegue(withIdentifier: "EditEventDetailPickerViewController", sender: textField.tag)
@@ -183,16 +183,16 @@ class EditEventViewController: UIViewController, UITextFieldDelegate, UIGestureR
                         self.campusTextField.text = string
                     }
                 case Tag.building.rawValue:
-                    if let campusID = self.campus?.objectId {
-                        vc.mode = .building(campusID)
+                    if let campus = self.campus {
+                        vc.mode = .building(campus)
                         vc.stringClosure = { object, string in
                             self.building = object
                             self.buildingTextField.text = string
                         }
                     }
                 case Tag.room.rawValue:
-                    if let buildingID = self.building?.objectId {
-                        vc.mode = .room(buildingID)
+                    if let building = self.building {
+                        vc.mode = .room(building)
                         vc.stringClosure = { object, string in
                             self.room = object
                             self.roomTextField.text = string

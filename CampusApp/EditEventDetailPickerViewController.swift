@@ -15,9 +15,9 @@ class EditEventDetailPickerViewController: UIViewController, UIPickerViewDataSou
     enum Mode {
         case startDateTime(Date?)
         case endDateTime(Date?)
-        case campus(String?)
-        case building(String)
-        case room(String)
+        case campus(PFObject?)
+        case building(PFObject)
+        case room(PFObject)
         case invalid
     }
     
@@ -69,10 +69,10 @@ class EditEventDetailPickerViewController: UIViewController, UIPickerViewDataSou
                 switch mode {
                 case .campus(_):
                     break   // Do nothing, for now
-                case .building(let campusID):
-                    query.whereKey(C.Parse.Building.Keys.campusID, equalTo: campusID)
-                case .room(let buildingID):
-                    query.whereKey(C.Parse.Room.Keys.buildingID, equalTo: buildingID)
+                case .building(let campus):
+                    query.whereKey(C.Parse.Building.Keys.campus, equalTo: campus)
+                case .room(let building):
+                    query.whereKey(C.Parse.Room.Keys.building, equalTo: building)
                 default:
                     break
                 }
