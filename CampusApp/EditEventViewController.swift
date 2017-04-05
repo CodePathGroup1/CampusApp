@@ -151,6 +151,8 @@ class EditEventViewController: UIViewController, UITextFieldDelegate, UIGestureR
             HUD.flash(.label("No building has been specified yet."))
             
         } else {
+            view.endEditing(true)
+            
             let storyboard = UIStoryboard(name: "Event", bundle: nil)
             if let vc = storyboard.instantiateViewController(withIdentifier: "EditEventDetailPickerViewController") as? EditEventDetailPickerViewController {
                 vc.modalPresentationStyle = .popover
