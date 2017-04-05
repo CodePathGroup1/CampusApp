@@ -109,6 +109,8 @@ class ChatConversationViewController: JSQMessagesViewController, UINavigationCon
     }
     
     private func loadMessages(query: PFQuery<Message>) {
+        HUD.flash(.label("Loading messages..."))
+        
         query.findObjectsInBackground { pfMessages, error in
             if let pfMessages = pfMessages {
                 self.add(pfMessages: pfMessages.reversed())
@@ -187,6 +189,8 @@ class ChatConversationViewController: JSQMessagesViewController, UINavigationCon
         if pfMessages.count >= 1 {
             self.scrollToBottom(animated: false)
             self.finishReceivingMessage()
+            
+            HUD.hide(animated: true)
         }
     }
     

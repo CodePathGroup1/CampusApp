@@ -22,7 +22,7 @@ class ChatCell: UITableViewCell {
         super.awakeFromNib()
         
         // avatarPFImageView = 60 x 60
-        self.avatarPFImageView.layer.cornerRadius = 30
+        self.avatarPFImageView.layer.cornerRadius = 17
         self.avatarPFImageView.clipsToBounds = true
     }
 
@@ -33,11 +33,11 @@ class ChatCell: UITableViewCell {
     func bindData(with pfObject: PFObject) {
         if let userObject = pfObject[C.Parse.Conversation.Keys.lastUser] as? PFUser {
             let user = User(pfObject: userObject)
-            // TODO: work on avatar
-    //        if let avatar = user?[C.Parse.User.Keys.avatar] {
-    //            avatarPFImageView.file = avatar
-    //            avatarPFImageView.loadInBackground()
-    //        }
+            
+            if let avatarPFFile = user.avatarPFFile {
+                avatarPFImageView.file = avatarPFFile
+                avatarPFImageView.loadInBackground()
+            }
             
             if let fullName = user.fullName, !fullName.isEmpty {
                 sendersDescriptionLabel.text = fullName

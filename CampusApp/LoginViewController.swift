@@ -80,10 +80,15 @@ class LoginViewController: UIViewController {
                                 let name = result["name"] as? String {
                                 
                                 user[C.Parse.User.Keys.username] = username
-                                
-                                user[C.Parse.User.Keys.email] = ""
-                                
                                 user[C.Parse.User.Keys.fullName] = name
+                                
+                                if let image = UIImage(named: "profile_blank"),
+                                    let data = UIImageJPEGRepresentation(image, 0.6),
+                                    let file = PFFile(name: "picture.jpg", data: data) {
+                                    
+                                    user[C.Parse.User.Keys.avatar] = file
+                                }
+                                user[C.Parse.User.Keys.email] = ""
                                 
                                 user.saveInBackground { succeeded, error in
                                     if succeeded {

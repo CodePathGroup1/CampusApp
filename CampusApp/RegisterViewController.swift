@@ -60,6 +60,13 @@ class RegisterViewController: UIViewController {
                     }
                 }
                 
+                if let image = UIImage(named: "profile_blank"),
+                    let data = UIImageJPEGRepresentation(image, 0.6),
+                    let file = PFFile(name: "picture.jpg", data: data) {
+                    
+                    newUser[C.Parse.User.Keys.avatar] = file
+                }
+                
                 newUser[C.Parse.User.Keys.fullName] = firstNameField.text
                 
                 newUser.signUpInBackground { (success: Bool, error: Error?) in

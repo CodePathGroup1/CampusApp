@@ -25,8 +25,8 @@ class ChatUserCell: UITableViewCell {
         
         let user = User(pfObject: pfUser)
         
-//        avatarPFImageView.file = user.avatarPFFile
-//        avatarPFImageView.loadInBackground()
+        avatarPFImageView.file = user.avatarPFFile
+        avatarPFImageView.loadInBackground()
         
         if let fullName = user.fullName, !fullName.isEmpty {
             userFullNameLabel.text = user.fullName

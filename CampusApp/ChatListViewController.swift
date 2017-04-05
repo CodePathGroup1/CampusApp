@@ -32,6 +32,9 @@ class ChatListViewController: UIViewController, UITableViewDataSource, UITableVi
         let nib = UINib(nibName: "ChatCell", bundle: nil)
         tableView.register(nib, forCellReuseIdentifier: C.Identifier.Cell.chatCell)
         
+        tableView.estimatedRowHeight = 50
+        tableView.rowHeight = UITableViewAutomaticDimension
+        
         loadConversations()
     }
     /* ==================================================================================================== */
