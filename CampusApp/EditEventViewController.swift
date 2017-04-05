@@ -10,7 +10,7 @@ import UIKit
 import Parse
 import PKHUD
 
-class EditEventViewController: UIViewController, UITextFieldDelegate, UIGestureRecognizerDelegate {
+class EditEventViewController: UIViewController, UITextFieldDelegate, UIGestureRecognizerDelegate, UIPopoverPresentationControllerDelegate {
     
     @IBOutlet weak var titleTextField: RoundTextField!
     @IBOutlet weak var startDateTimeTextField: RoundTextField!
@@ -153,6 +153,12 @@ class EditEventViewController: UIViewController, UITextFieldDelegate, UIGestureR
         } else {
             let storyboard = UIStoryboard(name: "Event", bundle: nil)
             if let vc = storyboard.instantiateViewController(withIdentifier: "EditEventDetailPickerViewController") as? EditEventDetailPickerViewController {
+                vc.modalPresentationStyle = .popover
+                vc.popoverPresentationController?.permittedArrowDirections = .up
+                vc.popoverPresentationController?.delegate = self
+                vc.popoverPresentationController?.sourceView = textField
+                vc.popoverPresentationController?.sourceRect = textField.bounds
+                
                 switch textField.tag {
                 case Tag.startDateTime.rawValue:
                     vc.mode = .startDateTime(self.endDateTime)
@@ -200,6 +206,15 @@ class EditEventViewController: UIViewController, UITextFieldDelegate, UIGestureR
         }
         
         return false
+    }
+    /* ==================================================================================================== */
+    
+    
+    /* ====================================================================================================
+     MARK: - UIPopoverPresentationController Delegate Methods
+     ====================================================================================================== */
+    func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
+        return .none
     }
     /* ==================================================================================================== */
     
