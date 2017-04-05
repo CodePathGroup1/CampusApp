@@ -17,6 +17,8 @@ class ChatConversationViewController: JSQMessagesViewController, UINavigationCon
 
     var conversation: PFObject!
     
+    var completion: ((PFObject) -> Void)?
+    
     private var users = [User]()
     private var messages = [JSQMessage]()
     
@@ -238,6 +240,7 @@ class ChatConversationViewController: JSQMessagesViewController, UINavigationCon
                     self.conversation[C.Parse.Conversation.Keys.lastUser] = currentUser
                     self.conversation.saveInBackground { succeeded, error in
                         if succeeded {
+                            self.completion?(self.conversation)
                             self.finishSendingMessage()
                         }
                     }

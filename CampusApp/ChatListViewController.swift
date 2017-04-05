@@ -16,6 +16,7 @@ class ChatListViewController: UIViewController, UITableViewDataSource, UITableVi
     
     private var conversations: [PFObject] = []
     
+    var completion: ((String) -> Void)?
     
     /* ====================================================================================================
      MARK: - Lifecycle Methdos
@@ -30,10 +31,6 @@ class ChatListViewController: UIViewController, UITableViewDataSource, UITableVi
         // Associate EventCell xib to this table view
         let nib = UINib(nibName: "ChatCell", bundle: nil)
         tableView.register(nib, forCellReuseIdentifier: C.Identifier.Cell.chatCell)
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
         
         loadConversations()
     }
@@ -47,8 +44,12 @@ class ChatListViewController: UIViewController, UITableViewDataSource, UITableVi
         if let identifier = segue.identifier {
             if identifier == C.Identifier.Segue.chatConversationViewController.old {
                 if let vc = segue.destination as? ChatConversationViewController {
-                    if let conversation = sender as? PFObject {
-                        vc.conversation = conversation
+                    if let indexPath = sender as? IndexPath {
+                        vc.conversation = conversations[indexPath.row]
+                        vc.completion = { conversation in
+                            self.conversations[indexPath.row] = conversation
+                            self.tableView.reloadRows(at: [indexPath], with: .none)
+                        }
                     }
                 }
             }
@@ -71,8 +72,7 @@ class ChatListViewController: UIViewController, UITableViewDataSource, UITableVi
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let conversation = conversations[indexPath.row]
-        performSegue(withIdentifier: C.Identifier.Segue.chatConversationViewController.old, sender: conversation)
+        performSegue(withIdentifier: C.Identifier.Segue.chatConversationViewController.old, sender: indexPath)
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
