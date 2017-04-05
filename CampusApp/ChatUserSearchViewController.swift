@@ -93,16 +93,29 @@ class ChatUserSearchViewController: UIViewController, UISearchBarDelegate, UITab
         let otherUsers = [filteredUsers[indexPath.row]]
         
         Conversation.startConversation(otherUsers: otherUsers) { conversationID in
-            let storyboard = UIStoryboard(name: "Chat", bundle: nil)
-            if let vc = storyboard.instantiateViewController(withIdentifier: "ChatConversationViewController") as? ChatConversationViewController {
-                vc.conversationID = conversationID
-                self.present(vc, animated: true, completion: nil)
-            }
+            self.performSegue(withIdentifier: C.Identifier.Segue.chatConversationViewController.new, sender: conversationID)
         }
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return filteredUsers.count
+    }
+    /* ==================================================================================================== */
+    
+    
+    /* ====================================================================================================
+     MARK: - Segues
+     ====================================================================================================== */
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let identifier = segue.identifier {
+            if identifier == C.Identifier.Segue.chatConversationViewController.new {
+                if let destination = segue.destination as? ChatConversationViewController {
+                    if let conversationID = sender as? String {
+                        destination.conversationID = conversationID
+                    }
+                }
+            }
+        }
     }
     /* ==================================================================================================== */
     

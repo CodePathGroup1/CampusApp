@@ -43,15 +43,13 @@ class ChatListViewController: UIViewController, UITableViewDataSource, UITableVi
     /* ====================================================================================================
      MARK: - Segue
      ====================================================================================================== */
-    @IBAction func newConversationButtonPressed(_ sender: AnyObject) {
-        showViewController(storyboardIdentifier: "Chat", viewControllerIdentifier: "ChatUserSearchViewController")
-    }
-    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let identifier = segue.identifier, identifier == C.Identifier.Segue.chatConversationViewController {
-            if let vc = segue.destination as? ChatConversationViewController {
-                if let conversationID = sender as? String {
-                    vc.conversationID = conversationID
+        if let identifier = segue.identifier {
+            if identifier == C.Identifier.Segue.chatConversationViewController.old {
+                if let vc = segue.destination as? ChatConversationViewController {
+                    if let conversationID = sender as? String {
+                        vc.conversationID = conversationID
+                    }
                 }
             }
         }
@@ -75,7 +73,7 @@ class ChatListViewController: UIViewController, UITableViewDataSource, UITableVi
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let conversation = conversations[indexPath.row]
         if let conversationID = conversation.objectId {
-            performSegue(withIdentifier: C.Identifier.Segue.chatConversationViewController, sender: conversationID)
+            performSegue(withIdentifier: C.Identifier.Segue.chatConversationViewController.old, sender: conversationID)
         }
     }
     

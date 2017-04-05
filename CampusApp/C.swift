@@ -14,7 +14,11 @@ struct C {
         }
         
         struct Segue {
-            static let chatConversationViewController = "ChatConversationViewController"
+            static let chatConversationViewController = (
+                new: "ChatConversationViewController_NEW",
+                old: "ChatConversationViewController_OLD"
+            )
+            static let chatUserSearchViewController = "ChatUserSearchViewController"
         }
     }
     

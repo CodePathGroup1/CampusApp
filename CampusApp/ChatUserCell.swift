@@ -23,8 +23,14 @@ class ChatUserCell: UITableViewCell {
     
     func bindData(user: User) {
 //        avatarPFImageView.file = user.avatarPFFile
-        avatarPFImageView.loadInBackground()
+//        avatarPFImageView.loadInBackground()
         
-        userFullNameLabel.text = user.fullName
+        if let fullName = user.fullName, !fullName.isEmpty {
+            userFullNameLabel.text = user.fullName
+        } else if let user = user.pfObject as? PFUser, let username = user.username, !username.isEmpty {
+            userFullNameLabel.text = username
+        } else if let objectId = user.pfObject.objectId {
+            userFullNameLabel.text = objectId
+        }
     }
 }
