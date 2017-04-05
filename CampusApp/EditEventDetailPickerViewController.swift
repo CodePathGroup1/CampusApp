@@ -23,6 +23,7 @@ class EditEventDetailPickerViewController: UIViewController, UIPickerViewDataSou
     
     @IBOutlet weak var inputDatePicker: UIDatePicker!
     @IBOutlet weak var inputPickerView: UIPickerView!
+    @IBOutlet weak var customNameField: RoundTextField!
     
     var mode: Mode = .invalid
     
@@ -46,18 +47,23 @@ class EditEventDetailPickerViewController: UIViewController, UIPickerViewDataSou
             inputDatePicker.minimumDate = Date()
             inputDatePicker.maximumDate = endDate
             inputPickerView.isHidden = true
+            customNameField.isHidden = true
         case .endDateTime(let startDate):
             inputDatePicker.minimumDate = (startDate ?? Date())
             inputPickerView.isHidden = true
+            customNameField.isHidden = true
         case .campus(_):
             className = C.Parse.Campus.className
             inputDatePicker.isHidden = true
+            customNameField.placeholder = "New campus"
         case .building(_):
             className = C.Parse.Building.className
             inputDatePicker.isHidden = true
+            customNameField.placeholder = "New building"
         case .room(_):
             className = C.Parse.Room.className
             inputDatePicker.isHidden = true
+            customNameField.placeholder = "New room"
         case .invalid:
             break
         }
@@ -119,9 +125,36 @@ class EditEventDetailPickerViewController: UIViewController, UIPickerViewDataSou
             switch self.mode {
             case .startDateTime(_), .endDateTime(_):
                 self.dateClosure(self.inputDatePicker.date)
+                
             default:
-                if self.pickerObjects.isEmpty || self.pickerData.isEmpty {
+                if let customName = self.customNameField.text, !customName.isEmpty,
+                   let className = self.className, !className.isEmpty {
+                    let pfObject = PFObject(className: className)
+                    
+                    switch self.mode {
+                    case .campus(_):
+                        pfObject[C.Parse.Campus.Keys.name] = customName
+                    case .building(let campus):
+                        pfObject[C.Parse.Building.Keys.name] = customName
+                        pfObject[C.Parse.Building.Keys.campus] = campus
+                    case .room(let building):
+                        pfObject[C.Parse.Room.Keys.name] = customName
+                        pfObject[C.Parse.Room.Keys.building] = building
+                    default:
+                        break
+                    }
+                    
+                    pfObject.saveInBackground { succeeded, error in
+                        if succeeded {
+                            self.stringClosure(pfObject, customName)
+                        } else {
+                            HUD.flash(.label(error?.localizedDescription ?? "Saving custom object failed"))
+                        }
+                    }
+                    
+                } else if self.pickerObjects.isEmpty || self.pickerData.isEmpty {
                     self.stringClosure(nil, nil)
+                    
                 } else {
                     self.stringClosure(self.pickerObjects[self.selectedIndex], self.pickerData[self.selectedIndex])
                 }
