@@ -146,42 +146,35 @@ class EditEventViewController: UIViewController, UITextFieldDelegate, UIGestureR
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         if textField.tag == Tag.building.rawValue, self.campus == nil {
             HUD.flash(.label("No campus has been specified yet."))
+            
         } else if textField.tag == Tag.room.rawValue, self.building == nil {
             HUD.flash(.label("No building has been specified yet."))
+            
         } else {
-            performSegue(withIdentifier: "EditEventDetailPickerViewController", sender: textField.tag)
-        }
-        
-        return false
-    }
-    /* ==================================================================================================== */
-    
-    
-    /* ====================================================================================================
-     MARK: - Segue
-     ====================================================================================================== */
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let tag = sender as? Int {
-            if let vc = segue.destination as? EditEventDetailPickerViewController {
-                switch tag {
+            let storyboard = UIStoryboard(name: "Event", bundle: nil)
+            if let vc = storyboard.instantiateViewController(withIdentifier: "EditEventDetailPickerViewController") as? EditEventDetailPickerViewController {
+                switch textField.tag {
                 case Tag.startDateTime.rawValue:
                     vc.mode = .startDateTime(self.endDateTime)
                     vc.dateClosure = { date in
                         self.startDateTime = date
                         self.startDateTimeTextField.text = date.shortDateTimeFormat
                     }
+                    present(vc, animated: true, completion: nil)
                 case Tag.endDateTime.rawValue:
                     vc.mode = .endDateTime(self.startDateTime)
                     vc.dateClosure = { date in
                         self.endDateTime = date
                         self.endDateTimeTextField.text = date.shortDateTimeFormat
                     }
+                    present(vc, animated: true, completion: nil)
                 case Tag.campus.rawValue:
                     vc.mode = .campus(nil)
                     vc.stringClosure = { object, string in
                         self.campus = object
                         self.campusTextField.text = string
                     }
+                    present(vc, animated: true, completion: nil)
                 case Tag.building.rawValue:
                     if let campus = self.campus {
                         vc.mode = .building(campus)
@@ -189,6 +182,7 @@ class EditEventViewController: UIViewController, UITextFieldDelegate, UIGestureR
                             self.building = object
                             self.buildingTextField.text = string
                         }
+                        present(vc, animated: true, completion: nil)
                     }
                 case Tag.room.rawValue:
                     if let building = self.building {
@@ -197,12 +191,15 @@ class EditEventViewController: UIViewController, UITextFieldDelegate, UIGestureR
                             self.room = object
                             self.roomTextField.text = string
                         }
+                        present(vc, animated: true, completion: nil)
                     }
                 default:
                     break
                 }
             }
         }
+        
+        return false
     }
     /* ==================================================================================================== */
     

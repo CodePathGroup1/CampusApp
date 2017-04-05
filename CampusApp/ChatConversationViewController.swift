@@ -15,7 +15,7 @@ import UIKit
 
 class ChatConversationViewController: JSQMessagesViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
 
-    var conversationID: String!
+    var conversation: PFObject!
     
     private var users = [User]()
     private var messages = [JSQMessage]()
@@ -38,8 +38,10 @@ class ChatConversationViewController: JSQMessagesViewController, UINavigationCon
         if let user = PFUser.current() {
             self.senderId = user.objectId
             
-            if let fullName = user[C.Parse.User.Keys.fullName] as? String {
+            if let fullName = user[C.Parse.User.Keys.fullName] as? String, !fullName.isEmpty {
                 self.senderDisplayName = fullName
+            } else if let username = user.username, !username.isEmpty {
+                self.senderDisplayName = username
             }
         }
         
@@ -93,7 +95,7 @@ class ChatConversationViewController: JSQMessagesViewController, UINavigationCon
      ====================================================================================================== */
     private func getMessageQuery() -> PFQuery<Message> {
         let query: PFQuery<Message> = PFQuery(className: C.Parse.Message.className)
-        query.whereKey(C.Parse.Message.Keys.conversationID, equalTo: conversationID)
+        query.whereKey(C.Parse.Message.Keys.conversation, equalTo: conversation)
         if let lastMessage = messages.last, let lastMessageDate = lastMessage.date {
             query.whereKey(C.Parse.Message.Keys.createdAt, greaterThan: lastMessageDate)
         }
@@ -219,7 +221,7 @@ class ChatConversationViewController: JSQMessagesViewController, UINavigationCon
         
         if let currentUser = PFUser.current() {
             let messageObject = PFObject(className: C.Parse.Message.className)
-            messageObject[C.Parse.Message.Keys.conversationID] = self.conversationID
+            messageObject[C.Parse.Message.Keys.conversation] = conversation
             messageObject[C.Parse.Message.Keys.user] = currentUser
             messageObject[C.Parse.Message.Keys.text] = modifiedText
             if let pictureFile = pictureFile {
@@ -230,13 +232,20 @@ class ChatConversationViewController: JSQMessagesViewController, UINavigationCon
             }
             
             messageObject.saveInBackground { succeeded, error in
-                if let error = error {
-                    HUD.flash(.label(error.localizedDescription))
+                if succeeded, let createdAt = messageObject.createdAt {
+                    self.conversation[C.Parse.Conversation.Keys.lastMessage] = messageObject
+                    self.conversation[C.Parse.Conversation.Keys.lastMessageTimestamp] = createdAt
+                    self.conversation[C.Parse.Conversation.Keys.lastUser] = currentUser
+                    self.conversation.saveInBackground { succeeded, error in
+                        if succeeded {
+                            self.finishSendingMessage()
+                        }
+                    }
+                } else {
+                    HUD.flash(.label(error?.localizedDescription ?? "Failed to send message"))
                 }
             }
         }
-        
-        self.finishSendingMessage()
     }
     /* ==================================================================================================== */
     
@@ -309,21 +318,7 @@ class ChatConversationViewController: JSQMessagesViewController, UINavigationCon
     }
     
     override func collectionView(_ collectionView: JSQMessagesCollectionView!, avatarImageDataForItemAt indexPath: IndexPath!) -> JSQMessageAvatarImageDataSource! {
-//        let user = users[indexPath.item]
-//        
-//        if let userId = user.id {
-//            if let avatar = avatars[userId] {
-//                return avatar
-//            } else {
-//                if let avatarPFFile = user.avatarPFFile {
-//                    avatarPFFile.getDataInBackground { imageData, error in
-//                        if let imageData = imageData, let image = UIImage(data: imageData) {
-//                            self.avatars[userId] = JSQMessagesAvatarImageFactory.avatarImage(with: image, diameter: 30)
-//                        }
-//                    }
-//                }
-//            }
-//        }
+        // TODO: Load avatar
         
         return blankAvatarImage
     }

@@ -30,7 +30,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="84"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="kbA-te-9ae" id="cQO-8E-JEd">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="83"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="83.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -79,151 +79,163 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="IvL-83-qxv" userLabel="Main">
-                                <rect key="frame" x="8" y="72" width="359" height="543"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Dlw-66-Whc">
+                                <rect key="frame" x="0.0" y="64" width="375" height="559"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="PQx-gp-fNa" userLabel="Title">
-                                        <rect key="frame" x="0.0" y="0.0" width="359" height="0.0"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="IvL-83-qxv" userLabel="Main">
+                                        <rect key="frame" x="37" y="56" width="300" height="447"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qzu-mX-gst">
-                                                <rect key="frame" x="0.0" y="0.0" width="64" height="0.0"/>
-                                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="14"/>
-                                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="245" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="caY-D8-Lcw" customClass="RoundTextField" customModule="CampusApp" customModuleProvider="target">
-                                                <rect key="frame" x="76" y="0.0" width="283" height="0.0"/>
-                                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits"/>
-                                            </textField>
+                                            <stackView opaque="NO" contentMode="scaleToFill" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="PQx-gp-fNa" userLabel="Title">
+                                                <rect key="frame" x="0.0" y="0.0" width="300" height="0.0"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qzu-mX-gst">
+                                                        <rect key="frame" x="0.0" y="0.0" width="64" height="0.0"/>
+                                                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="14"/>
+                                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="245" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="caY-D8-Lcw" customClass="RoundTextField" customModule="CampusApp" customModuleProvider="target">
+                                                        <rect key="frame" x="76" y="0.0" width="224" height="0.0"/>
+                                                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="14"/>
+                                                        <textInputTraits key="textInputTraits"/>
+                                                    </textField>
+                                                </subviews>
+                                            </stackView>
+                                            <stackView opaque="NO" contentMode="scaleToFill" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="syj-bc-pok" userLabel="Start Time">
+                                                <rect key="frame" x="0.0" y="12" width="300" height="0.0"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Start Time" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fJN-R3-vXS">
+                                                        <rect key="frame" x="0.0" y="0.0" width="64" height="0.0"/>
+                                                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="14"/>
+                                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="245" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kaG-LZ-RHc" customClass="RoundTextField" customModule="CampusApp" customModuleProvider="target">
+                                                        <rect key="frame" x="76" y="0.0" width="224" height="0.0"/>
+                                                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="14"/>
+                                                        <textInputTraits key="textInputTraits"/>
+                                                    </textField>
+                                                </subviews>
+                                            </stackView>
+                                            <stackView opaque="NO" contentMode="scaleToFill" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="7JT-dO-Dmc" userLabel="End Time">
+                                                <rect key="frame" x="0.0" y="24" width="300" height="0.0"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="End Time" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DKk-8D-6ab">
+                                                        <rect key="frame" x="0.0" y="0.0" width="64" height="0.0"/>
+                                                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="14"/>
+                                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="245" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4Om-IQ-Vsd" customClass="RoundTextField" customModule="CampusApp" customModuleProvider="target">
+                                                        <rect key="frame" x="76" y="0.0" width="224" height="0.0"/>
+                                                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="14"/>
+                                                        <textInputTraits key="textInputTraits"/>
+                                                    </textField>
+                                                </subviews>
+                                            </stackView>
+                                            <stackView opaque="NO" contentMode="scaleToFill" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="owc-1f-T5w" userLabel="Campus">
+                                                <rect key="frame" x="0.0" y="36" width="300" height="0.0"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Campus" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WS3-gj-AuD">
+                                                        <rect key="frame" x="0.0" y="0.0" width="64" height="0.0"/>
+                                                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="14"/>
+                                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="245" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9Z5-P5-Gla" customClass="RoundTextField" customModule="CampusApp" customModuleProvider="target">
+                                                        <rect key="frame" x="76" y="0.0" width="224" height="0.0"/>
+                                                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="14"/>
+                                                        <textInputTraits key="textInputTraits"/>
+                                                    </textField>
+                                                </subviews>
+                                            </stackView>
+                                            <stackView opaque="NO" contentMode="scaleToFill" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="uag-V0-Nft" userLabel="Building">
+                                                <rect key="frame" x="0.0" y="48" width="300" height="0.0"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Building" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qnz-Wh-6gU">
+                                                        <rect key="frame" x="0.0" y="0.0" width="64" height="0.0"/>
+                                                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="14"/>
+                                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="245" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ZBA-AU-oOd" customClass="RoundTextField" customModule="CampusApp" customModuleProvider="target">
+                                                        <rect key="frame" x="76" y="0.0" width="224" height="0.0"/>
+                                                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="14"/>
+                                                        <textInputTraits key="textInputTraits"/>
+                                                    </textField>
+                                                </subviews>
+                                            </stackView>
+                                            <stackView opaque="NO" contentMode="scaleToFill" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="9h8-MO-qtL" userLabel="Room">
+                                                <rect key="frame" x="0.0" y="60" width="300" height="0.0"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Room" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yv9-1g-TdE">
+                                                        <rect key="frame" x="0.0" y="0.0" width="64" height="0.0"/>
+                                                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="14"/>
+                                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="245" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="DFa-ya-6ED" customClass="RoundTextField" customModule="CampusApp" customModuleProvider="target">
+                                                        <rect key="frame" x="76" y="0.0" width="224" height="0.0"/>
+                                                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="14"/>
+                                                        <textInputTraits key="textInputTraits"/>
+                                                    </textField>
+                                                </subviews>
+                                            </stackView>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="Yge-jZ-IDZ" userLabel="Description">
+                                                <rect key="frame" x="0.0" y="72" width="300" height="375"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DmP-kr-yQw">
+                                                        <rect key="frame" x="0.0" y="0.0" width="300" height="0.0"/>
+                                                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="14"/>
+                                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" verticalHuggingPriority="245" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="NST-kr-Xp0">
+                                                        <rect key="frame" x="0.0" y="12" width="300" height="363"/>
+                                                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="14"/>
+                                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                    </textView>
+                                                </subviews>
+                                            </stackView>
                                         </subviews>
-                                    </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="syj-bc-pok" userLabel="Start Time">
-                                        <rect key="frame" x="0.0" y="12" width="359" height="0.0"/>
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Start Time" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fJN-R3-vXS">
-                                                <rect key="frame" x="0.0" y="0.0" width="64" height="0.0"/>
-                                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="14"/>
-                                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="245" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kaG-LZ-RHc" customClass="RoundTextField" customModule="CampusApp" customModuleProvider="target">
-                                                <rect key="frame" x="76" y="0.0" width="283" height="0.0"/>
-                                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits"/>
-                                            </textField>
-                                        </subviews>
-                                    </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="7JT-dO-Dmc" userLabel="End Time">
-                                        <rect key="frame" x="0.0" y="24" width="359" height="0.0"/>
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="End Time" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DKk-8D-6ab">
-                                                <rect key="frame" x="0.0" y="0.0" width="64" height="0.0"/>
-                                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="14"/>
-                                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="245" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4Om-IQ-Vsd" customClass="RoundTextField" customModule="CampusApp" customModuleProvider="target">
-                                                <rect key="frame" x="76" y="0.0" width="283" height="0.0"/>
-                                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits"/>
-                                            </textField>
-                                        </subviews>
-                                    </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="owc-1f-T5w" userLabel="Campus">
-                                        <rect key="frame" x="0.0" y="36" width="359" height="0.0"/>
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Campus" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WS3-gj-AuD">
-                                                <rect key="frame" x="0.0" y="0.0" width="64" height="0.0"/>
-                                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="14"/>
-                                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="245" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9Z5-P5-Gla" customClass="RoundTextField" customModule="CampusApp" customModuleProvider="target">
-                                                <rect key="frame" x="76" y="0.0" width="283" height="0.0"/>
-                                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits"/>
-                                            </textField>
-                                        </subviews>
-                                    </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="uag-V0-Nft" userLabel="Building">
-                                        <rect key="frame" x="0.0" y="48" width="359" height="0.0"/>
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Building" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qnz-Wh-6gU">
-                                                <rect key="frame" x="0.0" y="0.0" width="64" height="0.0"/>
-                                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="14"/>
-                                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="245" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ZBA-AU-oOd" customClass="RoundTextField" customModule="CampusApp" customModuleProvider="target">
-                                                <rect key="frame" x="76" y="0.0" width="283" height="0.0"/>
-                                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits"/>
-                                            </textField>
-                                        </subviews>
-                                    </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="9h8-MO-qtL" userLabel="Room">
-                                        <rect key="frame" x="0.0" y="60" width="359" height="0.0"/>
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Room" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yv9-1g-TdE">
-                                                <rect key="frame" x="0.0" y="0.0" width="64" height="0.0"/>
-                                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="14"/>
-                                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="245" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="DFa-ya-6ED" customClass="RoundTextField" customModule="CampusApp" customModuleProvider="target">
-                                                <rect key="frame" x="76" y="0.0" width="283" height="0.0"/>
-                                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits"/>
-                                            </textField>
-                                        </subviews>
-                                    </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="Yge-jZ-IDZ" userLabel="Description">
-                                        <rect key="frame" x="0.0" y="72" width="359" height="471"/>
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DmP-kr-yQw">
-                                                <rect key="frame" x="0.0" y="0.0" width="359" height="0.0"/>
-                                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="14"/>
-                                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" verticalHuggingPriority="245" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="NST-kr-Xp0">
-                                                <rect key="frame" x="0.0" y="12" width="359" height="459"/>
-                                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                            </textView>
-                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="DFa-ya-6ED" firstAttribute="width" secondItem="caY-D8-Lcw" secondAttribute="width" id="BEC-kA-cHE"/>
+                                            <constraint firstItem="kaG-LZ-RHc" firstAttribute="width" secondItem="caY-D8-Lcw" secondAttribute="width" id="MN9-eI-QWF"/>
+                                            <constraint firstItem="ZBA-AU-oOd" firstAttribute="width" secondItem="caY-D8-Lcw" secondAttribute="width" id="kOh-y9-oL1"/>
+                                            <constraint firstItem="4Om-IQ-Vsd" firstAttribute="width" secondItem="caY-D8-Lcw" secondAttribute="width" id="x5l-oZ-djW"/>
+                                            <constraint firstItem="9Z5-P5-Gla" firstAttribute="width" secondItem="caY-D8-Lcw" secondAttribute="width" id="z73-MU-SlP"/>
+                                        </constraints>
                                     </stackView>
                                 </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstItem="DFa-ya-6ED" firstAttribute="width" secondItem="caY-D8-Lcw" secondAttribute="width" id="BEC-kA-cHE"/>
-                                    <constraint firstItem="kaG-LZ-RHc" firstAttribute="width" secondItem="caY-D8-Lcw" secondAttribute="width" id="MN9-eI-QWF"/>
-                                    <constraint firstItem="ZBA-AU-oOd" firstAttribute="width" secondItem="caY-D8-Lcw" secondAttribute="width" id="kOh-y9-oL1"/>
-                                    <constraint firstItem="4Om-IQ-Vsd" firstAttribute="width" secondItem="caY-D8-Lcw" secondAttribute="width" id="x5l-oZ-djW"/>
-                                    <constraint firstItem="9Z5-P5-Gla" firstAttribute="width" secondItem="caY-D8-Lcw" secondAttribute="width" id="z73-MU-SlP"/>
+                                    <constraint firstItem="IvL-83-qxv" firstAttribute="centerX" secondItem="Dlw-66-Whc" secondAttribute="centerX" id="0Di-bl-URr"/>
+                                    <constraint firstItem="IvL-83-qxv" firstAttribute="width" secondItem="Dlw-66-Whc" secondAttribute="width" multiplier="0.8" id="OUH-vv-0RO"/>
+                                    <constraint firstItem="IvL-83-qxv" firstAttribute="height" secondItem="Dlw-66-Whc" secondAttribute="height" multiplier="0.8" id="bDy-fF-S93"/>
+                                    <constraint firstItem="IvL-83-qxv" firstAttribute="centerY" secondItem="Dlw-66-Whc" secondAttribute="centerY" id="zQJ-TG-c47"/>
                                 </constraints>
-                            </stackView>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="IvL-83-qxv" firstAttribute="top" secondItem="pJf-Im-zb7" secondAttribute="bottom" constant="8" id="43x-xq-VgB"/>
-                            <constraint firstItem="IvL-83-qxv" firstAttribute="leading" secondItem="0Ir-IO-Uai" secondAttribute="leading" constant="8" id="JGu-jL-pv0"/>
-                            <constraint firstItem="kxw-9v-yTR" firstAttribute="top" secondItem="IvL-83-qxv" secondAttribute="bottom" constant="8" id="mEY-Sh-MIn"/>
-                            <constraint firstAttribute="trailing" secondItem="IvL-83-qxv" secondAttribute="trailing" constant="8" id="oIA-6J-74c"/>
+                            <constraint firstItem="Dlw-66-Whc" firstAttribute="leading" secondItem="0Ir-IO-Uai" secondAttribute="leading" id="HpN-6D-uiY"/>
+                            <constraint firstItem="kxw-9v-yTR" firstAttribute="top" secondItem="Dlw-66-Whc" secondAttribute="bottom" id="UNx-D3-SaT"/>
+                            <constraint firstAttribute="trailing" secondItem="Dlw-66-Whc" secondAttribute="trailing" id="vuS-0J-BN1"/>
+                            <constraint firstItem="Dlw-66-Whc" firstAttribute="top" secondItem="pJf-Im-zb7" secondAttribute="bottom" id="z2S-aQ-dAA"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="New" id="Fxw-zA-NId">
@@ -241,7 +253,6 @@
                         <outlet property="roomTextField" destination="DFa-ya-6ED" id="PHV-Fs-3lg"/>
                         <outlet property="startDateTimeTextField" destination="kaG-LZ-RHc" id="8EE-Aq-rYW"/>
                         <outlet property="titleTextField" destination="caY-D8-Lcw" id="eVJ-wx-3ck"/>
-                        <segue destination="tQu-Kb-XTn" kind="presentation" identifier="EditEventDetailPickerViewController" id="5nv-2V-tPG"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4GI-0p-7dB" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -251,7 +262,7 @@
         <!--Edit Event Detail Picker View Controller-->
         <scene sceneID="XwK-GN-Rfb">
             <objects>
-                <viewController id="tQu-Kb-XTn" customClass="EditEventDetailPickerViewController" customModule="CampusApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="EditEventDetailPickerViewController" id="tQu-Kb-XTn" customClass="EditEventDetailPickerViewController" customModule="CampusApp" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="6V2-ak-hhI"/>
                         <viewControllerLayoutGuide type="bottom" id="mie-Yh-a68"/>

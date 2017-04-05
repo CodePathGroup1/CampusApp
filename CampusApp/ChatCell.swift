@@ -31,24 +31,38 @@ class ChatCell: UITableViewCell {
      MARK: - Bind Data to ChatCell
      ====================================================================================================== */
     func bindData(with pfObject: PFObject) {
-        let conversation = Conversation(pfObject: pfObject)
-        
-        let lastUser = conversation.lastUser
-        avatarPFImageView.file = lastUser?[C.Parse.User.Keys.avatar] as? PFFile
-        avatarPFImageView.loadInBackground()
-        
-        sendersDescriptionLabel.text = conversation.sendersDescription
-        lastMessageLabel.text = conversation.lastMessage
-        
-        if let lastMessageTimestamp = conversation.lastMessageTimestamp {
-            let dateDescription = JSQMessagesTimestampFormatter.shared().relativeDate(for: lastMessageTimestamp)
-            if dateDescription == "Today" {
-                lastMessageTimestampLabel.text = JSQMessagesTimestampFormatter.shared().time(for: lastMessageTimestamp)
+        if let userObject = pfObject[C.Parse.Conversation.Keys.lastUser] as? PFUser {
+            let user = User(pfObject: userObject)
+            // TODO: work on avatar
+    //        if let avatar = user?[C.Parse.User.Keys.avatar] {
+    //            avatarPFImageView.file = avatar
+    //            avatarPFImageView.loadInBackground()
+    //        }
+            
+            if let fullName = user.fullName, !fullName.isEmpty {
+                sendersDescriptionLabel.text = fullName
+            } else if let username = userObject.username {
+                sendersDescriptionLabel.text = username
             } else {
-                lastMessageTimestampLabel.text = dateDescription
+                sendersDescriptionLabel.text = nil
             }
-        } else {
-            lastMessageTimestampLabel.text = ""
+        }
+        
+        if let lastMessageObject = pfObject[C.Parse.Conversation.Keys.lastMessage] as? PFObject {
+            let lastMessage = Message(pfObject: lastMessageObject)
+            
+            lastMessageLabel.text = lastMessage.text
+            
+            if let lastMessageTimestamp = lastMessage.pfObject?.createdAt {
+                let dateDescription = JSQMessagesTimestampFormatter.shared().relativeDate(for: lastMessageTimestamp)
+                if dateDescription == "Today" {
+                    lastMessageTimestampLabel.text = JSQMessagesTimestampFormatter.shared().time(for: lastMessageTimestamp)
+                } else {
+                    lastMessageTimestampLabel.text = dateDescription
+                }
+            } else {
+                lastMessageTimestampLabel.text = ""
+            }
         }
     }
     /* ==================================================================================================== */

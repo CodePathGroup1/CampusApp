@@ -14,7 +14,6 @@ class Conversation {
     
     let pfObject: PFObject
     
-    let lastUser: PFUser?
     let sendersDescription: String?
     let lastMessage: String?
     let lastMessageTimestamp: Date?
@@ -22,45 +21,39 @@ class Conversation {
     init(pfObject: PFObject) {
         self.pfObject = pfObject
         
-        lastUser = pfObject[C.Parse.Conversation.Keys.lastUser] as? PFUser
         sendersDescription = pfObject[C.Parse.Conversation.Keys.sendersDescription] as? String
         lastMessage = pfObject[C.Parse.Conversation.Keys.lastMessage] as? String
         lastMessageTimestamp = pfObject[C.Parse.Conversation.Keys.lastMessageTimestamp] as? Date
     }
     
-    class func startConversation(otherUsers: [User], completion: @escaping (String) -> Void) {
-        if let currentUser = PFUser.current(), let currentUserID = currentUser.objectId {
-            let conversationID: String = {
-                var otherUserID = otherUsers
-                    .filter { $0.id != nil }
-                    .map { $0.id! }
-                otherUserID.append(currentUserID)
-                
-                return otherUserID.sorted().joined(separator: "|")
-            }()
-            
-            if !conversationID.isEmpty {
-                let query = PFQuery(className: C.Parse.Conversation.className)
-                query.whereKey(C.Parse.Conversation.Keys.userID, equalTo: currentUserID)
-                query.whereKey(C.Parse.Conversation.Keys.conversationID, equalTo: conversationID)
-                query.findObjectsInBackground { pfObject, error in
-                    if let pfObject = pfObject {
-                        if pfObject.isEmpty {
-                            let conversation = PFObject(className: C.Parse.Conversation.className)
-                            conversation[C.Parse.Conversation.Keys.conversationID] = conversationID
-                            conversation[C.Parse.Conversation.Keys.userID] = currentUserID
-                            conversation.saveInBackground { succeed, error in
-                                if succeed {
-                                    completion(conversationID)
-                                } else {
-                                    HUD.flash(.label(error?.localizedDescription ?? "Starting conversation failed"))
-                                }
-                            }
-                        } else {
-                            completion(conversationID)
+    class func startConversation(otherUsers: [PFUser], completion: @escaping (PFObject) -> Void) {
+        if let currentUser = PFUser.current() {
+            if !otherUsers.isEmpty {
+                let users: [PFUser] = (otherUsers + [currentUser])
+                    .reduce([]) { result, user in
+                        if let _ = user.objectId {
+                            return (result + [user])
                         }
+                        return result
+                    }.sorted(by: { user1, user2 -> Bool in
+                        return user1.objectId! < user2.objectId!
+                    })
+                
+                let query = PFQuery(className: C.Parse.Conversation.className)
+                query.whereKey(C.Parse.Conversation.Keys.users, containsAllObjectsIn: users)
+                query.findObjectsInBackground { pfObjects, error in
+                    if let pfObject = pfObjects?.first {
+                        completion(pfObject)
                     } else {
-                        HUD.flash(.label(error?.localizedDescription ?? "Starting conversation failed"))
+                        let newConversationPFObject = PFObject(className: C.Parse.Conversation.className)
+                        newConversationPFObject[C.Parse.Conversation.Keys.users] = users
+                        newConversationPFObject.saveInBackground { succeed, error in
+                            if succeed {
+                                completion(newConversationPFObject)
+                            } else {
+                                HUD.flash(.label(error?.localizedDescription ?? "Starting conversation failed"))
+                            }
+                        }
                     }
                 }
             }

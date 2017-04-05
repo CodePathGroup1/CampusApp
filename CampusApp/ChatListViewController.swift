@@ -47,8 +47,8 @@ class ChatListViewController: UIViewController, UITableViewDataSource, UITableVi
         if let identifier = segue.identifier {
             if identifier == C.Identifier.Segue.chatConversationViewController.old {
                 if let vc = segue.destination as? ChatConversationViewController {
-                    if let conversationID = sender as? String {
-                        vc.conversationID = conversationID
+                    if let conversation = sender as? PFObject {
+                        vc.conversation = conversation
                     }
                 }
             }
@@ -72,9 +72,7 @@ class ChatListViewController: UIViewController, UITableViewDataSource, UITableVi
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let conversation = conversations[indexPath.row]
-        if let conversationID = conversation.objectId {
-            performSegue(withIdentifier: C.Identifier.Segue.chatConversationViewController.old, sender: conversationID)
-        }
+        performSegue(withIdentifier: C.Identifier.Segue.chatConversationViewController.old, sender: conversation)
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -87,9 +85,10 @@ class ChatListViewController: UIViewController, UITableViewDataSource, UITableVi
      MARK: - Helper Methods
      ====================================================================================================== */
     private func loadConversations() {
-        if let currentUser = PFUser.current(), let currentUserID = currentUser.objectId {
+        if let currentUser = PFUser.current() {
             let query = PFQuery(className: C.Parse.Conversation.className)
-            query.whereKey(C.Parse.Conversation.Keys.userID, equalTo: currentUserID)
+            query.whereKey(C.Parse.Conversation.Keys.users, containsAllObjectsIn: [currentUser])
+            query.includeKey(C.Parse.Conversation.Keys.lastMessage)
             query.includeKey(C.Parse.Conversation.Keys.lastUser)
             query.order(byDescending: C.Parse.Conversation.Keys.lastMessageTimestamp)
             query.findObjectsInBackground { pfObjects, error in

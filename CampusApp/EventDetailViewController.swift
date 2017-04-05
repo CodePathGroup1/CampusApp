@@ -142,12 +142,11 @@ class EventDetailViewController: UIViewController, MKMapViewDelegate {
     }
     
     @IBAction func eventCreatorTapped(_ sender: AnyObject) {
-        if let organizer = event.organizer, organizer.objectId != PFUser.current()?.objectId {
-            let otherUsers = [User(pfObject: organizer)]
-            Conversation.startConversation(otherUsers: otherUsers) { conversationID in
+        if let organizer = event.organizer as? PFUser, organizer.objectId != PFUser.current()?.objectId {
+            Conversation.startConversation(otherUsers: [organizer]) { conversation in
                 let storyboard = UIStoryboard(name: "Chat", bundle: nil)
                 if let vc = storyboard.instantiateViewController(withIdentifier: "ChatConversationViewController") as? ChatConversationViewController {
-                    vc.conversationID = conversationID
+                    vc.conversation = conversation
                     self.present(vc, animated: true, completion: nil)
                 }
             }

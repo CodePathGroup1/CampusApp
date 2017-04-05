@@ -21,7 +21,10 @@ class ChatUserCell: UITableViewCell {
         avatarPFImageView.clipsToBounds = true
     }
     
-    func bindData(user: User) {
+    func bindData(pfUser: PFUser) {
+        
+        let user = User(pfObject: pfUser)
+        
 //        avatarPFImageView.file = user.avatarPFFile
 //        avatarPFImageView.loadInBackground()
         

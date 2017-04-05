@@ -15,8 +15,8 @@ class ChatUserSearchViewController: UIViewController, UISearchBarDelegate, UITab
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
     
-    private var originalLoadedUsers = [User]()
-    private var filteredUsers = [User]()
+    private var originalLoadedUsers = [PFUser]()
+    private var filteredUsers = [PFUser]()
     
     
     /* ====================================================================================================
@@ -44,7 +44,7 @@ class ChatUserSearchViewController: UIViewController, UISearchBarDelegate, UITab
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if !searchText.isEmpty {
             filteredUsers = originalLoadedUsers.filter { user -> Bool in
-                if let fullName = user.fullName {
+                if let fullName = user[C.Parse.User.Keys.fullName] as? String {
                     return (fullName.lowercased().range(of: searchText.lowercased()) != nil)
                 }
                 return false
@@ -82,7 +82,7 @@ class ChatUserSearchViewController: UIViewController, UISearchBarDelegate, UITab
      ====================================================================================================== */
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: C.Identifier.Cell.chatUserCell, for: indexPath) as? ChatUserCell {
-            cell.bindData(user: filteredUsers[indexPath.row])
+            cell.bindData(pfUser: filteredUsers[indexPath.row])
             return cell
         }
         
@@ -92,8 +92,8 @@ class ChatUserSearchViewController: UIViewController, UISearchBarDelegate, UITab
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let otherUsers = [filteredUsers[indexPath.row]]
         
-        Conversation.startConversation(otherUsers: otherUsers) { conversationID in
-            self.performSegue(withIdentifier: C.Identifier.Segue.chatConversationViewController.new, sender: conversationID)
+        Conversation.startConversation(otherUsers: otherUsers) { conversation in
+            self.performSegue(withIdentifier: C.Identifier.Segue.chatConversationViewController.new, sender: conversation)
         }
     }
     
@@ -110,8 +110,8 @@ class ChatUserSearchViewController: UIViewController, UISearchBarDelegate, UITab
         if let identifier = segue.identifier {
             if identifier == C.Identifier.Segue.chatConversationViewController.new {
                 if let destination = segue.destination as? ChatConversationViewController {
-                    if let conversationID = sender as? String {
-                        destination.conversationID = conversationID
+                    if let conversation = sender as? PFObject {
+                        destination.conversation = conversation
                     }
                 }
             }
@@ -130,10 +130,8 @@ class ChatUserSearchViewController: UIViewController, UISearchBarDelegate, UITab
             query.order(byAscending: C.Parse.User.Keys.fullName)
             query.findObjectsInBackground { pfObjects, error in
                 if let pfObjects = pfObjects as? [PFUser] {
-                    self.originalLoadedUsers = pfObjects.map { pfObject in
-                        return User(pfObject: pfObject)
-                    }
-                    self.filteredUsers = self.originalLoadedUsers
+                    self.originalLoadedUsers = pfObjects
+                    self.filteredUsers = pfObjects
                     self.tableView.reloadData()
                 } else {
                     HUD.flash(.label(error?.localizedDescription ?? "Network error"))

@@ -46,10 +46,10 @@ struct C {
             struct Keys {
                 static let conversationID = "conversation_id"
                 static let lastMessage = "last_message"
+                static let lastMessageTimestamp = "last_message_timestamp"
                 static let lastUser = "last_user"
                 static let sendersDescription = "senders_description"
-                static let lastMessageTimestamp = "last_message_timestamp"
-                static let userID = "user_id"
+                static let users = "users"
             }
         }
         
@@ -75,7 +75,7 @@ struct C {
             static let className = "Message"
             
             struct Keys {
-                static let conversationID = "conversation_id"
+                static let conversation = "conversation"
                 static let createdAt = "createdAt"
                 static let picture = "picture"
                 static let text = "text"
