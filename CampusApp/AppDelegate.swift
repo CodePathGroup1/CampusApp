@@ -30,10 +30,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         )
         
         if let _ = PFUser.current() {
-            let storyboard = UIStoryboard(name: "Event", bundle: nil)
-            if let vc = storyboard.instantiateViewController(withIdentifier: "EventNavigationController") as? UINavigationController {
-                window?.rootViewController = vc
-            }
+            window?.rootViewController = MainTabBarController()
         } else {
             let storyboard = UIStoryboard(name: "Login", bundle: nil)
             if let vc = storyboard.instantiateViewController(withIdentifier: "LoginViewController") as? LoginViewController {

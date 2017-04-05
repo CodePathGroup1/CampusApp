@@ -54,7 +54,9 @@ class LoginViewController: UIViewController {
                 PFUser.logInWithUsername(inBackground: username, password: password) { (user: PFUser?, error: Error?) -> Void in
                     if let _ = user {
                         HUD.hide(animated: true)
-                        self.showViewController(storyboardIdentifier: "Event", viewControllerIdentifier: "EventNavigationController")
+                        
+                        let vc = MainTabBarController()
+                        self.present(vc, animated: true, completion: nil)
                     } else {
                         HUD.flash(.label(error?.localizedDescription ?? "Unknown error"))
                     }
@@ -86,7 +88,9 @@ class LoginViewController: UIViewController {
                                 user.saveInBackground { succeeded, error in
                                     if succeeded {
                                         HUD.hide(animated: true)
-                                        self.showViewController(storyboardIdentifier: "Event", viewControllerIdentifier: "EventNavigationController")
+                                        
+                                        let vc = MainTabBarController()
+                                        self.present(vc, animated: true, completion: nil)
                                     } else {
                                         print(error?.localizedDescription ?? "Unknown error")
                                     }
@@ -96,7 +100,9 @@ class LoginViewController: UIViewController {
                     }
                 } else {
                     HUD.hide(animated: true)
-                    self.showViewController(storyboardIdentifier: "Event", viewControllerIdentifier: "EventNavigationController")
+                    
+                    let vc = MainTabBarController()
+                    self.present(vc, animated: true, completion: nil)
                 }
             } else {
                 HUD.flash(.error)

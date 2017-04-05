@@ -26,7 +26,6 @@
 		652F53191E838BC40073CA9C /* ChatCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 652F53171E838BC40073CA9C /* ChatCell.xib */; };
 		652F531B1E838D860073CA9C /* Conversation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 652F531A1E838D860073CA9C /* Conversation.swift */; };
 		653040F71E81A2C3009EF9A5 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 653040F51E81A2C3009EF9A5 /* MainTabBarController.swift */; };
-		653040F81E81A2C3009EF9A5 /* MainTabBarController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 653040F61E81A2C3009EF9A5 /* MainTabBarController.xib */; };
 		653040FC1E81B57C009EF9A5 /* GoogleCalendarClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 653040FB1E81B57C009EF9A5 /* GoogleCalendarClient.swift */; };
 		653040FE1E81C1A8009EF9A5 /* GoogleCalendarEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 653040FD1E81C1A8009EF9A5 /* GoogleCalendarEvent.swift */; };
 		653041001E81C88D009EF9A5 /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 653040FF1E81C88D009EF9A5 /* DateExtension.swift */; };
@@ -76,7 +75,6 @@
 		652F53171E838BC40073CA9C /* ChatCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChatCell.xib; sourceTree = "<group>"; };
 		652F531A1E838D860073CA9C /* Conversation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Conversation.swift; sourceTree = "<group>"; };
 		653040F51E81A2C3009EF9A5 /* MainTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
-		653040F61E81A2C3009EF9A5 /* MainTabBarController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainTabBarController.xib; sourceTree = "<group>"; };
 		653040FB1E81B57C009EF9A5 /* GoogleCalendarClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoogleCalendarClient.swift; sourceTree = "<group>"; };
 		653040FD1E81C1A8009EF9A5 /* GoogleCalendarEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoogleCalendarEvent.swift; sourceTree = "<group>"; };
 		653040FF1E81C88D009EF9A5 /* DateExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateExtension.swift; sourceTree = "<group>"; };
@@ -182,6 +180,7 @@
 			children = (
 				65E8353D1E80CA610006FC0D /* LoginViewController.swift */,
 				65E835411E80DDD00006FC0D /* RegisterViewController.swift */,
+				653040F51E81A2C3009EF9A5 /* MainTabBarController.swift */,
 				BE4249FF1E655D7200A7BA37 /* EventListViewController.swift */,
 				1DF7D75B1E80CC5D003ECFB6 /* EventDetailViewController.swift */,
 				6526E88E1E8F5D26008F468D /* EditEventViewController.swift */,
@@ -213,8 +212,6 @@
 				6555F1C91E86E773004284DB /* ChatUserCell.swift */,
 				1DF7D7591E80CA16003ECFB6 /* EventCell.swift */,
 				65F5BBEA1E82082700368D36 /* EventCell.xib */,
-				653040F51E81A2C3009EF9A5 /* MainTabBarController.swift */,
-				653040F61E81A2C3009EF9A5 /* MainTabBarController.xib */,
 				65E8353B1E80C2DC0006FC0D /* RoundButton.swift */,
 				65E8353F1E80CCE80006FC0D /* RoundTextField.swift */,
 				6519E53B1E820D1A0058CB6A /* TopAlignedLabel.swift */,
@@ -368,7 +365,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				652F53151E838B220073CA9C /* Chat.storyboard in Resources */,
-				653040F81E81A2C3009EF9A5 /* MainTabBarController.xib in Resources */,
 				BE424A081E655D7200A7BA37 /* LaunchScreen.storyboard in Resources */,
 				65F5BBDE1E80FE9000368D36 /* Login.storyboard in Resources */,
 				BE424A051E655D7200A7BA37 /* Assets.xcassets in Resources */,
