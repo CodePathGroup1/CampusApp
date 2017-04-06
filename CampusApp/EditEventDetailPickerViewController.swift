@@ -44,23 +44,28 @@ class EditEventDetailPickerViewController: UIViewController, UIPickerViewDataSou
         
         switch mode {
         case .startDateTime(let endDate):
+            navigationItem.title = "Select Start Time"
             inputDatePicker.minimumDate = Date()
             inputDatePicker.maximumDate = endDate
             inputPickerView.isHidden = true
             customNameField.isHidden = true
         case .endDateTime(let startDate):
+            navigationItem.title = "Select End Time"
             inputDatePicker.minimumDate = (startDate ?? Date())
             inputPickerView.isHidden = true
             customNameField.isHidden = true
         case .campus(_):
+            navigationItem.title = "Select Campus"
             className = C.Parse.Campus.className
             inputDatePicker.isHidden = true
             customNameField.placeholder = "New campus"
         case .building(_):
+            navigationItem.title = "Select Building"
             className = C.Parse.Building.className
             inputDatePicker.isHidden = true
             customNameField.placeholder = "New building"
         case .room(_):
+            navigationItem.title = "Select Room"
             className = C.Parse.Room.className
             inputDatePicker.isHidden = true
             customNameField.placeholder = "New room"

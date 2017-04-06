@@ -93,14 +93,17 @@ class EditEventViewController: UIViewController, UITextFieldDelegate, UIGestureR
         roomTextField.delegate = self
         roomTextField.tag = Tag.room.rawValue
         
+        descriptionTextView.layer.cornerRadius = 8
+        descriptionTextView.clipsToBounds = true
+        
         switch mode! {
         case .New:
             eventPFObject = PFObject(className: C.Parse.Event.className)
-            navigationController?.navigationBar.topItem?.title = "New"
+            navigationItem.title = "New Event"
             
         case .Edit(let parseEvent):
             eventPFObject = parseEvent.pfObject
-            navigationController?.navigationBar.topItem?.title = "Edit"
+            navigationItem.title = "Edit Event"
             
             titleTextField.text = parseEvent.title
             

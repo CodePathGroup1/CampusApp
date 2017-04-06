@@ -104,12 +104,18 @@ class ChatListViewController: UIViewController, UITableViewDataSource, UITableVi
         if let currentUser = PFUser.current() {
             let query = PFQuery(className: C.Parse.Conversation.className)
             query.whereKey(C.Parse.Conversation.Keys.users, containsAllObjectsIn: [currentUser])
-            query.includeKey(C.Parse.Conversation.Keys.lastMessage)
-            query.includeKey(C.Parse.Conversation.Keys.lastUser)
+            query.includeKeys([C.Parse.Conversation.Keys.lastMessage, C.Parse.Conversation.Keys.lastUser])
             query.order(byDescending: C.Parse.Conversation.Keys.lastMessageTimestamp)
             query.findObjectsInBackground { pfObjects, error in
                 if let pfObjects = pfObjects {
-                    self.conversations = pfObjects
+                    self.conversations = pfObjects.reduce([]) { result, conversation in
+                        if let _ = conversation[C.Parse.Conversation.Keys.lastUser] {
+                            return result + [conversation]
+                        } else {
+                            conversation.deleteInBackground()
+                            return result
+                        }
+                    }
                     
                     DispatchQueue.main.async {
                         self.tableView.reloadData()

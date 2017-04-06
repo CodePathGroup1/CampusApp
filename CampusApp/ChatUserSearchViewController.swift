@@ -44,11 +44,19 @@ class ChatUserSearchViewController: UIViewController, UISearchBarDelegate, UITab
      ====================================================================================================== */
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if !searchText.isEmpty {
-            filteredUsers = originalLoadedUsers.filter { user -> Bool in
-                if let fullName = user[C.Parse.User.Keys.fullName] as? String {
-                    return (fullName.lowercased().range(of: searchText.lowercased()) != nil)
-                }
-                return false
+            filteredUsers = originalLoadedUsers.filter { pfUser -> Bool in
+                let fullName: String? = {
+                    if let fullName = pfUser[C.Parse.User.Keys.fullName] as? String, !fullName.isEmpty {
+                        return fullName
+                    } else if let username = pfUser.username, !username.isEmpty {
+                        return username
+                    } else if let objectId = pfUser.objectId {
+                        return objectId
+                    }
+                    return nil
+                }()
+                
+                return (fullName?.lowercased().range(of: searchText.lowercased()) != nil)
             }
         } else {
             filteredUsers = originalLoadedUsers
