@@ -13,7 +13,7 @@ The following **required** functionality is completed:
 	Events include:
 	- [X] Event titles
 	- [X] Event time or time til
-	- [ ] Event campus, building, and room when applicable
+	- [X] Event campus, building, and room when applicable
 - [X] User can navigate to a detail view of events that includes:
 	- [X] Event info
 	- [X] Event description
@@ -22,6 +22,11 @@ The following **required** functionality is completed:
 - [ ] User can save preferences in a settings controller
 	- [ ] UI settings
 	- [ ] Set which campus(es) to see events for
+- [X] User can create new events
+- [X] User can edit existing events (only if it's created by him- or herself
+- [X] User can favorite or unfavorite events
+- [X] Navigation controller and tab controller have been introduced.
+
 
 **Optional**
 
@@ -36,7 +41,11 @@ The following **required** functionality is completed:
 
 Here's a walkthrough of implemented user stories:
 
+Spring #1
 <img src='http://i.imgur.com/PQGovYO.gif' title='Spring 1' width='' alt='Video Walkthrough' />
+
+Spring #2
+<img src='http://i.imgur.com/O9BX6bK.gif' title='Spring 2' width='' alt='Video Walkthrough' />
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
