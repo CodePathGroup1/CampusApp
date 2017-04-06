@@ -49,9 +49,10 @@ final class Camera {
         
         cameraUI.allowsEditing = canEdit
         cameraUI.showsCameraControls = true
-        if target is ChatConversationViewController {
-            cameraUI.delegate = target as! ChatConversationViewController
+        if let target = target as? ChatConversationViewController {
+            cameraUI.delegate = target
         }
+        
         target.present(cameraUI, animated: true, completion: nil)
         
         return true
@@ -86,9 +87,10 @@ final class Camera {
         }
         
         imagePicker.allowsEditing = canEdit
-        if target is ChatConversationViewController {
-            imagePicker.delegate = target as! ChatConversationViewController
+        if let target = target as? ChatConversationViewController {
+            imagePicker.delegate = target
         }
+        
         target.present(imagePicker, animated: true, completion: nil)
         
         return true

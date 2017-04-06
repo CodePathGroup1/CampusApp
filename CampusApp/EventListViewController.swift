@@ -119,6 +119,7 @@ class EventListViewController: UIViewController, UITableViewDataSource, UITableV
                 self.events.remove(at: indexPath.row)
                 DispatchQueue.main.async {
                     self.tableView.deleteRows(at: [indexPath], with: .automatic)
+                    self.tableView.reloadData()     // Reload target-action for all favorite buttons
                 }
             }
         }

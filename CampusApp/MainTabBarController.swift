@@ -14,11 +14,7 @@ class MainTabBarController: UITabBarController, UITabBarControllerDelegate {
         super.viewDidLoad()
 
         self.delegate = self
-    }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
         let eventListViewController = UIStoryboard(name: "Event", bundle: nil)
             .instantiateViewController(withIdentifier: "EventNavigationController") as? UINavigationController
         let eventListBarItem = UITabBarItem(title: "Events",

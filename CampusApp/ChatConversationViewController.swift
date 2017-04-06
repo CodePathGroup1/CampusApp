@@ -7,6 +7,7 @@
 //
 
 import AVKit
+import AVFoundation
 import JSQMessagesViewController
 import Parse
 import ParseLiveQuery
@@ -406,10 +407,20 @@ class ChatConversationViewController: JSQMessagesViewController, UINavigationCon
         let message = messages[indexPath.item]
         if message.isMediaMessage {
             if let media = message.media as? JSQVideoMediaItem {
-                let playerVC = AVPlayerViewController()
-                let player = AVPlayer(url: media.fileURL)
-                playerVC.player = player
-                player.play()
+                if let fileURL = media.fileURL {
+                    let playerVC = AVPlayerViewController()
+                    
+                    let asset = AVURLAsset(url: fileURL)
+                    let item = AVPlayerItem(asset: asset)
+                    
+                    let player = AVPlayer(playerItem: item)
+                    playerVC.player = player
+                    playerVC.showsPlaybackControls = true
+                    
+                    self.present(playerVC, animated: true) {
+                        player.play()
+                    }
+                }
             }
         }
     }
