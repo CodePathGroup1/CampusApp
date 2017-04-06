@@ -267,7 +267,9 @@ class EditEventViewController: UIViewController, UITextFieldDelegate, UIGestureR
         
         eventPFObject.saveInBackground { succeeded, error in
             if succeeded {
-                _ = self.navigationController?.popViewController(animated: true)
+                DispatchQueue.main.async {
+                    _ = self.navigationController?.popViewController(animated: true)
+                }
                 
                 let parseEvent = ParseEvent(pfObject: eventPFObject)
                 self.completionHandler?(parseEvent)

@@ -46,7 +46,7 @@
                     <navigationItem key="navigationItem" id="KN9-EV-mLH">
                         <barButtonItem key="rightBarButtonItem" systemItem="compose" id="c0W-6Y-uf1">
                             <connections>
-                                <segue destination="IaE-Dd-C8A" kind="show" id="wFo-ON-oDq"/>
+                                <segue destination="IaE-Dd-C8A" kind="show" identifier="ChatConversationViewController_NEW" id="wFo-ON-oDq"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -62,7 +62,7 @@
         <!--Chat User Search View Controller-->
         <scene sceneID="pNN-ue-2Ev">
             <objects>
-                <viewController storyboardIdentifier="ChatUserSearchViewController" id="IaE-Dd-C8A" customClass="ChatUserSearchViewController" customModule="CampusApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="IaE-Dd-C8A" customClass="ChatUserSearchViewController" customModule="CampusApp" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="hGo-Y0-SOY"/>
                         <viewControllerLayoutGuide type="bottom" id="fyb-bh-qJv"/>
@@ -72,14 +72,14 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="dIE-en-wit">
-                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="OTk-YG-GgT"/>
                                 </constraints>
                                 <textInputTraits key="textInputTraits"/>
                             </searchBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="76" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="mI0-lf-qcK">
-                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <rect key="frame" x="0.0" y="108" width="375" height="559"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ChatUserCell" rowHeight="46" id="hDd-iT-9r8" customClass="ChatUserCell" customModule="CampusApp" customModuleProvider="target">

@@ -71,10 +71,12 @@ class RegisterViewController: UIViewController {
                 
                 newUser.signUpInBackground { (success: Bool, error: Error?) in
                     if success {
-                        HUD.hide(animated: true)
-                        
-                        let vc = MainTabBarController()
-                        self.present(vc, animated: true, completion: nil)
+                        DispatchQueue.main.async {
+                            let vc = MainTabBarController()
+                            self.present(vc, animated: true) {
+                                HUD.hide(animated: true)
+                            }
+                        }
                     } else if let error = error as? NSError {
                         switch error.code {
                         case 202:

@@ -70,6 +70,8 @@ class EditEventDetailPickerViewController: UIViewController, UIPickerViewDataSou
         
         if !inputPickerView.isHidden {
             if let className = className {
+                HUD.flash(.label("Loading \(className)..."))
+                
                 let query = PFQuery(className: className)
                 
                 switch mode {
@@ -107,7 +109,11 @@ class EditEventDetailPickerViewController: UIViewController, UIPickerViewDataSou
                             return result
                         }
                         
-                        self.inputPickerView.reloadAllComponents()
+                        DispatchQueue.main.async {
+                            self.inputPickerView.reloadAllComponents()
+                            
+                            HUD.hide(animated: true)
+                        }
                     } else {
                         HUD.flash(.label(error?.localizedDescription ?? "Unknown error"))
                     }
@@ -146,17 +152,23 @@ class EditEventDetailPickerViewController: UIViewController, UIPickerViewDataSou
                     
                     pfObject.saveInBackground { succeeded, error in
                         if succeeded {
-                            self.stringClosure(pfObject, customName)
+                            DispatchQueue.main.async {
+                                self.stringClosure(pfObject, customName)
+                            }
                         } else {
                             HUD.flash(.label(error?.localizedDescription ?? "Saving custom object failed"))
                         }
                     }
                     
                 } else if self.pickerObjects.isEmpty || self.pickerData.isEmpty {
-                    self.stringClosure(nil, nil)
+                    DispatchQueue.main.async {
+                        self.stringClosure(nil, nil)
+                    }
                     
                 } else {
-                    self.stringClosure(self.pickerObjects[self.selectedIndex], self.pickerData[self.selectedIndex])
+                    DispatchQueue.main.async {
+                        self.stringClosure(self.pickerObjects[self.selectedIndex], self.pickerData[self.selectedIndex])
+                    }
                 }
             }
         }

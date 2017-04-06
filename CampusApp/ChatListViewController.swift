@@ -51,7 +51,29 @@ class ChatListViewController: UIViewController, UITableViewDataSource, UITableVi
                         vc.conversation = conversations[indexPath.row]
                         vc.completion = { conversation in
                             self.conversations[indexPath.row] = conversation
-                            self.tableView.reloadRows(at: [indexPath], with: .none)
+                            
+                            DispatchQueue.main.async {
+                                self.tableView.reloadRows(at: [indexPath], with: .none)
+                            }
+                        }
+                    }
+                }
+            } else if identifier == C.Identifier.Segue.chatConversationViewController.new {
+                if let vc = segue.destination as? ChatUserSearchViewController {
+                    vc.completion = { conversation in
+                        self.conversations.append(conversation)
+                        
+                        
+                        if self.conversations.count == 1 {
+                            DispatchQueue.main.async {
+                                self.tableView.reloadData()
+                            }
+                        } else {
+                            let indexPath = IndexPath(row: self.conversations.count - 1, section: 0)
+                            
+                            DispatchQueue.main.async {
+                                self.tableView.reloadRows(at: [indexPath], with: .none)
+                            }
                         }
                     }
                 }
@@ -97,7 +119,10 @@ class ChatListViewController: UIViewController, UITableViewDataSource, UITableVi
             query.findObjectsInBackground { pfObjects, error in
                 if let pfObjects = pfObjects {
                     self.conversations = pfObjects
-                    self.tableView.reloadData()
+                    
+                    DispatchQueue.main.async {
+                        self.tableView.reloadData()
+                    }
                 } else {
                     HUD.flash(.label(error?.localizedDescription ?? "Network error"))
                 }

@@ -47,9 +47,11 @@ class EventListViewController: UIViewController, UITableViewDataSource, UITableV
         
         let storyboard = UIStoryboard(name: "Login", bundle: nil)
         if let vc = storyboard.instantiateViewController(withIdentifier: "LoginViewController") as? LoginViewController {
-            self.present(vc, animated: true) {
-                PFUser.logOutInBackground { _ in
-                    HUD.hide(animated: true)
+            PFUser.logOutInBackground { _ in
+                DispatchQueue.main.async {
+                    self.present(vc, animated: true) {
+                        HUD.hide(animated: true)
+                    }
                 }
             }
         }
@@ -63,8 +65,10 @@ class EventListViewController: UIViewController, UITableViewDataSource, UITableV
         let index = sender.tag
         events[index].favorite { parseEvent in
             if let cell = self.tableView.cellForRow(at: IndexPath(row: index, section: 0)) as? EventCell {
-                let image = UIImage(named: (self.events[index].isFavorited ? "favorited" : "not-favorited"))
-                cell.favoriteButton.setImage(image, for: .normal)
+                DispatchQueue.main.async {
+                    let image = UIImage(named: (self.events[index].isFavorited ? "favorited" : "not-favorited"))
+                    cell.favoriteButton.setImage(image, for: .normal)
+                }
             }
         }
     }
@@ -113,7 +117,9 @@ class EventListViewController: UIViewController, UITableViewDataSource, UITableV
             let event = events[indexPath.row]
             event.pfObject?.deleteInBackground { succeed, error in
                 self.events.remove(at: indexPath.row)
-                self.tableView.deleteRows(at: [indexPath], with: .automatic)
+                DispatchQueue.main.async {
+                    self.tableView.deleteRows(at: [indexPath], with: .automatic)
+                }
             }
         }
     }
@@ -138,7 +144,10 @@ class EventListViewController: UIViewController, UITableViewDataSource, UITableV
                     if let indexPath = sender as? IndexPath {
                         destinationVC.completionHandler = { parseEvent in
                             self.events[indexPath.row] = parseEvent
-                            self.tableView.reloadRows(at: [indexPath], with: .automatic)
+                            
+                            DispatchQueue.main.async {
+                                self.tableView.reloadRows(at: [indexPath], with: .automatic)
+                            }
                         }
                         destinationVC.event = events[indexPath.row]
                     }
@@ -151,7 +160,10 @@ class EventListViewController: UIViewController, UITableViewDataSource, UITableV
                         self.events.sort(by: { (event1, event2) -> Bool in
                             return event1.startDateTime!.timeIntervalSinceNow < event2.startDateTime!.timeIntervalSinceNow
                         })
-                        self.tableView.reloadData()
+                        
+                        DispatchQueue.main.async {
+                            self.tableView.reloadData()
+                        }
                     }
                 }
             }
@@ -281,9 +293,12 @@ class EventListViewController: UIViewController, UITableViewDataSource, UITableV
         self.events.sort(by: { (event1, event2) -> Bool in
             return event1.startDateTime!.timeIntervalSinceNow < event2.startDateTime!.timeIntervalSinceNow
         })
-        self.tableView.reloadData()
         
-        HUD.hide(animated: true)
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        
+            HUD.hide(animated: true)
+        }
     }
     /* ==================================================================================================== */
 }

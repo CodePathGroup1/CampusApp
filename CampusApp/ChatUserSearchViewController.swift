@@ -18,6 +18,7 @@ class ChatUserSearchViewController: UIViewController, UISearchBarDelegate, UITab
     private var originalLoadedUsers = [PFUser]()
     private var filteredUsers = [PFUser]()
     
+    var completion: ((PFObject) -> Void)?
     
     /* ====================================================================================================
      MARK: - Lifecycle Methods
@@ -92,8 +93,12 @@ class ChatUserSearchViewController: UIViewController, UISearchBarDelegate, UITab
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let otherUsers = [filteredUsers[indexPath.row]]
         
+        HUD.flash(.label("Loading conversation..."))
+        
         Conversation.startConversation(otherUsers: otherUsers) { conversation in
-            self.performSegue(withIdentifier: C.Identifier.Segue.chatConversationViewController.new, sender: conversation)
+            DispatchQueue.main.async {
+                self.performSegue(withIdentifier: C.Identifier.Segue.chatConversationViewController.new, sender: conversation)
+            }
         }
     }
     
@@ -109,9 +114,12 @@ class ChatUserSearchViewController: UIViewController, UISearchBarDelegate, UITab
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let identifier = segue.identifier {
             if identifier == C.Identifier.Segue.chatConversationViewController.new {
-                if let destination = segue.destination as? ChatConversationViewController {
+                if let vc = segue.destination as? ChatConversationViewController {
                     if let conversation = sender as? PFObject {
-                        destination.conversation = conversation
+                        vc.conversation = conversation
+                        vc.completion = completion
+                        
+                        HUD.hide(animated: true)
                     }
                 }
             }
@@ -125,6 +133,8 @@ class ChatUserSearchViewController: UIViewController, UISearchBarDelegate, UITab
      ====================================================================================================== */
     private func loadUsers() {
         if let currentUser = PFUser.current(), let currentUsername = currentUser.username {
+            HUD.flash(.label("Loading users..."))
+            
             let query = PFQuery(className: C.Parse.User.className)
             query.whereKey(C.Parse.User.Keys.username, notEqualTo: currentUsername)
             query.order(byAscending: C.Parse.User.Keys.fullName)
@@ -132,7 +142,12 @@ class ChatUserSearchViewController: UIViewController, UISearchBarDelegate, UITab
                 if let pfObjects = pfObjects as? [PFUser] {
                     self.originalLoadedUsers = pfObjects
                     self.filteredUsers = pfObjects
-                    self.tableView.reloadData()
+                    
+                    DispatchQueue.main.async {
+                        self.tableView.reloadData()
+                        
+                        HUD.hide(animated: true)
+                    }
                 } else {
                     HUD.flash(.label(error?.localizedDescription ?? "Network error"))
                 }

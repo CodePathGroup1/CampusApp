@@ -60,8 +60,6 @@ class ChatConversationViewController: JSQMessagesViewController, UINavigationCon
                 self.loadMessages(query: self.getMessageQuery())
         }
         
-        self.loadMessages(query: messageQuery)
-        
         if self.isModal {
             let closeButton: UIButton = {
                 let button = UIButton(frame: CGRect(x: 24, y: 24, width: 25, height: 25))
@@ -73,6 +71,9 @@ class ChatConversationViewController: JSQMessagesViewController, UINavigationCon
             }()
             self.view.addSubview(closeButton)
         }
+        
+        HUD.flash(.label("Loading messages..."))
+        self.loadMessages(query: messageQuery)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -109,8 +110,6 @@ class ChatConversationViewController: JSQMessagesViewController, UINavigationCon
     }
     
     private func loadMessages(query: PFQuery<Message>) {
-        HUD.flash(.label("Loading messages..."))
-        
         query.findObjectsInBackground { pfMessages, error in
             if let pfMessages = pfMessages {
                 self.add(pfMessages: pfMessages.reversed())
@@ -239,15 +238,15 @@ class ChatConversationViewController: JSQMessagesViewController, UINavigationCon
             
             messageObject.saveInBackground { succeeded, error in
                 if succeeded, let createdAt = messageObject.createdAt {
+                    self.finishSendingMessage()
+                    
                     self.conversation[C.Parse.Conversation.Keys.lastMessage] = messageObject
                     self.conversation[C.Parse.Conversation.Keys.lastMessageTimestamp] = createdAt
                     self.conversation[C.Parse.Conversation.Keys.lastUser] = currentUser
-                    self.conversation.saveInBackground { succeeded, error in
-                        if succeeded {
-                            self.completion?(self.conversation)
-                            self.finishSendingMessage()
-                        }
-                    }
+                    
+                    self.completion?(self.conversation)
+                    
+                    self.conversation.saveInBackground()
                 } else {
                     HUD.flash(.label(error?.localizedDescription ?? "Failed to send message"))
                 }

@@ -133,21 +133,26 @@ class EventDetailViewController: UIViewController, MKMapViewDelegate {
     
     @IBAction func favoriteButtonTapped(_ sender: Any) {
         event.favorite {
-            let image = UIImage(named: (self.event.isFavorited ? "favorited" : "not-favorited"))
-            self.favoriteButton.setImage(image, for: .normal)
-            
-            self.changed = true
-            HUD.hide(animated: true)
+            DispatchQueue.main.async {
+                let image = UIImage(named: (self.event.isFavorited ? "favorited" : "not-favorited"))
+                self.favoriteButton.setImage(image, for: .normal)
+                
+                self.changed = true
+                
+                HUD.hide(animated: true)
+            }
         }
     }
     
     @IBAction func eventCreatorTapped(_ sender: AnyObject) {
         if let organizer = event.organizer as? PFUser, organizer.objectId != PFUser.current()?.objectId {
             Conversation.startConversation(otherUsers: [organizer]) { conversation in
-                let storyboard = UIStoryboard(name: "Chat", bundle: nil)
-                if let vc = storyboard.instantiateViewController(withIdentifier: "ChatConversationViewController") as? ChatConversationViewController {
-                    vc.conversation = conversation
-                    self.present(vc, animated: true, completion: nil)
+                DispatchQueue.main.async {
+                    let storyboard = UIStoryboard(name: "Chat", bundle: nil)
+                    if let vc = storyboard.instantiateViewController(withIdentifier: "ChatConversationViewController") as? ChatConversationViewController {
+                        vc.conversation = conversation
+                        self.present(vc, animated: true, completion: nil)
+                    }
                 }
             }
         } else if let _ = event.googleEventID {

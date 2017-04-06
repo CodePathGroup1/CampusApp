@@ -52,11 +52,14 @@ class LoginViewController: UIViewController {
                 HUD.show(.progress)
                 
                 PFUser.logInWithUsername(inBackground: username, password: password) { (user: PFUser?, error: Error?) -> Void in
+                    
                     if let _ = user {
-                        HUD.hide(animated: true)
-                        
-                        let vc = MainTabBarController()
-                        self.present(vc, animated: true, completion: nil)
+                        DispatchQueue.main.async {
+                            let vc = MainTabBarController()
+                            self.present(vc, animated: true) {
+                                HUD.hide(animated: true)
+                            }
+                        }
                     } else {
                         HUD.flash(.label(error?.localizedDescription ?? "Unknown error"))
                     }
@@ -92,26 +95,30 @@ class LoginViewController: UIViewController {
                                 
                                 user.saveInBackground { succeeded, error in
                                     if succeeded {
-                                        HUD.hide(animated: true)
-                                        
-                                        let vc = MainTabBarController()
-                                        self.present(vc, animated: true, completion: nil)
+                                        DispatchQueue.main.async {
+                                            let vc = MainTabBarController()
+                                            self.present(vc, animated: true) {
+                                                HUD.hide(animated: true)
+                                            }
+                                        }
                                     } else {
-                                        print(error?.localizedDescription ?? "Unknown error")
+                                        HUD.flash(.label(error?.localizedDescription ?? "Unknown error"))
                                     }
                                 }
                             }
                         }
                     }
                 } else {
-                    HUD.hide(animated: true)
-                    
-                    let vc = MainTabBarController()
-                    self.present(vc, animated: true, completion: nil)
+                    DispatchQueue.main.async {
+                        let vc = MainTabBarController()
+                        self.present(vc, animated: true) {
+                            HUD.hide(animated: true)
+                        }
+                    }
                 }
             } else {
                 HUD.flash(.error)
-                print(error?.localizedDescription ?? "Unknown error")
+                HUD.flash(.label(error?.localizedDescription ?? "Unknown error"))
             }
         }
     }
