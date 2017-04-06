@@ -63,17 +63,8 @@ class ChatListViewController: UIViewController, UITableViewDataSource, UITableVi
                     vc.completion = { conversation in
                         self.conversations.append(conversation)
                         
-                        
-                        if self.conversations.count == 1 {
-                            DispatchQueue.main.async {
-                                self.tableView.reloadData()
-                            }
-                        } else {
-                            let indexPath = IndexPath(row: self.conversations.count - 1, section: 0)
-                            
-                            DispatchQueue.main.async {
-                                self.tableView.reloadRows(at: [indexPath], with: .none)
-                            }
+                        DispatchQueue.main.async {
+                            self.tableView.reloadData()
                         }
                     }
                 }
