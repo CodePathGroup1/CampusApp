@@ -29,8 +29,8 @@ class LoginViewController: UIViewController {
         facebookLoginView.clipsToBounds = true
         
         // TODO: remove this once development is finished
-        usernameField.text = "codepath"
-        passwordField.text = "codepath"
+//        usernameField.text = "codepath"
+//        passwordField.text = "codepath"
     }
     
     
