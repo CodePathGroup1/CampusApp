@@ -347,6 +347,9 @@
                                                     <constraint firstAttribute="width" secondItem="rYY-IF-i4P" secondAttribute="height" multiplier="1:1" id="KFW-pb-KFK"/>
                                                 </constraints>
                                                 <state key="normal" image="add_rsvp"/>
+                                                <connections>
+                                                    <action selector="rsvpButtonTapped:" destination="zNt-fj-lfZ" eventType="touchUpInside" id="Tjb-U6-M5b"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
@@ -358,13 +361,22 @@
                                                     <constraint firstAttribute="height" constant="30" id="tEg-cn-cCu"/>
                                                 </constraints>
                                             </imageView>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="U33-hZ-akK">
+                                            <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="245" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="U33-hZ-akK">
                                                 <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="14"/>
                                                 <state key="normal" title="Event Creator">
                                                     <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
                                                 <connections>
                                                     <action selector="eventCreatorTapped:" destination="zNt-fj-lfZ" eventType="touchUpInside" id="Sh7-wa-YLe"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3eD-Fe-r2I">
+                                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="12"/>
+                                                <state key="normal" title="... attended">
+                                                    <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="showAttendeesButtonTapped:" destination="zNt-fj-lfZ" eventType="touchUpInside" id="8Z1-ji-yeF"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -497,6 +509,8 @@
                         <outlet property="favoriteButton" destination="vou-TM-bMJ" id="d1n-O7-MWA"/>
                         <outlet property="mapView" destination="4LR-Vj-dgF" id="TSM-86-eQl"/>
                         <outlet property="roomTextField" destination="8Nc-D1-s2N" id="Hf2-xq-Zop"/>
+                        <outlet property="rsvpButton" destination="rYY-IF-i4P" id="Jzk-5E-NJU"/>
+                        <outlet property="showAttendeesButton" destination="3eD-Fe-r2I" id="tyb-gV-BEA"/>
                         <outlet property="startingDateTimeLabel" destination="T3H-BG-tgA" id="UNR-nj-Nuk"/>
                         <outlet property="titleLabel" destination="jUA-Yv-QhW" id="Cji-Fw-HzJ"/>
                         <segue destination="ZCs-xX-AIP" kind="show" identifier="EditEventViewController_EDIT" id="7hz-l3-zAL"/>

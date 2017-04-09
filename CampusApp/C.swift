@@ -100,6 +100,7 @@ struct C {
                 static let avatar = "avatar"
                 static let email = "email"
                 static let favoritedPFObjects = "favorited_pf_objects"
+                static let rsvpEvents = "rsvp_events"
                 static let fullName = "full_name"
                 static let username = "username"
             }

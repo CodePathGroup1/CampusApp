@@ -14,6 +14,7 @@ class ParseEvent {
     
     var googleEventID: String?
     var isFavorited = false
+    var isRVSPed = false
     
     let title: String?
     let organizer: PFObject?
@@ -25,7 +26,7 @@ class ParseEvent {
     let building: PFObject?
     let room: PFObject?
     
-    let attendees: PFRelation<PFObject>?
+    var attendees: [PFUser]?
     
     let description: String?
     
@@ -39,7 +40,7 @@ class ParseEvent {
          campus: PFObject?,
          building: PFObject?,
          room: PFObject?,
-         attendees: PFRelation<PFObject>?,
+         attendees: [PFUser]?,
          description: String?) {
         self.pfObject = pfObject
         
@@ -75,7 +76,7 @@ class ParseEvent {
         self.building = pfObject[C.Parse.Event.Keys.building] as? PFObject
         self.room = pfObject[C.Parse.Event.Keys.room] as? PFObject
         
-        self.attendees = pfObject[C.Parse.Event.Keys.attendees] as? PFRelation<PFObject>
+        self.attendees = pfObject[C.Parse.Event.Keys.attendees] as? [PFUser]
         
         self.description = pfObject[C.Parse.Event.Keys.description] as? String
     }
@@ -109,45 +110,102 @@ class ParseEvent {
             eventPFObject[C.Parse.Event.Keys.description] = description
         }
         
-        self.pfObject = eventPFObject
         return eventPFObject
     }
     
     func favorite(completion: ((Void) -> Void)?) {
-        HUD.flash(.progress)
-        
         if let currentUser = PFUser.current() {
-            let pfObject = self.getRemoteParseObject()
+            HUD.flash(.progress)
             
-            pfObject.saveInBackground { succeeded, error in
-                if succeeded {
-                    HUD.flash(.progress)
+            self.isFavorited = !self.isFavorited
+            
+            let eventPFObject = self.getRemoteParseObject()
+            
+            let saveRelationsBlock = {
+                if let pfObject = self.pfObject {
+                    let relation = currentUser.relation(forKey: C.Parse.User.Keys.favoritedPFObjects)
+                    if self.isFavorited {
+                        relation.add(pfObject)
+                    } else {
+                        relation.remove(pfObject)
+                    }
+                    
+                    currentUser.saveInBackground { succeeded, error in
+                        if succeeded {
+                            completion?()
+                        } else {
+                            HUD.flash(.label(error?.localizedDescription ?? "Unknown error"))
+                        }
+                    }
+                }
+            }
+            
+            if self.pfObject == nil {
+                eventPFObject.saveInBackground { succeeded, error in
+                    if succeeded {
+                        self.pfObject = eventPFObject
+                        saveRelationsBlock()
+                    } else {
+                        HUD.flash(.label(error?.localizedDescription ?? "Unknown error"))
+                    }
+                }
+            } else {
+                saveRelationsBlock()
+            }
+    }
+    }
+    
+    func rvsp(completion: ((Void) -> Void)?) {
+        if let currentUser = PFUser.current() {
+            HUD.flash(.progress)
+            
+            self.isRVSPed = !self.isRVSPed
+            
+            let eventPFObject = self.getRemoteParseObject()
+            
+            let saveRelationsBlock = {
+                if let pfObject = self.pfObject {
+                    let relation = pfObject.relation(forKey: C.Parse.Event.Keys.attendees)
+                    if self.isRVSPed {
+                        relation.add(currentUser)
+                    } else {
+                        relation.remove(currentUser)
+                    }
+                    
                     pfObject.saveInBackground { succeeded, error in
                         if succeeded {
-                            self.isFavorited = !self.isFavorited
-                            
-                            let relation = currentUser.relation(forKey: C.Parse.User.Keys.favoritedPFObjects)
-                            if self.isFavorited {
+                            let relation = currentUser.relation(forKey: C.Parse.User.Keys.rsvpEvents)
+                            if self.isRVSPed {
                                 relation.add(pfObject)
                             } else {
                                 relation.remove(pfObject)
                             }
                             
-                            currentUser.saveInBackground { succeed, error in
+                            currentUser.saveInBackground { succeeded, error in
                                 if succeeded {
                                     completion?()
                                 } else {
-                                    self.isFavorited = !self.isFavorited
-                                    HUD.flash(.label("Failed to save favorited event to user profile"))
+                                    HUD.flash(.label(error?.localizedDescription ?? "Unknown error"))
                                 }
                             }
                         } else {
                             HUD.flash(.label(error?.localizedDescription ?? "Unknown error"))
                         }
                     }
-                } else {
-                    HUD.flash(.label(error?.localizedDescription ?? "Unknown error"))
                 }
+            }
+            
+            if self.pfObject == nil {
+                eventPFObject.saveInBackground { succeeded, error in
+                    if succeeded {
+                        self.pfObject = eventPFObject
+                        saveRelationsBlock()
+                    } else {
+                        HUD.flash(.label(error?.localizedDescription ?? "Unknown error"))
+                    }
+                }
+            } else {
+                saveRelationsBlock()
             }
         }
     }

@@ -19,10 +19,15 @@ class EventDetailViewController: UIViewController, MKMapViewDelegate {
     
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var favoriteButton: UIButton!
+    @IBOutlet weak var rsvpButton: UIButton!
+    
     @IBOutlet weak var creatorAvatorPFImageView: PFImageView!
     @IBOutlet weak var creatorNameButton: UIButton!
+    @IBOutlet weak var showAttendeesButton: UIButton!
+    
     @IBOutlet weak var startingDateTimeLabel: UILabel!
     @IBOutlet weak var endingDateTimeLabel: UILabel!
+    
     @IBOutlet weak var campusTextField: RoundTextField!
     @IBOutlet weak var buildingTextField: RoundTextField!
     @IBOutlet weak var roomTextField: RoundTextField!
@@ -32,8 +37,8 @@ class EventDetailViewController: UIViewController, MKMapViewDelegate {
     
     private var changed = false
     var completionHandler: ((ParseEvent) -> Void)!
-    var event: ParseEvent!
     
+    var event: ParseEvent!
     
     /* ====================================================================================================
      MARK: - Lifecycle Methods
@@ -44,6 +49,25 @@ class EventDetailViewController: UIViewController, MKMapViewDelegate {
         if event.organizer?.objectId != PFUser.current()?.objectId {
             navigationItem.rightBarButtonItem = nil
         }
+        
+        self.showAttendeesButton.setTitle("", for: .normal)
+        
+        if let relation = event.pfObject?.relation(forKey: C.Parse.Event.Keys.attendees) {
+            if let query = relation.query() as? PFQuery<PFUser> {
+                query.findObjectsInBackground { pfUsers, error in
+                    if let pfUsers = pfUsers {
+                        if pfUsers.isEmpty {
+                            self.showAttendeesButton.setTitle("", for: .normal)
+                        } else {
+                            self.event.attendees = pfUsers
+                            self.prepareAttendeeCountLabel()
+                        }
+                    } else {
+                        HUD.flash(.label(error?.localizedDescription ?? "Failed to retrieve attendees"))
+                    }
+                }
+            }
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -51,8 +75,11 @@ class EventDetailViewController: UIViewController, MKMapViewDelegate {
         
         titleLabel.text = event.title
         
-        let image = UIImage(named: (event.isFavorited ? "favorited" : "not-favorited"))
-        favoriteButton.setImage(image, for: .normal)
+        let favoriteButtonImage = UIImage(named: (event.isFavorited ? "favorited" : "not-favorited"))
+        favoriteButton.setImage(favoriteButtonImage, for: .normal)
+        
+        let rsvpButtonImage = UIImage(named: (event.isRVSPed ? "remove_rsvp" : "add_rsvp"))
+        rsvpButton.setImage(rsvpButtonImage, for: .normal)
         
         if let organizer = event.organizer {
             if organizer.objectId != PFUser.current()?.objectId {
@@ -144,6 +171,34 @@ class EventDetailViewController: UIViewController, MKMapViewDelegate {
         }
     }
     
+    @IBAction func rsvpButtonTapped(_ sender: AnyObject) {
+        event.rvsp {
+            DispatchQueue.main.async {
+                let image = UIImage(named: (self.event.isRVSPed ? "remove_rsvp" : "add_rsvp"))
+                self.rsvpButton.setImage(image, for: .normal)
+                
+                if let currentUser = PFUser.current() {
+                    if self.event.isRVSPed {
+                        self.event.attendees = [currentUser] + (self.event.attendees ?? [])
+                        
+                    } else {
+                        if let index = self.event.attendees?
+                            .map({ return $0.objectId ?? "" })
+                            .index(of: currentUser.objectId ?? "") {
+                            
+                            self.event.attendees?.remove(at: index)
+                        }
+                    }
+                }
+                self.prepareAttendeeCountLabel()
+                
+                self.changed = true
+                
+                HUD.hide(animated: true)
+            }
+        }
+    }
+    
     @IBAction func eventCreatorTapped(_ sender: AnyObject) {
         if let organizer = event.organizer as? PFUser, organizer.objectId != PFUser.current()?.objectId {
             Conversation.startConversation(otherUsers: [organizer]) { conversation in
@@ -158,6 +213,10 @@ class EventDetailViewController: UIViewController, MKMapViewDelegate {
         } else if let _ = event.googleEventID {
             HUD.flash(.label("Chatting with user is not supported for events imported from Google Calendars."))
         }
+    }
+    
+    @IBAction func showAttendeesButtonTapped(_ sender: AnyObject) {
+        print(self.event.attendees)
     }
     /* ==================================================================================================== */
     
@@ -175,6 +234,21 @@ class EventDetailViewController: UIViewController, MKMapViewDelegate {
                         self.changed = true
                     }
                 }
+            }
+        }
+    }
+    /* ==================================================================================================== */
+    
+    
+    /* ====================================================================================================
+     MARK: - Private Helper Method
+     ====================================================================================================== */
+    private func prepareAttendeeCountLabel() {
+        DispatchQueue.main.async {
+            if let attendees = self.event.attendees, !attendees.isEmpty {
+                self.showAttendeesButton.setTitle("\(attendees.count) attending", for: .normal)
+            } else {
+                self.showAttendeesButton.setTitle("", for: .normal)
             }
         }
     }

@@ -215,7 +215,11 @@ class EventListViewController: UIViewController, UITableViewDataSource, UITableV
     private func loadParseEvents() {
         let query = PFQuery(className: C.Parse.Event.className)
         query.whereKey(C.Parse.Event.Keys.startDateTime, lessThanOrEqualTo: Calendar.current.date(byAdding: .day, value: 14, to: Date())!)
-        query.includeKeys([C.Parse.Event.Keys.organizer, C.Parse.Event.Keys.campus, C.Parse.Event.Keys.building, C.Parse.Event.Keys.room])
+        query.includeKeys([C.Parse.Event.Keys.organizer,
+                           C.Parse.Event.Keys.attendees, 
+                           C.Parse.Event.Keys.campus,
+                           C.Parse.Event.Keys.building,
+                           C.Parse.Event.Keys.room])
         
         query.findObjectsInBackground { pfObjects, error in
             if let pfObjects = pfObjects {
@@ -278,6 +282,40 @@ class EventListViewController: UIViewController, UITableViewDataSource, UITableV
                     
                     for favoritedParseEvent in favoritedParseEvents {
                         favoritedParseEvent.isFavorited = true
+                    }
+                    
+                    // Go to Step 5
+                    self.loadRSVPStatus()
+                } else {
+                    HUD.flash(.label(error?.localizedDescription ?? "Getting favorite status failed"))
+                }
+            }
+        }
+    }
+    
+    // Step 5: Query current user's RSVPed events and update ParseEvent objects
+    private func loadRSVPStatus() {
+        if let currentUser = PFUser.current() {
+            let relation = currentUser.relation(forKey: C.Parse.User.Keys.rsvpEvents)
+            let query = relation.query()
+            query.findObjectsInBackground { pfObjects, error in
+                if let pfObjects = pfObjects {
+                    let rsvpedParseEventIDs: [String] = pfObjects.reduce([]) { result, pfObject in
+                        if let objectId = pfObject.objectId {
+                            return result + [objectId]
+                        }
+                        return result
+                    }
+                    
+                    let rsvpedParseEvents = self.events.filter { event in
+                        if let objectId = event.pfObject?.objectId {
+                            return rsvpedParseEventIDs.contains(objectId)
+                        }
+                        return false
+                    }
+                    
+                    for rsvpedParseEvent in rsvpedParseEvents {
+                        rsvpedParseEvent.isRVSPed = true
                     }
                     
                     // Go to FINAL step
