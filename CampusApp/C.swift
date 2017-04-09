@@ -67,6 +67,7 @@ struct C {
                 static let building = "building"
                 static let room = "room"
                 static let attendees = "attendees"
+                static let attendeeCount = "attendee_count"
                 static let description = "description"
             }
         }

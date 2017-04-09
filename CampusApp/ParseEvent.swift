@@ -27,6 +27,7 @@ class ParseEvent {
     let room: PFObject?
     
     var attendees: [PFUser]?
+    var attendeeCount: Int?
     
     let description: String?
     
@@ -41,6 +42,7 @@ class ParseEvent {
          building: PFObject?,
          room: PFObject?,
          attendees: [PFUser]?,
+         attendeeCount: Int?,
          description: String?) {
         self.pfObject = pfObject
         
@@ -57,6 +59,7 @@ class ParseEvent {
         self.room = room
         
         self.attendees = attendees
+        self.attendeeCount = attendeeCount
         
         self.description = description
     }
@@ -77,6 +80,7 @@ class ParseEvent {
         self.room = pfObject[C.Parse.Event.Keys.room] as? PFObject
         
         self.attendees = pfObject[C.Parse.Event.Keys.attendees] as? [PFUser]
+        self.attendeeCount = pfObject[C.Parse.Event.Keys.attendeeCount] as? Int
         
         self.description = pfObject[C.Parse.Event.Keys.description] as? String
     }
@@ -168,8 +172,14 @@ class ParseEvent {
                     let relation = pfObject.relation(forKey: C.Parse.Event.Keys.attendees)
                     if self.isRVSPed {
                         relation.add(currentUser)
+                        
+                        self.attendeeCount = (self.attendeeCount ?? 0) + 1
+                        pfObject[C.Parse.Event.Keys.attendeeCount] = self.attendeeCount
                     } else {
                         relation.remove(currentUser)
+                        
+                        self.attendeeCount = min(0, (self.attendeeCount ?? 0) - 1)
+                        pfObject[C.Parse.Event.Keys.attendeeCount] = self.attendeeCount
                     }
                     
                     pfObject.saveInBackground { succeeded, error in

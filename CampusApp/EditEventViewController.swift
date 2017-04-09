@@ -228,6 +228,8 @@ class EditEventViewController: UIViewController, UITextFieldDelegate, UIGestureR
      MARK: - Private Helper Methods
      ====================================================================================================== */
     private func save(eventPFObject: PFObject) {
+        if !isSaving { return }
+        
         guard
             let title = titleTextField.text, !title.isEmpty,
             let startDateTime = startDateTime,
@@ -248,8 +250,15 @@ class EditEventViewController: UIViewController, UITextFieldDelegate, UIGestureR
                 eventPFObject[C.Parse.Event.Keys.organizerName] = fullName
             }
             
-            let relation = eventPFObject.relation(forKey: C.Parse.Event.Keys.attendees)
-            relation.add(currentUser)
+            switch mode! {
+            case .New:
+                let relation = eventPFObject.relation(forKey: C.Parse.Event.Keys.attendees)
+                relation.add(currentUser)
+                
+                eventPFObject[C.Parse.Event.Keys.attendeeCount] = 1
+            default:
+                break
+            }
         }
         
         eventPFObject[C.Parse.Event.Keys.startDateTime] = startDateTime
@@ -273,6 +282,8 @@ class EditEventViewController: UIViewController, UITextFieldDelegate, UIGestureR
         
         eventPFObject.saveInBackground { succeeded, error in
             if succeeded {
+                self.isSaving = false
+                
                 DispatchQueue.main.async {
                     _ = self.navigationController?.popViewController(animated: true)
                 }

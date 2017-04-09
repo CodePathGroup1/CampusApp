@@ -49,25 +49,6 @@ class EventDetailViewController: UIViewController, MKMapViewDelegate {
         if event.organizer?.objectId != PFUser.current()?.objectId {
             navigationItem.rightBarButtonItem = nil
         }
-        
-        self.showAttendeesButton.setTitle("", for: .normal)
-        
-        if let relation = event.pfObject?.relation(forKey: C.Parse.Event.Keys.attendees) {
-            if let query = relation.query() as? PFQuery<PFUser> {
-                query.findObjectsInBackground { pfUsers, error in
-                    if let pfUsers = pfUsers {
-                        if pfUsers.isEmpty {
-                            self.showAttendeesButton.setTitle("", for: .normal)
-                        } else {
-                            self.event.attendees = pfUsers
-                            self.prepareAttendeeCountLabel()
-                        }
-                    } else {
-                        HUD.flash(.label(error?.localizedDescription ?? "Failed to retrieve attendees"))
-                    }
-                }
-            }
-        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -105,6 +86,12 @@ class EventDetailViewController: UIViewController, MKMapViewDelegate {
         } else if let organizerName = event.organizerName {
             creatorAvatorPFImageView.isHidden = true
             creatorNameButton.setTitle(organizerName, for: .normal)
+        }
+        
+        if let attendeeCount = event.attendeeCount, attendeeCount >= 1 {
+            self.showAttendeesButton.setTitle("\(attendeeCount) attending", for: .normal)
+        } else {
+            self.showAttendeesButton.setTitle("", for: .normal)
         }
         
         startingDateTimeLabel.text = event.startDateTime?.shortDateTimeFormat

@@ -238,17 +238,12 @@ class EventListViewController: UIViewController, UITableViewDataSource, UITableV
         
         for parseEvent in parseEvents {
             if let googleEventID = parseEvent.googleEventID {
-                let loadedGoogleEvent: ParseEvent? = {
-                    for event in self.events {
-                        if event.googleEventID == googleEventID {
-                            return event
-                        }
-                    }
-                    return nil
-                }()
+                let index = self.events.index { event -> Bool in
+                    return (event.googleEventID == googleEventID)
+                }
                 
-                if let loadedGoogleEvent = loadedGoogleEvent {
-                    loadedGoogleEvent.pfObject = parseEvent.pfObject
+                if let index = index {
+                    self.events[index] = parseEvent
                 }
             } else {
                 self.events.append(parseEvent)
