@@ -13,7 +13,7 @@ import ParseUI
 import PKHUD
 import UIKit
 
-class EventDetailViewController: UIViewController, MKMapViewDelegate {
+class EventDetailViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, MKMapViewDelegate {
 
     @IBOutlet var editButton: UIBarButtonItem!
     
@@ -33,6 +33,8 @@ class EventDetailViewController: UIViewController, MKMapViewDelegate {
     @IBOutlet weak var roomTextField: RoundTextField!
     @IBOutlet weak var descriptionLabel: UITextView!
     
+    @IBOutlet weak var collectionView: UICollectionView!
+    
     @IBOutlet weak var mapView: MKMapView!
     
     private var changed = false
@@ -49,6 +51,9 @@ class EventDetailViewController: UIViewController, MKMapViewDelegate {
         if event.organizer?.objectId != PFUser.current()?.objectId {
             navigationItem.rightBarButtonItem = nil
         }
+        
+        collectionView.dataSource = self
+        collectionView.delegate = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -204,6 +209,19 @@ class EventDetailViewController: UIViewController, MKMapViewDelegate {
     
     @IBAction func showAttendeesButtonTapped(_ sender: AnyObject) {
         performSegue(withIdentifier: "AttendeeListViewController", sender: nil)
+    }
+    /* ==================================================================================================== */
+    
+    
+    /* ====================================================================================================
+     MARK: - UICollectionView Delegate Methods
+     ====================================================================================================== */
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        
     }
     /* ==================================================================================================== */
     
