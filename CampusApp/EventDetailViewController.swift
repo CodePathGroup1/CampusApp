@@ -13,7 +13,7 @@ import ParseUI
 import PKHUD
 import UIKit
 
-class EventDetailViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, MKMapViewDelegate {
+class EventDetailViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate, MKMapViewDelegate {
 
     @IBOutlet var editButton: UIBarButtonItem!
     
@@ -54,6 +54,8 @@ class EventDetailViewController: UIViewController, UICollectionViewDataSource, U
         
         collectionView.dataSource = self
         collectionView.delegate = self
+        
+        loadEventImages()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -210,6 +212,25 @@ class EventDetailViewController: UIViewController, UICollectionViewDataSource, U
     @IBAction func showAttendeesButtonTapped(_ sender: AnyObject) {
         performSegue(withIdentifier: "AttendeeListViewController", sender: nil)
     }
+    
+    @IBAction func addEventImageButtontapped(_ sender: AnyObject) {
+        let alertVC = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        
+        let takePhotoAction = UIAlertAction(title: "Take photo", style: .default) { _ in
+            _ = Camera.shouldStartCamera(target: self, canEdit: true, frontFacing: true)
+        }
+        alertVC.addAction(takePhotoAction)
+        
+        let chooseExistingPhotoAction = UIAlertAction(title: "Choose existing photo", style: .default) { _ in
+            _ = Camera.shouldStartPhotoLibrary(target: self, mediaType: .Photo, canEdit: true)
+        }
+        alertVC.addAction(chooseExistingPhotoAction)
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: nil)
+        alertVC.addAction(cancelAction)
+        
+        present(alertVC, animated: true, completion: nil)
+    }
     /* ==================================================================================================== */
     
     
@@ -217,11 +238,42 @@ class EventDetailViewController: UIViewController, UICollectionViewDataSource, U
      MARK: - UICollectionView Delegate Methods
      ====================================================================================================== */
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "EventImageCell", for: indexPath) as? EventImageCell {
+            if let eventImages = event.eventImages {
+                let eventImage = eventImages[indexPath.item]
+                
+                cell.eventImageView.file = eventImage.file
+                cell.eventImageView.loadInBackground()
+            }
+            
+            return cell
+        }
         
+        return UICollectionViewCell()
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return (event.eventImages?.count ?? 0)
+    }
+    /* ==================================================================================================== */
+    
+    
+    /* ====================================================================================================
+     MARK: - UIImagePickerController Delegate Methods
+     ====================================================================================================== */
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        HUD.show(.progress)
         
+        if let picture = info[UIImagePickerControllerEditedImage] as? UIImage {
+            picker.dismiss(animated: true) {
+                self.event.add(eventImage: picture) {
+                    DispatchQueue.main.async {
+                        self.collectionView.reloadData()
+                        HUD.hide(animated: true)
+                    }
+                }
+            }
+        }
     }
     /* ==================================================================================================== */
     
@@ -258,6 +310,33 @@ class EventDetailViewController: UIViewController, UICollectionViewDataSource, U
                 self.showAttendeesButton.setTitle("\(attendees.count) attending", for: .normal)
             } else {
                 self.showAttendeesButton.setTitle("", for: .normal)
+            }
+        }
+    }
+    
+    private func loadEventImages() {
+        if let relation = event.pfObject?.relation(forKey: C.Parse.Event.Keys.eventImages) {
+            let spinner = UIActivityIndicatorView(activityIndicatorStyle: .gray)
+            spinner.frame = collectionView.frame
+            collectionView.addSubview(spinner)
+            
+            spinner.startAnimating()
+            
+            let query = relation.query()
+            query.findObjectsInBackground { pfObjects, error in
+                if let pfObjects = pfObjects, !pfObjects.isEmpty {
+                    self.event.eventImages = pfObjects.map { pfObject in
+                        return ParseImage(pfObject: pfObject)
+                    }
+                    
+                    DispatchQueue.main.async {
+                        self.collectionView.reloadData()
+                    }
+                }
+                
+                DispatchQueue.main.async {
+                    spinner.stopAnimating()
+                }
             }
         }
     }

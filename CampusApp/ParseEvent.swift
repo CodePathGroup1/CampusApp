@@ -31,6 +31,8 @@ class ParseEvent {
     
     let description: String?
     
+    var eventImages: [ParseImage]?
+    
     init(pfObject: PFObject?,
          googleEventID: String?,
          title: String?,
@@ -43,7 +45,8 @@ class ParseEvent {
          room: PFObject?,
          attendees: [PFUser]?,
          attendeeCount: Int?,
-         description: String?) {
+         description: String?,
+         eventImages: [ParseImage]?) {
         self.pfObject = pfObject
         
         self.googleEventID = googleEventID
@@ -62,6 +65,8 @@ class ParseEvent {
         self.attendeeCount = attendeeCount
         
         self.description = description
+        
+        self.eventImages = eventImages
     }
     
     init(pfObject: PFObject) {
@@ -83,6 +88,8 @@ class ParseEvent {
         self.attendeeCount = pfObject[C.Parse.Event.Keys.attendeeCount] as? Int
         
         self.description = pfObject[C.Parse.Event.Keys.description] as? String
+        
+        self.eventImages = pfObject[C.Parse.Event.Keys.eventImages] as? [ParseImage]
     }
     
     private func getRemoteParseObject() -> PFObject {
@@ -217,6 +224,51 @@ class ParseEvent {
             } else {
                 saveRelationsBlock()
             }
+        }
+    }
+    
+    func add(eventImage: UIImage, completion: ((Void) -> Void)?) {
+        let eventPFObject = self.getRemoteParseObject()
+        
+        let saveRelationsBlock = {
+            if let data = UIImageJPEGRepresentation(eventImage, 0.6),
+                let eventImagePFfile = PFFile(name: "picture.jpg", data: data),
+                let currentUser = PFUser.current(),
+                let pfObject = self.pfObject {
+                
+                let imagePFObject = PFObject(className: C.Parse.Image.className)
+                imagePFObject[C.Parse.Image.Keys.uploader] = currentUser
+                imagePFObject[C.Parse.Image.Keys.file] = eventImagePFfile
+                
+                imagePFObject.saveInBackground { succeeded, error in
+                    if succeeded {
+                        let relation = pfObject.relation(forKey: C.Parse.Event.Keys.eventImages)
+                        relation.add(imagePFObject)
+                        
+                        pfObject.saveInBackground { succeeded, error in
+                            let eventImage = ParseImage(pfObject: imagePFObject)
+                            self.eventImages = (self.eventImages ?? []) + [eventImage]
+                            
+                            completion?()
+                        }
+                    } else {
+                        HUD.flash(.label(error?.localizedDescription ?? "Unknown error"))
+                    }
+                }
+            }
+        }
+        
+        if self.pfObject == nil {
+            eventPFObject.saveInBackground { succeeded, error in
+                if succeeded {
+                    self.pfObject = eventPFObject
+                    saveRelationsBlock()
+                } else {
+                    HUD.flash(.label(error?.localizedDescription ?? "Unknown error"))
+                }
+            }
+        } else {
+            saveRelationsBlock()
         }
     }
 }

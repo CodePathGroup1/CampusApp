@@ -49,7 +49,7 @@ final class Camera {
         
         cameraUI.allowsEditing = canEdit
         cameraUI.showsCameraControls = true
-        if let target = target as? ChatConversationViewController {
+        if let target = target as? UINavigationControllerDelegate & UIImagePickerControllerDelegate {
             cameraUI.delegate = target
         }
         
@@ -87,7 +87,7 @@ final class Camera {
         }
         
         imagePicker.allowsEditing = canEdit
-        if let target = target as? ChatConversationViewController {
+        if let target = target as? UINavigationControllerDelegate & UIImagePickerControllerDelegate {
             imagePicker.delegate = target
         }
         

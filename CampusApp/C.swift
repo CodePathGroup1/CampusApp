@@ -69,6 +69,16 @@ struct C {
                 static let attendees = "attendees"
                 static let attendeeCount = "attendee_count"
                 static let description = "description"
+                static let eventImages = "event_images"
+            }
+        }
+        
+        struct Image {
+            static let className = "Image"
+            
+            struct Keys {
+                static let uploader = "uploader"
+                static let file = "file"
             }
         }
         

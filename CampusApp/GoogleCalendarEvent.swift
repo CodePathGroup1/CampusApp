@@ -80,6 +80,7 @@ class GoogleCalendarEvent: ParseEvent {
                    room: nil,
                    attendees: [PFUser](),
                    attendeeCount: nil,
-                   description: json["description"] as? String)
+                   description: json["description"] as? String,
+                   eventImages: nil)
     }
 }
