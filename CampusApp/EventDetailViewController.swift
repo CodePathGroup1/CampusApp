@@ -203,7 +203,7 @@ class EventDetailViewController: UIViewController, MKMapViewDelegate {
     }
     
     @IBAction func showAttendeesButtonTapped(_ sender: AnyObject) {
-        print(self.event.attendees)
+        performSegue(withIdentifier: "AttendeeListViewController", sender: nil)
     }
     /* ==================================================================================================== */
     
@@ -220,6 +220,10 @@ class EventDetailViewController: UIViewController, MKMapViewDelegate {
                         self.event = parseEvent
                         self.changed = true
                     }
+                }
+            } else if identifier == "AttendeeListViewController" {
+                if let destination = segue.destination as? AttendeeListViewController {
+                    destination.event = event
                 }
             }
         }

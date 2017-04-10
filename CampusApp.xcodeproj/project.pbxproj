@@ -33,6 +33,9 @@
 		6555F1C61E86D0C1004284DB /* Camera.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6555F1C51E86D0C1004284DB /* Camera.swift */; };
 		6555F1C81E86D9EE004284DB /* ChatUserSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6555F1C71E86D9EE004284DB /* ChatUserSearchViewController.swift */; };
 		6555F1CA1E86E773004284DB /* ChatUserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6555F1C91E86E773004284DB /* ChatUserCell.swift */; };
+		655AA7F91E9B071E00833DCD /* AttendeeListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 655AA7F81E9B071E00833DCD /* AttendeeListViewController.swift */; };
+		655AA8001E9B0A5D00833DCD /* UserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 655AA7FE1E9B0A5D00833DCD /* UserCell.swift */; };
+		655AA8011E9B0A5D00833DCD /* UserCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 655AA7FF1E9B0A5D00833DCD /* UserCell.xib */; };
 		65730E211E82FA3000FF5906 /* Campus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65730E201E82FA3000FF5906 /* Campus.swift */; };
 		65730E231E82FA3B00FF5906 /* Building.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65730E221E82FA3B00FF5906 /* Building.swift */; };
 		65730E251E82FA4900FF5906 /* Room.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65730E241E82FA4900FF5906 /* Room.swift */; };
@@ -82,6 +85,9 @@
 		6555F1C51E86D0C1004284DB /* Camera.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Camera.swift; sourceTree = "<group>"; };
 		6555F1C71E86D9EE004284DB /* ChatUserSearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatUserSearchViewController.swift; sourceTree = "<group>"; };
 		6555F1C91E86E773004284DB /* ChatUserCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatUserCell.swift; sourceTree = "<group>"; };
+		655AA7F81E9B071E00833DCD /* AttendeeListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttendeeListViewController.swift; sourceTree = "<group>"; };
+		655AA7FE1E9B0A5D00833DCD /* UserCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserCell.swift; sourceTree = "<group>"; };
+		655AA7FF1E9B0A5D00833DCD /* UserCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserCell.xib; sourceTree = "<group>"; };
 		65730E201E82FA3000FF5906 /* Campus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Campus.swift; sourceTree = "<group>"; };
 		65730E221E82FA3B00FF5906 /* Building.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Building.swift; sourceTree = "<group>"; };
 		65730E241E82FA4900FF5906 /* Room.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Room.swift; sourceTree = "<group>"; };
@@ -183,6 +189,7 @@
 				653040F51E81A2C3009EF9A5 /* MainTabBarController.swift */,
 				BE4249FF1E655D7200A7BA37 /* EventListViewController.swift */,
 				1DF7D75B1E80CC5D003ECFB6 /* EventDetailViewController.swift */,
+				655AA7F81E9B071E00833DCD /* AttendeeListViewController.swift */,
 				6526E88E1E8F5D26008F468D /* EditEventViewController.swift */,
 				6526E8901E8F63D3008F468D /* EditEventDetailPickerViewController.swift */,
 				652F53101E838ACE0073CA9C /* ChatListViewController.swift */,
@@ -216,6 +223,8 @@
 				65E8353F1E80CCE80006FC0D /* RoundTextField.swift */,
 				6519E53B1E820D1A0058CB6A /* TopAlignedLabel.swift */,
 				1DCF9BC81E91BE41008BE66E /* SaleCell.swift */,
+				655AA7FE1E9B0A5D00833DCD /* UserCell.swift */,
+				655AA7FF1E9B0A5D00833DCD /* UserCell.xib */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -365,6 +374,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				652F53151E838B220073CA9C /* Chat.storyboard in Resources */,
+				655AA8011E9B0A5D00833DCD /* UserCell.xib in Resources */,
 				BE424A081E655D7200A7BA37 /* LaunchScreen.storyboard in Resources */,
 				65F5BBDE1E80FE9000368D36 /* Login.storyboard in Resources */,
 				BE424A051E655D7200A7BA37 /* Assets.xcassets in Resources */,
@@ -431,6 +441,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				65F5BBE01E81059500368D36 /* ParseUtil.swift in Sources */,
+				655AA8001E9B0A5D00833DCD /* UserCell.swift in Sources */,
 				1DCF9BC71E91BB62008BE66E /* SaleViewController.swift in Sources */,
 				65730E231E82FA3B00FF5906 /* Building.swift in Sources */,
 				6526E88F1E8F5D26008F468D /* EditEventViewController.swift in Sources */,
@@ -451,6 +462,7 @@
 				65730E251E82FA4900FF5906 /* Room.swift in Sources */,
 				652F531B1E838D860073CA9C /* Conversation.swift in Sources */,
 				1DCF9BCB1E91BED6008BE66E /* SaleDetailViewController.swift in Sources */,
+				655AA7F91E9B071E00833DCD /* AttendeeListViewController.swift in Sources */,
 				6555F1CA1E86E773004284DB /* ChatUserCell.swift in Sources */,
 				BE424A001E655D7200A7BA37 /* EventListViewController.swift in Sources */,
 				1DF7D75A1E80CA16003ECFB6 /* EventCell.swift in Sources */,
