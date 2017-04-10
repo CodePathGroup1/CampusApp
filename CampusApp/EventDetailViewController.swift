@@ -252,6 +252,20 @@ class EventDetailViewController: UIViewController, UICollectionViewDataSource, U
         return UICollectionViewCell()
     }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        let storyboard = UIStoryboard(name: "Event", bundle: nil)
+        if let vc = storyboard.instantiateViewController(withIdentifier: "EventImageViewController") as? EventImageViewController {
+            
+            if let cell = collectionView.cellForItem(at: indexPath) as? EventImageCell {
+                if let image = cell.eventImageView.image {
+                    vc.image = image
+                    present(vc, animated: true, completion: nil)
+                }
+            }
+        }
+    }
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return (event.eventImages?.count ?? 0)
     }

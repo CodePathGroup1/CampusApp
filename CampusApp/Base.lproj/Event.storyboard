@@ -577,6 +577,49 @@
             </objects>
             <point key="canvasLocation" x="1701.5999999999999" y="138.98050974512745"/>
         </scene>
+        <!--Event Image View Controller-->
+        <scene sceneID="SXU-T8-lGe">
+            <objects>
+                <viewController storyboardIdentifier="EventImageViewController" id="VSb-1z-C50" customClass="EventImageViewController" customModule="CampusApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="KXJ-Ke-0rZ"/>
+                        <viewControllerLayoutGuide type="bottom" id="Gma-9t-8tY"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="uOM-V6-4UP">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="6ya-ud-gMQ">
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="c9B-be-TOx" appends="YES" id="aSQ-WL-kUC"/>
+                                </connections>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="6ya-ud-gMQ" secondAttribute="trailing" id="3VK-PR-SUP"/>
+                            <constraint firstItem="6ya-ud-gMQ" firstAttribute="leading" secondItem="uOM-V6-4UP" secondAttribute="leading" id="HRO-Cw-PeZ"/>
+                            <constraint firstItem="6ya-ud-gMQ" firstAttribute="top" secondItem="KXJ-Ke-0rZ" secondAttribute="bottom" id="hPx-v1-psh"/>
+                            <constraint firstItem="Gma-9t-8tY" firstAttribute="top" secondItem="6ya-ud-gMQ" secondAttribute="bottom" id="lpt-g2-SiT"/>
+                        </constraints>
+                    </view>
+                    <nil key="simulatedStatusBarMetrics"/>
+                    <nil key="simulatedTopBarMetrics"/>
+                    <nil key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="eventImageView" destination="6ya-ud-gMQ" id="Ytr-Uj-utv"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="eov-TW-gWM" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="c9B-be-TOx">
+                    <connections>
+                        <action selector="imageTapped:" destination="VSb-1z-C50" id="CAi-lm-Cou"/>
+                    </connections>
+                </tapGestureRecognizer>
+            </objects>
+            <point key="canvasLocation" x="1702" y="869"/>
+        </scene>
         <!--Attendee List View Controller-->
         <scene sceneID="zSF-wb-WVO">
             <objects>
