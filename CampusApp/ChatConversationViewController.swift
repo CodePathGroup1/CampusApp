@@ -73,7 +73,7 @@ class ChatConversationViewController: JSQMessagesViewController, UINavigationCon
             self.view.addSubview(closeButton)
         }
         
-        HUD.flash(.label("Loading messages..."))
+        HUD.show(.label("Loading messages..."))
         self.loadMessages(query: messageQuery)
     }
     
@@ -115,7 +115,9 @@ class ChatConversationViewController: JSQMessagesViewController, UINavigationCon
             if let pfMessages = pfMessages {
                 self.add(pfMessages: pfMessages.reversed())
             } else {
-                HUD.flash(.label(error?.localizedDescription ?? "Network error"))
+                HUD.hide(animated: false)
+                UIWindow.showMessage(title: "Error",
+                                     message: error?.localizedDescription ?? "Network error")
             }
         }
     }
@@ -206,9 +208,9 @@ class ChatConversationViewController: JSQMessagesViewController, UINavigationCon
             modifiedText += "[Picture message]"
             pictureFile = file
             file.saveInBackground { succeed, error in
-                if let error = error {
-                    HUD.flash(.label(error.localizedDescription))
-                }
+                HUD.hide(animated: false)
+                UIWindow.showMessage(title: "Error",
+                                     message: error?.localizedDescription ?? "Unknown error")
             }
         }
         
@@ -220,7 +222,9 @@ class ChatConversationViewController: JSQMessagesViewController, UINavigationCon
             videoFile = file
             file.saveInBackground { succeed, error in
                 if let error = error {
-                    HUD.flash(.label(error.localizedDescription))
+                    HUD.hide(animated: false)
+                    UIWindow.showMessage(title: "Error",
+                                         message: error.localizedDescription)
                 }
             }
         }
@@ -249,7 +253,9 @@ class ChatConversationViewController: JSQMessagesViewController, UINavigationCon
                     
                     self.conversation.saveInBackground()
                 } else {
-                    HUD.flash(.label(error?.localizedDescription ?? "Failed to send message"))
+                    HUD.hide(animated: false)
+                    UIWindow.showMessage(title: "Error",
+                                         message: error?.localizedDescription ?? "Failed to send message")
                 }
             }
         }

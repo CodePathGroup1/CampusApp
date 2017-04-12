@@ -148,10 +148,14 @@ class EditEventViewController: UIViewController, UITextFieldDelegate, UIGestureR
      ====================================================================================================== */
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         if textField.tag == Tag.building.rawValue, self.campus == nil {
-            HUD.flash(.label("No campus has been specified yet."))
+            HUD.hide(animated: false)
+            UIWindow.showMessage(title: "Error",
+                                 message: "No campus has been specified yet.")
             
         } else if textField.tag == Tag.room.rawValue, self.building == nil {
-            HUD.flash(.label("No building has been specified yet."))
+            HUD.hide(animated: false)
+            UIWindow.showMessage(title: "Error",
+                                 message: "No building has been specified yet.")
             
         } else {
             view.endEditing(true)
@@ -228,14 +232,16 @@ class EditEventViewController: UIViewController, UITextFieldDelegate, UIGestureR
      MARK: - Private Helper Methods
      ====================================================================================================== */
     private func save(eventPFObject: PFObject) {
-        if !isSaving { return }
+        if isSaving { return }
         
         guard
             let title = titleTextField.text, !title.isEmpty,
             let startDateTime = startDateTime,
             let endDateTime = endDateTime
             else {
-                HUD.flash(.label("Missing content in required field(s)"))
+                HUD.hide(animated: false)
+                UIWindow.showMessage(title: "Error",
+                                     message: "Missing content in required field(s)")
                 return
         }
         
@@ -292,7 +298,9 @@ class EditEventViewController: UIViewController, UITextFieldDelegate, UIGestureR
                 self.completionHandler?(parseEvent)
             } else {
                 self.isSaving = false
-                HUD.flash(.label(error?.localizedDescription ?? "Create event failed"))
+                HUD.hide(animated: false)
+                UIWindow.showMessage(title: "Error",
+                                     message: error?.localizedDescription ?? "Create event failed")
             }
         }
     }

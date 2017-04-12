@@ -40,6 +40,7 @@
 		65730E231E82FA3B00FF5906 /* Building.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65730E221E82FA3B00FF5906 /* Building.swift */; };
 		65730E251E82FA4900FF5906 /* Room.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65730E241E82FA4900FF5906 /* Room.swift */; };
 		65730E291E82FF5300FF5906 /* CampusEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65730E281E82FF5300FF5906 /* CampusEvent.swift */; };
+		6577A6481E9DE85E00CC5AA6 /* UIWindowExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6577A6471E9DE85E00CC5AA6 /* UIWindowExtension.swift */; };
 		65C69BBA1E86F069002AFC2F /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65C69BB91E86F069002AFC2F /* Message.swift */; };
 		65E61B1C1E9B3B9500B142A2 /* EventImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65E61B1B1E9B3B9500B142A2 /* EventImageCell.swift */; };
 		65E61B1E1E9B517D00B142A2 /* ParseImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65E61B1D1E9B517D00B142A2 /* ParseImage.swift */; };
@@ -95,6 +96,7 @@
 		65730E221E82FA3B00FF5906 /* Building.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Building.swift; sourceTree = "<group>"; };
 		65730E241E82FA4900FF5906 /* Room.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Room.swift; sourceTree = "<group>"; };
 		65730E281E82FF5300FF5906 /* CampusEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CampusEvent.swift; sourceTree = "<group>"; };
+		6577A6471E9DE85E00CC5AA6 /* UIWindowExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIWindowExtension.swift; sourceTree = "<group>"; };
 		65C69BB91E86F069002AFC2F /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		65E61B1B1E9B3B9500B142A2 /* EventImageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventImageCell.swift; sourceTree = "<group>"; };
 		65E61B1D1E9B517D00B142A2 /* ParseImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseImage.swift; sourceTree = "<group>"; };
@@ -264,6 +266,7 @@
 				653040FF1E81C88D009EF9A5 /* DateExtension.swift */,
 				653041011E81C8AF009EF9A5 /* StringExtension.swift */,
 				65F5BBE11E810C4D00368D36 /* UIViewControllerExtension.swift */,
+				6577A6471E9DE85E00CC5AA6 /* UIWindowExtension.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -452,6 +455,7 @@
 				65F5BBE01E81059500368D36 /* ParseUtil.swift in Sources */,
 				655AA8001E9B0A5D00833DCD /* UserCell.swift in Sources */,
 				1DCF9BC71E91BB62008BE66E /* SaleViewController.swift in Sources */,
+				6577A6481E9DE85E00CC5AA6 /* UIWindowExtension.swift in Sources */,
 				65730E231E82FA3B00FF5906 /* Building.swift in Sources */,
 				6526E88F1E8F5D26008F468D /* EditEventViewController.swift in Sources */,
 				653041001E81C88D009EF9A5 /* DateExtension.swift in Sources */,

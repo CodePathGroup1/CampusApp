@@ -101,7 +101,7 @@ class ChatUserSearchViewController: UIViewController, UISearchBarDelegate, UITab
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let otherUsers = [filteredUsers[indexPath.row]]
         
-        HUD.flash(.label("Loading conversation..."))
+        HUD.show(.label("Loading conversation..."))
         
         Conversation.startConversation(otherUsers: otherUsers) { conversation in
             DispatchQueue.main.async {
@@ -141,7 +141,7 @@ class ChatUserSearchViewController: UIViewController, UISearchBarDelegate, UITab
      ====================================================================================================== */
     private func loadUsers() {
         if let currentUser = PFUser.current(), let currentUsername = currentUser.username {
-            HUD.flash(.label("Loading users..."))
+            HUD.show(.label("Loading users..."))
             
             let query = PFQuery(className: C.Parse.User.className)
             query.whereKey(C.Parse.User.Keys.username, notEqualTo: currentUsername)
@@ -157,7 +157,9 @@ class ChatUserSearchViewController: UIViewController, UISearchBarDelegate, UITab
                         HUD.hide(animated: true)
                     }
                 } else {
-                    HUD.flash(.label(error?.localizedDescription ?? "Network error"))
+                    HUD.hide(animated: false)
+                    UIWindow.showMessage(title: "Error",
+                                         message: error?.localizedDescription ?? "Network Error")
                 }
             }
         }

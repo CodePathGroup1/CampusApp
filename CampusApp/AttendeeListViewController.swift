@@ -81,7 +81,7 @@ class AttendeeListViewController: UIViewController, UITableViewDataSource, UITab
      MARK: - Private Helper Methods
      ====================================================================================================== */
     private func loadAttendees() {
-        HUD.flash(.progress)
+        HUD.show(.progress)
         
         if let relation = event.pfObject?.relation(forKey: C.Parse.Event.Keys.attendees) {
             if let query = relation.query() as? PFQuery<PFUser> {
@@ -94,7 +94,9 @@ class AttendeeListViewController: UIViewController, UITableViewDataSource, UITab
                             HUD.hide(animated: true)
                         }
                     } else {
-                        HUD.flash(.label(error?.localizedDescription ?? "Failed to retrieve attendees"))
+                        HUD.hide(animated: false)
+                        UIWindow.showMessage(title: "Error",
+                                             message: error?.localizedDescription ?? "Failed to retrieve attendees")
                     }
                 }
             }

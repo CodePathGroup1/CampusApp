@@ -126,7 +126,7 @@ class ParseEvent {
     
     func favorite(completion: ((Void) -> Void)?) {
         if let currentUser = PFUser.current() {
-            HUD.flash(.progress)
+            HUD.show(.progress)
             
             self.isFavorited = !self.isFavorited
             
@@ -145,7 +145,9 @@ class ParseEvent {
                         if succeeded {
                             completion?()
                         } else {
-                            HUD.flash(.label(error?.localizedDescription ?? "Unknown error"))
+                            HUD.hide(animated: false)
+                            UIWindow.showMessage(title: "Error",
+                                                 message: error?.localizedDescription ?? "Unknown Error")
                         }
                     }
                 }
@@ -157,7 +159,9 @@ class ParseEvent {
                         self.pfObject = eventPFObject
                         saveRelationsBlock()
                     } else {
-                        HUD.flash(.label(error?.localizedDescription ?? "Unknown error"))
+                        HUD.hide(animated: false)
+                        UIWindow.showMessage(title: "Error",
+                                             message: error?.localizedDescription ?? "Unknown Error")
                     }
                 }
             } else {
@@ -168,7 +172,7 @@ class ParseEvent {
     
     func rvsp(completion: ((Void) -> Void)?) {
         if let currentUser = PFUser.current() {
-            HUD.flash(.progress)
+            HUD.show(.progress)
             
             self.isRVSPed = !self.isRVSPed
             
@@ -202,11 +206,15 @@ class ParseEvent {
                                 if succeeded {
                                     completion?()
                                 } else {
-                                    HUD.flash(.label(error?.localizedDescription ?? "Unknown error"))
+                                    HUD.hide(animated: false)
+                                    UIWindow.showMessage(title: "Error",
+                                                         message: error?.localizedDescription ?? "Unknown Error")
                                 }
                             }
                         } else {
-                            HUD.flash(.label(error?.localizedDescription ?? "Unknown error"))
+                            HUD.hide(animated: false)
+                            UIWindow.showMessage(title: "Error",
+                                                 message: error?.localizedDescription ?? "Unknown Error")
                         }
                     }
                 }
@@ -218,7 +226,9 @@ class ParseEvent {
                         self.pfObject = eventPFObject
                         saveRelationsBlock()
                     } else {
-                        HUD.flash(.label(error?.localizedDescription ?? "Unknown error"))
+                        HUD.hide(animated: false)
+                        UIWindow.showMessage(title: "Error",
+                                             message: error?.localizedDescription ?? "Unknown Error")
                     }
                 }
             } else {
@@ -252,7 +262,9 @@ class ParseEvent {
                             completion?()
                         }
                     } else {
-                        HUD.flash(.label(error?.localizedDescription ?? "Unknown error"))
+                        HUD.hide(animated: false)
+                        UIWindow.showMessage(title: "Error",
+                                             message: error?.localizedDescription ?? "Unknown Error")
                     }
                 }
             }
@@ -264,7 +276,9 @@ class ParseEvent {
                     self.pfObject = eventPFObject
                     saveRelationsBlock()
                 } else {
-                    HUD.flash(.label(error?.localizedDescription ?? "Unknown error"))
+                    HUD.hide(animated: false)
+                    UIWindow.showMessage(title: "Error",
+                                         message: error?.localizedDescription ?? "Unknown Error")
                 }
             }
         } else {

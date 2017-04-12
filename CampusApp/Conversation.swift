@@ -51,7 +51,9 @@ class Conversation {
                             if succeed {
                                 completion(newConversationPFObject)
                             } else {
-                                HUD.flash(.label(error?.localizedDescription ?? "Starting conversation failed"))
+                                HUD.hide(animated: false)
+                                UIWindow.showMessage(title: "Error",
+                                                     message: error?.localizedDescription ?? "Starting conversation failed")
                             }
                         }
                     }

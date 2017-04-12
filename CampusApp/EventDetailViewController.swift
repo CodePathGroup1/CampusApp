@@ -205,7 +205,9 @@ class EventDetailViewController: UIViewController, UICollectionViewDataSource, U
                 }
             }
         } else if let _ = event.googleEventID {
-            HUD.flash(.label("Chatting with user is not supported for events imported from Google Calendars."))
+            HUD.hide(animated: false)
+            UIWindow.showMessage(title: "Error",
+                                 message: "Chatting with user is not supported for events imported from Google Calendars.")
         }
     }
     

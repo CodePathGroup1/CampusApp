@@ -102,6 +102,8 @@ class ChatListViewController: UIViewController, UITableViewDataSource, UITableVi
      ====================================================================================================== */
     private func loadConversations() {
         if let currentUser = PFUser.current() {
+            HUD.show(.label("Loading chat..."))
+            
             let query = PFQuery(className: C.Parse.Conversation.className)
             query.whereKey(C.Parse.Conversation.Keys.users, containsAllObjectsIn: [currentUser])
             query.includeKeys([C.Parse.Conversation.Keys.lastMessage, C.Parse.Conversation.Keys.lastUser])
@@ -119,9 +121,13 @@ class ChatListViewController: UIViewController, UITableViewDataSource, UITableVi
                     
                     DispatchQueue.main.async {
                         self.tableView.reloadData()
+                        
+                        HUD.hide(animated: true)
                     }
                 } else {
-                    HUD.flash(.label(error?.localizedDescription ?? "Network error"))
+                    HUD.hide(animated: false)
+                    UIWindow.showMessage(title: "Error",
+                                         message: error?.localizedDescription ?? "Network error")
                 }
             }
         }

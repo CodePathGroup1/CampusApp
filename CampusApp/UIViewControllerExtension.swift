@@ -18,4 +18,15 @@ extension UIViewController {
         }
         return false
     }
+    
+//    func showMessage(title: String?, message: String?) {
+//        DispatchQueue.main.async {
+//            let ac = UIAlertController(title: title, message: message, preferredStyle: .alert)
+//            
+//            let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+//            ac.addAction(okAction)
+//            
+//            self.present(ac, animated: true, completion: nil)
+//        }
+//    }
 }

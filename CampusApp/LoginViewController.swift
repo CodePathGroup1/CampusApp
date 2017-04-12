@@ -61,7 +61,9 @@ class LoginViewController: UIViewController {
                             }
                         }
                     } else {
-                        HUD.flash(.label(error?.localizedDescription ?? "Unknown error"))
+                        HUD.hide(animated: false)
+                        UIWindow.showMessage(title: "Error",
+                                             message: error?.localizedDescription ?? "Unknown Error")
                     }
                 }
             }
@@ -102,7 +104,9 @@ class LoginViewController: UIViewController {
                                             }
                                         }
                                     } else {
-                                        HUD.flash(.label(error?.localizedDescription ?? "Unknown error"))
+                                        HUD.hide(animated: false)
+                                        UIWindow.showMessage(title: "Error",
+                                                             message: error?.localizedDescription ?? "Unknown Error")
                                     }
                                 }
                             }
@@ -117,8 +121,9 @@ class LoginViewController: UIViewController {
                     }
                 }
             } else {
-                HUD.flash(.error)
-                HUD.flash(.label(error?.localizedDescription ?? "Unknown error"))
+                HUD.hide(animated: false)
+                UIWindow.showMessage(title: "Error",
+                                     message: error?.localizedDescription ?? "Unknown Error")
             }
         }
     }

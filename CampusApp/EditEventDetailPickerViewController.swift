@@ -75,7 +75,7 @@ class EditEventDetailPickerViewController: UIViewController, UIPickerViewDataSou
         
         if !inputPickerView.isHidden {
             if let className = className {
-                HUD.flash(.label("Loading \(className)..."))
+                HUD.show(.label("Loading \(className)..."))
                 
                 let query = PFQuery(className: className)
                 
@@ -120,7 +120,9 @@ class EditEventDetailPickerViewController: UIViewController, UIPickerViewDataSou
                             HUD.hide(animated: true)
                         }
                     } else {
-                        HUD.flash(.label(error?.localizedDescription ?? "Unknown error"))
+                        HUD.hide(animated: false)
+                        UIWindow.showMessage(title: "Error",
+                                             message: error?.localizedDescription ?? "Unknown Error")
                     }
                 }
             }
@@ -161,7 +163,9 @@ class EditEventDetailPickerViewController: UIViewController, UIPickerViewDataSou
                                 self.stringClosure(pfObject, customName)
                             }
                         } else {
-                            HUD.flash(.label(error?.localizedDescription ?? "Saving custom object failed"))
+                            HUD.hide(animated: false)
+                            UIWindow.showMessage(title: "Error",
+                                                 message: error?.localizedDescription ?? "Saving custom object failed")
                         }
                     }
                     

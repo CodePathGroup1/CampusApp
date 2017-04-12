@@ -43,7 +43,7 @@ class EventListViewController: UIViewController, UITableViewDataSource, UITableV
      MARK: - Button Handlers
      ====================================================================================================== */
     @IBAction func logoutButtonTapped(_ sender: AnyObject) {
-        HUD.flash(.progress)
+        HUD.show(.progress)
         
         let storyboard = UIStoryboard(name: "Login", bundle: nil)
         if let vc = storyboard.instantiateViewController(withIdentifier: "LoginViewController") as? LoginViewController {
@@ -178,7 +178,7 @@ class EventListViewController: UIViewController, UITableViewDataSource, UITableV
      ====================================================================================================== */
     // Starter Method
     private func loadEvents() {
-        HUD.flash(.progress)
+        HUD.show(.progress)
         loadGoogleEvents()
     }
     
@@ -191,7 +191,8 @@ class EventListViewController: UIViewController, UITableViewDataSource, UITableV
             GoogleCalendarClient.shared.getPublicEvents(calendarID: calendarID,
                                                         success: { json in
                                                             loadedCalendarCount += 1
-                                                            HUD.flash(.label("Loading: \(loadedCalendarCount / totalCalendarCount) %"))
+                                                            
+                                                            HUD.show(.label("Loading events..."))
                                                             
                                                             let newEvents: [ParseEvent] = json.map { eventJSON -> GoogleCalendarEvent in
                                                                 return GoogleCalendarEvent(json: eventJSON)
@@ -282,7 +283,9 @@ class EventListViewController: UIViewController, UITableViewDataSource, UITableV
                     // Go to Step 5
                     self.loadRSVPStatus()
                 } else {
-                    HUD.flash(.label(error?.localizedDescription ?? "Getting favorite status failed"))
+                    HUD.hide(animated: false)
+                    UIWindow.showMessage(title: "Error",
+                                         message: error?.localizedDescription ?? "Getting favorite status failed")
                 }
             }
         }
@@ -316,7 +319,9 @@ class EventListViewController: UIViewController, UITableViewDataSource, UITableV
                     // Go to FINAL step
                     self.reloadEvents()
                 } else {
-                    HUD.flash(.label(error?.localizedDescription ?? "Getting favorite status failed"))
+                    HUD.hide(animated: false)
+                    UIWindow.showMessage(title: "Error",
+                                         message: error?.localizedDescription ?? "Getting favorite status failed")
                 }
             }
         }

@@ -55,7 +55,9 @@ class RegisterViewController: UIViewController {
                     if isValidEmail(email) {
                         newUser[C.Parse.User.Keys.email] = emailField.text
                     } else {
-                        HUD.flash(.label("Invalid email format"))
+                        HUD.hide(animated: false)
+                        UIWindow.showMessage(title: "Error",
+                                             message: "Invalid email format")
                         return
                     }
                 }
@@ -78,12 +80,15 @@ class RegisterViewController: UIViewController {
                             }
                         }
                     } else if let error = error as? NSError {
+                        HUD.hide(animated: false)
+                        
                         switch error.code {
                         case 202:
-                            HUD.flash(.label("User name is taken"))
+                            UIWindow.showMessage(title: "Error",
+                                                 message: error.localizedDescription)
                         default:
-                            HUD.flash(.error)
-                            print(error.localizedDescription)
+                            UIWindow.showMessage(title: "Error",
+                                                 message: error.localizedDescription)
                         }
                     }
                 }
