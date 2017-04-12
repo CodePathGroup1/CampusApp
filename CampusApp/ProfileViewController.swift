@@ -11,7 +11,7 @@ import ParseUI
 import PKHUD
 import UIKit
 
-class ProfileViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate {
+class ProfileViewController: UIViewController, UITextFieldDelegate {
 
     @IBOutlet weak var avatarPFImageView: PFImageView!
     
@@ -26,16 +26,11 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
     
     @IBOutlet weak var phoneNumberField: RoundTextField!
     
-    @IBOutlet weak var tableView: UITableView!
-    
     /* ====================================================================================================
      MARK: - Lifecycle Methods
      ====================================================================================================== */
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        tableView.dataSource = self
-        tableView.delegate = self
         
         loadCurrentUserProfile()
     }
@@ -45,6 +40,10 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
     /* ====================================================================================================
      MARK: - Tap Actions
      ====================================================================================================== */
+    @IBAction func avatarTapped(_ sender: AnyObject) {
+        
+    }
+    
     @IBAction func saveButtonTapped(_ sender: AnyObject) {
         if let currentUser = PFUser.current() {
             view.endEditing(true)
@@ -119,25 +118,27 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
         }
     }
     
-    @IBAction func avatarTapped(_ sender: AnyObject) {
-        
-    }
-    /* ==================================================================================================== */
-    
-    
-    /* ====================================================================================================
-     MARK: - UITableView Delegate Methods
-     ====================================================================================================== */
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return UITableViewCell()
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    @IBAction func favoritedEventsButtonTapped(_ sender: AnyObject) {
         
     }
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 0
+    @IBAction func rsvpEventsButtonTapped(_ sender: AnyObject) {
+        
+    }
+    
+    @IBAction func signoutButtonTapped(_ sender: AnyObject) {
+        HUD.show(.progress)
+        
+        let storyboard = UIStoryboard(name: "Login", bundle: nil)
+        if let vc = storyboard.instantiateViewController(withIdentifier: "LoginViewController") as? LoginViewController {
+            PFUser.logOutInBackground { _ in
+                DispatchQueue.main.async {
+                    self.present(vc, animated: true) {
+                        HUD.hide(animated: true)
+                    }
+                }
+            }
+        }
     }
     /* ==================================================================================================== */
     

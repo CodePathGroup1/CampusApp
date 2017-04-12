@@ -42,21 +42,6 @@ class EventListViewController: UIViewController, UITableViewDataSource, UITableV
     /* ====================================================================================================
      MARK: - Button Handlers
      ====================================================================================================== */
-    @IBAction func logoutButtonTapped(_ sender: AnyObject) {
-        HUD.show(.progress)
-        
-        let storyboard = UIStoryboard(name: "Login", bundle: nil)
-        if let vc = storyboard.instantiateViewController(withIdentifier: "LoginViewController") as? LoginViewController {
-            PFUser.logOutInBackground { _ in
-                DispatchQueue.main.async {
-                    self.present(vc, animated: true) {
-                        HUD.hide(animated: true)
-                    }
-                }
-            }
-        }
-    }
-    
     @IBAction func addEventButtonTapped(_ sender: AnyObject) {
         performSegue(withIdentifier: "EditEventViewController_NEW", sender: nil)
     }
