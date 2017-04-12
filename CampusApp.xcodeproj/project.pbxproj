@@ -101,6 +101,7 @@
 		6577A6471E9DE85E00CC5AA6 /* UIWindowExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIWindowExtension.swift; sourceTree = "<group>"; };
 		6577A6491E9DEE6D00CC5AA6 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		6577A64B1E9DEE8600CC5AA6 /* Profile.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
+		6577A64D1E9EBBB800CC5AA6 /* CampusApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CampusApp.entitlements; sourceTree = "<group>"; };
 		65C69BB91E86F069002AFC2F /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		65E61B1B1E9B3B9500B142A2 /* EventImageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventImageCell.swift; sourceTree = "<group>"; };
 		65E61B1D1E9B517D00B142A2 /* ParseImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseImage.swift; sourceTree = "<group>"; };
@@ -323,6 +324,7 @@
 				65730E271E82FA6B00FF5906 /* Utilities */,
 				65F4E37E1E8609C30001CA93 /* Values */,
 				BE4249FD1E655D7200A7BA37 /* AppDelegate.swift */,
+				6577A64D1E9EBBB800CC5AA6 /* CampusApp.entitlements */,
 				BE424A091E655D7200A7BA37 /* Info.plist */,
 			);
 			path = CampusApp;
@@ -365,6 +367,11 @@
 						CreatedOnToolsVersion = 8.0;
 						DevelopmentTeam = L398DL783R;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -635,6 +642,7 @@
 			baseConfigurationReference = 596B552B26D2DA6826F22FD3 /* Pods-CampusApp.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = CampusApp/CampusApp.entitlements;
 				DEVELOPMENT_TEAM = L398DL783R;
 				INFOPLIST_FILE = CampusApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -650,6 +658,7 @@
 			baseConfigurationReference = 2BE7391FFFE1ECA4FAC20D5E /* Pods-CampusApp.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = CampusApp/CampusApp.entitlements;
 				DEVELOPMENT_TEAM = L398DL783R;
 				INFOPLIST_FILE = CampusApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
