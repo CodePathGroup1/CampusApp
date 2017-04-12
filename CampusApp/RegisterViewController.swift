@@ -69,7 +69,14 @@ class RegisterViewController: UIViewController {
                     newUser[C.Parse.User.Keys.avatar] = file
                 }
                 
-                newUser[C.Parse.User.Keys.fullName] = firstNameField.text
+                newUser[C.Parse.User.Keys.firstName] = firstNameField.text
+                newUser[C.Parse.User.Keys.lastName] = lastNameField.text
+                
+                if let firstName = firstNameField.text, let lastName = lastNameField.text {
+                    newUser[C.Parse.User.Keys.fullName] = (firstName + " " + lastName).trimmingCharacters(in: .whitespacesAndNewlines)
+                }
+                
+                newUser[C.Parse.User.Keys.phoneNumber] = phoneNumberField.text
                 
                 newUser.signUpInBackground { (success: Bool, error: Error?) in
                     if success {

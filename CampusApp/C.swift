@@ -109,11 +109,14 @@ struct C {
             
             struct Keys {
                 static let avatar = "avatar"
+                static let username = "username"
                 static let email = "email"
                 static let favoritedPFObjects = "favorited_pf_objects"
                 static let rsvpEvents = "rsvp_events"
+                static let firstName = "first_name"
+                static let lastName = "last_name"
                 static let fullName = "full_name"
-                static let username = "username"
+                static let phoneNumber = "phone_number"
             }
         }
     }
