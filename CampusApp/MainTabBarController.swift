@@ -25,18 +25,28 @@ class MainTabBarController: UITabBarController, UITabBarControllerDelegate {
         let chatListViewController = UIStoryboard(name: "Chat", bundle: nil)
             .instantiateViewController(withIdentifier: "ChatNavigationController") as? UINavigationController
         let chatListBarItem = UITabBarItem(title: "Chat",
-                                            image: UIImage(named: "chat_tab_bar_icon"),
-                                            selectedImage: nil)
+                                           image: UIImage(named: "chat_tab_bar_icon"),
+                                           selectedImage: nil)
         chatListViewController?.tabBarItem = chatListBarItem
         
-        self.viewControllers = [
-            eventListViewController,
-            chatListViewController
-        ].reduce([]) { result, vc -> [UIViewController] in
-            if let vc = vc {
-                return result + [vc]
-            }
-            return result
+        let profileViewController = UIStoryboard(name: "Profile", bundle: nil)
+            .instantiateViewController(withIdentifier: "ProfileViewController") as? ProfileViewController
+        let profileBarItem = UITabBarItem(title: "Profile",
+                                          image: UIImage(named: "profile_tab_bar_icon"),
+                                          selectedImage: nil)
+        profileViewController?.tabBarItem = profileBarItem
+        
+        if let eventListViewController = eventListViewController,
+            let chatListViewController = chatListViewController,
+            let profileViewController = profileViewController {
+            
+            self.viewControllers = [
+                eventListViewController,
+                chatListViewController,
+                profileViewController
+            ]
+        } else {
+            fatalError("One or more tab bars failed to load...")
         }
     }
 }
