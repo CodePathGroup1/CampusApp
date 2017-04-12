@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="qvX-dd-CgR">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="2Cc-tb-nXL">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--Profile View Controller-->
         <scene sceneID="vIi-vu-pnm">
             <objects>
-                <viewController storyboardIdentifier="ProfileViewController" id="qvX-dd-CgR" customClass="ProfileViewController" customModule="CampusApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="qvX-dd-CgR" customClass="ProfileViewController" customModule="CampusApp" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="avn-PA-tY4"/>
                         <viewControllerLayoutGuide type="bottom" id="Mje-yb-utx"/>
@@ -16,12 +18,164 @@
                     <view key="view" contentMode="scaleToFill" id="FRR-Jb-rBH">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="jJH-gT-BHm">
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="a29-Vt-Oi2">
+                                        <subviews>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="hAG-nE-4Ix" customClass="PFImageView">
+                                                <gestureRecognizers/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" secondItem="hAG-nE-4Ix" secondAttribute="height" multiplier="1:1" id="jle-wA-eCX"/>
+                                                </constraints>
+                                                <connections>
+                                                    <outletCollection property="gestureRecognizers" destination="JcG-wM-PzP" appends="YES" id="35c-mk-4wC"/>
+                                                </connections>
+                                            </imageView>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="nAX-dD-Krx">
+                                                <subviews>
+                                                    <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2Q0-TE-dsf" customClass="RoundTextField" customModule="CampusApp" customModuleProvider="target">
+                                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="15"/>
+                                                        <textInputTraits key="textInputTraits"/>
+                                                    </textField>
+                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Current password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Ehu-GP-DGz" customClass="RoundTextField" customModule="CampusApp" customModuleProvider="target">
+                                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="15"/>
+                                                        <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                                                    </textField>
+                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="New Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="il9-bG-4XJ" customClass="RoundTextField" customModule="CampusApp" customModuleProvider="target">
+                                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="15"/>
+                                                        <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                                                    </textField>
+                                                </subviews>
+                                            </stackView>
+                                        </subviews>
+                                    </stackView>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="IJm-Go-RGu" customClass="RoundTextField" customModule="CampusApp" customModuleProvider="target">
+                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="15"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
+                                    </textField>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="494-IY-kEj">
+                                        <subviews>
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="First name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ryF-Uc-XWS" customClass="RoundTextField" customModule="CampusApp" customModuleProvider="target">
+                                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="15"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                            </textField>
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Last name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0E1-rR-vIA" customClass="RoundTextField" customModule="CampusApp" customModuleProvider="target">
+                                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="15"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                            </textField>
+                                        </subviews>
+                                    </stackView>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Phone number" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1r5-f6-gzC" customClass="RoundTextField" customModule="CampusApp" customModuleProvider="target">
+                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="15"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="phonePad"/>
+                                    </textField>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TPK-aW-h4A">
+                                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="1" id="sVy-wm-n0V"/>
+                                        </constraints>
+                                    </view>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" verticalHuggingPriority="255" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Yhs-g6-xUa">
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <sections>
+                                            <tableViewSection headerTitle="Events" id="Q9H-Hl-WG8">
+                                                <cells>
+                                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="Jp5-TD-zsZ">
+                                                        <rect key="frame" x="0.0" y="28" width="327" height="44"/>
+                                                        <autoresizingMask key="autoresizingMask"/>
+                                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Jp5-TD-zsZ" id="lPU-c5-xyz">
+                                                            <frame key="frameInset" width="327" height="43"/>
+                                                            <autoresizingMask key="autoresizingMask"/>
+                                                        </tableViewCellContentView>
+                                                    </tableViewCell>
+                                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="pw8-kK-38N">
+                                                        <rect key="frame" x="0.0" y="72" width="327" height="44"/>
+                                                        <autoresizingMask key="autoresizingMask"/>
+                                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="pw8-kK-38N" id="SJC-5h-dP3">
+                                                            <frame key="frameInset" width="327" height="43"/>
+                                                            <autoresizingMask key="autoresizingMask"/>
+                                                        </tableViewCellContentView>
+                                                    </tableViewCell>
+                                                </cells>
+                                            </tableViewSection>
+                                            <tableViewSection headerTitle="Account" id="hnr-Io-3AN">
+                                                <cells>
+                                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="o6I-oD-4FZ">
+                                                        <rect key="frame" x="0.0" y="144" width="327" height="44"/>
+                                                        <autoresizingMask key="autoresizingMask"/>
+                                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="o6I-oD-4FZ" id="GIh-wn-EBu">
+                                                            <frame key="frameInset" width="327" height="43"/>
+                                                            <autoresizingMask key="autoresizingMask"/>
+                                                        </tableViewCellContentView>
+                                                    </tableViewCell>
+                                                </cells>
+                                            </tableViewSection>
+                                        </sections>
+                                    </tableView>
+                                </subviews>
+                            </stackView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="jJH-gT-BHm" secondAttribute="trailing" constant="8" id="H0Z-pT-8JL"/>
+                            <constraint firstItem="jJH-gT-BHm" firstAttribute="leading" secondItem="FRR-Jb-rBH" secondAttribute="leadingMargin" constant="8" id="cSs-kp-gEj"/>
+                            <constraint firstItem="jJH-gT-BHm" firstAttribute="top" secondItem="avn-PA-tY4" secondAttribute="bottom" constant="16" id="czf-nU-Thk"/>
+                            <constraint firstItem="Mje-yb-utx" firstAttribute="top" secondItem="jJH-gT-BHm" secondAttribute="bottom" constant="16" id="wXz-qi-zKj"/>
+                        </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="JYD-QU-hVO">
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="6fZ-9x-CLr">
+                            <connections>
+                                <action selector="saveButtonTapped:" destination="qvX-dd-CgR" id="r4W-sN-xXI"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="avatarPFImageView" destination="hAG-nE-4Ix" id="mak-d8-Z9r"/>
+                        <outlet property="currentPasswordField" destination="Ehu-GP-DGz" id="C35-Cc-wby"/>
+                        <outlet property="emailField" destination="IJm-Go-RGu" id="KvV-ja-Mog"/>
+                        <outlet property="firstNameField" destination="ryF-Uc-XWS" id="4jC-6u-ipa"/>
+                        <outlet property="lastNameField" destination="0E1-rR-vIA" id="5rf-kF-lq9"/>
+                        <outlet property="newPasswordField" destination="il9-bG-4XJ" id="IrZ-XO-tDk"/>
+                        <outlet property="phoneNumberField" destination="1r5-f6-gzC" id="VtD-Wk-Okv"/>
+                        <outlet property="tableView" destination="Yhs-g6-xUa" id="eRF-ul-XAO"/>
+                        <outlet property="usernameField" destination="2Q0-TE-dsf" id="TIc-oB-Xgm"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zJ2-S8-uHw" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="JcG-wM-PzP">
+                    <connections>
+                        <action selector="avatarTapped:" destination="qvX-dd-CgR" id="8J2-Ea-hIF"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="-234" y="165"/>
+            <point key="canvasLocation" x="582" y="164"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="7Wa-hp-XIZ">
+            <objects>
+                <navigationController storyboardIdentifier="ProfileNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="2Cc-tb-nXL" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="kt5-Ir-5L5">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="qvX-dd-CgR" kind="relationship" relationship="rootViewController" id="3ND-Dk-Ye9"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="nDU-pT-5UP" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-234.40000000000001" y="164.16791604197903"/>
         </scene>
     </scenes>
 </document>

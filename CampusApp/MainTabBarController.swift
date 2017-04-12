@@ -30,7 +30,7 @@ class MainTabBarController: UITabBarController, UITabBarControllerDelegate {
         chatListViewController?.tabBarItem = chatListBarItem
         
         let profileViewController = UIStoryboard(name: "Profile", bundle: nil)
-            .instantiateViewController(withIdentifier: "ProfileViewController") as? ProfileViewController
+            .instantiateViewController(withIdentifier: "ProfileNavigationController") as? UINavigationController
         let profileBarItem = UITabBarItem(title: "Profile",
                                           image: UIImage(named: "profile_tab_bar_icon"),
                                           selectedImage: nil)
