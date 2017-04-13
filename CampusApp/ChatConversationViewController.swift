@@ -113,7 +113,11 @@ class ChatConversationViewController: JSQMessagesViewController, UINavigationCon
     private func loadMessages(query: PFQuery<Message>) {
         query.findObjectsInBackground { pfMessages, error in
             if let pfMessages = pfMessages {
-                self.add(pfMessages: pfMessages.reversed())
+                if !pfMessages.isEmpty {
+                    self.add(pfMessages: pfMessages.reversed())
+                } else {
+                    HUD.hide(animated: false)
+                }
             } else {
                 HUD.hide(animated: false)
                 UIWindow.showMessage(title: "Error",

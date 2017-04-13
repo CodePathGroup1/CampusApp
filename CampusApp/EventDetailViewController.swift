@@ -322,8 +322,8 @@ class EventDetailViewController: UIViewController, UICollectionViewDataSource, U
      ====================================================================================================== */
     private func prepareAttendeeCountLabel() {
         DispatchQueue.main.async {
-            if let attendees = self.event.attendees, !attendees.isEmpty {
-                self.showAttendeesButton.setTitle("\(attendees.count) attending", for: .normal)
+            if let attendeeCount = self.event.attendeeCount, attendeeCount != 0 {
+                self.showAttendeesButton.setTitle("\(attendeeCount) attending", for: .normal)
             } else {
                 self.showAttendeesButton.setTitle("", for: .normal)
             }

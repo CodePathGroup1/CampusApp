@@ -216,6 +216,9 @@ class EventListViewController: UIViewController, UITableViewDataSource, UITableV
                 // Go to Step 3
                 self.associateGoogleEvents(with: parseEvents)
             }
+            
+            // Go to Step 3
+            self.associateGoogleEvents(with: [])
         }
     }
     

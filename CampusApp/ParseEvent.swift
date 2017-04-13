@@ -189,7 +189,7 @@ class ParseEvent {
                     } else {
                         relation.remove(currentUser)
                         
-                        self.attendeeCount = min(0, (self.attendeeCount ?? 0) - 1)
+                        self.attendeeCount = max(0, (self.attendeeCount ?? 0) - 1)
                         pfObject[C.Parse.Event.Keys.attendeeCount] = self.attendeeCount
                     }
                     
