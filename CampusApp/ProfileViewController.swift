@@ -89,8 +89,14 @@ class ProfileViewController: UIViewController, UITextFieldDelegate {
                                                             user.password = newPassword
                                                             user.saveInBackground { succeeded, error in
                                                                 if succeeded {
-                                                                    UIWindow.showMessage(title: "Please login again",
-                                                                                         message: "")
+                                                                    PFUser.logOutInBackground { error in
+                                                                        if let error = error {
+                                                                            UIWindow.showMessage(title: "Error",
+                                                                                                 message: error.localizedDescription)
+                                                                        } else {
+                                                                            self.logout()
+                                                                        }
+                                                                    }
                                                                 } else {
                                                                     HUD.hide(animated: false)
                                                                     UIWindow.showMessage(title: "Error",
@@ -127,18 +133,7 @@ class ProfileViewController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func signoutButtonTapped(_ sender: AnyObject) {
-        HUD.show(.progress)
-        
-        let storyboard = UIStoryboard(name: "Login", bundle: nil)
-        if let vc = storyboard.instantiateViewController(withIdentifier: "LoginViewController") as? LoginViewController {
-            PFUser.logOutInBackground { _ in
-                DispatchQueue.main.async {
-                    self.present(vc, animated: true) {
-                        HUD.hide(animated: true)
-                    }
-                }
-            }
-        }
+        self.logout()
     }
     /* ==================================================================================================== */
     
@@ -187,6 +182,21 @@ class ProfileViewController: UIViewController, UITextFieldDelegate {
             }
             
             HUD.hide(animated: true)
+        }
+    }
+    
+    private func logout() {
+        HUD.show(.progress)
+        
+        let storyboard = UIStoryboard(name: "Login", bundle: nil)
+        if let vc = storyboard.instantiateViewController(withIdentifier: "LoginViewController") as? LoginViewController {
+            PFUser.logOutInBackground { _ in
+                DispatchQueue.main.async {
+                    self.present(vc, animated: true) {
+                        HUD.hide(animated: true)
+                    }
+                }
+            }
         }
     }
     /* ==================================================================================================== */

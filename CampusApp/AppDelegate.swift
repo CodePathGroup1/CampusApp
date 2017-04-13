@@ -10,6 +10,7 @@ import UIKit
 import Parse
 import ParseFacebookUtilsV4
 import ParseLiveQuery
+import UserNotifications
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -18,8 +19,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-
-        registerForPushNotifications(application: application)
+        //1
+        let userNotificationCenter = UNUserNotificationCenter.current()
+        userNotificationCenter.delegate = self
+        
+        //2
+        userNotificationCenter.requestAuthorization(options: [.alert, .badge, .sound]) { accepted, error in
+            guard accepted == true else {
+                print("User declined remote notifications")
+                return
+            }
+            //3
+            application.registerForRemoteNotifications()
+        }
         
         // Initialize Parse
         Parse.initialize(with:
@@ -72,29 +84,29 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return FBSDKApplicationDelegate.sharedInstance().application(app, open: url, options: options)
     }
     
-    private func registerForPushNotifications(application: UIApplication) {
-        let notificationSettings = UIUserNotificationSettings(types: [.badge, .sound, .alert], categories: nil)
-        application.registerUserNotificationSettings(notificationSettings)
-    }
-    
-    func application(_ application: UIApplication, didRegister notificationSettings: UIUserNotificationSettings) {
-        if notificationSettings.types != .none {
-            application.registerForRemoteNotifications()
-        }
-    }
-    
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
-        var token = ""
-        
-        for i in 0..<deviceToken.count {
-            token = token + String(format: "%02.2hhx", arguments: [deviceToken[i]])
-        }
-        
-        print("Token: ", token)
+        let installation = PFInstallation.current()
+        installation?.setDeviceTokenFrom(deviceToken)
+        installation?.saveInBackground()
     }
     
     func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
-        print("Failed to register:", error)
+        if (error as NSError).code == 3010 {
+            print("Push notifications are not supported in the iOS Simulator.")
+        } else {
+            print("application:didFailToRegisterForRemoteNotificationsWithError: %@", error)
+        }
     }
 }
 
+
+extension AppDelegate: UNUserNotificationCenterDelegate {
+    
+    func userNotificationCenter(_ center: UNUserNotificationCenter,
+                                willPresent notification: UNNotification,
+                                withCompletionHandler completionHandler:
+        @escaping (UNNotificationPresentationOptions) -> Void) {
+            PFPush.handle(notification.request.content.userInfo)
+            completionHandler(.alert)
+    }
+}

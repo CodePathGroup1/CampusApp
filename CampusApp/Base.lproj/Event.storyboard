@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="hL2-cV-juP">
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -27,7 +28,7 @@
                                         <rect key="frame" x="0.0" y="92" width="375" height="84"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="kbA-te-9ae" id="cQO-8E-JEd">
-                                            <frame key="frameInset" width="375" height="83.5"/>
+                                            <frame key="frameInset" width="375" height="83"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -43,11 +44,6 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="NCK-89-h2a">
-                        <barButtonItem key="leftBarButtonItem" title="Log out" id="Wvj-gu-rFy">
-                            <connections>
-                                <action selector="logoutButtonTapped:" destination="BYZ-38-t0r" id="QXt-Lr-yGj"/>
-                            </connections>
-                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="ajN-XE-P8i">
                             <connections>
                                 <action selector="addEventButtonTapped:" destination="BYZ-38-t0r" id="BvR-1B-AJr"/>
@@ -677,6 +673,6 @@
         <image name="not-favorited" width="240" height="240"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="7hz-l3-zAL"/>
+        <segue reference="lfr-uu-66n"/>
     </inferredMetricsTieBreakers>
 </document>
