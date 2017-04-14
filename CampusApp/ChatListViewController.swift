@@ -18,6 +18,14 @@ class ChatListViewController: UIViewController, UITableViewDataSource, UITableVi
     
     var completion: ((String) -> Void)?
     
+    var newMessageReceived = false {
+        didSet {
+            if self.tabBarController?.selectedIndex == 1 && newMessageReceived {
+                loadConversations()
+            }
+        }
+    }
+    
     /* ====================================================================================================
      MARK: - Lifecycle Methdos
      ====================================================================================================== */
@@ -36,6 +44,14 @@ class ChatListViewController: UIViewController, UITableViewDataSource, UITableVi
         tableView.rowHeight = UITableViewAutomaticDimension
         
         loadConversations()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        if self.tabBarController?.selectedIndex == 1 && newMessageReceived {
+            loadConversations()
+        }
     }
     /* ==================================================================================================== */
     
@@ -102,7 +118,9 @@ class ChatListViewController: UIViewController, UITableViewDataSource, UITableVi
      ====================================================================================================== */
     private func loadConversations() {
         if let currentUser = PFUser.current() {
-            HUD.show(.label("Loading chat..."))
+            if presentingViewController is ChatListViewController {
+                HUD.show(.label("Loading chat..."))
+            }
             
             let query = PFQuery(className: C.Parse.Conversation.className)
             query.whereKey(C.Parse.Conversation.Keys.users, containsAllObjectsIn: [currentUser])
@@ -121,6 +139,7 @@ class ChatListViewController: UIViewController, UITableViewDataSource, UITableVi
                     
                     DispatchQueue.main.async {
                         self.tableView.reloadData()
+                        self.newMessageReceived = false
                         
                         HUD.hide(animated: true)
                     }

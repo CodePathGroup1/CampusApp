@@ -106,11 +106,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 extension AppDelegate: UNUserNotificationCenterDelegate {
     func userNotificationCenter(_ center: UNUserNotificationCenter,
                                 willPresent notification: UNNotification,
-                                withCompletionHandler completionHandler:
-        @escaping (UNNotificationPresentationOptions) -> Void) {
-            if (UIApplication.shared.applicationState != .active) {
-                PFPush.handle(notification.request.content.userInfo)
-                completionHandler(.alert)
+                                withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        if (UIApplication.shared.applicationState == .active) {
+            if let tabBarVC = UIApplication.shared.keyWindow?.rootViewController as? UITabBarController,
+                let viewControllers = tabBarVC.viewControllers {
+                
+                for viewController in viewControllers {
+                    if let navigationController = viewController as? UINavigationController {
+                        if let topVC = navigationController.topViewController as? ChatListViewController {
+                            topVC.newMessageReceived = true
+                        }
+                    }
+                }
+                
+            }
+        } else {
+            PFPush.handle(notification.request.content.userInfo)
+            completionHandler(.alert)
         }
     }
 }

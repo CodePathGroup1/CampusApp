@@ -197,6 +197,13 @@ class ChatConversationViewController: JSQMessagesViewController, UINavigationCon
             self.scrollToBottom(animated: false)
             self.finishReceivingMessage()
             
+            if let lastMessage = pfMessages.last {
+                self.conversation[C.Parse.Conversation.Keys.lastMessage] = lastMessage
+                self.conversation[C.Parse.Conversation.Keys.lastMessageTimestamp] = lastMessage.createdAt
+                self.conversation[C.Parse.Conversation.Keys.lastUser] = lastMessage[C.Parse.Message.Keys.user] as? PFUser
+                self.completion?(self.conversation)
+            }
+            
             HUD.hide(animated: true)
         }
     }
@@ -247,14 +254,8 @@ class ChatConversationViewController: JSQMessagesViewController, UINavigationCon
             }
             
             messageObject.saveInBackground { succeeded, error in
-                if succeeded, let createdAt = messageObject.createdAt {
+                if succeeded {
                     self.finishSendingMessage()
-                    
-                    self.conversation[C.Parse.Conversation.Keys.lastMessage] = messageObject
-                    self.conversation[C.Parse.Conversation.Keys.lastMessageTimestamp] = createdAt
-                    self.conversation[C.Parse.Conversation.Keys.lastUser] = currentUser
-                    
-                    self.completion?(self.conversation)
                     
                     self.conversation.saveInBackground { succeeded, error in
                         if succeeded {
@@ -266,7 +267,8 @@ class ChatConversationViewController: JSQMessagesViewController, UINavigationCon
                                 
                                 if let otherUser = otherUsers?.first {
                                     PFCloud.callFunction(inBackground: "push",
-                                                         withParameters: ["objectId" : otherUser.objectId!, "message": modifiedText])
+                                                         withParameters: ["objectId": otherUser.objectId!,
+                                                                          "message": modifiedText])
                                 }
                             }
                         } else {
