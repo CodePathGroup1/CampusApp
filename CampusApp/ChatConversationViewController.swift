@@ -13,6 +13,7 @@ import Parse
 import ParseLiveQuery
 import PKHUD
 import UIKit
+import UserNotifications
 
 class ChatConversationViewController: JSQMessagesViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
 
@@ -255,7 +256,24 @@ class ChatConversationViewController: JSQMessagesViewController, UINavigationCon
                     
                     self.completion?(self.conversation)
                     
-                    self.conversation.saveInBackground()
+                    self.conversation.saveInBackground { succeeded, error in
+                        if succeeded {
+                            if let currentUser = PFUser.current() {
+                                let users = self.conversation[C.Parse.Conversation.Keys.users] as? [PFUser]
+                                let otherUsers = users?.filter { user in
+                                    return user.objectId != currentUser.objectId
+                                }
+                                
+                                if let otherUser = otherUsers?.first {
+                                    _ = try? PFCloud.callFunction("push",
+                                                                  withParameters: ["objectId" : otherUser.objectId!, "message": modifiedText])
+                                }
+                            }
+                        } else {
+                            UIWindow.showMessage(title: "Error",
+                                                 message: error?.localizedDescription ?? "Unknown Error")
+                        }
+                    }
                 } else {
                     HUD.hide(animated: false)
                     UIWindow.showMessage(title: "Error",

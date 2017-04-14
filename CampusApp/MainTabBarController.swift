@@ -6,6 +6,7 @@
 //  Copyright © 2017 HLPostman. All rights reserved.
 //
 
+import Parse
 import UIKit
 
 class MainTabBarController: UITabBarController, UITabBarControllerDelegate {
@@ -47,6 +48,13 @@ class MainTabBarController: UITabBarController, UITabBarControllerDelegate {
             ]
         } else {
             fatalError("One or more tab bars failed to load...")
+        }
+        
+        if let installation = PFInstallation.current(), installation["user"] == nil,
+            let currentUser = PFUser.current() {
+            
+            installation["user"] = currentUser
+            installation.saveInBackground()
         }
     }
 }

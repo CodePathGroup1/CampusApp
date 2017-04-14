@@ -19,6 +19,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+        // Initialize Parse
+        Parse.initialize(with:
+            ParseClientConfiguration { (configuration: ParseMutableClientConfiguration) -> Void in
+                configuration.applicationId = "campus-app"
+                configuration.clientKey = "ijS97M6sbiNotEj5IKhf"
+                configuration.server = "https://campus-app.herokuapp.com/parse"
+                configuration.isLocalDatastoreEnabled = false
+            }
+        )
+        
         //1
         let userNotificationCenter = UNUserNotificationCenter.current()
         userNotificationCenter.delegate = self
@@ -32,16 +42,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             //3
             application.registerForRemoteNotifications()
         }
-        
-        // Initialize Parse
-        Parse.initialize(with:
-            ParseClientConfiguration { (configuration: ParseMutableClientConfiguration) -> Void in
-                configuration.applicationId = "campus-app"
-                configuration.clientKey = "ijS97M6sbiNotEj5IKhf"
-                configuration.server = "https://campus-app.herokuapp.com/parse"
-                configuration.isLocalDatastoreEnabled = false
-            }
-        )
         
         if let _ = PFUser.current() {
             window?.rootViewController = MainTabBarController()
@@ -87,6 +87,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
         let installation = PFInstallation.current()
         installation?.setDeviceTokenFrom(deviceToken)
+        if let currentUser = PFUser.current() {
+            installation?["user"] = currentUser
+        }
         installation?.saveInBackground()
     }
     
