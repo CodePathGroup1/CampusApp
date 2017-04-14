@@ -265,8 +265,8 @@ class ChatConversationViewController: JSQMessagesViewController, UINavigationCon
                                 }
                                 
                                 if let otherUser = otherUsers?.first {
-                                    _ = try? PFCloud.callFunction("push",
-                                                                  withParameters: ["objectId" : otherUser.objectId!, "message": modifiedText])
+                                    PFCloud.callFunction(inBackground: "push",
+                                                         withParameters: ["objectId" : otherUser.objectId!, "message": modifiedText])
                                 }
                             }
                         } else {
