@@ -104,12 +104,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
 extension AppDelegate: UNUserNotificationCenterDelegate {
-    
     func userNotificationCenter(_ center: UNUserNotificationCenter,
                                 willPresent notification: UNNotification,
                                 withCompletionHandler completionHandler:
         @escaping (UNNotificationPresentationOptions) -> Void) {
-            PFPush.handle(notification.request.content.userInfo)
-            completionHandler(.alert)
+            if (UIApplication.shared.applicationState != .active) {
+                PFPush.handle(notification.request.content.userInfo)
+                completionHandler(.alert)
+        }
     }
 }
