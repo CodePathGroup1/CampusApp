@@ -255,16 +255,6 @@ class EditEventViewController: UIViewController, UITextFieldDelegate, UIGestureR
             if let fullName = currentUser[C.Parse.User.Keys.fullName] as? String {
                 eventPFObject[C.Parse.Event.Keys.organizerName] = fullName
             }
-            
-            switch mode! {
-            case .New:
-                let relation = eventPFObject.relation(forKey: C.Parse.Event.Keys.attendees)
-                relation.add(currentUser)
-                
-                eventPFObject[C.Parse.Event.Keys.attendeeCount] = 1
-            default:
-                break
-            }
         }
         
         eventPFObject[C.Parse.Event.Keys.startDateTime] = startDateTime
