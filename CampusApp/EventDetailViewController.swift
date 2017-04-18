@@ -12,13 +12,14 @@ import Parse
 import ParseUI
 import PKHUD
 import UIKit
+import FaveButton
 
 class EventDetailViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate, MKMapViewDelegate {
 
     @IBOutlet var editButton: UIBarButtonItem!
     
     @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var favoriteButton: UIButton!
+    @IBOutlet weak var favoriteButton: FaveButton!
     @IBOutlet weak var rsvpButton: UIButton!
     
     @IBOutlet weak var creatorAvatorPFImageView: PFImageView!
@@ -62,9 +63,7 @@ class EventDetailViewController: UIViewController, UICollectionViewDataSource, U
         super.viewWillAppear(animated)
         
         titleLabel.text = event.title
-        
-        let favoriteButtonImage = UIImage(named: (event.isFavorited ? "favorited" : "not-favorited"))
-        favoriteButton.setImage(favoriteButtonImage, for: .normal)
+        favoriteButton.isSelected = event.isFavorited
         
         let rsvpButtonImage = UIImage(named: (event.isRVSPed ? "remove_rsvp" : "add_rsvp"))
         rsvpButton.setImage(rsvpButtonImage, for: .normal)
@@ -155,8 +154,7 @@ class EventDetailViewController: UIViewController, UICollectionViewDataSource, U
     @IBAction func favoriteButtonTapped(_ sender: Any) {
         event.favorite {
             DispatchQueue.main.async {
-                let image = UIImage(named: (self.event.isFavorited ? "favorited" : "not-favorited"))
-                self.favoriteButton.setImage(image, for: .normal)
+                self.favoriteButton.isSelected = self.event.isFavorited
                 
                 self.changed = true
                 

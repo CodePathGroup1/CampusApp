@@ -51,8 +51,10 @@ class EventListViewController: UIViewController, UITableViewDataSource, UITableV
         events[index].favorite { parseEvent in
             if let cell = self.tableView.cellForRow(at: IndexPath(row: index, section: 0)) as? EventCell {
                 DispatchQueue.main.async {
-                    let image = UIImage(named: (self.events[index].isFavorited ? "favorited" : "not-favorited"))
-                    cell.favoriteButton.setImage(image, for: .normal)
+//                    let image = UIImage(named: (self.events[index].isFavorited ? "favorited" : "not-favorited"))
+//                    cell.favoriteButton.setImage(image, for: .normal)
+                    cell.favoriteButton.isSelected = (self.events[index].isFavorited)
+
                     HUD.hide(animated: true)
                 }
             }
@@ -87,8 +89,7 @@ class EventListViewController: UIViewController, UITableViewDataSource, UITableV
             configure(label: cell.endDateTimeLabel, content: event.endDateTime?.shortDateTimeFormat)
             configure(label: cell.detailLabel, content: event.description)
             
-            let image = UIImage(named: (event.isFavorited ? "favorited" : "not-favorited"))
-            cell.favoriteButton.setImage(image, for: .normal)
+            cell.favoriteButton.isSelected = event.isFavorited
             cell.favoriteButton.tag = indexPath.row
             cell.favoriteButton.addTarget(self, action: #selector(favoriteButtonTapped(_:)), for: .touchUpInside)
             

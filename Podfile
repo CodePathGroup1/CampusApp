@@ -13,4 +13,5 @@ target 'CampusApp' do
   pod 'JSQMessagesViewController'
   pod 'ParseLiveQuery'
   pod 'ParseFacebookUtilsV4'
+  pod 'FaveButton', '~> 2.0.3'
 end
