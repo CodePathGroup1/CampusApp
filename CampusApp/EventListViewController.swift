@@ -53,6 +53,7 @@ class EventListViewController: UIViewController, UITableViewDataSource, UITableV
                 DispatchQueue.main.async {
                     let image = UIImage(named: (self.events[index].isFavorited ? "favorited" : "not-favorited"))
                     cell.favoriteButton.setImage(image, for: .normal)
+                    HUD.hide(animated: true)
                 }
             }
         }
