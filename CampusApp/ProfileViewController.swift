@@ -125,11 +125,39 @@ class ProfileViewController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func favoritedEventsButtonTapped(_ sender: AnyObject) {
-        
+        let storyboard = UIStoryboard(name: "Event", bundle: nil)
+        if let vc = storyboard.instantiateViewController(withIdentifier: "EventListViewController") as? EventListViewController {
+            if let navigationVC = tabBarController?.viewControllers?[0] as? UINavigationController,
+                let eventListVC = navigationVC.viewControllers.first as? EventListViewController, !eventListVC.events.isEmpty {
+                
+                let favoritedEvents = eventListVC.events.filter { event in
+                    return event.isFavorited
+                }
+                vc.mode = .Favorited(favoritedEvents)
+            } else {
+                vc.mode = .Favorited(nil)
+            }
+            
+            navigationController?.pushViewController(vc, animated: true)
+        }
     }
     
     @IBAction func rsvpEventsButtonTapped(_ sender: AnyObject) {
-        
+        let storyboard = UIStoryboard(name: "Event", bundle: nil)
+        if let vc = storyboard.instantiateViewController(withIdentifier: "EventListViewController") as? EventListViewController {
+            if let navigationVC = tabBarController?.viewControllers?[0] as? UINavigationController,
+                let eventListVC = navigationVC.viewControllers.first as? EventListViewController, !eventListVC.events.isEmpty {
+                
+                let rsvpedEvents = eventListVC.events.filter { event in
+                    return event.isRSVPed
+                }
+                vc.mode = .RSVPed(rsvpedEvents)
+            } else {
+                vc.mode = .RSVPed(nil)
+            }
+            
+            navigationController?.pushViewController(vc, animated: true)
+        }
     }
     
     @IBAction func signoutButtonTapped(_ sender: AnyObject) {

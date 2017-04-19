@@ -14,7 +14,7 @@ class ParseEvent {
     
     var googleEventID: String?
     var isFavorited = false
-    var isRVSPed = false
+    var isRSVPed = false
     
     let title: String?
     let organizer: PFObject?
@@ -174,14 +174,14 @@ class ParseEvent {
         if let currentUser = PFUser.current() {
             HUD.show(.progress)
             
-            self.isRVSPed = !self.isRVSPed
+            self.isRSVPed = !self.isRSVPed
             
             let eventPFObject = self.getRemoteParseObject()
             
             let saveRelationsBlock = {
                 if let pfObject = self.pfObject {
                     let relation = pfObject.relation(forKey: C.Parse.Event.Keys.attendees)
-                    if self.isRVSPed {
+                    if self.isRSVPed {
                         relation.add(currentUser)
                         
                         self.attendeeCount = (self.attendeeCount ?? 0) + 1
@@ -196,7 +196,7 @@ class ParseEvent {
                     pfObject.saveInBackground { succeeded, error in
                         if succeeded {
                             let relation = currentUser.relation(forKey: C.Parse.User.Keys.rsvpEvents)
-                            if self.isRVSPed {
+                            if self.isRSVPed {
                                 relation.add(pfObject)
                             } else {
                                 relation.remove(pfObject)

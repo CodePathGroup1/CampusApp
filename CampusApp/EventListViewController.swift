@@ -14,8 +14,14 @@ class EventListViewController: UIViewController, UITableViewDataSource, UITableV
     
     @IBOutlet weak var tableView: UITableView!
     
-    private var events: [ParseEvent] = []
+    var events: [ParseEvent] = []
     
+    enum EventListMode {
+        case All
+        case Favorited([ParseEvent]?)
+        case RSVPed([ParseEvent]?)
+    }
+    var mode: EventListMode = .All
     
     /* ====================================================================================================
      MARK: - Lifecycle Methods
@@ -51,8 +57,6 @@ class EventListViewController: UIViewController, UITableViewDataSource, UITableV
         events[index].favorite { parseEvent in
             if let cell = self.tableView.cellForRow(at: IndexPath(row: index, section: 0)) as? EventCell {
                 DispatchQueue.main.async {
-//                    let image = UIImage(named: (self.events[index].isFavorited ? "favorited" : "not-favorited"))
-//                    cell.favoriteButton.setImage(image, for: .normal)
                     cell.favoriteButton.isSelected = (self.events[index].isFavorited)
 
                     HUD.hide(animated: true)
@@ -166,7 +170,25 @@ class EventListViewController: UIViewController, UITableViewDataSource, UITableV
     // Starter Method
     private func loadEvents() {
         HUD.show(.progress)
-        loadGoogleEvents()
+        
+        switch mode {
+        case .All:
+            loadGoogleEvents()
+        case .Favorited(let events):
+            if let events = events {
+                self.events = events
+                self.reloadEvents()
+            } else {
+                loadGoogleEvents()
+            }
+        case .RSVPed(let events):
+            if let events = events {
+                self.events = events
+                self.reloadEvents()
+            } else {
+                loadGoogleEvents()
+            }
+        }
     }
     
     // Step 1: Load Google Events from Google Calendar API
@@ -303,7 +325,7 @@ class EventListViewController: UIViewController, UITableViewDataSource, UITableV
                     }
                     
                     for rsvpedParseEvent in rsvpedParseEvents {
-                        rsvpedParseEvent.isRVSPed = true
+                        rsvpedParseEvent.isRSVPed = true
                     }
                     
                     // Go to FINAL step
@@ -319,6 +341,19 @@ class EventListViewController: UIViewController, UITableViewDataSource, UITableV
     
     // FINAL Step: Reload Table View
     private func reloadEvents() {
+        switch mode {
+        case .All:
+            break
+        case .Favorited(_):
+            self.events = self.events.filter { event in
+                return event.isFavorited
+            }
+        case .RSVPed(_):
+            self.events = self.events.filter { event in
+                return event.isRSVPed
+            }
+        }
+        
         self.events.sort(by: { (event1, event2) -> Bool in
             return event1.startDateTime!.timeIntervalSinceNow < event2.startDateTime!.timeIntervalSinceNow
         })

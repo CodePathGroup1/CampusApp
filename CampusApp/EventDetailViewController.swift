@@ -65,7 +65,7 @@ class EventDetailViewController: UIViewController, UICollectionViewDataSource, U
         titleLabel.text = event.title
         favoriteButton.isSelected = event.isFavorited
         
-        let rsvpButtonImage = UIImage(named: (event.isRVSPed ? "remove_rsvp" : "add_rsvp"))
+        let rsvpButtonImage = UIImage(named: (event.isRSVPed ? "remove_rsvp" : "add_rsvp"))
         rsvpButton.setImage(rsvpButtonImage, for: .normal)
         
         if let organizer = event.organizer {
@@ -166,11 +166,11 @@ class EventDetailViewController: UIViewController, UICollectionViewDataSource, U
     @IBAction func rsvpButtonTapped(_ sender: AnyObject) {
         event.rvsp {
             DispatchQueue.main.async {
-                let image = UIImage(named: (self.event.isRVSPed ? "remove_rsvp" : "add_rsvp"))
+                let image = UIImage(named: (self.event.isRSVPed ? "remove_rsvp" : "add_rsvp"))
                 self.rsvpButton.setImage(image, for: .normal)
                 
                 if let currentUser = PFUser.current() {
-                    if self.event.isRVSPed {
+                    if self.event.isRSVPed {
                         self.event.attendees = [currentUser] + (self.event.attendees ?? [])
                         
                     } else {
