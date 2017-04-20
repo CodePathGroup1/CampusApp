@@ -19,8 +19,8 @@ class ParseEvent {
     let title: String?
     let organizer: PFObject?
     let organizerName: String?
-    let startDateTime: Date?
-    let endDateTime: Date?
+    var startDateTime: Date?
+    var endDateTime: Date?
     
     let campus: PFObject?
     let building: PFObject?

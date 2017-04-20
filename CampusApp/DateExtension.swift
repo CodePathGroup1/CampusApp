@@ -29,10 +29,10 @@ extension Date {
     }
     
     var shortDateTimeFormat: String {
-        let interval = self.timeIntervalSinceNow
         let shortDateTimeFormatter: DateFormatter = {
             let formatter = DateFormatter()
-            if interval < 24 * 60 * 60 {
+            
+            if Calendar.current.isDate(self, inSameDayAs: Date()) {
                 formatter.dateFormat = "hh:mm a"
             } else {
                 formatter.dateFormat = "MMM d, hh:mm a"

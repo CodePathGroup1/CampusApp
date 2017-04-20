@@ -225,6 +225,7 @@ class EventListViewController: UIViewController, UITableViewDataSource, UITableV
     private func loadParseEvents() {
         let query = PFQuery(className: C.Parse.Event.className)
         query.whereKey(C.Parse.Event.Keys.startDateTime, lessThanOrEqualTo: Calendar.current.date(byAdding: .month, value: 1, to: Date())!)
+        query.whereKey(C.Parse.Event.Keys.endDateTime, greaterThanOrEqualTo: Date())
         query.includeKeys([C.Parse.Event.Keys.organizer,
                            C.Parse.Event.Keys.attendees, 
                            C.Parse.Event.Keys.campus,
@@ -256,6 +257,8 @@ class EventListViewController: UIViewController, UITableViewDataSource, UITableV
                 }
                 
                 if let index = index {
+                    parseEvent.startDateTime = self.events[index].startDateTime
+                    parseEvent.endDateTime = self.events[index].endDateTime
                     self.events[index] = parseEvent
                 }
             } else {
@@ -355,6 +358,7 @@ class EventListViewController: UIViewController, UITableViewDataSource, UITableV
         }
         
         self.events.sort(by: { (event1, event2) -> Bool in
+            print("\(event1.startDateTime!.timeIntervalSinceNow) < \(event2.startDateTime!.timeIntervalSinceNow)")
             return event1.startDateTime!.timeIntervalSinceNow < event2.startDateTime!.timeIntervalSinceNow
         })
         
