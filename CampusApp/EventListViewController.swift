@@ -358,8 +358,9 @@ class EventListViewController: UIViewController, UITableViewDataSource, UITableV
         }
         
         self.events.sort(by: { (event1, event2) -> Bool in
-            print("\(event1.startDateTime!.timeIntervalSinceNow) < \(event2.startDateTime!.timeIntervalSinceNow)")
-            return event1.startDateTime!.timeIntervalSinceNow < event2.startDateTime!.timeIntervalSinceNow
+            return (event1.startDateTime!.timeIntervalSinceNow < event2.startDateTime!.timeIntervalSinceNow ||
+                (event1.startDateTime!.timeIntervalSinceNow == event2.startDateTime!.timeIntervalSinceNow &&
+                event1.endDateTime!.timeIntervalSinceNow <= event2.endDateTime!.timeIntervalSinceNow))
         })
         
         DispatchQueue.main.async {
