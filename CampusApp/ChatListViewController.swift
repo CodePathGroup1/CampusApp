@@ -125,7 +125,7 @@ class ChatListViewController: UIViewController, UITableViewDataSource, UITableVi
      ====================================================================================================== */
     private func loadConversations() {
         if let currentUser = PFUser.current() {
-            if presentingViewController is ChatListViewController {
+            if tabBarController?.selectedIndex == 1 {
                 HUD.show(.label("Loading chat..."))
             }
             

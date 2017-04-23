@@ -13,6 +13,8 @@ import JSQMessagesViewController
 
 class ChatCell: UITableViewCell {
 
+    @IBOutlet weak var cellBackground: UIView!
+    
     @IBOutlet weak var avatarPFImageView: PFImageView!
     @IBOutlet weak var sendersDescriptionLabel: UILabel!
     @IBOutlet weak var lastMessageTimestampLabel: UILabel!
@@ -21,7 +23,15 @@ class ChatCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        // avatarPFImageView = 60 x 60
+        cellBackground.layer.cornerRadius = 4.0
+        cellBackground.clipsToBounds = true
+        
+        cellBackground.layer.shadowColor = UIColor.black.cgColor
+        cellBackground.layer.shadowOffset = CGSize(width: 2.0, height: 2.0)
+        cellBackground.layer.shadowOpacity = 0.10
+        cellBackground.layer.shadowRadius = 1.0
+        cellBackground.layer.masksToBounds = false
+        
         self.avatarPFImageView.layer.cornerRadius = 17
         self.avatarPFImageView.clipsToBounds = true
     }
