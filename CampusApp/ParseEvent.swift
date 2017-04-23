@@ -31,7 +31,7 @@ class ParseEvent {
     
     let description: String?
     
-    var eventImages: [ParseImage]?
+    var eventMedias: [ParseEventMedia]?
     
     init(pfObject: PFObject?,
          googleEventID: String?,
@@ -46,7 +46,7 @@ class ParseEvent {
          attendees: [PFUser]?,
          attendeeCount: Int?,
          description: String?,
-         eventImages: [ParseImage]?) {
+         eventMedias: [ParseEventMedia]?) {
         self.pfObject = pfObject
         
         self.googleEventID = googleEventID
@@ -66,7 +66,7 @@ class ParseEvent {
         
         self.description = description
         
-        self.eventImages = eventImages
+        self.eventMedias = eventMedias
     }
     
     init(pfObject: PFObject) {
@@ -89,7 +89,7 @@ class ParseEvent {
         
         self.description = pfObject[C.Parse.Event.Keys.description] as? String
         
-        self.eventImages = pfObject[C.Parse.Event.Keys.eventImages] as? [ParseImage]
+        self.eventMedias = pfObject[C.Parse.Event.Keys.eventMedias] as? [ParseEventMedia]
     }
     
     private func getRemoteParseObject() -> PFObject {
@@ -237,27 +237,36 @@ class ParseEvent {
         }
     }
     
-    func add(eventImage: UIImage, completion: ((Void) -> Void)?) {
+    func add(eventImagePFFile: PFFile?, eventVideoPFFile: PFFile?, completion: ((Void) -> Void)?) {
         let eventPFObject = self.getRemoteParseObject()
         
         let saveRelationsBlock = {
-            if let data = UIImageJPEGRepresentation(eventImage, 0.6),
-                let eventImagePFfile = PFFile(name: "picture.jpg", data: data),
-                let currentUser = PFUser.current(),
+            if let currentUser = PFUser.current(),
                 let pfObject = self.pfObject {
                 
-                let imagePFObject = PFObject(className: C.Parse.Image.className)
-                imagePFObject[C.Parse.Image.Keys.uploader] = currentUser
-                imagePFObject[C.Parse.Image.Keys.file] = eventImagePFfile
+                guard let _ = (eventImagePFFile ?? eventVideoPFFile) else {
+                    HUD.hide(animated: false)
+                    UIWindow.showMessage(title: "Error",
+                                         message: "Unknown type of media file")
+                    return
+                }
                 
-                imagePFObject.saveInBackground { succeeded, error in
+                let mediaPFObject = PFObject(className: C.Parse.Media.className)
+                mediaPFObject[C.Parse.Media.Keys.uploader] = currentUser
+                if let eventImagePFFile = eventImagePFFile {
+                    mediaPFObject[C.Parse.Media.Keys.image] = eventImagePFFile
+                } else if let eventVideoPFFile = eventVideoPFFile {
+                    mediaPFObject[C.Parse.Media.Keys.video] = eventVideoPFFile
+                }
+                
+                mediaPFObject.saveInBackground { succeeded, error in
                     if succeeded {
-                        let relation = pfObject.relation(forKey: C.Parse.Event.Keys.eventImages)
-                        relation.add(imagePFObject)
+                        let relation = pfObject.relation(forKey: C.Parse.Event.Keys.eventMedias)
+                        relation.add(mediaPFObject)
                         
                         pfObject.saveInBackground { succeeded, error in
-                            let eventImage = ParseImage(pfObject: imagePFObject)
-                            self.eventImages = (self.eventImages ?? []) + [eventImage]
+                            let eventMedia = ParseEventMedia(pfObject: mediaPFObject)
+                            self.eventMedias = (self.eventMedias ?? []) + [eventMedia]
                             
                             completion?()
                         }

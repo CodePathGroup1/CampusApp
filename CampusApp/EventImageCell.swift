@@ -6,9 +6,11 @@
 //  Copyright © 2017 HLPostman. All rights reserved.
 //
 
+import Parse
 import ParseUI
 import UIKit
 
 class EventImageCell: UICollectionViewCell {
     @IBOutlet weak var eventImageView: PFImageView!
+    var videoPFFile: PFFile?
 }

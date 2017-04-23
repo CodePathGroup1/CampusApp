@@ -6,8 +6,9 @@
 //  Copyright © 2017 HLPostman. All rights reserved.
 //
 
+import AVKit
+import AVFoundation
 import JSQMessagesViewController
-import MapKit
 import Parse
 import ParseUI
 import PKHUD
@@ -121,18 +122,6 @@ class EventDetailViewController: UIViewController, UICollectionViewDataSource, U
         mapView.showsUserLocation = true
         mapView.layer.cornerRadius = 8.0
         mapView.clipsToBounds = true
-        
-        /*
-         if let latitude = event.latitude, let longitude = event.longitude {
-         let annotation: MKAnnotation = {
-         let annotation = MKPointAnnotation()
-         annotation.coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
-         return annotation
-         }()
-         
-         mapView.showAnnotations([annotation], animated: false)
-         }
-         */
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -226,6 +215,11 @@ class EventDetailViewController: UIViewController, UICollectionViewDataSource, U
         }
         alertVC.addAction(chooseExistingPhotoAction)
         
+        let chooseExistingVideoAction = UIAlertAction(title: "Choose existing video", style: .default) { _ in
+            _ = Camera.shouldStartPhotoLibrary(target: self, mediaType: .Video, canEdit: true)
+        }
+        alertVC.addAction(chooseExistingVideoAction)
+        
         let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: nil)
         alertVC.addAction(cancelAction)
         
@@ -239,11 +233,16 @@ class EventDetailViewController: UIViewController, UICollectionViewDataSource, U
      ====================================================================================================== */
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "EventImageCell", for: indexPath) as? EventImageCell {
-            if let eventImages = event.eventImages {
-                let eventImage = eventImages[indexPath.item]
+            if let eventMedias = event.eventMedias {
+                let eventMedia = eventMedias[indexPath.item]
                 
-                cell.eventImageView.file = eventImage.file
-                cell.eventImageView.loadInBackground()
+                if let image = eventMedia.image {
+                    cell.eventImageView.file = image
+                    cell.eventImageView.loadInBackground()
+                } else if let video = eventMedia.video {
+                    cell.eventImageView.image = UIImage(named: "event_video_thumbnail")
+                    cell.videoPFFile = video
+                }
             }
             
             return cell
@@ -253,12 +252,25 @@ class EventDetailViewController: UIViewController, UICollectionViewDataSource, U
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
-        let storyboard = UIStoryboard(name: "Event", bundle: nil)
-        if let vc = storyboard.instantiateViewController(withIdentifier: "EventImageViewController") as? EventImageViewController {
-            
-            if let cell = collectionView.cellForItem(at: indexPath) as? EventImageCell {
-                if let image = cell.eventImageView.image {
+        if let cell = collectionView.cellForItem(at: indexPath) as? EventImageCell {
+            if let video = cell.videoPFFile,
+                let url = video.url,
+                let fileURL = URL(string: url) {
+                let playerVC = AVPlayerViewController()
+                
+                let asset = AVURLAsset(url: fileURL)
+                let item = AVPlayerItem(asset: asset)
+                
+                let player = AVPlayer(playerItem: item)
+                playerVC.player = player
+                playerVC.showsPlaybackControls = true
+                
+                self.present(playerVC, animated: true) {
+                    player.play()
+                }
+            } else if let image = cell.eventImageView.image {
+                let storyboard = UIStoryboard(name: "Event", bundle: nil)
+                if let vc = storyboard.instantiateViewController(withIdentifier: "EventImageViewController") as? EventImageViewController {
                     vc.image = image
                     present(vc, animated: true, completion: nil)
                 }
@@ -267,7 +279,7 @@ class EventDetailViewController: UIViewController, UICollectionViewDataSource, U
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return (event.eventImages?.count ?? 0)
+        return (event.eventMedias?.count ?? 0)
     }
     /* ==================================================================================================== */
     
@@ -278,9 +290,24 @@ class EventDetailViewController: UIViewController, UICollectionViewDataSource, U
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         HUD.show(.progress)
         
-        if let picture = info[UIImagePickerControllerEditedImage] as? UIImage {
+        if let eventImage = info[UIImagePickerControllerEditedImage] as? UIImage,
+            let data = UIImageJPEGRepresentation(eventImage, 0.6),
+            let eventImagePFfile = PFFile(name: "picture.jpg", data: data) {
+            
             picker.dismiss(animated: true) {
-                self.event.add(eventImage: picture) {
+                self.event.add(eventImagePFFile: eventImagePFfile, eventVideoPFFile: nil) {
+                    DispatchQueue.main.async {
+                        self.collectionView.reloadData()
+                        HUD.hide(animated: true)
+                    }
+                }
+            }
+        } else if let video = info[UIImagePickerControllerMediaURL] as? URL,
+            let data = FileManager.default.contents(atPath: video.path),
+            let eventVideoPFfile = PFFile(name: "video.mp4", data: data) {
+                
+            picker.dismiss(animated: true) {
+                self.event.add(eventImagePFFile: nil, eventVideoPFFile: eventVideoPFfile) {
                     DispatchQueue.main.async {
                         self.collectionView.reloadData()
                         HUD.hide(animated: true)
@@ -329,7 +356,7 @@ class EventDetailViewController: UIViewController, UICollectionViewDataSource, U
     }
     
     private func loadEventImages() {
-        if let relation = event.pfObject?.relation(forKey: C.Parse.Event.Keys.eventImages) {
+        if let relation = event.pfObject?.relation(forKey: C.Parse.Event.Keys.eventMedias) {
             let spinner = UIActivityIndicatorView(activityIndicatorStyle: .gray)
             spinner.frame = collectionView.frame
             collectionView.addSubview(spinner)
@@ -339,8 +366,8 @@ class EventDetailViewController: UIViewController, UICollectionViewDataSource, U
             let query = relation.query()
             query.findObjectsInBackground { pfObjects, error in
                 if let pfObjects = pfObjects, !pfObjects.isEmpty {
-                    self.event.eventImages = pfObjects.map { pfObject in
-                        return ParseImage(pfObject: pfObject)
+                    self.event.eventMedias = pfObjects.map { pfObject in
+                        return ParseEventMedia(pfObject: pfObject)
                     }
                     
                     DispatchQueue.main.async {

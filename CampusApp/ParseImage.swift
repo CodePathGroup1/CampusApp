@@ -8,16 +8,18 @@
 
 import Parse
 
-class ParseImage {
+class ParseEventMedia {
     let pfObject: PFObject
     
     let uploader: PFUser?
-    let file: PFFile?
+    let image: PFFile?
+    let video: PFFile?
     
     init(pfObject: PFObject) {
         self.pfObject = pfObject
         
-        self.uploader = pfObject[C.Parse.Image.Keys.uploader] as? PFUser
-        self.file = pfObject[C.Parse.Image.Keys.file] as? PFFile
+        self.uploader = pfObject[C.Parse.Media.Keys.uploader] as? PFUser
+        self.image = pfObject[C.Parse.Media.Keys.image] as? PFFile
+        self.video = pfObject[C.Parse.Media.Keys.video] as? PFFile
     }
 }

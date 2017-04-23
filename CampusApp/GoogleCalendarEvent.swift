@@ -81,6 +81,6 @@ class GoogleCalendarEvent: ParseEvent {
                    attendees: [PFUser](),
                    attendeeCount: nil,
                    description: json["description"] as? String,
-                   eventImages: nil)
+                   eventMedias: nil)
     }
 }
