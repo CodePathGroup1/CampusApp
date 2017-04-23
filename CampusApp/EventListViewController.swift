@@ -29,6 +29,14 @@ class EventListViewController: UIViewController, UITableViewDataSource, UITableV
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        navigationItem.backBarButtonItem = UIBarButtonItem(image: UIImage(named: "left_arrow"),
+                                                           style: .plain,
+                                                           target: nil,
+                                                           action: nil)
+        
+        navigationItem.title = "EVENTS"
+
+        
         // Set up tableView delegation
         tableView.delegate = self
         tableView.dataSource = self

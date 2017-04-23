@@ -12,6 +12,8 @@ import PKHUD
 
 class EditEventViewController: UIViewController, UITextFieldDelegate, UIGestureRecognizerDelegate, UIPopoverPresentationControllerDelegate {
     
+    @IBOutlet weak var saveButton: UIBarButtonItem!
+    
     @IBOutlet weak var titleTextField: RoundTextField!
     @IBOutlet weak var startDateTimeTextField: RoundTextField!
     @IBOutlet weak var endDateTimeTextField: RoundTextField!
@@ -96,14 +98,23 @@ class EditEventViewController: UIViewController, UITextFieldDelegate, UIGestureR
         descriptionTextView.layer.cornerRadius = 8
         descriptionTextView.clipsToBounds = true
         
+        navigationItem.backBarButtonItem = UIBarButtonItem(image: UIImage(named: "left_arrow"),
+                                                           style: .plain,
+                                                           target: nil,
+                                                           action: nil)
+        
+        saveButton.setTitleTextAttributes([NSFontAttributeName: UIFont(name: "JosefinSans-Bold", size: 17.0)!,
+                                           NSForegroundColorAttributeName: UIColor.white],
+                                          for: .normal)
+        
         switch mode! {
         case .New:
             eventPFObject = PFObject(className: C.Parse.Event.className)
-            navigationItem.title = "New Event"
+            navigationItem.title = "NEW EVENT"
             
         case .Edit(let parseEvent):
             eventPFObject = parseEvent.pfObject
-            navigationItem.title = "Edit Event"
+            navigationItem.title = "EDIT EVENT"
             
             titleTextField.text = parseEvent.title
             

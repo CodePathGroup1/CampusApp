@@ -32,7 +32,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="84"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="kbA-te-9ae" id="cQO-8E-JEd">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="83.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="83"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -49,6 +49,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="NCK-89-h2a">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="ajN-XE-P8i">
+                            <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <action selector="addEventButtonTapped:" destination="BYZ-38-t0r" id="BvR-1B-AJr"/>
                             </connections>
@@ -80,7 +81,7 @@
                                 <rect key="frame" x="0.0" y="64" width="375" height="559"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="IvL-83-qxv" userLabel="Main">
-                                        <rect key="frame" x="37.5" y="56" width="300" height="447"/>
+                                        <rect key="frame" x="38" y="56" width="300" height="447"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="PQx-gp-fNa" userLabel="Title">
                                                 <rect key="frame" x="0.0" y="0.0" width="300" height="0.0"/>
@@ -236,7 +237,8 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Fxw-zA-NId">
-                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="tb4-P7-zVQ">
+                        <barButtonItem key="rightBarButtonItem" title="SAVE" id="tb4-P7-zVQ">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
                                 <action selector="saveButtonTapped:" destination="ZCs-xX-AIP" id="GhO-kE-09B"/>
                             </connections>
@@ -248,6 +250,7 @@
                         <outlet property="descriptionTextView" destination="NST-kr-Xp0" id="qgf-Wl-sQq"/>
                         <outlet property="endDateTimeTextField" destination="4Om-IQ-Vsd" id="os0-f8-T0H"/>
                         <outlet property="roomTextField" destination="DFa-ya-6ED" id="PHV-Fs-3lg"/>
+                        <outlet property="saveButton" destination="tb4-P7-zVQ" id="SgS-iA-F9g"/>
                         <outlet property="startDateTimeTextField" destination="kaG-LZ-RHc" id="8EE-Aq-rYW"/>
                         <outlet property="titleTextField" destination="caY-D8-Lcw" id="eVJ-wx-3ck"/>
                     </connections>
@@ -339,7 +342,7 @@
             </objects>
             <point key="canvasLocation" x="2480.8000000000002" y="-598.65067466266873"/>
         </scene>
-        <!--Detail-->
+        <!--Event Detail View Controller-->
         <scene sceneID="AIF-fI-Nod">
             <objects>
                 <viewController id="zNt-fj-lfZ" customClass="EventDetailViewController" customModule="CampusApp" customModuleProvider="target" sceneMemberID="viewController">
@@ -502,14 +505,14 @@
                                         </constraints>
                                     </stackView>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" verticalHuggingPriority="245" verticalCompressionResistancePriority="745" showsHorizontalScrollIndicator="NO" editable="NO" text="Description" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="ypJ-MS-13q">
-                                        <rect key="frame" x="0.0" y="228.5" width="343" height="141"/>
+                                        <rect key="frame" x="0.0" y="228.5" width="343" height="141.5"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                         <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                     </textView>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="LeD-f3-tzl">
-                                        <rect key="frame" x="0.0" y="381.5" width="343" height="29"/>
+                                        <rect key="frame" x="0.0" y="382" width="343" height="29"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="245" verticalHuggingPriority="251" text="Gallery" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Sl-BN-t4B">
                                                 <rect key="frame" x="0.0" y="0.0" width="252" height="29"/>
@@ -528,7 +531,7 @@
                                         </subviews>
                                     </stackView>
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="ltt-p8-Uii">
-                                        <rect key="frame" x="0.0" y="422.5" width="343" height="112.5"/>
+                                        <rect key="frame" x="0.0" y="423" width="343" height="112"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <edgeInsets key="layoutMargins" top="0.0" left="0.0" bottom="0.0" right="0.0"/>
                                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="2" minimumInteritemSpacing="2" id="XVF-dJ-nhH">
@@ -611,10 +614,11 @@
                         </constraints>
                     </view>
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" title="Detail" id="kkE-mu-d0K">
-                        <barButtonItem key="rightBarButtonItem" systemItem="edit" id="FVp-HA-oE2">
+                    <navigationItem key="navigationItem" id="NTX-sz-TG9">
+                        <barButtonItem key="rightBarButtonItem" title="EDIT" id="aUE-4x-5Js">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
-                                <action selector="editButtonTapped:" destination="zNt-fj-lfZ" id="c4s-3T-GT5"/>
+                                <action selector="editButtonTapped:" destination="zNt-fj-lfZ" id="j6s-vB-NzJ"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -626,7 +630,7 @@
                         <outlet property="creatorAvatorPFImageView" destination="yhw-wi-w4L" id="Wt1-B0-SKg"/>
                         <outlet property="creatorNameButton" destination="U33-hZ-akK" id="hcj-mn-6UP"/>
                         <outlet property="descriptionLabel" destination="ypJ-MS-13q" id="4Vu-jf-3YN"/>
-                        <outlet property="editButton" destination="FVp-HA-oE2" id="618-3s-AZN"/>
+                        <outlet property="editButton" destination="aUE-4x-5Js" id="DtT-Zb-322"/>
                         <outlet property="endingDateTimeLabel" destination="sVB-HL-0zy" id="4N9-9h-Icy"/>
                         <outlet property="favoriteButton" destination="vou-TM-bMJ" id="XAc-hj-sWX"/>
                         <outlet property="mapView" destination="4LR-Vj-dgF" id="TSM-86-eQl"/>
@@ -725,10 +729,15 @@
             <objects>
                 <navigationController storyboardIdentifier="EventNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="hL2-cV-juP" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="mje-Ry-j6S">
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="mje-Ry-j6S">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" red="0.2627450980392157" green="0.31372549019607843" blue="0.45490196078431372" alpha="1" colorSpace="calibratedRGB"/>
+                        <textAttributes key="titleTextAttributes">
+                            <fontDescription key="fontDescription" name="JosefinSans-Bold" family="Josefin Sans" pointSize="17"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </textAttributes>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
@@ -745,6 +754,6 @@
         <image name="heart" width="128" height="128"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="lfr-uu-66n"/>
+        <segue reference="7hz-l3-zAL"/>
     </inferredMetricsTieBreakers>
 </document>

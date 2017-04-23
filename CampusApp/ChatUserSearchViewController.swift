@@ -26,6 +26,13 @@ class ChatUserSearchViewController: UIViewController, UISearchBarDelegate, UITab
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        navigationItem.backBarButtonItem = UIBarButtonItem(image: UIImage(named: "left_arrow"),
+                                                           style: .plain,
+                                                           target: nil,
+                                                           action: nil)
+        
+        navigationItem.title = "SEARCH USER"
+        
         self.searchBar.delegate = self
         
         self.tableView.dataSource = self

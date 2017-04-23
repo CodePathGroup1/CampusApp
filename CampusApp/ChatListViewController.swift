@@ -32,6 +32,13 @@ class ChatListViewController: UIViewController, UITableViewDataSource, UITableVi
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        navigationItem.backBarButtonItem = UIBarButtonItem(image: UIImage(named: "left_arrow"),
+                                                           style: .plain,
+                                                           target: nil,
+                                                           action: nil)
+        
+        navigationItem.title = "CHAT"
+        
         // UITableView delegation
         tableView.dataSource = self
         tableView.delegate = self

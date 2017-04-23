@@ -50,6 +50,17 @@ class EventDetailViewController: UIViewController, UICollectionViewDataSource, U
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        navigationItem.backBarButtonItem = UIBarButtonItem(image: UIImage(named: "left_arrow"),
+                                                           style: .plain,
+                                                           target: nil,
+                                                           action: nil)
+        
+        navigationItem.title = "DETAIL"
+        
+        editButton.setTitleTextAttributes([NSFontAttributeName: UIFont(name: "JosefinSans-Bold", size: 17.0)!,
+                                           NSForegroundColorAttributeName: UIColor.white],
+                                          for: .normal)
+        
         if event.organizer?.objectId != PFUser.current()?.objectId {
             navigationItem.rightBarButtonItem = nil
         }

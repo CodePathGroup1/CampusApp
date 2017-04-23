@@ -39,6 +39,13 @@ class ChatConversationViewController: JSQMessagesViewController, UINavigationCon
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        navigationItem.backBarButtonItem = UIBarButtonItem(image: UIImage(named: "left_arrow"),
+                                                           style: .plain,
+                                                           target: nil,
+                                                           action: nil)
+        
+        navigationItem.title = "CONVERSATION"
+        
         if let user = PFUser.current() {
             self.senderId = user.objectId
             

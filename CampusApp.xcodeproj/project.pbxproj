@@ -44,6 +44,10 @@
 		6577A64A1E9DEE6D00CC5AA6 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6577A6491E9DEE6D00CC5AA6 /* ProfileViewController.swift */; };
 		6577A64C1E9DEE8600CC5AA6 /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6577A64B1E9DEE8600CC5AA6 /* Profile.storyboard */; };
 		65C69BBA1E86F069002AFC2F /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65C69BB91E86F069002AFC2F /* Message.swift */; };
+		65D511F71EAC6EC60001E33B /* JosefinSans-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 65D511F41EAC6EC60001E33B /* JosefinSans-Light.ttf */; };
+		65D511F81EAC6EC60001E33B /* JosefinSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 65D511F51EAC6EC60001E33B /* JosefinSans-Regular.ttf */; };
+		65D511F91EAC6EC60001E33B /* JosefinSans-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 65D511F61EAC6EC60001E33B /* JosefinSans-Thin.ttf */; };
+		65D511FB1EAC705E0001E33B /* JosefinSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 65D511FA1EAC705E0001E33B /* JosefinSans-Bold.ttf */; };
 		65E61B1C1E9B3B9500B142A2 /* EventImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65E61B1B1E9B3B9500B142A2 /* EventImageCell.swift */; };
 		65E61B1E1E9B517D00B142A2 /* ParseImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65E61B1D1E9B517D00B142A2 /* ParseImage.swift */; };
 		65E61B201E9B67E500B142A2 /* EventImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65E61B1F1E9B67E500B142A2 /* EventImageViewController.swift */; };
@@ -103,6 +107,10 @@
 		6577A64B1E9DEE8600CC5AA6 /* Profile.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
 		6577A64D1E9EBBB800CC5AA6 /* CampusApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CampusApp.entitlements; sourceTree = "<group>"; };
 		65C69BB91E86F069002AFC2F /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
+		65D511F41EAC6EC60001E33B /* JosefinSans-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "JosefinSans-Light.ttf"; sourceTree = "<group>"; };
+		65D511F51EAC6EC60001E33B /* JosefinSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "JosefinSans-Regular.ttf"; sourceTree = "<group>"; };
+		65D511F61EAC6EC60001E33B /* JosefinSans-Thin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "JosefinSans-Thin.ttf"; sourceTree = "<group>"; };
+		65D511FA1EAC705E0001E33B /* JosefinSans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "JosefinSans-Bold.ttf"; sourceTree = "<group>"; };
 		65E61B1B1E9B3B9500B142A2 /* EventImageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventImageCell.swift; sourceTree = "<group>"; };
 		65E61B1D1E9B517D00B142A2 /* ParseImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseImage.swift; sourceTree = "<group>"; };
 		65E61B1F1E9B67E500B142A2 /* EventImageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventImageViewController.swift; sourceTree = "<group>"; };
@@ -250,6 +258,10 @@
 			isa = PBXGroup;
 			children = (
 				BE424A041E655D7200A7BA37 /* Assets.xcassets */,
+				65D511FA1EAC705E0001E33B /* JosefinSans-Bold.ttf */,
+				65D511F41EAC6EC60001E33B /* JosefinSans-Light.ttf */,
+				65D511F51EAC6EC60001E33B /* JosefinSans-Regular.ttf */,
+				65D511F61EAC6EC60001E33B /* JosefinSans-Thin.ttf */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -399,7 +411,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				652F53151E838B220073CA9C /* Chat.storyboard in Resources */,
+				65D511F81EAC6EC60001E33B /* JosefinSans-Regular.ttf in Resources */,
 				655AA8011E9B0A5D00833DCD /* UserCell.xib in Resources */,
+				65D511F71EAC6EC60001E33B /* JosefinSans-Light.ttf in Resources */,
 				6577A64C1E9DEE8600CC5AA6 /* Profile.storyboard in Resources */,
 				BE424A081E655D7200A7BA37 /* LaunchScreen.storyboard in Resources */,
 				65F5BBDE1E80FE9000368D36 /* Login.storyboard in Resources */,
@@ -407,7 +421,9 @@
 				1DCF9BC51E91B7E8008BE66E /* Sale.storyboard in Resources */,
 				652F53191E838BC40073CA9C /* ChatCell.xib in Resources */,
 				65F5BBEB1E82082700368D36 /* EventCell.xib in Resources */,
+				65D511F91EAC6EC60001E33B /* JosefinSans-Thin.ttf in Resources */,
 				BE424A031E655D7200A7BA37 /* Event.storyboard in Resources */,
+				65D511FB1EAC705E0001E33B /* JosefinSans-Bold.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

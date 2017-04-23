@@ -25,6 +25,13 @@ class AttendeeListViewController: UIViewController, UITableViewDataSource, UITab
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        navigationItem.backBarButtonItem = UIBarButtonItem(image: UIImage(named: "left_arrow"),
+                                                           style: .plain,
+                                                           target: nil,
+                                                           action: nil)
+        
+        navigationItem.title = "ATTENDEES"
+        
         // Set up tableView delegation
         tableView.delegate = self
         tableView.dataSource = self

@@ -74,5 +74,12 @@
 	</array>
 	<key>NSCameraUsageDescription</key>
 	<string>Please consier giving us access to your camera.</string>
+	<key>UIAppFonts</key>
+	<array>
+		<string>JosefinSans-Light.ttf</string>
+		<string>JosefinSans-Regular.ttf</string>
+		<string>JosefinSans-Thin.ttf</string>
+		<string>JosefinSans-Bold.ttf</string>
+	</array>
 </dict>
 </plist>
