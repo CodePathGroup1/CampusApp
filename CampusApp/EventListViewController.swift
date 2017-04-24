@@ -362,7 +362,7 @@ class EventListViewController: UIViewController, UITableViewDataSource, UITableV
         segmentedControl.selectionIndicatorLocation = .down
         segmentedControl.selectionIndicatorColor = themeBlue
         segmentedControl.isVerticalDividerEnabled = false
-        segmentedControl.titleTextAttributes = [NSFontAttributeName: UIFont(name: "JosefinSans-Bold", size: 17.0)!,
+        segmentedControl.titleTextAttributes = [NSFontAttributeName: UIFont(name: "JosefinSans-Bold", size: 13.0)!,
                                                 NSForegroundColorAttributeName: themeBlue]
         segmentedControl.addTarget(self, action: #selector(segmentedControlValueChanged(segmentedControl:)), for: .valueChanged)
     }

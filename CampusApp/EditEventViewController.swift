@@ -103,7 +103,7 @@ class EditEventViewController: UIViewController, UITextFieldDelegate, UIGestureR
                                                            target: nil,
                                                            action: nil)
         
-        saveButton.setTitleTextAttributes([NSFontAttributeName: UIFont(name: "JosefinSans-Bold", size: 17.0)!,
+        saveButton.setTitleTextAttributes([NSFontAttributeName: UIFont(name: "JosefinSans", size: 13.0)!,
                                            NSForegroundColorAttributeName: UIColor.white],
                                           for: .normal)
         

@@ -57,7 +57,7 @@ class EventDetailViewController: UIViewController, UICollectionViewDataSource, U
         
         navigationItem.title = "DETAIL"
         
-        editButton.setTitleTextAttributes([NSFontAttributeName: UIFont(name: "JosefinSans-Bold", size: 17.0)!,
+        editButton.setTitleTextAttributes([NSFontAttributeName: UIFont(name: "JosefinSans", size: 13.0)!,
                                            NSForegroundColorAttributeName: UIColor.white],
                                           for: .normal)
         

@@ -41,7 +41,7 @@ class ProfileViewController: UIViewController, UITextFieldDelegate {
         
         navigationItem.title = "PROFILE"
         
-        logoutButton.setTitleTextAttributes([NSFontAttributeName: UIFont(name: "JosefinSans-Bold", size: 17.0)!,
+        logoutButton.setTitleTextAttributes([NSFontAttributeName: UIFont(name: "JosefinSans", size: 13.0)!,
                                              NSForegroundColorAttributeName: UIColor.white],
                                             for: .normal)
         
