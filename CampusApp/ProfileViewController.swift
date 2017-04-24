@@ -28,6 +28,8 @@ class ProfileViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var phoneNumberField: RoundTextField!
     
+    @IBOutlet weak var saveButton: UIButton!
+    
     /* ====================================================================================================
      MARK: - Lifecycle Methods
      ====================================================================================================== */
@@ -46,6 +48,9 @@ class ProfileViewController: UIViewController, UITextFieldDelegate {
                                             for: .normal)
         
         loadCurrentUserProfile()
+        
+        saveButton.layer.cornerRadius = 20.0
+        saveButton.clipsToBounds = true
     }
     /* ==================================================================================================== */
     

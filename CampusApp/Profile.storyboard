@@ -238,6 +238,7 @@
                         <outlet property="logoutButton" destination="SL1-O9-nxX" id="Mza-JT-yBf"/>
                         <outlet property="newPasswordField" destination="il9-bG-4XJ" id="IrZ-XO-tDk"/>
                         <outlet property="phoneNumberField" destination="1r5-f6-gzC" id="VtD-Wk-Okv"/>
+                        <outlet property="saveButton" destination="aJQ-bh-CKF" id="kJg-1Z-XCx"/>
                         <outlet property="usernameField" destination="2Q0-TE-dsf" id="TIc-oB-Xgm"/>
                     </connections>
                 </viewController>
