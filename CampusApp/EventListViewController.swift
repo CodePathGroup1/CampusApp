@@ -384,7 +384,13 @@ class EventListViewController: UIViewController, UITableViewDataSource, UITableV
         }
         
         self.tableView.reloadData()
-        self.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: false)
+        
+        if self.filteredEvents.isEmpty {
+            self.tableView.isHidden = true
+        } else {
+            self.tableView.isHidden = false
+            self.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: false)
+        }
     }
     /* ==================================================================================================== */
 }

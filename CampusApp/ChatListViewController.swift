@@ -145,7 +145,9 @@ class ChatListViewController: UIViewController, UITableViewDataSource, UITableVi
                     }
                     
                     DispatchQueue.main.async {
+                        self.tableView.isHidden = self.conversations.isEmpty
                         self.tableView.reloadData()
+                        
                         self.newMessageReceived = false
                         
                         HUD.hide(animated: true)

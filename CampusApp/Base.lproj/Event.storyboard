@@ -11,6 +11,11 @@
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="JosefinSans-Regular.ttf">
+            <string>JosefinSans</string>
+        </array>
+    </customFonts>
     <scenes>
         <!--Event List View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -24,6 +29,33 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="v21-FU-TFL" userLabel="Empty View">
+                                <rect key="frame" x="0.0" y="124" width="375" height="543"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="hRE-CS-znC">
+                                        <rect key="frame" x="127" y="202.5" width="120" height="138"/>
+                                        <subviews>
+                                            <imageView userInteractionEnabled="NO" alpha="0.80000000000000004" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="empty_view_icon" translatesAutoresizingMaskIntoConstraints="NO" id="n6g-pi-VDD">
+                                                <rect key="frame" x="0.0" y="0.0" width="120" height="120"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="120" id="5lK-Vm-CgY"/>
+                                                    <constraint firstAttribute="height" constant="120" id="uOB-sP-fBb"/>
+                                                </constraints>
+                                            </imageView>
+                                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.80000000000000004" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nothing to Display" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2zI-kb-4MN">
+                                                <rect key="frame" x="0.0" y="124" width="120" height="14"/>
+                                                <fontDescription key="fontDescription" name="JosefinSans" family="Josefin Sans" pointSize="14"/>
+                                                <color key="textColor" red="0.26274509800000001" green="0.31372549020000001" blue="0.4549019608" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="hRE-CS-znC" firstAttribute="centerY" secondItem="v21-FU-TFL" secondAttribute="centerY" id="h7Y-OP-9GY"/>
+                                    <constraint firstItem="hRE-CS-znC" firstAttribute="centerX" secondItem="v21-FU-TFL" secondAttribute="centerX" id="qRc-iD-XNy"/>
+                                </constraints>
+                            </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="84" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="fm3-Gy-W4k">
                                 <rect key="frame" x="0.0" y="124" width="375" height="543"/>
                                 <color key="backgroundColor" red="0.88235294119999996" green="0.91372549020000005" blue="0.94901960780000005" alpha="1" colorSpace="calibratedRGB"/>
@@ -49,11 +81,15 @@
                         <color key="backgroundColor" red="0.88235294119999996" green="0.91372549020000005" blue="0.94901960780000005" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="exK-TM-UDi" secondAttribute="trailing" id="54h-h7-dru"/>
+                            <constraint firstItem="v21-FU-TFL" firstAttribute="trailing" secondItem="fm3-Gy-W4k" secondAttribute="trailing" id="5vJ-V8-meq"/>
+                            <constraint firstItem="v21-FU-TFL" firstAttribute="leading" secondItem="fm3-Gy-W4k" secondAttribute="leading" id="7U4-lh-IZr"/>
                             <constraint firstItem="fm3-Gy-W4k" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="Lx0-aL-Q9h"/>
                             <constraint firstAttribute="trailing" secondItem="fm3-Gy-W4k" secondAttribute="trailing" id="TZU-BF-4lI"/>
                             <constraint firstItem="fm3-Gy-W4k" firstAttribute="top" secondItem="exK-TM-UDi" secondAttribute="bottom" id="bEe-Lx-yyc"/>
+                            <constraint firstItem="v21-FU-TFL" firstAttribute="bottom" secondItem="fm3-Gy-W4k" secondAttribute="bottom" id="deQ-BU-v8F"/>
                             <constraint firstItem="exK-TM-UDi" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="jr0-kp-Yh7"/>
                             <constraint firstItem="exK-TM-UDi" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="nnV-zj-9yU"/>
+                            <constraint firstItem="v21-FU-TFL" firstAttribute="top" secondItem="fm3-Gy-W4k" secondAttribute="top" id="oh8-w5-QqU"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="fm3-Gy-W4k" secondAttribute="bottom" id="zhu-mn-FDK"/>
                         </constraints>
                     </view>
@@ -762,6 +798,7 @@
     </scenes>
     <resources>
         <image name="add_rsvp" width="240" height="240"/>
+        <image name="empty_view_icon" width="240" height="240"/>
         <image name="heart" width="128" height="128"/>
     </resources>
     <inferredMetricsTieBreakers>

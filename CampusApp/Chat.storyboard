@@ -8,6 +8,11 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="JosefinSans-Regular.ttf">
+            <string>JosefinSans</string>
+        </array>
+    </customFonts>
     <scenes>
         <!--Chat List View Controller-->
         <scene sceneID="5RB-a4-4QO">
@@ -21,6 +26,33 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MKj-dX-KPM" userLabel="Empty View">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="c7e-ik-hGV">
+                                        <rect key="frame" x="127" y="233" width="120" height="138"/>
+                                        <subviews>
+                                            <imageView userInteractionEnabled="NO" alpha="0.80000001192092896" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="empty_view_icon" translatesAutoresizingMaskIntoConstraints="NO" id="iBt-Oc-47t">
+                                                <rect key="frame" x="0.0" y="0.0" width="120" height="120"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="120" id="GqA-p7-VK9"/>
+                                                    <constraint firstAttribute="width" constant="120" id="qQP-0v-teX"/>
+                                                </constraints>
+                                            </imageView>
+                                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.80000001192092896" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nothing to Display" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7fC-H8-242">
+                                                <rect key="frame" x="0.0" y="124" width="120" height="14"/>
+                                                <fontDescription key="fontDescription" name="JosefinSans" family="Josefin Sans" pointSize="14"/>
+                                                <color key="textColor" red="0.26274509800000001" green="0.31372549020000001" blue="0.4549019608" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="c7e-ik-hGV" firstAttribute="centerY" secondItem="MKj-dX-KPM" secondAttribute="centerY" id="PIX-Y9-Wwd"/>
+                                    <constraint firstItem="c7e-ik-hGV" firstAttribute="centerX" secondItem="MKj-dX-KPM" secondAttribute="centerX" id="eCC-Nj-5fV"/>
+                                </constraints>
+                            </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Pg3-QC-0W7">
                                 <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <color key="backgroundColor" red="0.88235294119999996" green="0.91372549020000005" blue="0.94901960780000005" alpha="1" colorSpace="calibratedRGB"/>
@@ -41,7 +73,11 @@
                             <constraint firstAttribute="trailing" secondItem="Pg3-QC-0W7" secondAttribute="trailing" id="76j-al-3WK"/>
                             <constraint firstItem="Pg3-QC-0W7" firstAttribute="leading" secondItem="CPe-rP-mbG" secondAttribute="leading" id="Ml1-Ni-ZyW"/>
                             <constraint firstItem="Pg3-QC-0W7" firstAttribute="top" secondItem="Zqj-xk-imk" secondAttribute="bottom" id="Q1A-bL-PRX"/>
+                            <constraint firstItem="MKj-dX-KPM" firstAttribute="leading" secondItem="Pg3-QC-0W7" secondAttribute="leading" id="R2y-ci-v4D"/>
+                            <constraint firstItem="MKj-dX-KPM" firstAttribute="bottom" secondItem="Pg3-QC-0W7" secondAttribute="bottom" id="UeZ-VE-0bC"/>
+                            <constraint firstItem="MKj-dX-KPM" firstAttribute="trailing" secondItem="Pg3-QC-0W7" secondAttribute="trailing" id="ar0-DF-QVB"/>
                             <constraint firstItem="Uwk-NZ-fSe" firstAttribute="top" secondItem="Pg3-QC-0W7" secondAttribute="bottom" id="q4L-mI-aYr"/>
+                            <constraint firstItem="MKj-dX-KPM" firstAttribute="top" secondItem="Pg3-QC-0W7" secondAttribute="top" id="vvN-VC-qjf"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="KN9-EV-mLH">
@@ -59,7 +95,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gl7-bU-inI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="538" y="-107"/>
+            <point key="canvasLocation" x="598" y="-107"/>
         </scene>
         <!--Chat User Search View Controller-->
         <scene sceneID="pNN-ue-2Ev">
@@ -170,7 +206,7 @@
                 <navigationController storyboardIdentifier="ChatNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="VfI-VZ-NBj" sceneMemberID="viewController">
                     <toolbarItems/>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="sfH-qG-85K">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="sfH-qG-85K">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="0.26274509800000001" green="0.31372549020000001" blue="0.4549019608" alpha="1" colorSpace="calibratedRGB"/>
@@ -189,6 +225,9 @@
             <point key="canvasLocation" x="-220" y="-105.69715142428787"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="empty_view_icon" width="240" height="240"/>
+    </resources>
     <inferredMetricsTieBreakers>
         <segue reference="cKt-aW-K7V"/>
     </inferredMetricsTieBreakers>
