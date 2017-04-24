@@ -1,5 +1,7 @@
 PODS:
   - Alamofire (4.4.0)
+  - BATabBarController (0.1.4):
+    - Masonry
   - Bolts (1.8.4):
     - Bolts/AppLinks (= 1.8.4)
     - Bolts/Tasks (= 1.8.4)
@@ -16,6 +18,7 @@ PODS:
   - JSQMessagesViewController (7.3.4):
     - JSQSystemSoundPlayer (~> 2.0.1)
   - JSQSystemSoundPlayer (2.0.1)
+  - Masonry (1.0.2)
   - Parse (1.14.2):
     - Bolts/Tasks (~> 1.8)
   - ParseFacebookUtilsV4 (1.11.1):
@@ -36,6 +39,7 @@ PODS:
 
 DEPENDENCIES:
   - Alamofire
+  - BATabBarController
   - FaveButton (~> 2.0.3)
   - HMSegmentedControl
   - JSQMessagesViewController
@@ -47,6 +51,7 @@ DEPENDENCIES:
 
 SPEC CHECKSUMS:
   Alamofire: dc44b1600b800eb63da6a19039a0083d62a6a62d
+  BATabBarController: 7bd7a21d65a1df9f08586adb17622da1c58f44a5
   Bolts: 8a7995239dbe724f9cba2248b766d48b7ebdd322
   Bolts-Swift: fa98d1b59fc1acea9b21a21306dcdca1c85e3737
   FaveButton: cfcbc5e73da159c4f916613da5687357b5bb4783
@@ -55,6 +60,7 @@ SPEC CHECKSUMS:
   HMSegmentedControl: 7c6145afb50f26cec5f3243082f6f12b9f41318f
   JSQMessagesViewController: 39fed975e3c9f8eba7292071e29eeb541d105e66
   JSQSystemSoundPlayer: c5850e77a4363ffd374cd851154b9af93264ed8d
+  Masonry: 7c429b56da9d4ee0bbb3ed77a5ea710d6a5df39e
   Parse: 4335d65f40cb3d43190d723144bbe1afb9c38230
   ParseFacebookUtilsV4: 2f30c2b7021c8005d3042781da7ef87d06589421
   ParseLiveQuery: 38fb42e4b8611ecfcb199d47e48aeaf6879f8560
@@ -62,6 +68,6 @@ SPEC CHECKSUMS:
   PKHUD: 2bb45c936bb8afa39f3cd33ec14e8cc89f624255
   Starscream: 3fdd5c277e57cca6b5c406d274e3f34a7c88f2ce
 
-PODFILE CHECKSUM: 179dd7c8f14284df00bd12345539f685e0ffd52f
+PODFILE CHECKSUM: 76141f4475d76678a30ff6e49662ea45978e8002
 
 COCOAPODS: 1.2.1.beta.1

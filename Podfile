@@ -15,4 +15,5 @@ target 'CampusApp' do
   pod 'ParseFacebookUtilsV4'
   pod 'FaveButton', '~> 2.0.3'
   pod 'HMSegmentedControl'
+  pod "BATabBarController"
 end

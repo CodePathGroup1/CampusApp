@@ -6,10 +6,11 @@
 //  Copyright © 2017 HLPostman. All rights reserved.
 //
 
-import UIKit
+import BATabBarController
 import Parse
 import ParseFacebookUtilsV4
 import ParseLiveQuery
+import UIKit
 import UserNotifications
 
 @UIApplicationMain
@@ -112,7 +113,7 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
                                 willPresent notification: UNNotification,
                                 withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
         if (UIApplication.shared.applicationState == .active) {
-            if let tabBarVC = UIApplication.shared.keyWindow?.rootViewController as? UITabBarController,
+            if let tabBarVC = UIApplication.shared.keyWindow?.rootViewController as? BATabBarController,
                 let viewControllers = tabBarVC.viewControllers {
                 
                 for viewController in viewControllers {

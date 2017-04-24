@@ -6,6 +6,7 @@
 //  Copyright © 2017 HLPostman. All rights reserved.
 //
 
+import BATabBarController
 import UIKit
 
 extension UIViewController {
@@ -13,7 +14,7 @@ extension UIViewController {
     var isModal: Bool {
         if self.presentingViewController != nil ||
             self.navigationController?.presentingViewController?.presentedViewController == self.navigationController ||
-            (self.tabBarController?.presentingViewController?.isKind(of: UITabBarController.self) ?? false) {
+            (self.tabBarController?.presentingViewController?.isKind(of: BATabBarController.self) ?? false) {
             return true
         }
         return false

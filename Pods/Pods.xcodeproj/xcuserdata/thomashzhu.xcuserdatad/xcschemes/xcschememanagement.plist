@@ -9,6 +9,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>BATabBarController.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Bolts-Swift.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -45,6 +50,11 @@
 			<false/>
 		</dict>
 		<key>JSQSystemSoundPlayer.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Masonry.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -92,11 +102,6 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>17F697305302A62FC4D771FADF176CF5</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
 		<key>2A52779AA0BD86BA0CEB8753126ED2FE</key>
 		<dict>
 			<key>primary</key>
@@ -112,6 +117,11 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>4BC8F602A565EFCB80DF876B48AAF533</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>51CB0AF616C6306147B99C320EB6D3ED</key>
 		<dict>
 			<key>primary</key>
@@ -123,6 +133,11 @@
 			<true/>
 		</dict>
 		<key>7C08227B6E14D87F0F5B0FD6DFFA1A3E</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>84B806A1547EF5E04133DC15B161173D</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -152,6 +167,11 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>C858099BE8FA3C04D5C37E92F7C8B75F</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>D0581AF7BF4A6DA140D280B19ECC7BFF</key>
 		<dict>
 			<key>primary</key>
@@ -163,11 +183,6 @@
 			<true/>
 		</dict>
 		<key>D7A75F149082140741FC1E0B5B2863C8</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>EAAC37FC9E1C74C8255AD2B9FE79AD92</key>
 		<dict>
 			<key>primary</key>
 			<true/>
