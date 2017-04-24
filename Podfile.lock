@@ -12,6 +12,7 @@ PODS:
     - Bolts (~> 1.7)
   - FBSDKLoginKit (4.20.2):
     - FBSDKCoreKit
+  - HMSegmentedControl (1.5.3)
   - JSQMessagesViewController (7.3.4):
     - JSQSystemSoundPlayer (~> 2.0.1)
   - JSQSystemSoundPlayer (2.0.1)
@@ -36,6 +37,7 @@ PODS:
 DEPENDENCIES:
   - Alamofire
   - FaveButton (~> 2.0.3)
+  - HMSegmentedControl
   - JSQMessagesViewController
   - Parse
   - ParseFacebookUtilsV4
@@ -50,6 +52,7 @@ SPEC CHECKSUMS:
   FaveButton: cfcbc5e73da159c4f916613da5687357b5bb4783
   FBSDKCoreKit: 82eac696eb6157da5f4266c3a241f00e9bd72471
   FBSDKLoginKit: 2211bede07c83391349eacc1fd86cf6d9289ce38
+  HMSegmentedControl: 7c6145afb50f26cec5f3243082f6f12b9f41318f
   JSQMessagesViewController: 39fed975e3c9f8eba7292071e29eeb541d105e66
   JSQSystemSoundPlayer: c5850e77a4363ffd374cd851154b9af93264ed8d
   Parse: 4335d65f40cb3d43190d723144bbe1afb9c38230
@@ -59,6 +62,6 @@ SPEC CHECKSUMS:
   PKHUD: 2bb45c936bb8afa39f3cd33ec14e8cc89f624255
   Starscream: 3fdd5c277e57cca6b5c406d274e3f34a7c88f2ce
 
-PODFILE CHECKSUM: ae05ec202cb20c91c35d95691a121ed9751aff46
+PODFILE CHECKSUM: 179dd7c8f14284df00bd12345539f685e0ffd52f
 
-COCOAPODS: 1.2.0
+COCOAPODS: 1.2.1.beta.1

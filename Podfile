@@ -14,4 +14,5 @@ target 'CampusApp' do
   pod 'ParseLiveQuery'
   pod 'ParseFacebookUtilsV4'
   pod 'FaveButton', '~> 2.0.3'
+  pod 'HMSegmentedControl'
 end

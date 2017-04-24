@@ -6,22 +6,18 @@
 //  Copyright © 2017 HLPostman. All rights reserved.
 //
 
+import HMSegmentedControl
 import UIKit
 import Parse
 import PKHUD
 
 class EventListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
+    @IBOutlet weak var segmentedControl: HMSegmentedControl!
     @IBOutlet weak var tableView: UITableView!
     
-    var events: [ParseEvent] = []
-    
-    enum EventListMode {
-        case All
-        case Favorited([ParseEvent]?)
-        case RSVPed([ParseEvent]?)
-    }
-    var mode: EventListMode = .All
+    var allEvents: [ParseEvent] = []
+    var filteredEvents: [ParseEvent] = []
     
     /* ====================================================================================================
      MARK: - Lifecycle Methods
@@ -48,6 +44,8 @@ class EventListViewController: UIViewController, UITableViewDataSource, UITableV
         let nib = UINib(nibName: "EventCell", bundle: nil)
         tableView.register(nib, forCellReuseIdentifier: "EventCell")
         
+        self.setupSegmentedControl()
+        
         self.loadEvents()
     }
     /* ==================================================================================================== */
@@ -62,10 +60,10 @@ class EventListViewController: UIViewController, UITableViewDataSource, UITableV
     
     func favoriteButtonTapped(_ sender: UIButton) {
         let index = sender.tag
-        events[index].favorite { parseEvent in
+        filteredEvents[index].favorite { parseEvent in
             if let cell = self.tableView.cellForRow(at: IndexPath(row: index, section: 0)) as? EventCell {
                 DispatchQueue.main.async {
-                    cell.favoriteButton.isSelected = (self.events[index].isFavorited)
+                    cell.favoriteButton.isSelected = (self.filteredEvents[index].isFavorited)
 
                     HUD.hide(animated: true)
                 }
@@ -79,13 +77,13 @@ class EventListViewController: UIViewController, UITableViewDataSource, UITableV
      MARK: - TableView Delegate Methods
      ====================================================================================================== */
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        let event = events[indexPath.row]
+        let event = filteredEvents[indexPath.row]
         return (event.organizer?.objectId == PFUser.current()?.objectId && event.googleEventID == nil)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: "EventCell", for: indexPath) as? EventCell {
-            let event = events[indexPath.row]
+            let event = filteredEvents[indexPath.row]
             
             func configure(label: UILabel, content: String?) {
                 if let content = content, !content.isEmpty {
@@ -113,9 +111,10 @@ class EventListViewController: UIViewController, UITableViewDataSource, UITableV
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            let event = events[indexPath.row]
+            let event = filteredEvents[indexPath.row]
+            
             event.pfObject?.deleteInBackground { succeed, error in
-                self.events.remove(at: indexPath.row)
+                self.filteredEvents.remove(at: indexPath.row)
                 DispatchQueue.main.async {
                     self.tableView.deleteRows(at: [indexPath], with: .automatic)
                     self.tableView.reloadData()     // Reload target-action for all favorite buttons
@@ -129,7 +128,7 @@ class EventListViewController: UIViewController, UITableViewDataSource, UITableV
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return events.count
+        return filteredEvents.count
     }
     /* ==================================================================================================== */
     
@@ -143,21 +142,21 @@ class EventListViewController: UIViewController, UITableViewDataSource, UITableV
                 if let destinationVC = segue.destination as? EventDetailViewController {
                     if let indexPath = sender as? IndexPath {
                         destinationVC.completionHandler = { parseEvent in
-                            self.events[indexPath.row] = parseEvent
+                            self.filteredEvents[indexPath.row] = parseEvent
                             
                             DispatchQueue.main.async {
                                 self.tableView.reloadRows(at: [indexPath], with: .automatic)
                             }
                         }
-                        destinationVC.event = events[indexPath.row]
+                        destinationVC.event = filteredEvents[indexPath.row]
                     }
                 }
             } else if identifier == "EditEventViewController_NEW" {
                 if let destinationVC = segue.destination as? EditEventViewController {
                     destinationVC.mode = .New
                     destinationVC.completionHandler = { parseEvent in
-                        self.events.append(parseEvent)
-                        self.events.sort(by: { (event1, event2) -> Bool in
+                        self.filteredEvents.append(parseEvent)
+                        self.filteredEvents.sort(by: { (event1, event2) -> Bool in
                             return event1.startDateTime!.timeIntervalSinceNow < event2.startDateTime!.timeIntervalSinceNow
                         })
                         
@@ -179,24 +178,7 @@ class EventListViewController: UIViewController, UITableViewDataSource, UITableV
     private func loadEvents() {
         HUD.show(.progress)
         
-        switch mode {
-        case .All:
-            loadGoogleEvents()
-        case .Favorited(let events):
-            if let events = events {
-                self.events = events
-                self.reloadEvents()
-            } else {
-                loadGoogleEvents()
-            }
-        case .RSVPed(let events):
-            if let events = events {
-                self.events = events
-                self.reloadEvents()
-            } else {
-                loadGoogleEvents()
-            }
-        }
+        loadGoogleEvents()
     }
     
     // Step 1: Load Google Events from Google Calendar API
@@ -217,7 +199,7 @@ class EventListViewController: UIViewController, UITableViewDataSource, UITableV
                                                                     return event.startDateTime != nil
                                                             }
                                                             
-                                                            self.events.append(contentsOf: newEvents)
+                                                            self.allEvents.append(contentsOf: newEvents)
                                                             
                                                             if loadedCalendarCount == totalCalendarCount {
                                                                 // Go to Step 2
@@ -260,17 +242,17 @@ class EventListViewController: UIViewController, UITableViewDataSource, UITableV
         
         for parseEvent in parseEvents {
             if let googleEventID = parseEvent.googleEventID {
-                let index = self.events.index { event -> Bool in
+                let index = self.allEvents.index { event -> Bool in
                     return (event.googleEventID == googleEventID)
                 }
                 
                 if let index = index {
-                    parseEvent.startDateTime = self.events[index].startDateTime
-                    parseEvent.endDateTime = self.events[index].endDateTime
-                    self.events[index] = parseEvent
+                    parseEvent.startDateTime = self.allEvents[index].startDateTime
+                    parseEvent.endDateTime = self.allEvents[index].endDateTime
+                    self.allEvents[index] = parseEvent
                 }
             } else {
-                self.events.append(parseEvent)
+                self.allEvents.append(parseEvent)
             }
         }
         
@@ -292,7 +274,7 @@ class EventListViewController: UIViewController, UITableViewDataSource, UITableV
                         return result
                     }
                     
-                    let favoritedParseEvents = self.events.filter { event in
+                    let favoritedParseEvents = self.allEvents.filter { event in
                         if let objectId = event.pfObject?.objectId {
                             return favoritedParseEventIDs.contains(objectId)
                         }
@@ -328,7 +310,7 @@ class EventListViewController: UIViewController, UITableViewDataSource, UITableV
                         return result
                     }
                     
-                    let rsvpedParseEvents = self.events.filter { event in
+                    let rsvpedParseEvents = self.allEvents.filter { event in
                         if let objectId = event.pfObject?.objectId {
                             return rsvpedParseEventIDs.contains(objectId)
                         }
@@ -352,30 +334,57 @@ class EventListViewController: UIViewController, UITableViewDataSource, UITableV
     
     // FINAL Step: Reload Table View
     private func reloadEvents() {
-        switch mode {
-        case .All:
-            break
-        case .Favorited(_):
-            self.events = self.events.filter { event in
-                return event.isFavorited
-            }
-        case .RSVPed(_):
-            self.events = self.events.filter { event in
-                return event.isRSVPed
-            }
-        }
-        
-        self.events.sort(by: { (event1, event2) -> Bool in
+        self.allEvents.sort(by: { (event1, event2) -> Bool in
             return (event1.startDateTime!.timeIntervalSinceNow < event2.startDateTime!.timeIntervalSinceNow ||
                 (event1.startDateTime!.timeIntervalSinceNow == event2.startDateTime!.timeIntervalSinceNow &&
                 event1.endDateTime!.timeIntervalSinceNow <= event2.endDateTime!.timeIntervalSinceNow))
         })
+        
+        self.filteredEvents = self.allEvents
         
         DispatchQueue.main.async {
             self.tableView.reloadData()
         
             HUD.hide(animated: true)
         }
+    }
+    /* ==================================================================================================== */
+    
+    
+    /* ====================================================================================================
+     MARK: - Private Helper Methods
+     ====================================================================================================== */
+    private func setupSegmentedControl() {
+        let themeBlue = UIColor(red: 67.0/255, green: 80.0/255, blue: 116.0/255, alpha: 1)
+        
+        segmentedControl.sectionTitles = ["ALL", "FAVORITED", "RSVP"]
+        segmentedControl.selectionStyle = .fullWidthStripe
+        segmentedControl.selectionIndicatorLocation = .down
+        segmentedControl.selectionIndicatorColor = themeBlue
+        segmentedControl.isVerticalDividerEnabled = false
+        segmentedControl.titleTextAttributes = [NSFontAttributeName: UIFont(name: "JosefinSans-Bold", size: 17.0)!,
+                                                NSForegroundColorAttributeName: themeBlue]
+        segmentedControl.addTarget(self, action: #selector(segmentedControlValueChanged(segmentedControl:)), for: .valueChanged)
+    }
+    
+    func segmentedControlValueChanged(segmentedControl: HMSegmentedControl) {
+        switch segmentedControl.selectedSegmentIndex {
+        case 0:
+            self.filteredEvents = self.allEvents
+        case 1:
+            self.filteredEvents = self.allEvents.filter { event in
+                return event.isFavorited
+            }
+        case 2:
+            self.filteredEvents = self.allEvents.filter { event in
+                return event.isRSVPed
+            }
+        default:
+            break
+        }
+        
+        self.tableView.reloadData()
+        self.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: false)
     }
     /* ==================================================================================================== */
 }

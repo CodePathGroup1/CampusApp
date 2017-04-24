@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '7C08227B6E14D87F0F5B0FD6DFFA1A3E'
-               BlueprintName = 'FaveButton'
+               BlueprintIdentifier = '7891E2B724C54EF58FB1692B34F1455C'
+               BlueprintName = 'HMSegmentedControl'
                ReferencedContainer = 'container:Pods.xcodeproj'
-               BuildableName = 'FaveButton.framework'>
+               BuildableName = 'HMSegmentedControl.framework'>
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
