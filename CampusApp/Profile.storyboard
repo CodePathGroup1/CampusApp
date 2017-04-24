@@ -9,6 +9,11 @@
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="JosefinSans-Regular.ttf">
+            <string>JosefinSans</string>
+        </array>
+    </customFonts>
     <scenes>
         <!--Profile View Controller-->
         <scene sceneID="vIi-vu-pnm">
@@ -26,108 +31,183 @@
                                 <rect key="frame" x="24" y="80" width="327" height="571"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="XVu-kr-fZI">
-                                        <rect key="frame" x="0.0" y="0.0" width="327" height="336"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="327" height="318"/>
                                         <subviews>
-                                            <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="a29-Vt-Oi2">
-                                                <rect key="frame" x="0.0" y="0.0" width="327" height="210"/>
+                                            <stackView opaque="NO" contentMode="scaleToFill" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="a29-Vt-Oi2">
+                                                <rect key="frame" x="0.0" y="0.0" width="327" height="153"/>
                                                 <subviews>
-                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="hAG-nE-4Ix" customClass="PFImageView">
-                                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
-                                                        <gestureRecognizers/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="height" constant="50" id="2Nn-6y-yir"/>
-                                                            <constraint firstAttribute="width" constant="50" id="3VD-y8-5Qr"/>
-                                                        </constraints>
-                                                        <connections>
-                                                            <outletCollection property="gestureRecognizers" destination="JcG-wM-PzP" appends="YES" id="35c-mk-4wC"/>
-                                                        </connections>
-                                                    </imageView>
-                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="nAX-dD-Krx">
-                                                        <rect key="frame" x="62" y="0.0" width="265" height="114"/>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="cRP-Jz-VKl">
+                                                        <rect key="frame" x="0.0" y="0.0" width="50" height="153"/>
                                                         <subviews>
-                                                            <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2Q0-TE-dsf" customClass="RoundTextField" customModule="CampusApp" customModuleProvider="target">
-                                                                <rect key="frame" x="0.0" y="0.0" width="265" height="30"/>
+                                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="hAG-nE-4Ix" customClass="PFImageView">
+                                                                <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                                                <gestureRecognizers/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" constant="50" id="2Nn-6y-yir"/>
+                                                                    <constraint firstAttribute="width" constant="50" id="3VD-y8-5Qr"/>
+                                                                </constraints>
+                                                                <connections>
+                                                                    <outletCollection property="gestureRecognizers" destination="JcG-wM-PzP" appends="YES" id="35c-mk-4wC"/>
+                                                                </connections>
+                                                            </imageView>
+                                                        </subviews>
+                                                    </stackView>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="nAX-dD-Krx">
+                                                        <rect key="frame" x="62" y="0.0" width="265" height="153"/>
+                                                        <subviews>
+                                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="ogG-AA-l6i">
+                                                                <rect key="frame" x="0.0" y="0.0" width="265" height="43"/>
+                                                                <subviews>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="USER NAME" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7H7-RE-kih">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="265" height="9"/>
+                                                                        <fontDescription key="fontDescription" name="JosefinSans" family="Josefin Sans" pointSize="9"/>
+                                                                        <color key="textColor" red="0.26274509800000001" green="0.31372549020000001" blue="0.4549019608" alpha="1" colorSpace="calibratedRGB"/>
+                                                                        <nil key="highlightedColor"/>
+                                                                    </label>
+                                                                    <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2Q0-TE-dsf" customClass="RoundTextField" customModule="CampusApp" customModuleProvider="target">
+                                                                        <rect key="frame" x="0.0" y="13" width="265" height="30"/>
+                                                                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="15"/>
+                                                                        <textInputTraits key="textInputTraits"/>
+                                                                    </textField>
+                                                                </subviews>
+                                                            </stackView>
+                                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="2Wa-f0-Osi">
+                                                                <rect key="frame" x="0.0" y="55" width="265" height="43"/>
+                                                                <subviews>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CURRENT PASSWORD" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XDa-Nc-sEg">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="265" height="9"/>
+                                                                        <fontDescription key="fontDescription" name="JosefinSans" family="Josefin Sans" pointSize="9"/>
+                                                                        <color key="textColor" red="0.26274509800000001" green="0.31372549020000001" blue="0.4549019608" alpha="1" colorSpace="calibratedRGB"/>
+                                                                        <nil key="highlightedColor"/>
+                                                                    </label>
+                                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Ehu-GP-DGz" customClass="RoundTextField" customModule="CampusApp" customModuleProvider="target">
+                                                                        <rect key="frame" x="0.0" y="13" width="265" height="30"/>
+                                                                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="15"/>
+                                                                        <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                                                                    </textField>
+                                                                </subviews>
+                                                            </stackView>
+                                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="i6J-l8-2tH">
+                                                                <rect key="frame" x="0.0" y="110" width="265" height="43"/>
+                                                                <subviews>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NEW PASSWORD" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eG4-Xg-26O">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="265" height="9"/>
+                                                                        <fontDescription key="fontDescription" name="JosefinSans" family="Josefin Sans" pointSize="9"/>
+                                                                        <color key="textColor" red="0.26274509800000001" green="0.31372549020000001" blue="0.4549019608" alpha="1" colorSpace="calibratedRGB"/>
+                                                                        <nil key="highlightedColor"/>
+                                                                    </label>
+                                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="il9-bG-4XJ" customClass="RoundTextField" customModule="CampusApp" customModuleProvider="target">
+                                                                        <rect key="frame" x="0.0" y="13" width="265" height="30"/>
+                                                                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="15"/>
+                                                                        <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                                                                    </textField>
+                                                                </subviews>
+                                                            </stackView>
+                                                        </subviews>
+                                                    </stackView>
+                                                </subviews>
+                                            </stackView>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="AnZ-qI-Ikq">
+                                                <rect key="frame" x="0.0" y="165" width="327" height="43"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="EMAIL" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DPK-ad-PUe">
+                                                        <rect key="frame" x="0.0" y="0.0" width="327" height="9"/>
+                                                        <fontDescription key="fontDescription" name="JosefinSans" family="Josefin Sans" pointSize="9"/>
+                                                        <color key="textColor" red="0.26274509800000001" green="0.31372549020000001" blue="0.4549019608" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="IJm-Go-RGu" customClass="RoundTextField" customModule="CampusApp" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="13" width="327" height="30"/>
+                                                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="15"/>
+                                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="emailAddress"/>
+                                                    </textField>
+                                                </subviews>
+                                            </stackView>
+                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="494-IY-kEj">
+                                                <rect key="frame" x="0.0" y="220" width="327" height="43"/>
+                                                <subviews>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="PBx-zo-cE9">
+                                                        <rect key="frame" x="0.0" y="0.0" width="157.5" height="43"/>
+                                                        <subviews>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="FIRST NAME" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Eei-CW-X67">
+                                                                <rect key="frame" x="0.0" y="0.0" width="157.5" height="9"/>
+                                                                <fontDescription key="fontDescription" name="JosefinSans" family="Josefin Sans" pointSize="9"/>
+                                                                <color key="textColor" red="0.26274509800000001" green="0.31372549020000001" blue="0.4549019608" alpha="1" colorSpace="calibratedRGB"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ryF-Uc-XWS" customClass="RoundTextField" customModule="CampusApp" customModuleProvider="target">
+                                                                <rect key="frame" x="0.0" y="13" width="157.5" height="30"/>
                                                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                                 <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="15"/>
-                                                                <textInputTraits key="textInputTraits"/>
+                                                                <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
                                                             </textField>
-                                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Current password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Ehu-GP-DGz" customClass="RoundTextField" customModule="CampusApp" customModuleProvider="target">
-                                                                <rect key="frame" x="0.0" y="42" width="265" height="30"/>
+                                                        </subviews>
+                                                    </stackView>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="KD3-uh-mV1">
+                                                        <rect key="frame" x="169.5" y="0.0" width="157.5" height="43"/>
+                                                        <subviews>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="LAST NAME" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q5A-8N-hha">
+                                                                <rect key="frame" x="0.0" y="0.0" width="157.5" height="9"/>
+                                                                <fontDescription key="fontDescription" name="JosefinSans" family="Josefin Sans" pointSize="9"/>
+                                                                <color key="textColor" red="0.26274509800000001" green="0.31372549020000001" blue="0.4549019608" alpha="1" colorSpace="calibratedRGB"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0E1-rR-vIA" customClass="RoundTextField" customModule="CampusApp" customModuleProvider="target">
+                                                                <rect key="frame" x="0.0" y="13" width="157.5" height="30"/>
                                                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                                 <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="15"/>
-                                                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
-                                                            </textField>
-                                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="New Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="il9-bG-4XJ" customClass="RoundTextField" customModule="CampusApp" customModuleProvider="target">
-                                                                <rect key="frame" x="0.0" y="84" width="265" height="30"/>
-                                                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                                                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="15"/>
-                                                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                                                                <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
                                                             </textField>
                                                         </subviews>
                                                     </stackView>
                                                 </subviews>
                                             </stackView>
-                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" textAlignment="natural" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="IJm-Go-RGu" customClass="RoundTextField" customModule="CampusApp" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="222" width="327" height="30"/>
-                                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="15"/>
-                                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="emailAddress"/>
-                                            </textField>
-                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="494-IY-kEj">
-                                                <rect key="frame" x="0.0" y="264" width="327" height="30"/>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="QxN-wl-CBQ">
+                                                <rect key="frame" x="0.0" y="275" width="327" height="43"/>
                                                 <subviews>
-                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="First name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ryF-Uc-XWS" customClass="RoundTextField" customModule="CampusApp" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="0.0" width="157.5" height="30"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PHONE NUMBER" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n7L-YP-P29">
+                                                        <rect key="frame" x="0.0" y="0.0" width="327" height="9"/>
+                                                        <fontDescription key="fontDescription" name="JosefinSans" family="Josefin Sans" pointSize="9"/>
+                                                        <color key="textColor" red="0.26274509800000001" green="0.31372549020000001" blue="0.4549019608" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1r5-f6-gzC" customClass="RoundTextField" customModule="CampusApp" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="13" width="327" height="30"/>
                                                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                         <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="15"/>
-                                                        <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
-                                                    </textField>
-                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Last name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0E1-rR-vIA" customClass="RoundTextField" customModule="CampusApp" customModuleProvider="target">
-                                                        <rect key="frame" x="169.5" y="0.0" width="157.5" height="30"/>
-                                                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="15"/>
-                                                        <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
+                                                        <textInputTraits key="textInputTraits" keyboardType="phonePad"/>
                                                     </textField>
                                                 </subviews>
                                             </stackView>
-                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Phone number" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1r5-f6-gzC" customClass="RoundTextField" customModule="CampusApp" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="306" width="327" height="30"/>
-                                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="15"/>
-                                                <textInputTraits key="textInputTraits" keyboardType="phonePad"/>
-                                            </textField>
                                         </subviews>
                                     </stackView>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aJQ-bh-CKF">
-                                        <rect key="frame" x="0.0" y="360" width="327" height="30"/>
-                                        <state key="normal" title="Save"/>
-                                        <connections>
-                                            <action selector="saveButtonTapped:" destination="qvX-dd-CgR" eventType="touchUpInside" id="V9K-N2-5Lw"/>
-                                        </connections>
-                                    </button>
                                     <view contentMode="scaleToFill" verticalHuggingPriority="245" verticalCompressionResistancePriority="245" translatesAutoresizingMaskIntoConstraints="NO" id="U6c-0d-gVd">
-                                        <rect key="frame" x="0.0" y="414" width="327" height="78"/>
+                                        <rect key="frame" x="0.0" y="342" width="327" height="165"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TPK-aW-h4A">
-                                        <rect key="frame" x="0.0" y="516" width="327" height="1"/>
-                                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aJQ-bh-CKF">
+                                        <rect key="frame" x="0.0" y="531" width="327" height="40"/>
+                                        <color key="backgroundColor" red="0.26274509800000001" green="0.31372549020000001" blue="0.4549019608" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="1" id="sVy-wm-n0V"/>
+                                            <constraint firstAttribute="height" constant="40" id="VHv-a9-CwQ"/>
                                         </constraints>
-                                    </view>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gby-AD-o8q">
-                                        <rect key="frame" x="0.0" y="541" width="327" height="30"/>
-                                        <state key="normal" title="Sign out"/>
+                                        <fontDescription key="fontDescription" name="JosefinSans" family="Josefin Sans" pointSize="17"/>
+                                        <state key="normal" title="SAVE">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
                                         <connections>
-                                            <action selector="signoutButtonTapped:" destination="qvX-dd-CgR" eventType="touchUpInside" id="vtM-KH-D5O"/>
+                                            <action selector="saveButtonTapped:" destination="qvX-dd-CgR" eventType="touchUpInside" id="V9K-N2-5Lw"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -141,13 +221,21 @@
                             <constraint firstItem="Mje-yb-utx" firstAttribute="top" secondItem="jJH-gT-BHm" secondAttribute="bottom" constant="16" id="wXz-qi-zKj"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="JYD-QU-hVO"/>
+                    <navigationItem key="navigationItem" id="JYD-QU-hVO">
+                        <barButtonItem key="rightBarButtonItem" title="LOG OUT" id="SL1-O9-nxX">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <action selector="signoutButtonTapped:" destination="qvX-dd-CgR" id="5xi-Rd-Bth"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="avatarPFImageView" destination="hAG-nE-4Ix" id="mak-d8-Z9r"/>
                         <outlet property="currentPasswordField" destination="Ehu-GP-DGz" id="C35-Cc-wby"/>
                         <outlet property="emailField" destination="IJm-Go-RGu" id="KvV-ja-Mog"/>
                         <outlet property="firstNameField" destination="ryF-Uc-XWS" id="4jC-6u-ipa"/>
                         <outlet property="lastNameField" destination="0E1-rR-vIA" id="5rf-kF-lq9"/>
+                        <outlet property="logoutButton" destination="SL1-O9-nxX" id="Mza-JT-yBf"/>
                         <outlet property="newPasswordField" destination="il9-bG-4XJ" id="IrZ-XO-tDk"/>
                         <outlet property="phoneNumberField" destination="1r5-f6-gzC" id="VtD-Wk-Okv"/>
                         <outlet property="usernameField" destination="2Q0-TE-dsf" id="TIc-oB-Xgm"/>
@@ -168,7 +256,7 @@
                 <navigationController storyboardIdentifier="ProfileNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="2Cc-tb-nXL" sceneMemberID="viewController">
                     <toolbarItems/>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="kt5-Ir-5L5">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="kt5-Ir-5L5">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="0.26274509800000001" green="0.31372549020000001" blue="0.4549019608" alpha="1" colorSpace="calibratedRGB"/>

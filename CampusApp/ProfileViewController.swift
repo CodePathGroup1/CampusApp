@@ -13,6 +13,8 @@ import UIKit
 
 class ProfileViewController: UIViewController, UITextFieldDelegate {
 
+    @IBOutlet weak var logoutButton: UIBarButtonItem!
+    
     @IBOutlet weak var avatarPFImageView: PFImageView!
     
     @IBOutlet weak var usernameField: RoundTextField!
@@ -38,6 +40,10 @@ class ProfileViewController: UIViewController, UITextFieldDelegate {
                                                            action: nil)
         
         navigationItem.title = "PROFILE"
+        
+        logoutButton.setTitleTextAttributes([NSFontAttributeName: UIFont(name: "JosefinSans-Bold", size: 17.0)!,
+                                             NSForegroundColorAttributeName: UIColor.white],
+                                            for: .normal)
         
         loadCurrentUserProfile()
     }
