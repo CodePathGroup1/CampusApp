@@ -35,6 +35,7 @@ class EventDetailViewController: UIViewController, UICollectionViewDataSource, U
     @IBOutlet weak var roomTextField: RoundTextField!
     @IBOutlet weak var descriptionLabel: UITextView!
     
+    @IBOutlet weak var eventImageCount: UILabel!
     @IBOutlet weak var collectionView: UICollectionView!
     
     @IBOutlet weak var mapView: MKMapView!
@@ -290,7 +291,12 @@ class EventDetailViewController: UIViewController, UICollectionViewDataSource, U
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return (event.eventMedias?.count ?? 0)
+        let count = event.eventMedias?.count ?? 0
+        
+        self.eventImageCount.text = "( \(count) )"
+        self.collectionView.isHidden = (count == 0)
+        
+        return count
     }
     /* ==================================================================================================== */
     
