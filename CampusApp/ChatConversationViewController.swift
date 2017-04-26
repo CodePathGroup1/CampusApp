@@ -264,6 +264,11 @@ class ChatConversationViewController: JSQMessagesViewController, UINavigationCon
                 if succeeded {
                     self.finishSendingMessage()
                     
+                    self.conversation[C.Parse.Conversation.Keys.lastMessage] = messageObject
+                    self.conversation[C.Parse.Conversation.Keys.lastMessageTimestamp] = messageObject.createdAt
+                    self.conversation[C.Parse.Conversation.Keys.lastUser] = currentUser
+                    self.completion?(self.conversation)
+                    
                     self.conversation.saveInBackground { succeeded, error in
                         if succeeded {
                             if let currentUser = PFUser.current() {

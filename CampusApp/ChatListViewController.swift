@@ -20,7 +20,7 @@ class ChatListViewController: UIViewController, UITableViewDataSource, UITableVi
     
     var newMessageReceived = false {
         didSet {
-            if self.tabBarController?.selectedIndex == 1 && newMessageReceived {
+            if presentationController?.presentedViewController is ChatListViewController && newMessageReceived {
                 loadConversations()
             }
         }
@@ -49,14 +49,12 @@ class ChatListViewController: UIViewController, UITableViewDataSource, UITableVi
         
         tableView.estimatedRowHeight = 50
         tableView.rowHeight = UITableViewAutomaticDimension
-        
-        loadConversations()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        if self.tabBarController?.selectedIndex == 1 && newMessageReceived {
+        if presentationController?.presentedViewController is ChatListViewController && newMessageReceived {
             loadConversations()
         }
     }
@@ -76,7 +74,7 @@ class ChatListViewController: UIViewController, UITableViewDataSource, UITableVi
                             self.conversations[indexPath.row] = conversation
                             
                             DispatchQueue.main.async {
-                                self.tableView.reloadRows(at: [indexPath], with: .none)
+                                self.tableView.reloadData()
                             }
                         }
                     }
@@ -84,7 +82,9 @@ class ChatListViewController: UIViewController, UITableViewDataSource, UITableVi
             } else if identifier == C.Identifier.Segue.chatConversationViewController.new {
                 if let vc = segue.destination as? ChatUserSearchViewController {
                     vc.completion = { conversation in
-                        self.conversations.append(conversation)
+                        if self.conversations.index(where: { return $0.objectId == conversation.objectId }) == nil {
+                            self.conversations.append(conversation)
+                        }
                         
                         DispatchQueue.main.async {
                             self.tableView.reloadData()
@@ -123,9 +123,9 @@ class ChatListViewController: UIViewController, UITableViewDataSource, UITableVi
     /* ====================================================================================================
      MARK: - Helper Methods
      ====================================================================================================== */
-    private func loadConversations() {
+    func loadConversations() {
         if let currentUser = PFUser.current() {
-            if tabBarController?.selectedIndex == 1 {
+            if presentationController?.presentedViewController is ChatListViewController {
                 HUD.show(.label("Loading chat..."))
             }
             

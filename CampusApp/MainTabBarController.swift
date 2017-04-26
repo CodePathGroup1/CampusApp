@@ -46,6 +46,7 @@ class MainTabBarController: BATabBarController, BATabBarControllerDelegate {
             let chatListBarItem = chatListBarItem,
             let profileBarItem = profileBarItem {
             
+            self.delegate = self
             self.tabBarBackgroundColor = UIColor(red: 67.0/255, green: 80.0/255, blue: 116.0/255, alpha: 1)
             self.tabBarItemStrokeColor = .white
             self.tabBarItemLineWidth = 1.0
@@ -74,6 +75,10 @@ class MainTabBarController: BATabBarController, BATabBarControllerDelegate {
     }
     
     func tabBarController(_ tabBarController: BATabBarController!, didSelect viewController: UIViewController!) {
-        print("selected")
+        if let navigationController = tabBarController.selectedViewController as? UINavigationController {
+            if let chatListVC = navigationController.topViewController as? ChatListViewController {
+                chatListVC.loadConversations()
+            }
+        }
     }
 }
