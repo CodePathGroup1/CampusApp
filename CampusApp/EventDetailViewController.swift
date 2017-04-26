@@ -66,6 +66,11 @@ class EventDetailViewController: UIViewController, UICollectionViewDataSource, U
             navigationItem.rightBarButtonItem = nil
         }
         
+        if event.organizer?.objectId == PFUser.current()?.objectId || event.googleEventID != nil {
+            creatorNameButton.setTitleColor(UIColor(red: 85.0/255, green: 85.0/255, blue: 85.0/255, alpha: 1), for: .normal)
+            creatorNameButton.isEnabled = false
+        }
+        
         collectionView.dataSource = self
         collectionView.delegate = self
         
@@ -105,6 +110,10 @@ class EventDetailViewController: UIViewController, UICollectionViewDataSource, U
         } else if let organizerName = event.organizerName {
             creatorAvatorPFImageView.isHidden = true
             creatorNameButton.setTitle(organizerName, for: .normal)
+        }
+        
+        if let title = creatorNameButton.title(for: .normal), event.googleEventID != nil {
+            creatorNameButton.setTitle("\(title) (Google Event)", for: .normal)
         }
         
         if let attendeeCount = event.attendeeCount, attendeeCount >= 1 {
@@ -193,7 +202,7 @@ class EventDetailViewController: UIViewController, UICollectionViewDataSource, U
     }
     
     @IBAction func eventCreatorTapped(_ sender: AnyObject) {
-        if let organizer = event.organizer as? PFUser, organizer.objectId != PFUser.current()?.objectId {
+        if let organizer = event.organizer as? PFUser {
             Conversation.startConversation(otherUsers: [organizer]) { conversation in
                 DispatchQueue.main.async {
                     let storyboard = UIStoryboard(name: "Chat", bundle: nil)
@@ -203,10 +212,6 @@ class EventDetailViewController: UIViewController, UICollectionViewDataSource, U
                     }
                 }
             }
-        } else if let _ = event.googleEventID {
-            HUD.hide(animated: false)
-            UIWindow.showMessage(title: "Error",
-                                 message: "Chatting with user is not supported for events imported from Google Calendars.")
         }
     }
     
