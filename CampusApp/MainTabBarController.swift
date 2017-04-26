@@ -78,6 +78,8 @@ class MainTabBarController: BATabBarController, BATabBarControllerDelegate {
         if let navigationController = tabBarController.selectedViewController as? UINavigationController {
             if let chatListVC = navigationController.topViewController as? ChatListViewController {
                 chatListVC.loadConversations()
+            } else if let profileVC = navigationController.topViewController as? ProfileViewController {
+                profileVC.loadCurrentUserProfile()
             }
         }
     }

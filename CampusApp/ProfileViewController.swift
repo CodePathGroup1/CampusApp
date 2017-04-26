@@ -11,7 +11,7 @@ import ParseUI
 import PKHUD
 import UIKit
 
-class ProfileViewController: UIViewController, UITextFieldDelegate {
+class ProfileViewController: UIViewController, UITextFieldDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
 
     @IBOutlet weak var logoutButton: UIBarButtonItem!
     
@@ -47,7 +47,9 @@ class ProfileViewController: UIViewController, UITextFieldDelegate {
                                              NSForegroundColorAttributeName: UIColor.white],
                                             for: .normal)
         
-        loadCurrentUserProfile()
+        avatarPFImageView.layer.cornerRadius = 25
+        avatarPFImageView.clipsToBounds = true
+        avatarPFImageView.isUserInteractionEnabled = true
         
         saveButton.layer.cornerRadius = 20.0
         saveButton.clipsToBounds = true
@@ -59,7 +61,22 @@ class ProfileViewController: UIViewController, UITextFieldDelegate {
      MARK: - Tap Actions
      ====================================================================================================== */
     @IBAction func avatarTapped(_ sender: AnyObject) {
+        let alertVC = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         
+        let takePhotoAction = UIAlertAction(title: "Take photo", style: .default) { _ in
+            _ = Camera.shouldStartCamera(target: self, canEdit: true, frontFacing: true)
+        }
+        alertVC.addAction(takePhotoAction)
+        
+        let chooseExistingPhotoAction = UIAlertAction(title: "Choose existing photo", style: .default) { _ in
+            _ = Camera.shouldStartPhotoLibrary(target: self, mediaType: .Photo, canEdit: true)
+        }
+        alertVC.addAction(chooseExistingPhotoAction)
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: nil)
+        alertVC.addAction(cancelAction)
+        
+        present(alertVC, animated: true, completion: nil)
     }
     
     @IBAction func saveButtonTapped(_ sender: AnyObject) {
@@ -159,39 +176,72 @@ class ProfileViewController: UIViewController, UITextFieldDelegate {
     
     
     /* ====================================================================================================
-     MARK: - Private Helper Methods
+     MARK: - UIImagePickerController Delegate Methods
      ====================================================================================================== */
-    private func loadCurrentUserProfile() {
-        if let currentUser = PFUser.current() {
-            HUD.show(.label("Loading profile..."))
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        HUD.show(.progress)
+        
+        if let eventImage = info[UIImagePickerControllerEditedImage] as? UIImage,
+            let data = UIImageJPEGRepresentation(eventImage, 0.6),
+            let avatarPFFile = PFFile(name: "picture.jpg", data: data) {
             
-            if let avatarPFImageFile = currentUser[C.Parse.User.Keys.avatar] as? PFFile {
-                avatarPFImageView.file = avatarPFImageFile
-                avatarPFImageView.loadInBackground()
-            } else {
-                let image = UIImage(named: "profile_blank")
-                avatarPFImageView.image = image
+            picker.dismiss(animated: true) {
+                if let currentUser = PFUser.current() {
+                    currentUser[C.Parse.User.Keys.avatar] = avatarPFFile
+                    currentUser.saveInBackground { succeeded, error in
+                        DispatchQueue.main.async {
+                            if succeeded {
+                                self.avatarPFImageView.image = eventImage
+                                HUD.hide(animated: true)
+                            } else {
+                                UIWindow.showMessage(title: "Error",
+                                                     message: error?.localizedDescription ?? "Unknown Error")
+                            }
+                        }
+                    }
+                }
             }
-            
-            usernameField.text = currentUser.username
-            
-            if let email = currentUser[C.Parse.User.Keys.email] as? String, !email.isEmpty {
-                emailField.text = email
+        }
+    }
+    /* ==================================================================================================== */
+    
+    
+    /* ====================================================================================================
+     MARK: - Helper Methods
+     ====================================================================================================== */
+    func loadCurrentUserProfile() {
+        if presentationController?.presentedViewController is ProfileViewController {
+            if let currentUser = PFUser.current() {
+                HUD.show(.label("Loading profile..."))
+                
+                if let avatarPFImageFile = currentUser[C.Parse.User.Keys.avatar] as? PFFile {
+                    avatarPFImageView.file = avatarPFImageFile
+                    avatarPFImageView.loadInBackground()
+                } else {
+                    let image = UIImage(named: "profile_blank")
+                    avatarPFImageView.image = image
+                }
+                
+                usernameField.text = currentUser.username
+                
+                if let email = currentUser[C.Parse.User.Keys.email] as? String, !email.isEmpty {
+                    emailField.text = email
+                }
+                
+                if let firstName = currentUser[C.Parse.User.Keys.firstName] as? String, !firstName.isEmpty {
+                    firstNameField.text = firstName
+                }
+                
+                if let lastName = currentUser[C.Parse.User.Keys.lastName] as? String, !lastName.isEmpty {
+                    lastNameField.text = lastName
+                }
+                
+                if let phoneNumber = currentUser[C.Parse.User.Keys.phoneNumber] as? String, !phoneNumber.isEmpty {
+                    phoneNumberField.text = phoneNumber
+                }
+                
+                HUD.hide(animated: true)
             }
-            
-            if let firstName = currentUser[C.Parse.User.Keys.firstName] as? String, !firstName.isEmpty {
-                firstNameField.text = firstName
-            }
-            
-            if let lastName = currentUser[C.Parse.User.Keys.lastName] as? String, !lastName.isEmpty {
-                lastNameField.text = lastName
-            }
-            
-            if let phoneNumber = currentUser[C.Parse.User.Keys.phoneNumber] as? String, !phoneNumber.isEmpty {
-                phoneNumberField.text = phoneNumber
-            }
-            
-            HUD.hide(animated: true)
         }
     }
     
