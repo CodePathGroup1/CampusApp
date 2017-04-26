@@ -24,11 +24,11 @@
                         <viewControllerLayoutGuide type="bottom" id="Mje-yb-utx"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="FRR-Jb-rBH">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="jJH-gT-BHm">
-                                <rect key="frame" x="24" y="80" width="327" height="527"/>
+                                <rect key="frame" x="24" y="16" width="327" height="527"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="XVu-kr-fZI">
                                         <rect key="frame" x="0.0" y="0.0" width="327" height="318"/>
@@ -257,7 +257,7 @@
                 <navigationController storyboardIdentifier="ProfileNavigationController" automaticallyAdjustsScrollViewInsets="NO" toolbarHidden="NO" id="2Cc-tb-nXL" sceneMemberID="viewController">
                     <toolbarItems/>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="kt5-Ir-5L5">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="kt5-Ir-5L5">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="0.26274509800000001" green="0.31372549020000001" blue="0.4549019608" alpha="1" colorSpace="calibratedRGB"/>

@@ -1,11 +1,11 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="hL2-cV-juP">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1421" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="hL2-cV-juP">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
@@ -26,14 +26,14 @@
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="v21-FU-TFL" userLabel="Empty View">
-                                <rect key="frame" x="0.0" y="124" width="375" height="499"/>
+                                <rect key="frame" x="0.0" y="60" width="375" height="499"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="hRE-CS-znC">
-                                        <rect key="frame" x="127" y="181" width="120" height="138"/>
+                                        <rect key="frame" x="127" y="180.5" width="120" height="138"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" alpha="0.80000000000000004" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="empty_view_icon" translatesAutoresizingMaskIntoConstraints="NO" id="n6g-pi-VDD">
                                                 <rect key="frame" x="0.0" y="0.0" width="120" height="120"/>
@@ -57,7 +57,7 @@
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="84" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="fm3-Gy-W4k">
-                                <rect key="frame" x="0.0" y="124" width="375" height="499"/>
+                                <rect key="frame" x="0.0" y="60" width="375" height="499"/>
                                 <color key="backgroundColor" red="0.88235294119999996" green="0.91372549020000005" blue="0.94901960780000005" alpha="1" colorSpace="calibratedRGB"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="EventCell" id="kbA-te-9ae" customClass="EventCell" customModule="CampusApp" customModuleProvider="target">
@@ -71,7 +71,7 @@
                                 </prototypes>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="exK-TM-UDi" customClass="HMSegmentedControl">
-                                <rect key="frame" x="0.0" y="64" width="375" height="60"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="xhP-i6-Kmr"/>
@@ -121,11 +121,11 @@
                         <viewControllerLayoutGuide type="bottom" id="kxw-9v-yTR"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="0Ir-IO-Uai">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Dlw-66-Whc">
-                                <rect key="frame" x="0.0" y="64" width="375" height="559"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="559"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="IvL-83-qxv" userLabel="Main">
                                         <rect key="frame" x="38" y="56.5" width="300" height="447"/>
@@ -398,11 +398,11 @@
                         <viewControllerLayoutGuide type="bottom" id="f1N-8u-xUs"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="ytc-gi-ZrO">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="XTm-If-bKD">
-                                <rect key="frame" x="16" y="76" width="343" height="535"/>
+                                <rect key="frame" x="16" y="12" width="343" height="535"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="O4a-XO-fAR">
                                         <rect key="frame" x="0.0" y="0.0" width="343" height="25"/>
@@ -754,11 +754,11 @@
                         <viewControllerLayoutGuide type="bottom" id="not-A8-Hcd"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="CYC-FL-jOq">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="58" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="QLu-uB-0kN">
-                                <rect key="frame" x="0.0" y="64" width="375" height="559"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="559"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </tableView>
                         </subviews>
@@ -784,7 +784,7 @@
                 <navigationController storyboardIdentifier="EventNavigationController" automaticallyAdjustsScrollViewInsets="NO" toolbarHidden="NO" id="hL2-cV-juP" sceneMemberID="viewController">
                     <toolbarItems/>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="mje-Ry-j6S">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="mje-Ry-j6S">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="0.2627450980392157" green="0.31372549019607843" blue="0.45490196078431372" alpha="1" colorSpace="calibratedRGB"/>

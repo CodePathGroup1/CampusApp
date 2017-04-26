@@ -47,6 +47,10 @@ class ChatConversationViewController: JSQMessagesViewController, UINavigationCon
         navigationItem.title = "CONVERSATION"
         
         if let user = PFUser.current() {
+            if let otherUser = self.users.filter({ return $0.pfObject.objectId != user.objectId }).first {
+                navigationItem.title = otherUser.fullName ?? "CONVERSATION"
+            }
+            
             self.senderId = user.objectId
             
             if let fullName = user[C.Parse.User.Keys.fullName] as? String, !fullName.isEmpty {
@@ -367,7 +371,26 @@ class ChatConversationViewController: JSQMessagesViewController, UINavigationCon
     }
     
     override func collectionView(_ collectionView: JSQMessagesCollectionView!, avatarImageDataForItemAt indexPath: IndexPath!) -> JSQMessageAvatarImageDataSource! {
-        // TODO: Load avatar
+        let pfObject = self.users[indexPath.item].pfObject
+        
+        if let objectId = pfObject.objectId {
+            if self.avatars[objectId] == nil {
+                let thumbnailFile = pfObject[C.Parse.User.Keys.avatar] as? PFFile
+                thumbnailFile?.getDataInBackground { data, error in
+                    if let data = data {
+                        self.avatars[objectId] = JSQMessagesAvatarImageFactory.avatarImage(with: UIImage(data: data), diameter: 30)
+                    } else {
+                        self.avatars[objectId] = self.blankAvatarImage
+                    }
+                    
+                    DispatchQueue.main.async {
+                        self.collectionView.reloadData()
+                    }
+                }
+            } else {
+                return self.avatars[objectId]
+            }
+        }
         
         return blankAvatarImage
     }

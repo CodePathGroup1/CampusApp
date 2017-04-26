@@ -32,7 +32,7 @@ class ChatCell: UITableViewCell {
         cellBackground.layer.shadowRadius = 1.0
         cellBackground.layer.masksToBounds = false
         
-        self.avatarPFImageView.layer.cornerRadius = 4.0
+        self.avatarPFImageView.layer.cornerRadius = 17.0
         self.avatarPFImageView.clipsToBounds = true
     }
 
