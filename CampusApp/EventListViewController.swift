@@ -155,6 +155,11 @@ class EventListViewController: UIViewController, UITableViewDataSource, UITableV
                 if let destinationVC = segue.destination as? EditEventViewController {
                     destinationVC.mode = .New
                     destinationVC.completionHandler = { parseEvent in
+                        self.allEvents.append(parseEvent)
+                        self.allEvents.sort(by: { (event1, event2) -> Bool in
+                            return event1.startDateTime!.timeIntervalSinceNow < event2.startDateTime!.timeIntervalSinceNow
+                        })
+                        
                         self.filteredEvents.append(parseEvent)
                         self.filteredEvents.sort(by: { (event1, event2) -> Bool in
                             return event1.startDateTime!.timeIntervalSinceNow < event2.startDateTime!.timeIntervalSinceNow

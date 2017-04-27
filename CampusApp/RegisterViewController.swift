@@ -86,7 +86,7 @@ class RegisterViewController: UIViewController {
                                 HUD.hide(animated: true)
                             }
                         }
-                    } else if let error = error as? NSError {
+                    } else if let error = error as NSError? {
                         HUD.hide(animated: false)
                         
                         switch error.code {
