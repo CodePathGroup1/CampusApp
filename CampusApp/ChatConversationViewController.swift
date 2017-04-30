@@ -220,6 +220,8 @@ class ChatConversationViewController: JSQMessagesViewController, UINavigationCon
     }
     
     private func sendMessage(text: String, video: URL?, picture: UIImage?) {
+        HUD.show(.progress)
+        
         var modifiedText = text
         var pictureFile: PFFile?
         var videoFile: PFFile?
@@ -231,9 +233,11 @@ class ChatConversationViewController: JSQMessagesViewController, UINavigationCon
             modifiedText += "[Picture message]"
             pictureFile = file
             file.saveInBackground { succeed, error in
-                HUD.hide(animated: false)
-                UIWindow.showMessage(title: "Error",
-                                     message: error?.localizedDescription ?? "Unknown error")
+                if !succeed {
+                    HUD.hide(animated: false)
+                    UIWindow.showMessage(title: "Error",
+                                         message: error?.localizedDescription ?? "Unknown error")
+                }
             }
         }
         
@@ -244,10 +248,10 @@ class ChatConversationViewController: JSQMessagesViewController, UINavigationCon
             modifiedText += "[Video message]"
             videoFile = file
             file.saveInBackground { succeed, error in
-                if let error = error {
+                if !succeed {
                     HUD.hide(animated: false)
                     UIWindow.showMessage(title: "Error",
-                                         message: error.localizedDescription)
+                                         message: error?.localizedDescription ?? "Unknown error")
                 }
             }
         }
@@ -265,6 +269,8 @@ class ChatConversationViewController: JSQMessagesViewController, UINavigationCon
             }
             
             messageObject.saveInBackground { succeeded, error in
+                HUD.hide(animated: false)
+                
                 if succeeded {
                     self.finishSendingMessage()
                     
@@ -293,7 +299,6 @@ class ChatConversationViewController: JSQMessagesViewController, UINavigationCon
                         }
                     }
                 } else {
-                    HUD.hide(animated: false)
                     UIWindow.showMessage(title: "Error",
                                          message: error?.localizedDescription ?? "Failed to send message")
                 }

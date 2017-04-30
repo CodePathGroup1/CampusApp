@@ -295,8 +295,20 @@ class EditEventViewController: UIViewController, UITextFieldDelegate, UIGestureR
                     _ = self.navigationController?.popViewController(animated: true)
                 }
                 
-                let parseEvent = ParseEvent(pfObject: eventPFObject)
-                self.completionHandler?(parseEvent)
+                let newParseEvent = ParseEvent(pfObject: eventPFObject)
+                
+                if let mode = self.mode {
+                    switch mode {
+                    case .Edit(let parseEvent):
+                        newParseEvent.isFavorited = parseEvent.isFavorited
+                        newParseEvent.isRSVPed = parseEvent.isRSVPed
+                        newParseEvent.attendeeCount = parseEvent.attendeeCount
+                    default:
+                        break
+                    }
+                }
+                
+                self.completionHandler?(newParseEvent)
             } else {
                 self.isSaving = false
                 HUD.hide(animated: false)

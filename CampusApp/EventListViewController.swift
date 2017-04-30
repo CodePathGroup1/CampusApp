@@ -63,8 +63,12 @@ class EventListViewController: UIViewController, UITableViewDataSource, UITableV
         filteredEvents[index].favorite { parseEvent in
             if let cell = self.tableView.cellForRow(at: IndexPath(row: index, section: 0)) as? EventCell {
                 DispatchQueue.main.async {
-                    cell.favoriteButton.isSelected = (self.filteredEvents[index].isFavorited)
+                    cell.favoriteButton.isSelected = self.filteredEvents[index].isFavorited
 
+                    if let allEventIndex = self.allEvents.index(where: { return $0.pfObject?.objectId == self.filteredEvents[index].pfObject?.objectId }) {
+                        self.allEvents[allEventIndex].isFavorited = self.filteredEvents[index].isFavorited
+                    }
+                    
                     HUD.hide(animated: true)
                 }
             }
@@ -116,6 +120,10 @@ class EventListViewController: UIViewController, UITableViewDataSource, UITableV
             event.pfObject?.deleteInBackground { succeed, error in
                 self.filteredEvents.remove(at: indexPath.row)
                 DispatchQueue.main.async {
+                    if let allEventIndex = self.allEvents.index(where: { return $0.pfObject?.objectId == event.pfObject?.objectId }) {
+                        self.allEvents.remove(at: allEventIndex)
+                    }
+                    
                     self.tableView.deleteRows(at: [indexPath], with: .automatic)
                     self.tableView.reloadData()     // Reload target-action for all favorite buttons
                 }
@@ -143,6 +151,10 @@ class EventListViewController: UIViewController, UITableViewDataSource, UITableV
                     if let indexPath = sender as? IndexPath {
                         destinationVC.completionHandler = { parseEvent in
                             self.filteredEvents[indexPath.row] = parseEvent
+                            
+                            if let allEventIndex = self.allEvents.index(where: { return $0.pfObject?.objectId == parseEvent.pfObject?.objectId }) {
+                                self.allEvents[allEventIndex] = parseEvent
+                            }
                             
                             DispatchQueue.main.async {
                                 self.tableView.reloadRows(at: [indexPath], with: .automatic)
